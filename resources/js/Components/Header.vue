@@ -12,9 +12,9 @@
                 </div>
                 <!-- LOGO -->
                 <div class="logo">
-                    <a href="index.html">
+                    <NavLink href="/">
                         <img :src="logo" alt="Logo Image" />
-                    </a>
+                    </NavLink>
                 </div>
 
                 <div class="top-navigation-right">
@@ -40,23 +40,20 @@
 
             <div class="site-menu">
                 <ul class="menueffect d-flex">
-                    <li style="opacity: 1">
-                        <a href="index.html">el club</a>
+                    <li>
+                        <NavLink href="/club">El Club</NavLink>
                     </li>
-                    <li style="opacity: 1">
-                        <a href="league-table.html">primer equipo</a>
+                    <li>
+                        <NavLink href="/primer-equipo">Primer Equipo</NavLink>
                     </li>
-                    <li style="opacity: 1">
-                        <a href="players.html">escuela</a>
+                    <li>
+                        <NavLink href="/escuela">Escuela</NavLink>
                     </li>
-                    <li style="opacity: 1">
-                        <a href="gallery.html">prensa</a>
+                    <li>
+                        <NavLink href="/prensa">Prensa</NavLink>
                     </li>
-                    <li style="opacity: 1">
-                        <a href="blog.html">contacto</a>
-                    </li>
-                    <li style="opacity: 1">
-                        <a href="contact-us.html">Contact</a>
+                    <li>
+                        <NavLink href="/contacto">Contacto</NavLink>
                     </li>
                 </ul>
             </div>
@@ -80,7 +77,7 @@
 
 .top-social-wrapper {
     display: flex;
-    gap: .5rem;
+    gap: 0.5rem;
 }
 .navbar .container {
     max-width: 1250px;
@@ -94,22 +91,22 @@
     justify-content: center;
 }
 .social-icon a i {
-    font-size: 1.5rem;
-    transition: .5s;
+    font-size: 1.3rem;
+    transition: 0.5s;
 }
 
 .social-icon a i:hover {
     color: var(--red);
 }
 
-.site-menu .menueffect{
+.site-menu .menueffect {
     gap: 2rem;
 }
 
-.site-menu .menueffect li a{
- text-transform: uppercase;
- font-family: var(--roboto);
- font-weight: 500;
+.site-menu .menueffect li a {
+    text-transform: uppercase;
+    font-family: var(--roboto);
+    font-weight: 500;
 }
 
 .menueffect a:before {
@@ -137,10 +134,10 @@
     text-decoration: none;
     color: #fff;
 }
-
-
 </style>
 
 <script setup>
+import NavLink from "@/Components/NavLink.vue"; // Asegúrate de importar el componente NavLink
+
 import logo from "@images/logo.png"; // Usa el alias configurado
 </script>
