@@ -1,5 +1,7 @@
 <template>
     <GuestLayout>
+        <CustomCursor />
+
         <div class="content container-home w-100">
             <p>This is some content inside the GuestLayout.</p>
         </div>
@@ -8,7 +10,7 @@
 
 <script setup>
 import GuestLayout from "@/Layouts/GuestLayout.vue";
-
+import customCursor from "@/Components/CustomCursor.vue";
 </script>
 
 <style scoped>
@@ -26,10 +28,10 @@ html, body, #app {
 
 .content {
     background-image: url('@images/homev1.jpg');
-    background-size: cover; 
-    background-position: center; 
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
-    height: 100vh; 
+    height: 100vh;
     width: 100vw;
     display: flex;
     justify-content: center;

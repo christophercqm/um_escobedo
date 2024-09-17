@@ -1,24 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 :root {
     --red: #ee1d36;
     --black: #000;
     --white: #fff;
     --gray: #bdbcbc;
-
     /* FUENTES */
     --barlow: "Barlow Condensed", sans-serif;
     --roboto: "Roboto", sans-serif;
 }
 
-
 body {
     font-family: var(--roboto);
     color: var(--gray);
 }
-
 
 h1,
 h2,
@@ -29,15 +25,16 @@ h6 {
     color: var(--barlow);
 }
 
-
 a {
     text-decoration: none !important;
     color: var(--white) !important;
 }
 
+
 /* resources/css/app.css */
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -50,6 +47,8 @@ html, body {
 }
 
 body {
-    background-color: black; /* Establece el fondo negro */
-    color: white; /* Opcional: Establece el color del texto en blanco para contraste */
+    background-color: black;
+    /* Establece el fondo negro */
+    color: white;
+    /* Opcional: Establece el color del texto en blanco para contraste */
 }
