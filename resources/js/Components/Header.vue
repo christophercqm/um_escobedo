@@ -5,7 +5,7 @@
                 class="menu-top d-flex justify-content-between align-items-center w-100"
             >
                 <div class="top-navigation-left">
-                    <div class="top-navigation-left-text">
+                    <div class="top-navigation-left-text d-flex gap-5">
                         <span class="text-white">SPONSOR 1</span>
                         <span class="text-white">SPONSOR 2</span>
                     </div>
@@ -13,24 +13,25 @@
                 <!-- LOGO -->
                 <div class="logo">
                     <NavLink href="/">
-                        <img :src="logo" alt="Logo Image" />
+                        <img :src="logo" alt="Logo Image" class="img-logo" />
                     </NavLink>
                 </div>
 
                 <div class="top-navigation-right">
                     <div class="top-social-wrapper d-flex">
                         <div class="social-icon">
-                            <a href="#">
-                                <i class="fa-brands fa-facebook-f"></i>
-                            </a>
-                        </div>
-                        <div class="social-icon">
-                            <a href="#">
+                            <a
+                                href="https://www.instagram.com/um_escobedooficial/"
+                                target="_blank"
+                            >
                                 <i class="fa-brands fa-instagram"></i>
                             </a>
                         </div>
                         <div class="social-icon">
-                            <a href="#">
+                            <a
+                                href="https://x.com/UMEscobedo?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"
+                                target="_blank"
+                            >
                                 <i class="fa-brands fa-x-twitter"></i>
                             </a>
                         </div>
@@ -41,19 +42,27 @@
             <div class="site-menu">
                 <ul class="menueffect d-flex">
                     <li>
-                        <NavLink href="/club">El Club</NavLink>
+                        <NavLink href="/club" class="nav_link">El Club</NavLink>
                     </li>
                     <li>
-                        <NavLink href="/primer-equipo">Primer Equipo</NavLink>
+                        <NavLink href="/primer-equipo" class="nav_link"
+                            >Primer Equipo</NavLink
+                        >
                     </li>
                     <li>
-                        <NavLink href="/escuela">Escuela</NavLink>
+                        <NavLink href="/escuela" class="nav_link"
+                            >Escuela</NavLink
+                        >
                     </li>
                     <li>
-                        <NavLink href="/prensa">Prensa</NavLink>
+                        <NavLink href="/prensa" class="nav_link"
+                            >Prensa</NavLink
+                        >
                     </li>
                     <li>
-                        <NavLink href="/contacto">Contacto</NavLink>
+                        <NavLink href="/contacto" class="nav_link"
+                            >Contacto</NavLink
+                        >
                     </li>
                 </ul>
             </div>
@@ -68,11 +77,15 @@
 <style scope>
 .navbar {
     z-index: 1;
-    background: rgba(0, 0, 0, 0.671);
+    background: rgba(0, 0, 0, 0.771);
 }
 
 .logo {
     padding: 1rem 0;
+}
+
+.logo .img-logo {
+    width: 5rem;
 }
 
 .top-social-wrapper {
@@ -134,10 +147,14 @@
     text-decoration: none;
     color: #fff;
 }
+
+.nav_link {
+    font-size: 1rem;
+}
 </style>
 
 <script setup>
 import NavLink from "@/Components/NavLink.vue"; // Asegúrate de importar el componente NavLink
 
-import logo from "@images/logo.png"; // Usa el alias configurado
+import logo from "@images/logo-escobedo.png"; // Usa el alias configurado
 </script>
