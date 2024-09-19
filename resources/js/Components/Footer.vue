@@ -4,22 +4,13 @@
             <div class="row row-cols-1 row-cols-lg-3">
                 <div class="col">
                     <div class="comon-footer">
-                        <h5>Contact Info</h5>
+                        <h5>Contacto</h5>
                         <p class="col-lg-10">
-                            We're a professional football club in Kolkata,
-                            India, founded in 1990. It is a long established
-                            fact.
-                        </p>
-                        <ul
-                            class="list-unstyled d-flex align-items-center mt-2"
-                        >
+                            Apasionados por el fútbol desde 1917, preparados para la victoria desde siempre.                        </p>
+                        <ul class="list-unstyled d-flex align-items-center mt-2">
+                           
                             <li>
-                                <a href="#">
-                                    <i class="fab fa-facebook"></i>
-                                </a>
-                            </li>
-                            <li class="mx-2">
-                                <a href="#">
+                                <a href="#" class="social-icon">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="16"
@@ -30,12 +21,13 @@
                                     >
                                         <path
                                             d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"
-                                        ></path></svg
-                                ></a>
+                                        ></path>
+                                    </svg>
+                                </a>
                             </li>
                             <li>
-                                <a href="#"
-                                    ><i class="fab fa-instagram"></i>
+                                <a href="#" class="social-icon">
+                                    <i class="fab fa-instagram"></i>
                                 </a>
                             </li>
                         </ul>
@@ -44,35 +36,13 @@
 
                 <div class="col">
                     <div class="comon-footer">
-                        <h5>Resources</h5>
+                        <h5>U.M  Escobedo</h5>
                         <ul class="list-unstyled">
-                            <li>
-                                <a href="#"> Matches </a>
-                            </li>
-                            <li>
-                                <a href="#"> The Club </a>
-                            </li>
-                            <li>
-                                <a href="#"> Member </a>
-                            </li>
-                            <li>
-                                <a href="#"> News </a>
-                            </li>
-                            <li>
-                                <a href="#"> Players </a>
-                            </li>
-
-                            <li>
-                                <a href="#"> Media </a>
-                            </li>
-
-                            <li>
-                                <a href="#"> Shop </a>
-                            </li>
-
-                            <li>
-                                <a href="#"> Contact </a>
-                            </li>
+                            <li><a href="#">El Club</a></li>
+                            <li><a href="#">Primer equipo</a></li>
+                            <li><a href="#">Escuela</a></li>
+                            <li><a href="#">Prensa</a></li>
+                            <li><a href="#">Contacto</a></li>
                         </ul>
                     </div>
                 </div>
@@ -110,15 +80,62 @@
             </div>
             <hr />
             <p class="text-center copy-t">
-                Copyright 2020 Soccer FC Club, All Right Reserved
+                © 2024 U.M. Escobedo
             </p>
         </div>
     </footer>
 </template>
 
+<style scoped>
 
-<style scope></style>
+footer .container {
+    max-width: 1250px;
+}
 
-<script setup>
+footer {
+    background-color: var(--black);
+}
 
-</script>
+.comon-footer h5 {
+    color: var(--white);
+    font-size: 26px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.comon-footer p, .comon-footer li a, .copy-t {
+    color: #8d95a1;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.comon-footer li {
+    margin-bottom: 10px;
+}
+
+footer .social-icon {
+    display: block;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+footer .social-icon svg,
+footer .social-icon i.fa-instagram{
+    transition: .5s;
+
+}
+
+footer .social-icon svg:hover{
+    fill: var(--red);
+}
+
+footer .social-icon i.fa-instagram:hover {
+    color: var(--red);
+}
+
+</style>
+
+<script setup></script>

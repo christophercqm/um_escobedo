@@ -3,6 +3,7 @@
         <div class="content container-home w-100">
             <div class="container container-bg px-0">
                 <div class="row row-info-bg">
+                    <div class="bg-home"></div>
                     <div class="col col-bg-info">
                         <!-- INFO DESC TOP -->
                         <div class="content-top">
@@ -697,7 +698,7 @@
                 <!-- TABLE DE POSICIONES-->
                 <div class="table-ag-div py-5">
                     <div class="container">
-                        <h2 class="comon-heading m-0">
+                        <h2 class="comon-heading m-0 text-left">
                             Tabla de posiciones &amp; Calendario
                         </h2>
 
@@ -1015,7 +1016,9 @@
                                                                         class="d-flex align-items-center"
                                                                     >
                                                                         <img
-                                                                            :src=escobedo_logo
+                                                                            :src="
+                                                                                escobedo_logo
+                                                                            "
                                                                             alt="fbn"
                                                                             class="img-tabla-posiciones"
                                                                         />
@@ -1039,8 +1042,10 @@
                                                                     <figure
                                                                         class="d-flex align-items-center"
                                                                     >
-                                                                    <img
-                                                                            :src=escobedo_logo
+                                                                        <img
+                                                                            :src="
+                                                                                escobedo_logo
+                                                                            "
                                                                             alt="fbn"
                                                                             class="img-tabla-posiciones"
                                                                         />
@@ -1064,8 +1069,10 @@
                                                                     <figure
                                                                         class="d-flex align-items-center"
                                                                     >
-                                                                    <img
-                                                                            :src=escobedo_logo
+                                                                        <img
+                                                                            :src="
+                                                                                escobedo_logo
+                                                                            "
                                                                             alt="fbn"
                                                                             class="img-tabla-posiciones"
                                                                         />
@@ -1089,8 +1096,10 @@
                                                                     <figure
                                                                         class="d-flex align-items-center"
                                                                     >
-                                                                    <img
-                                                                            :src=escobedo_logo
+                                                                        <img
+                                                                            :src="
+                                                                                escobedo_logo
+                                                                            "
                                                                             alt="fbn"
                                                                             class="img-tabla-posiciones"
                                                                         />
@@ -1114,8 +1123,10 @@
                                                                     <figure
                                                                         class="d-flex align-items-center"
                                                                     >
-                                                                    <img
-                                                                            :src=escobedo_logo
+                                                                        <img
+                                                                            :src="
+                                                                                escobedo_logo
+                                                                            "
                                                                             alt="fbn"
                                                                             class="img-tabla-posiciones"
                                                                         />
@@ -1679,15 +1690,688 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Plantilla de Jugadores -->
+                <div class="team-div-1"></div>
+
+                <!-- Forma parte de un gran equipo -->
+                <div class="join-us-div">
+                    <div class="container">
+                        <div class="d-lg-flex justify-content-between">
+                            <h1 class="comon-heading m-0">
+                                Forma parte de un gran equipo
+                            </h1>
+                            <a href="#" class="btn all-cm-btn mt-4 mt-lg-0">
+                                únete a nosotros
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    class="bi bi-arrow-up-short"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"
+                                    ></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nuestra tienda del equipo -->
+                <div class="team-products py-5">
+                    <div class="container">
+                        <div
+                            class="d-flex justify-content-between align-items-center"
+                        >
+                            <h1 class="comon-heading m-0">
+                                Nuestra tienda del equipo
+                            </h1>
+                            <a href="#" class="btn all-cm-btn">
+                                Ver todos
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    class="bi bi-arrow-right"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+                                    ></path>
+                                </svg>
+                            </a>
+                        </div>
+
+                        <ul
+                            class="nav nav-pills my-4"
+                            id="pills-tab"
+                            role="tablist"
+                        >
+                            <li class="nav-item" role="presentation">
+                                <button
+                                    class="nav-link active"
+                                    id="pills-home-tab"
+                                    data-bs-toggle="pill"
+                                    data-bs-target="#pills-home"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="pills-home"
+                                    aria-selected="true"
+                                >
+                                    Nuevo
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button
+                                    class="nav-link"
+                                    id="pills-profile-tab"
+                                    data-bs-toggle="pill"
+                                    data-bs-target="#pills-profile"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="pills-profile"
+                                    aria-selected="false"
+                                >
+                                    Merchandising
+                                </button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                            <div
+                                class="tab-pane fade show active"
+                                id="pills-home"
+                                role="tabpanel"
+                                aria-labelledby="pills-home-tab"
+                            >
+                                <div
+                                    class="news-slid owl-carousel owl-theme owl-loaded owl-drag"
+                                >
+                                    <div class="owl-stage-outer">
+                                        <div
+                                            class="owl-stage d-flex"
+                                            style="
+                                                transform: translate3d(
+                                                    0px,
+                                                    0px,
+                                                    0px
+                                                );
+                                                transition: all;
+                                                width: 1326px;
+                                            "
+                                        >
+                                            <div
+                                                class="owl-item active"
+                                                style="
+                                                    width: 301.5px;
+                                                    margin-right: 30px;
+                                                "
+                                            >
+                                                <a href="#" class="items-shop">
+                                                    <figure>
+                                                        <img
+                                                            :src="product01"
+                                                            alt="products"
+                                                        />
+                                                        <figcaption>
+                                                            - 10%
+                                                        </figcaption>
+                                                        <ul
+                                                            class="list-unstyled"
+                                                        >
+                                                            <li>
+                                                                <button
+                                                                    class="btn save"
+                                                                >
+                                                                    <svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        width="16"
+                                                                        height="16"
+                                                                        fill="currentColor"
+                                                                        class="bi bi-heart-fill"
+                                                                        viewBox="0 0 16 16"
+                                                                    >
+                                                                        <path
+                                                                            fill-rule="evenodd"
+                                                                            d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                                                                        ></path>
+                                                                    </svg>
+                                                                </button>
+                                                            </li>
+                                                            <li>
+                                                                <button
+                                                                    class="btn save"
+                                                                >
+                                                                    <svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        width="16"
+                                                                        height="16"
+                                                                        fill="currentColor"
+                                                                        class="bi bi-cart3"
+                                                                        viewBox="0 0 16 16"
+                                                                    >
+                                                                        <path
+                                                                            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+                                                                        ></path>
+                                                                    </svg>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </figure>
+                                                    <h6>Camiseta</h6>
+                                                    <h5>Camiseta de Fútbol</h5>
+                                                    <h4>45 €</h4>
+                                                </a>
+                                            </div>
+                                            <div
+                                                class="owl-item active"
+                                                style="
+                                                    width: 301.5px;
+                                                    margin-right: 30px;
+                                                "
+                                            >
+                                                <a href="#" class="items-shop">
+                                                    <figure>
+                                                        <img
+                                                            :src="product02"
+                                                            alt="products"
+                                                        />
+
+                                                        <ul
+                                                            class="list-unstyled"
+                                                        >
+                                                            <li>
+                                                                <button
+                                                                    class="btn save"
+                                                                >
+                                                                    <svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        width="16"
+                                                                        height="16"
+                                                                        fill="currentColor"
+                                                                        class="bi bi-heart-fill"
+                                                                        viewBox="0 0 16 16"
+                                                                    >
+                                                                        <path
+                                                                            fill-rule="evenodd"
+                                                                            d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                                                                        ></path>
+                                                                    </svg>
+                                                                </button>
+                                                            </li>
+                                                            <li>
+                                                                <button
+                                                                    class="btn save"
+                                                                >
+                                                                    <svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        width="16"
+                                                                        height="16"
+                                                                        fill="currentColor"
+                                                                        class="bi bi-cart3"
+                                                                        viewBox="0 0 16 16"
+                                                                    >
+                                                                        <path
+                                                                            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+                                                                        ></path>
+                                                                    </svg>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </figure>
+                                                    <h6 class="text-left">
+                                                        Botas
+                                                    </h6>
+                                                    <h5 class="text-left">
+                                                        Botas de fútbol
+                                                    </h5>
+                                                    <h4 class="text-left">
+                                                        15 €
+                                                    </h4>
+                                                </a>
+                                            </div>
+                                            <div
+                                                class="owl-item active"
+                                                style="
+                                                    width: 301.5px;
+                                                    margin-right: 30px;
+                                                "
+                                            >
+                                                <a href="#" class="items-shop">
+                                                    <figure>
+                                                        <img
+                                                            :src="product03"
+                                                            alt="products"
+                                                        />
+                                                        <figcaption>
+                                                            - 5%
+                                                        </figcaption>
+                                                        <ul
+                                                            class="list-unstyled"
+                                                        >
+                                                            <li>
+                                                                <button
+                                                                    class="btn save"
+                                                                >
+                                                                    <svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        width="16"
+                                                                        height="16"
+                                                                        fill="currentColor"
+                                                                        class="bi bi-heart-fill"
+                                                                        viewBox="0 0 16 16"
+                                                                    >
+                                                                        <path
+                                                                            fill-rule="evenodd"
+                                                                            d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                                                                        ></path>
+                                                                    </svg>
+                                                                </button>
+                                                            </li>
+                                                            <li>
+                                                                <button
+                                                                    class="btn save"
+                                                                >
+                                                                    <svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        width="16"
+                                                                        height="16"
+                                                                        fill="currentColor"
+                                                                        class="bi bi-cart3"
+                                                                        viewBox="0 0 16 16"
+                                                                    >
+                                                                        <path
+                                                                            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+                                                                        ></path>
+                                                                    </svg>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </figure>
+                                                    <h6>Guantes</h6>
+                                                    <h5>Guantes de fútbol</h5>
+                                                    <h4>45 €</h4>
+                                                </a>
+                                            </div>
+                                            <div
+                                                class="owl-item active"
+                                                style="
+                                                    width: 301.5px;
+                                                    margin-right: 30px;
+                                                "
+                                            >
+                                                <a href="#" class="items-shop">
+                                                    <figure>
+                                                        <img
+                                                            :src="product04"
+                                                            alt="products"
+                                                        />
+                                                        <ul
+                                                            class="list-unstyled"
+                                                        >
+                                                            <li>
+                                                                <button
+                                                                    class="btn save"
+                                                                >
+                                                                    <svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        width="16"
+                                                                        height="16"
+                                                                        fill="currentColor"
+                                                                        class="bi bi-heart-fill"
+                                                                        viewBox="0 0 16 16"
+                                                                    >
+                                                                        <path
+                                                                            fill-rule="evenodd"
+                                                                            d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                                                                        ></path>
+                                                                    </svg>
+                                                                </button>
+                                                            </li>
+                                                            <li>
+                                                                <button
+                                                                    class="btn save"
+                                                                >
+                                                                    <svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        width="16"
+                                                                        height="16"
+                                                                        fill="currentColor"
+                                                                        class="bi bi-cart3"
+                                                                        viewBox="0 0 16 16"
+                                                                    >
+                                                                        <path
+                                                                            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+                                                                        ></path>
+                                                                    </svg>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </figure>
+                                                    <h6>Camiseta</h6>
+                                                    <h5>Camiseta de Fútbol</h5>
+                                                    <h4>25 €</h4>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-nav disabled">
+                                        <button
+                                            type="button"
+                                            role="presentation"
+                                            class="owl-prev"
+                                        >
+                                            <span aria-label="Previous"
+                                                >‹</span
+                                            ></button
+                                        ><button
+                                            type="button"
+                                            role="presentation"
+                                            class="owl-next"
+                                        >
+                                            <span aria-label="Next">›</span>
+                                        </button>
+                                    </div>
+                                    <div class="owl-dots disabled">
+                                        <button
+                                            role="button"
+                                            class="owl-dot active"
+                                        >
+                                            <span></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="tab-pane fade"
+                                id="pills-profile"
+                                role="tabpanel"
+                                aria-labelledby="pills-profile-tab"
+                            >
+                                <div
+                                    class="news-slid owl-carousel owl-theme owl-loaded owl-drag"
+                                >
+                                    <div class="owl-stage-outer">
+                                        <div
+                                            class="owl-stage"
+                                            style="
+                                                transform: translate3d(
+                                                    0px,
+                                                    0px,
+                                                    0px
+                                                );
+                                                transition: all;
+                                            "
+                                        >
+                                            <div class="owl-item">
+                                                <a href="#" class="items-shop">
+                                                    <figure>
+                                                        <img
+                                                            src="images/product01.jpg"
+                                                            alt="products"
+                                                        />
+                                                        <figcaption>
+                                                            10% Off
+                                                        </figcaption>
+                                                        <ul
+                                                            class="list-unstyled"
+                                                        >
+                                                            <li>
+                                                                <button
+                                                                    class="btn save"
+                                                                >
+                                                                    <svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        width="16"
+                                                                        height="16"
+                                                                        fill="currentColor"
+                                                                        class="bi bi-heart-fill"
+                                                                        viewBox="0 0 16 16"
+                                                                    >
+                                                                        <path
+                                                                            fill-rule="evenodd"
+                                                                            d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                                                                        ></path>
+                                                                    </svg>
+                                                                </button>
+                                                            </li>
+                                                            <li>
+                                                                <button
+                                                                    class="btn save"
+                                                                >
+                                                                    <svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        width="16"
+                                                                        height="16"
+                                                                        fill="currentColor"
+                                                                        class="bi bi-cart3"
+                                                                        viewBox="0 0 16 16"
+                                                                    >
+                                                                        <path
+                                                                            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+                                                                        ></path>
+                                                                    </svg>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </figure>
+                                                    <h6>T-shirt</h6>
+                                                    <h5>soccer jersey</h5>
+                                                    <h4>$45</h4>
+                                                </a>
+                                            </div>
+                                            <div class="owl-item">
+                                                <a href="#" class="items-shop">
+                                                    <figure>
+                                                        <img
+                                                            src="images/product02.webp"
+                                                            alt="products"
+                                                        />
+
+                                                        <ul
+                                                            class="list-unstyled"
+                                                        >
+                                                            <li>
+                                                                <button
+                                                                    class="btn save"
+                                                                >
+                                                                    <svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        width="16"
+                                                                        height="16"
+                                                                        fill="currentColor"
+                                                                        class="bi bi-heart-fill"
+                                                                        viewBox="0 0 16 16"
+                                                                    >
+                                                                        <path
+                                                                            fill-rule="evenodd"
+                                                                            d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                                                                        ></path>
+                                                                    </svg>
+                                                                </button>
+                                                            </li>
+                                                            <li>
+                                                                <button
+                                                                    class="btn save"
+                                                                >
+                                                                    <svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        width="16"
+                                                                        height="16"
+                                                                        fill="currentColor"
+                                                                        class="bi bi-cart3"
+                                                                        viewBox="0 0 16 16"
+                                                                    >
+                                                                        <path
+                                                                            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+                                                                        ></path>
+                                                                    </svg>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </figure>
+                                                    <h6>Shoes</h6>
+                                                    <h5>soccer jersey</h5>
+                                                    <h4>$15</h4>
+                                                </a>
+                                            </div>
+                                            <div class="owl-item">
+                                                <a href="#" class="items-shop">
+                                                    <figure>
+                                                        <img
+                                                            src="images/product-13-copyright-393x426.webp"
+                                                            alt="products"
+                                                        />
+                                                        <figcaption>
+                                                            5% Off
+                                                        </figcaption>
+                                                        <ul
+                                                            class="list-unstyled"
+                                                        >
+                                                            <li>
+                                                                <button
+                                                                    class="btn save"
+                                                                >
+                                                                    <svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        width="16"
+                                                                        height="16"
+                                                                        fill="currentColor"
+                                                                        class="bi bi-heart-fill"
+                                                                        viewBox="0 0 16 16"
+                                                                    >
+                                                                        <path
+                                                                            fill-rule="evenodd"
+                                                                            d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                                                                        ></path>
+                                                                    </svg>
+                                                                </button>
+                                                            </li>
+                                                            <li>
+                                                                <button
+                                                                    class="btn save"
+                                                                >
+                                                                    <svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        width="16"
+                                                                        height="16"
+                                                                        fill="currentColor"
+                                                                        class="bi bi-cart3"
+                                                                        viewBox="0 0 16 16"
+                                                                    >
+                                                                        <path
+                                                                            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+                                                                        ></path>
+                                                                    </svg>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </figure>
+                                                    <h6>Gloves</h6>
+                                                    <h5>soccer jersey</h5>
+                                                    <h4>$45</h4>
+                                                </a>
+                                            </div>
+                                            <div class="owl-item">
+                                                <a href="#" class="items-shop">
+                                                    <figure>
+                                                        <img
+                                                            src="images/4.jpg"
+                                                            alt="products"
+                                                        />
+                                                        <ul
+                                                            class="list-unstyled"
+                                                        >
+                                                            <li>
+                                                                <button
+                                                                    class="btn save"
+                                                                >
+                                                                    <svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        width="16"
+                                                                        height="16"
+                                                                        fill="currentColor"
+                                                                        class="bi bi-heart-fill"
+                                                                        viewBox="0 0 16 16"
+                                                                    >
+                                                                        <path
+                                                                            fill-rule="evenodd"
+                                                                            d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                                                                        ></path>
+                                                                    </svg>
+                                                                </button>
+                                                            </li>
+                                                            <li>
+                                                                <button
+                                                                    class="btn save"
+                                                                >
+                                                                    <svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        width="16"
+                                                                        height="16"
+                                                                        fill="currentColor"
+                                                                        class="bi bi-cart3"
+                                                                        viewBox="0 0 16 16"
+                                                                    >
+                                                                        <path
+                                                                            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+                                                                        ></path>
+                                                                    </svg>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </figure>
+                                                    <h6>t-shirt</h6>
+                                                    <h5>soccer jersey</h5>
+                                                    <h4>$25</h4>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-nav disabled">
+                                        <button
+                                            type="button"
+                                            role="presentation"
+                                            class="owl-prev"
+                                        >
+                                            <span aria-label="Previous"
+                                                >‹</span
+                                            ></button
+                                        ><button
+                                            type="button"
+                                            role="presentation"
+                                            class="owl-next"
+                                        >
+                                            <span aria-label="Next">›</span>
+                                        </button>
+                                    </div>
+                                    <div class="owl-dots disabled">
+                                        <button
+                                            role="button"
+                                            class="owl-dot active"
+                                        >
+                                            <span></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+                <span color="red"></span>
             </div>
         </div>
     </GuestLayout>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
-
-
+import { onMounted, ref } from "vue";
 
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import escobedo_logo from "@images/logo-escobedo.png";
@@ -1695,32 +2379,47 @@ import bg_1 from "@images/bg-1.jpg";
 import bg_2 from "@images/bg-2.jpeg";
 import bg_3 from "@images/bg-3.jpeg";
 import bg_4 from "@images/bg-4.jpg";
-
-
+import product01 from "@images/producto01.jpg";
+import product02 from "@images/product02.webp";
+import product03 from "@images/producto03.webp";
+import product04 from "@images/producto04.jpg";
 </script>
 
 <style scoped>
-.container-bg {
+
+.bg-home{
+    background: url("@images/homev1.jpg") no-repeat center center;
+    background-size: cover;
     height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.content.container-home {
+    height: 100%;
+}
+
+.container-bg {
     width: 100%;
     max-width: unset !important;
 }
 
 .row-info-bg {
     width: 100%;
-    height: 100vh;
 }
 
 .row-info-bg .col-bg-info {
     width: 100%;
     max-width: 1250px;
     margin: 0 auto;
+    height: 80vh;
 }
 
-.container-home {
-    position: absolute;
-    top: 0;
-}
+
 
 .container-home .container {
     max-width: 1250px;
@@ -1736,15 +2435,6 @@ body,
 }
 
 .content {
-    background-image: url("@images/homev1.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     text-align: center;
 }
 
@@ -2073,7 +2763,6 @@ ltest-divbm figure {
     width: 100%;
 }
 
-
 .comon-heading {
     font-weight: 600;
     color: #071f40;
@@ -2095,4 +2784,138 @@ ltest-divbm figure {
     height: 40px;
     object-fit: cover;
 }
+
+/* Para navegadores basados en WebKit (Chrome, Safari) */
+.dataTables_scrollBody::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra de scroll */
+}
+
+.dataTables_scrollBody::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 10px;
+}
+
+.dataTables_scrollBody::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+}
+
+/* Para Firefox */
+.dataTables_scrollBody {
+    scrollbar-color: var(--red) #f1f1f1;
+    scrollbar-width: thin;
+}
+
+/* SECCIÓN - FORMA PARTE DE UN GRAN EQUIPO */
+.join-us-div {
+    display: inline-block;
+    width: 100%;
+    padding: 30px 0;
+    background: var(--red) url("@images/creat-bg.jpg") no-repeat;
+    background-size: cover;
+}
+
+.join-us-div .comon-heading {
+    color: var(--white);
+}
+.comon-heading {
+    font-weight: 600;
+    color: #071f40;
+    font-size: 35px;
+}
+
+.join-us-div .all-cm-btn {
+    background: var(--white);
+    color: var(--red) !important;
+    line-height: 36px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+}
+
+.join-us-div .all-cm-btn svg {
+    transform: rotate(90deg);
+    width: 30px;
+    height: 30px;
+}
+
+/* Nuestra tienda del equipo */
+.items-shop figure {
+    height: 250px;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    border-radius: 8px;
+}
+
+.owl-carousel .owl-item img {
+    display: block;
+    width: 100%;
+}
+
+.items-shop figure img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-position: top;
+}
+
+.items-shop figcaption {
+    background: var(--red);
+    color: var(--white);
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.items-shop figure ul {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    visibility: visible;
+    transition: all 0.5s;
+    opacity: 0;
+}
+
+.items-shop figure ul li .btn {
+    background: var(--red);
+    color: var(--red);
+    margin-bottom: 5px;
+}
+
+.items-shop h6 {
+    color: var(--red);
+}
+
+.items-shop h5 {
+    font-family: var(--roboto) !important;
+    font-weight: 700;
+    color: var(--black);
+}
+
+.items-shop h4 {
+    color: var(--red);
+    font-family: var(--roboto) !important;
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.team-products .nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    background: none;
+    color: #ee1d36;
+    border-bottom: solid 2px #ee1d36;
+}
+
+.team-products .nav-pills .nav-link {
+    border-radius: 0;
+    color: var(--black);
+    font-weight: 600;
+    font-size: 20px;
+}
+
+
 </style>

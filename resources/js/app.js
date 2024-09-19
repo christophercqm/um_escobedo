@@ -6,8 +6,6 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 
-
-
 // Importar estilos de Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 
