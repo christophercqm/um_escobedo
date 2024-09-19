@@ -45,11 +45,22 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Icono de hamburguesa para menú móvil -->
+                <div class="hamburger-menu" @click="toggleMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
 
-            <!-- Menú de navegación -->
-            <div class="site-menu">
-                <ul class="menueffect d-flex">
+            <!-- Menú de navegación lateral -->
+            <div class="site-menu" :class="{ 'open-menu': isMenuOpen }">
+                <!-- Icono de cerrar -->
+                <div class="close-menu" @click="toggleMenu">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+                <ul class="menueffect">
                     <li>
                         <NavLink href="/club" class="nav_link">El Club</NavLink>
                     </li>
@@ -76,171 +87,23 @@
                 </ul>
             </div>
 
-            <div class="hamburger-menu">
-                <span></span> <span></span> <span></span>
-            </div>
+            <!-- Fondo oscuro cuando el menú lateral está abierto -->
+            <div class="overlay" v-if="isMenuOpen" @click="toggleMenu"></div>
         </div>
     </nav>
 </template>
 
-<style scope>
-.navbar {
-    z-index: 1;
-    background: rgba(0, 0, 0, 0.771);
-}
-
-.logo {
-    padding: 1rem 0;
-}
-
-.logo .img-logo {
-    width: 5rem;
-}
-
-.top-social-wrapper {
-    display: flex;
-    gap: 0.5rem;
-}
-.navbar .container {
-    max-width: 1250px;
-}
-
-.social-icon a {
-    width: 38px;
-    height: 38px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.social-icon a i {
-    font-size: 1.3rem;
-    transition: 0.5s;
-}
-
-.social-icon a i:hover {
-    color: var(--red);
-}
-
-.site-menu .menueffect {
-    gap: 2rem;
-}
-
-.site-menu .menueffect li a {
-    text-transform: uppercase;
-    font-family: var(--roboto);
-    font-weight: 500;
-}
-
-.menueffect a:before {
-    bottom: 0;
-    display: block;
-    height: 3px;
-    width: 0%;
-    content: "";
-    background-color: #fff;
-}
-
-.menueffect a:after {
-    left: 0;
-    top: 0;
-    padding: 0.5em 0;
-    position: absolute;
-    content: attr(data-hover);
-    color: #ffffff;
-    white-space: nowrap;
-    max-width: 0%;
-    overflow: hidden;
-}
-
-.navbar .site-menu ul li a:hover {
-    text-decoration: none;
-    color: #fff;
-}
-
-.nav_link {
-    font-size: 1rem;
-}
-
-/* MENU FIJO */
-/* Estilos para el estado normal */
-.navbar .top-navigation-left {
-    display: flex;
-}
-
-/* Cuando está en modo sticky */
-.sticky {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10;
-    background-color: rgba(0, 0, 0, 0.9);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem 2rem;
-    transition: all 0.3s ease-in-out;
-}
-
-/* Estilos para el estado normal */
-.logo .link-logo {
-    position: relative;
-}
-
-/* Cuando el menú está en modo sticky, la clase .link-logo tendrá position: absolute */
-.sticky .link-logo {
-    position: absolute;
-}
-
-.sticky .top-social-wrapper {
-    position: absolute;
-    right: 20px;
-}
-
-/* Ajuste de la barra sticky */
-.sticky {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10;
-    background-color: rgba(0, 0, 0, 0.9);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem 2rem;
-    transition: all 0.3s ease-in-out;
-}
-
-/* Ocultar patrocinadores en estado sticky */
-.sticky .top-navigation-left {
-    display: none;
-}
-
-/* Mantener centrado el menú */
-.sticky .site-menu {
-    flex-grow: 1;
-    justify-content: center;
-}
-
-.navbar .container.sticky {
-    max-width: unset;
-}   
-
-.navbar .container.sticky .top-social-wrapper{
-    padding-top: .5rem;
-}
-</style>
-
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
-
 import NavLink from "@/Components/NavLink.vue";
 import logo from "@images/logo-escobedo.png";
 
 const isSticky = ref(false);
+const isMenuOpen = ref(false);
+
+const toggleMenu = () => {
+    isMenuOpen.value = !isMenuOpen.value;
+};
 
 onMounted(() => {
     const handleScroll = () => {
@@ -264,3 +127,166 @@ onMounted(() => {
     });
 });
 </script>
+
+<style scoped>
+/* General styles */
+.navbar {
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.771);
+}
+
+/* Estilos para el logo */
+.logo {
+    padding: 1rem 0;
+}
+.logo .img-logo {
+    width: 5rem;
+}
+
+/* Social media */
+.top-social-wrapper {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.navbar .container {
+    max-width: 1250px;
+}
+
+.social-icon a {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.social-icon a i {
+    font-size: 1.3rem;
+    transition: 0.5s;
+}
+
+.social-icon a i:hover {
+    color: var(--red);
+}
+
+/* Estilos para el menú en pantallas grandes */
+.site-menu {
+    display: block; /* Mostrar el menú lateral siempre en pantallas grandes */
+}
+
+.site-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.site-menu .menueffect {
+    display: flex;
+}
+
+.site-menu .menueffect li {
+    padding: 15px 0;
+}
+
+.site-menu .menueffect li a {
+    text-transform: uppercase;
+    font-family: var(--roboto);
+    font-weight: 500;
+    color: #fff;
+    text-decoration: none;
+}
+
+.hamburger-menu {
+    display: none; /* Ocultar el icono de hamburguesa en pantallas grandes */
+}
+
+.hamburger-menu span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px;
+    background-color: white;
+}
+
+/* Estilos para el menú lateral en pantallas pequeñas (móviles y tabletas) */
+@media (max-width: 992px) {
+    .hamburger-menu {
+        display: block;
+    }
+
+    .site-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 250px;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 1);
+        z-index: 6;
+        opacity: 0; /* Inicialmente oculto */
+        transition: transform 0.3s ease, opacity 0.5s ease; /* Transiciones para suavizar la apertura/cierre */
+    }
+
+    .menueffect {
+        display: block !important;
+    }
+
+    .site-menu.open-menu {
+        right: 0;
+        opacity: 1;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 5;
+        opacity: 0; /* Inicialmente oculto */
+        transition: opacity 0.5s ease; /* Transición para suavizar la aparición del overlay */
+    }
+
+    .overlay.active {
+        opacity: 1;
+    }
+
+    .menu-top .top-navigation-left,
+    .menu-top .top-navigation-right {
+        display: none; /* Ocultar las secciones en pantallas pequeñas */
+    }
+
+    .close-menu {
+        display: block; /* Mostrar el icono de cerrar en pantallas pequeñas */
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 2rem;
+        color: white;
+        cursor: pointer;
+    }
+}
+
+/* Sticky */
+.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.9);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sticky .site-menu {
+    justify-content: center;
+}
+
+.sticky .logo {
+    position: absolute;
+}
+
+.sticky .top-social-wrapper {
+    position: absolute;
+    right: 20px;
+}
+</style>
