@@ -2,13 +2,50 @@
     <footer class="py-5 float-start w-100">
         <div class="container">
             <div class="row row-cols-1 row-cols-lg-3">
+               
+                <div class="col">
+                    <div class="comon-footer">
+                        <h5>U.M Escobedo</h5>
+                        <ul class="list-unstyled">
+                            <li>
+                                <NavLink href="/club" class="nav_link"
+                                    >El Club</NavLink
+                                >
+                            </li>
+                            <li>
+                                <NavLink href="/primer-equipo" class="nav_link"
+                                    >Primer Equipo</NavLink
+                                >
+                            </li>
+                            <li>
+                                <NavLink href="/escuela" class="nav_link"
+                                    >Escuela</NavLink
+                                >
+                            </li>
+                            <li>
+                                <NavLink href="/prensa" class="nav_link"
+                                    >Prensa</NavLink
+                                >
+                            </li>
+                            <li>
+                                <NavLink href="/contacto" class="nav_link"
+                                    >Contacto</NavLink
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
                 <div class="col">
                     <div class="comon-footer">
                         <h5>Contacto</h5>
                         <p class="col-lg-10">
-                            Apasionados por el fútbol desde 1917, preparados para la victoria desde siempre.                        </p>
-                        <ul class="list-unstyled d-flex align-items-center mt-2">
-                           
+                            Apasionados por el fútbol desde 1917, preparados
+                            para la victoria desde siempre.
+                        </p>
+                        <ul
+                            class="list-unstyled d-flex align-items-center mt-2"
+                        >
                             <li>
                                 <a href="#" class="social-icon">
                                     <svg
@@ -34,60 +71,22 @@
                     </div>
                 </div>
 
-                <div class="col">
-                    <div class="comon-footer">
-                        <h5>U.M  Escobedo</h5>
-                        <ul class="list-unstyled">
-                            <li><a href="#">El Club</a></li>
-                            <li><a href="#">Primer equipo</a></li>
-                            <li><a href="#">Escuela</a></li>
-                            <li><a href="#">Prensa</a></li>
-                            <li><a href="#">Contacto</a></li>
-                        </ul>
-                    </div>
-                </div>
 
                 <div class="col">
-                    <div class="comon-footer">
-                        <h5>Newsletter</h5>
-                        <p>
-                            We'll send updates straight to your Mail. Let's Do
-                            stay connected!
-                        </p>
-                        <div class="d-flex mt-3 align-items-center">
-                            <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Enter Email"
-                            />
-                            <button type="submit" class="btn scub-btn">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
-                                    fill="currentColor"
-                                    class="bi bi-arrow-up-right-square-fill"
-                                    viewBox="0 0 16 16"
-                                >
-                                    <path
-                                        d="M14 0a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12zM5.904 10.803 10 6.707v2.768a.5.5 0 0 0 1 0V5.5a.5.5 0 0 0-.5-.5H6.525a.5.5 0 1 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 .707.707z"
-                                    ></path>
-                                </svg>
-                            </button>
+                    <div class="comon-footer d-flex justify-center">
+                        <div class="logo-container">
+                            <img :src=logo alt="Logo Escobedo">
                         </div>
                     </div>
                 </div>
             </div>
             <hr />
-            <p class="text-center copy-t">
-                © 2024 U.M. Escobedo
-            </p>
+            <p class="text-center copy-t">© 2024 U.M. Escobedo</p>
         </div>
     </footer>
 </template>
 
 <style scoped>
-
 footer .container {
     max-width: 1250px;
 }
@@ -103,7 +102,9 @@ footer {
     margin-bottom: 20px;
 }
 
-.comon-footer p, .comon-footer li a, .copy-t {
+.comon-footer p,
+.comon-footer li a,
+.copy-t {
     color: #8d95a1;
     text-decoration: none;
     font-size: 16px;
@@ -123,12 +124,11 @@ footer .social-icon {
 }
 
 footer .social-icon svg,
-footer .social-icon i.fa-instagram{
-    transition: .5s;
-
+footer .social-icon i.fa-instagram {
+    transition: 0.5s;
 }
 
-footer .social-icon svg:hover{
+footer .social-icon svg:hover {
     fill: var(--red);
 }
 
@@ -136,6 +136,12 @@ footer .social-icon i.fa-instagram:hover {
     color: var(--red);
 }
 
+.logo-container {
+    width: 80px;
+}
 </style>
 
-<script setup></script>
+<script setup>
+import NavLink from "@/Components/NavLink.vue";
+import logo from "@images/logo-escobedo.png";
+</script>

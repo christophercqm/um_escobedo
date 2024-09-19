@@ -97,7 +97,7 @@
                                         <span
                                             class="ct-2 d-flex align-items-center"
                                         >
-                                            <i class="far fa-futbol"></i> Goals
+                                            <i class="far fa-futbol"></i> Goles
                                         </span>
                                         <span>12 </span>
                                     </li>
@@ -107,7 +107,7 @@
                                     >
                                         <span class="ct-2">
                                             <i class="fas fa-mitten"></i>
-                                            Assists
+                                            Asistencias
                                         </span>
                                         <span>54 </span>
                                     </li>
@@ -117,7 +117,7 @@
                                     >
                                         <span class="ct-2">
                                             <i class="fas fa-running"></i>
-                                            Apperarences
+                                            Apariciones
                                         </span>
                                         <span>34 </span>
                                     </li>
@@ -154,7 +154,7 @@
                                         class="d-flex justify-content-between align-items-center"
                                     >
                                         <h2 class="comon-heading m-0">
-                                            Calendario y Resultado
+                                            Partidos y Resultados
                                         </h2>
                                         <a href="#" class="btn all-cm-btn">
                                             Todos los Partidos
@@ -1924,13 +1924,13 @@
                                                             </li>
                                                         </ul>
                                                     </figure>
-                                                    <h6 class="text-left">
+                                                    <h6>
                                                         Botas
                                                     </h6>
-                                                    <h5 class="text-left">
+                                                    <h5>
                                                         Botas de fútbol
                                                     </h5>
-                                                    <h4 class="text-left">
+                                                    <h4>
                                                         15 €
                                                     </h4>
                                                 </a>
