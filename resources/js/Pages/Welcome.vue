@@ -2416,7 +2416,7 @@ import product04 from "@images/producto04.jpg";
     width: 100%;
     max-width: 1250px;
     margin: 0 auto;
-    height: 80vh;
+    height: 100vh;
 }
 
 
@@ -2917,5 +2917,10 @@ ltest-divbm figure {
     font-size: 20px;
 }
 
-
+@media (max-width: 992px) { 
+    .row.row-calendairo-resultados {
+        z-index: 1;
+        position: relative;
+    }
+}
 </style>

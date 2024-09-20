@@ -2,40 +2,15 @@
     <footer class="py-5 float-start w-100">
         <div class="container">
             <div class="row row-cols-1 row-cols-lg-3">
-               
-                <div class="col">
-                    <div class="comon-footer">
-                        <h5>U.M Escobedo</h5>
-                        <ul class="list-unstyled">
-                            <li>
-                                <NavLink href="/club" class="nav_link"
-                                    >El Club</NavLink
-                                >
-                            </li>
-                            <li>
-                                <NavLink href="/primer-equipo" class="nav_link"
-                                    >Primer Equipo</NavLink
-                                >
-                            </li>
-                            <li>
-                                <NavLink href="/escuela" class="nav_link"
-                                    >Escuela</NavLink
-                                >
-                            </li>
-                            <li>
-                                <NavLink href="/prensa" class="nav_link"
-                                    >Prensa</NavLink
-                                >
-                            </li>
-                            <li>
-                                <NavLink href="/contacto" class="nav_link"
-                                    >Contacto</NavLink
-                                >
-                            </li>
-                        </ul>
+                 <!-- LOGO -->
+                 <div class="col">
+                    <div class="comon-footer d-flex justify-center">
+                        <div class="logo-container">
+                            <img :src="logo" alt="Logo Escobedo" />
+                        </div>
                     </div>
                 </div>
-
+                <!-- CONTACTO  -->
                 <div class="col">
                     <div class="comon-footer">
                         <h5>Contacto</h5>
@@ -70,15 +45,41 @@
                         </ul>
                     </div>
                 </div>
-
-
+                <!-- CONTACTO -->
                 <div class="col">
-                    <div class="comon-footer d-flex justify-center">
-                        <div class="logo-container">
-                            <img :src=logo alt="Logo Escobedo">
-                        </div>
+                    <div class="comon-footer">
+                        <h5>U.M Escobedo</h5>
+                        <ul class="list-unstyled">
+                            <li>
+                                <NavLink href="/club" class="nav_link"
+                                    >El Club</NavLink
+                                >
+                            </li>
+                            <li>
+                                <NavLink href="/primer-equipo" class="nav_link"
+                                    >Primer Equipo</NavLink
+                                >
+                            </li>
+                            <li>
+                                <NavLink href="/escuela" class="nav_link"
+                                    >Escuela</NavLink
+                                >
+                            </li>
+                            <li>
+                                <NavLink href="/prensa" class="nav_link"
+                                    >Prensa</NavLink
+                                >
+                            </li>
+                            <li>
+                                <NavLink href="/contacto" class="nav_link"
+                                    >Contacto</NavLink
+                                >
+                            </li>
+                        </ul>
                     </div>
                 </div>
+
+               
             </div>
             <hr />
             <p class="text-center copy-t">© 2024 U.M. Escobedo</p>

@@ -60,6 +60,12 @@
                 <div class="close-menu" @click="toggleMenu">
                     <i class="fa-solid fa-xmark"></i>
                 </div>
+
+                <div class="logo-mobil">
+                    <div class="logo">
+                        <img :src="logo" alt="Escobedo Logo" />
+                    </div>
+                </div>
                 <ul class="menueffect">
                     <li>
                         <NavLink href="/club" class="nav_link">El Club</NavLink>
@@ -85,6 +91,26 @@
                         >
                     </li>
                 </ul>
+
+                <!-- REDES MOBILE -->
+                <div class="redes">
+                    <div class="social-icon">
+                        <a
+                            href="https://www.instagram.com/um_escobedooficial/"
+                            target="_blank"
+                        >
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                    </div>
+                    <div class="social-icon">
+                        <a
+                            href="https://x.com/UMEscobedo?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"
+                            target="_blank"
+                        >
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
 
             <!-- Fondo oscuro cuando el menú lateral está abierto -->
@@ -131,16 +157,14 @@ onMounted(() => {
 <style scoped>
 /* General styles */
 .navbar {
-    z-index: 1;
+    z-index: 9;
     background: rgba(0, 0, 0, 0.771);
 }
 
 /* Estilos para el logo */
-.logo {
-    padding: 1rem 0;
-}
 .logo .img-logo {
-    width: 5rem;
+    width: 4.5rem;
+    padding-top: 0.2rem;
 }
 
 /* Social media */
@@ -183,16 +207,16 @@ onMounted(() => {
     display: flex;
 }
 
-.site-menu .menueffect li {
-    padding: 15px 0;
-}
-
 .site-menu .menueffect li a {
     text-transform: uppercase;
     font-family: var(--roboto);
     font-weight: 500;
     color: #fff;
     text-decoration: none;
+}
+
+.logo-mobil {
+    display: none;
 }
 
 .hamburger-menu {
@@ -205,6 +229,10 @@ onMounted(() => {
     height: 3px;
     margin: 5px;
     background-color: white;
+}
+
+.redes {
+   display: none; 
 }
 
 /* Estilos para el menú lateral en pantallas pequeñas (móviles y tabletas) */
@@ -226,12 +254,25 @@ onMounted(() => {
     }
 
     .menueffect {
-        display: block !important;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 3rem 1rem;
     }
 
     .site-menu.open-menu {
         right: 0;
         opacity: 1;
+        padding: 3rem 1rem;
+    }
+
+    .site-menu.open-menu .redes{
+        display: flex;
+        margin: 3rem 0;
+    }
+
+    .redes .social-icon a{
+        justify-content: start;
     }
 
     .overlay {
@@ -266,14 +307,53 @@ onMounted(() => {
     }
 }
 
+.menueffect {
+    display: flex;
+    gap: 1.2rem;
+}
+.menueffect .nav_link {
+    font-size: 1rem;
+}
+
 /* Sticky */
+
+.container.sticky {
+    max-width: unset;
+    min-height: 5rem;
+    justify-content: center;
+}
+
+.container.sticky .logo {
+    padding: 0;
+    position: initial;
+}
+
+.container.sticky .link-logo {
+    position: absolute;
+}
+
+.container.sticky .menueffect {
+    margin-bottom: 0;
+}
+.container.sticky .close-menu {
+    display: none;
+}
+.container.sticky .top-navigation-left {
+    display: none;
+}
+
+.container.sticky .top-social-wrapper {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 .sticky {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 10;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 1);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -288,5 +368,15 @@ onMounted(() => {
 .sticky .top-social-wrapper {
     position: absolute;
     right: 20px;
+}
+
+.site-menu.open-menu .logo-mobil {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.site-menu.open-menu .logo-mobil .logo {
+    max-width: 100px;
 }
 </style>
