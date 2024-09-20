@@ -11,9 +11,20 @@
             >
                 <!-- Patrocinadores (desaparecen cuando es sticky) -->
                 <div class="top-navigation-left">
-                    <div class="top-navigation-left-text d-flex gap-5">
-                        <span class="text-white">SPONSOR 1</span>
-                        <span class="text-white">SPONSOR 2</span>
+                    <div class="top-navigation-left-text d-flex gap-5 align-items-center">
+                        <!-- LOGO FÚTBOL EMOTION-->
+                        <div class="container-sponsor">
+                            <div class="contain-logo">
+                                <img :src=logo_emotion alt="Logo Fútbol Emotion">
+                            </div>
+                        </div>
+                        <!-- SOKA-->
+                        <div class="container-sponsor">
+                            <div class="contain-logo">
+                                <img :src=logo_soka alt="Logo Soka">
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
 
@@ -123,6 +134,10 @@
 import { ref, onMounted, onUnmounted } from "vue";
 import NavLink from "@/Components/NavLink.vue";
 import logo from "@images/logo-escobedo.png";
+import logo_soka from "@images/logo-soka.png";
+import logo_emotion from "@images/logo-futbol-emotion.png";
+
+
 
 const isSticky = ref(false);
 const isMenuOpen = ref(false);
@@ -245,7 +260,7 @@ onMounted(() => {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 250px;
+        width: 280px !important;
         height: 100%;
         background-color: rgba(0, 0, 0, 1);
         z-index: 6;
@@ -258,6 +273,11 @@ onMounted(() => {
         flex-direction: column;
         width: 100%;
         padding: 3rem 1rem;
+    }
+
+    .close-menu{
+        display: block !important;
+        cursor: pointer;
     }
 
     .site-menu.open-menu {
@@ -379,4 +399,23 @@ onMounted(() => {
 .site-menu.open-menu .logo-mobil .logo {
     max-width: 100px;
 }
+
+
+.container-sponsor {
+    width: 150px;
+}
+
+.container-sponsor .contain-logo img{
+    width: 100%;
+    height: 100%; 
+}
+
+.close-menu {
+    display: none;
+}
+
+.social-icon a {
+    justify-content: flex-end;
+}
+
 </style>

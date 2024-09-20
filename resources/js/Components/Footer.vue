@@ -79,9 +79,13 @@
                     </div>
                 </div>
 
+                <hr class="separator">
+
+                <div class="by d-flex justify-center">
+                    <span>Desarrollado por <strong>Black Cat</strong> by <em>EL Ayudante</em></span>
+                </div>
                
             </div>
-            <hr />
             <p class="text-center copy-t">© 2024 U.M. Escobedo</p>
         </div>
     </footer>
@@ -139,6 +143,15 @@ footer .social-icon i.fa-instagram:hover {
 
 .logo-container {
     width: 80px;
+}
+
+.separator{
+    opacity: 1;
+    color: rgba(255, 255, 255, .4);
+}
+
+.by span{
+    color: var(--grayv2);
 }
 </style>
 
