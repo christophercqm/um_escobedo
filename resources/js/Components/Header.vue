@@ -1,131 +1,151 @@
 <template>
     <nav class="navbar">
-        <div
-            :class="[
-                'container d-flex content-nav flex-column',
-                { sticky: isSticky },
-            ]"
-        >
+        <!-- Capa que ocupa el 100% del ancho -->
+        <div class="full-width-layer" :class="{ sticky: isSticky }">
             <div
-                class="menu-top d-flex justify-content-between align-items-center w-100"
+                :class="[
+                    'container d-flex content-nav flex-column',
+                    { sticky: isSticky },
+                ]"
             >
-                <!-- Patrocinadores (desaparecen cuando es sticky) -->
-                <div class="top-navigation-left">
-                    <div class="top-navigation-left-text d-flex gap-5 align-items-center">
-                        <!-- LOGO FÚTBOL EMOTION-->
-                        <div class="container-sponsor">
-                            <div class="contain-logo">
-                                <img :src=logo_emotion alt="Logo Fútbol Emotion">
+                <div class="bg-full">
+                    <div
+                        class="menu-top d-flex justify-content-between align-items-center w-100"
+                    >
+                        <!-- Patrocinadores (desaparecen cuando es sticky) -->
+                        <div class="top-navigation-left">
+                            <div
+                                class="top-navigation-left-text gap-4 d-flex align-items-center"
+                            >
+                                <!-- LOGO FÚTBOL EMOTION-->
+                                <div class="container-sponsor">
+                                    <img
+                                        :src="logo_emotion"
+                                        alt="Logo Fútbol Emotion"
+                                        class="sponsor-image"
+                                    />
+                                </div>
+                                <!-- SOKA-->
+                                <div class="container-sponsor">
+                                    <img
+                                        :src="logo_soka"
+                                        alt="Logo Soka"
+                                        class="sponsor-image"
+                                    />
+                                </div>
                             </div>
                         </div>
-                        <!-- SOKA-->
-                        <div class="container-sponsor">
-                            <div class="contain-logo">
-                                <img :src=logo_soka alt="Logo Soka">
+
+                        <!-- LOGO -->
+                        <div class="logo">
+                            <NavLink href="/" class="link-logo">
+                                <img
+                                    :src="logo"
+                                    alt="Logo Image"
+                                    class="img-logo"
+                                />
+                            </NavLink>
+                        </div>
+
+                        <!-- Redes sociales (se colocan a la derecha cuando es sticky) -->
+                        <div class="top-navigation-right">
+                            <div class="top-social-wrapper d-flex">
+                                <div class="social-icon">
+                                    <a
+                                        href="https://www.instagram.com/um_escobedooficial/"
+                                        target="_blank"
+                                    >
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </a>
+                                </div>
+                                <div class="social-icon">
+                                    <a
+                                        href="https://x.com/UMEscobedo?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"
+                                        target="_blank"
+                                    >
+                                        <i class="fa-brands fa-x-twitter"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        
-                    </div>
-                </div>
 
-                <!-- LOGO -->
-                <div class="logo">
-                    <NavLink href="/" class="link-logo">
-                        <img :src="logo" alt="Logo Image" class="img-logo" />
-                    </NavLink>
-                </div>
-
-                <!-- Redes sociales (se colocan a la derecha cuando es sticky) -->
-                <div class="top-navigation-right">
-                    <div class="top-social-wrapper d-flex">
-                        <div class="social-icon">
-                            <a
-                                href="https://www.instagram.com/um_escobedooficial/"
-                                target="_blank"
-                            >
-                                <i class="fa-brands fa-instagram"></i>
-                            </a>
-                        </div>
-                        <div class="social-icon">
-                            <a
-                                href="https://x.com/UMEscobedo?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"
-                                target="_blank"
-                            >
-                                <i class="fa-brands fa-x-twitter"></i>
-                            </a>
+                        <!-- Icono de hamburguesa para menú móvil -->
+                        <div class="hamburger-menu" @click="toggleMenu">
+                            <span></span>
+                            <span></span>
+                            <span></span>
                         </div>
                     </div>
-                </div>
 
-                <!-- Icono de hamburguesa para menú móvil -->
-                <div class="hamburger-menu" @click="toggleMenu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <!-- Menú de navegación lateral -->
+                    <div class="site-menu" :class="{ 'open-menu': isMenuOpen }">
+                        <!-- Icono de cerrar -->
+                        <div class="close-menu" @click="toggleMenu">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+
+                        <div class="logo-mobil">
+                            <div class="logo">
+                                <img :src="logo" alt="Escobedo Logo" />
+                            </div>
+                        </div>
+                        <ul class="menueffect">
+                            <li>
+                                <NavLink href="/club" class="nav_link"
+                                    >El Club</NavLink
+                                >
+                            </li>
+                            <li>
+                                <NavLink href="/primer-equipo" class="nav_link"
+                                    >Primer Equipo</NavLink
+                                >
+                            </li>
+                            <li>
+                                <NavLink href="/escuela" class="nav_link"
+                                    >Escuela</NavLink
+                                >
+                            </li>
+                            <li>
+                                <NavLink href="/prensa" class="nav_link"
+                                    >Prensa</NavLink
+                                >
+                            </li>
+                            <li>
+                                <NavLink href="/contacto" class="nav_link"
+                                    >Contacto</NavLink
+                                >
+                            </li>
+                        </ul>
+
+                        <!-- REDES MOBILE -->
+                        <div class="redes">
+                            <div class="social-icon">
+                                <a
+                                    href="https://www.instagram.com/um_escobedooficial/"
+                                    target="_blank"
+                                >
+                                    <i class="fa-brands fa-instagram"></i>
+                                </a>
+                            </div>
+                            <div class="social-icon">
+                                <a
+                                    href="https://x.com/UMEscobedo?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"
+                                    target="_blank"
+                                >
+                                    <i class="fa-brands fa-x-twitter"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fondo oscuro cuando el menú lateral está abierto -->
+                    <div
+                        class="overlay"
+                        v-if="isMenuOpen"
+                        @click="toggleMenu"
+                    ></div>
                 </div>
             </div>
-
-            <!-- Menú de navegación lateral -->
-            <div class="site-menu" :class="{ 'open-menu': isMenuOpen }">
-                <!-- Icono de cerrar -->
-                <div class="close-menu" @click="toggleMenu">
-                    <i class="fa-solid fa-xmark"></i>
-                </div>
-
-                <div class="logo-mobil">
-                    <div class="logo">
-                        <img :src="logo" alt="Escobedo Logo" />
-                    </div>
-                </div>
-                <ul class="menueffect">
-                    <li>
-                        <NavLink href="/club" class="nav_link">El Club</NavLink>
-                    </li>
-                    <li>
-                        <NavLink href="/primer-equipo" class="nav_link"
-                            >Primer Equipo</NavLink
-                        >
-                    </li>
-                    <li>
-                        <NavLink href="/escuela" class="nav_link"
-                            >Escuela</NavLink
-                        >
-                    </li>
-                    <li>
-                        <NavLink href="/prensa" class="nav_link"
-                            >Prensa</NavLink
-                        >
-                    </li>
-                    <li>
-                        <NavLink href="/contacto" class="nav_link"
-                            >Contacto</NavLink
-                        >
-                    </li>
-                </ul>
-
-                <!-- REDES MOBILE -->
-                <div class="redes">
-                    <div class="social-icon">
-                        <a
-                            href="https://www.instagram.com/um_escobedooficial/"
-                            target="_blank"
-                        >
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
-                    </div>
-                    <div class="social-icon">
-                        <a
-                            href="https://x.com/UMEscobedo?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"
-                            target="_blank"
-                        >
-                            <i class="fa-brands fa-x-twitter"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Fondo oscuro cuando el menú lateral está abierto -->
-            <div class="overlay" v-if="isMenuOpen" @click="toggleMenu"></div>
         </div>
     </nav>
 </template>
@@ -137,8 +157,6 @@ import logo from "@images/logo-escobedo.png";
 import logo_soka from "@images/logo-soka.png";
 import logo_emotion from "@images/logo-futbol-emotion.png";
 
-
-
 const isSticky = ref(false);
 const isMenuOpen = ref(false);
 
@@ -148,8 +166,8 @@ const toggleMenu = () => {
 
 onMounted(() => {
     const handleScroll = () => {
-        const menu = document.querySelector(".site-menu");
-        const stickyOffset = menu.offsetTop;
+        const stickyOffset =
+            document.querySelector(".full-width-layer").offsetTop;
 
         // Añadir o quitar la clase 'sticky' basado en la posición del scroll
         if (window.scrollY > stickyOffset) {
@@ -186,10 +204,6 @@ onMounted(() => {
 .top-social-wrapper {
     display: flex;
     gap: 0.5rem;
-}
-
-.navbar .container {
-    max-width: 1250px;
 }
 
 .social-icon a {
@@ -247,7 +261,7 @@ onMounted(() => {
 }
 
 .redes {
-   display: none; 
+    display: none;
 }
 
 /* Estilos para el menú lateral en pantallas pequeñas (móviles y tabletas) */
@@ -275,7 +289,7 @@ onMounted(() => {
         padding: 3rem 1rem;
     }
 
-    .close-menu{
+    .close-menu {
         display: block !important;
         cursor: pointer;
     }
@@ -286,12 +300,12 @@ onMounted(() => {
         padding: 3rem 1rem;
     }
 
-    .site-menu.open-menu .redes{
+    .site-menu.open-menu .redes {
         display: flex;
         margin: 3rem 0;
     }
 
-    .redes .social-icon a{
+    .redes .social-icon a {
         justify-content: start;
     }
 
@@ -327,6 +341,51 @@ onMounted(() => {
     }
 }
 
+@media (min-width: 992px) {
+    .menu-top {
+        display: flex; /* Asegúrate de que el contenedor sea un flex container */
+    }
+
+    .top-navigation-left,
+    .logo,
+    .top-navigation-right {
+        flex: 1;
+        max-width: 33.33%;
+        display: flex;
+        align-items: center;
+    }
+
+    .container-sponsor {
+        width: 100%;
+        height: auto;
+    }
+
+    .container-sponsor img.sponsor-image {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .bg-full .top-navigation-left{
+        justify-content: start;
+    }
+
+    .bg-full .logo{
+        justify-content: center;
+    }
+
+    .bg-full .top-navigation-right{
+        justify-content: flex-end;
+    }
+
+    .bg-full .menu-top {
+        margin: 1.2rem 0;
+    }
+
+    .full-width-layer.sticky .bg-full .menu-top{
+        margin: 0;
+    }
+}
+
 .menueffect {
     display: flex;
     gap: 1.2rem;
@@ -338,9 +397,11 @@ onMounted(() => {
 /* Sticky */
 
 .container.sticky {
-    max-width: unset;
     min-height: 5rem;
     justify-content: center;
+    left: 0;
+    right: 0;
+    width: 100%;
 }
 
 .container.sticky .logo {
@@ -350,6 +411,8 @@ onMounted(() => {
 
 .container.sticky .link-logo {
     position: absolute;
+    top: -1rem;
+    left: 0;
 }
 
 .container.sticky .menueffect {
@@ -400,14 +463,20 @@ onMounted(() => {
     max-width: 100px;
 }
 
-
 .container-sponsor {
-    width: 150px;
+    width: 100px;
+    height: 100px;
 }
 
-.container-sponsor .contain-logo img{
+.container-sponsor img.sponsor-image {
     width: 100%;
-    height: 100%; 
+    height: 100%;
+    object-fit: contain;
+}
+
+.container-sponsor .contain-logo img {
+    width: 100%;
+    height: 100%;
 }
 
 .close-menu {
@@ -418,4 +487,24 @@ onMounted(() => {
     justify-content: flex-end;
 }
 
+/* Capa que ocupa el 100% del ancho */
+.full-width-layer {
+    width: 100%;
+    position: relative;
+}
+
+.full-width-layer .container {
+    margin: 0 auto;
+}
+
+.bg-full {
+    max-width: 1250px;
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 </style>

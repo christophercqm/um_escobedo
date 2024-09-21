@@ -2,14 +2,6 @@
     <footer class="py-5 float-start w-100">
         <div class="container">
             <div class="row row-cols-1 row-cols-lg-3">
-                 <!-- LOGO -->
-                 <div class="col">
-                    <div class="comon-footer d-flex justify-center">
-                        <div class="logo-container">
-                            <img :src="logo" alt="Logo Escobedo" />
-                        </div>
-                    </div>
-                </div>
                 <!-- CONTACTO  -->
                 <div class="col">
                     <div class="comon-footer">
@@ -45,7 +37,8 @@
                         </ul>
                     </div>
                 </div>
-                <!-- CONTACTO -->
+
+                <!-- ENLACES -->
                 <div class="col">
                     <div class="comon-footer">
                         <h5>U.M Escobedo</h5>
@@ -79,12 +72,24 @@
                     </div>
                 </div>
 
-                <hr class="separator">
-
-                <div class="by d-flex justify-center">
-                    <span>Desarrollado por <strong>Black Cat</strong> by <em>EL Ayudante</em></span>
+                <!-- LOGO -->
+                <div class="col">
+                    <div class="comon-footer d-flex justify-center">
+                        <div class="logo-container">
+                            <img :src="logo" alt="Logo Escobedo" />
+                        </div>
+                    </div>
                 </div>
-               
+
+                <hr class="separator w-100" />
+
+                <div class="by d-flex justify-center w-100">
+                    <span
+                       class="copyright"
+                    >Desarrollado por <strong>Black Cat</strong> by
+                        <em>EL Ayudante</em></span
+                    >
+                </div>
             </div>
             <p class="text-center copy-t">© 2024 U.M. Escobedo</p>
         </div>
@@ -145,12 +150,17 @@ footer .social-icon i.fa-instagram:hover {
     width: 80px;
 }
 
-.separator{
+.separator {
     opacity: 1;
-    color: rgba(255, 255, 255, .4);
+    color: rgba(255, 255, 255, 0.4);
 }
 
-.by span{
+.copyright,
+.copy-t{
+    font-size: .9rem;
+}
+
+.by span {
     color: var(--grayv2);
 }
 </style>
