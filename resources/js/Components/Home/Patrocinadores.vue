@@ -113,13 +113,14 @@ import logo8 from "@images/patrocinadores/logo-soka.webp";
     align-items: center;
 }
 
-.col-patro {
-    background-color: #f7f7f7;
-}
 
 .sponsor .logo {
     width: 20%;
     max-width: 8rem;
+}
+
+.patrocinadores {
+    background-color: #EFEFF0;
 }
 
 .contain-patrocinadores .img-logo {
@@ -128,6 +129,7 @@ import logo8 from "@images/patrocinadores/logo-soka.webp";
     vertical-align: top;
     object-fit: contain;
 }
+
 
 .patrocinadores-title {
     font-family: var(--barlow);
@@ -142,4 +144,6 @@ import logo8 from "@images/patrocinadores/logo-soka.webp";
         width: 30%;
     }
 }
+
+
 </style>
