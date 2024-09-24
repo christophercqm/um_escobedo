@@ -191,7 +191,7 @@ onMounted(() => {
 /* General styles */
 .navbar {
     z-index: 9;
-    background: rgba(0, 0, 0, 0.771);
+    background: rgba(0, 0, 0, .9);
 }
 
 /* Estilos para el logo */

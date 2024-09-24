@@ -1,11 +1,11 @@
 <template>
     <!-- PATROCINIOS -->
-    <div class="patrocinadores py-5">
+    <div class="patrocinadores contain-patrocinadores">
         <div class="container">
-            <div class="row g-lg-5">
-                <div class="col col-patro">
+            <div class="row">
+                <div class="col col-patro mt-0">
                     <h2
-                        class="patrocinadores patrocinadores-title m-0 text-center my-5"
+                        class="patrocinadores patrocinadores-title m-0 text-center"
                     >
                         Patrocinadores
                     </h2>
@@ -90,6 +90,11 @@ import logo8 from "@images/patrocinadores/logo-soka.webp";
 </script>
 
 <style scoped>
+.contain-patrocinadores {
+    padding: 60px 0;
+
+}
+
 .patrocinadores .container {
     max-width: 1250px;
 }

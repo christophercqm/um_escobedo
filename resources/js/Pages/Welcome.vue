@@ -23,10 +23,9 @@
                                     dapibus condimentum. Nulla facilisi. Morbi
                                     auctor risus nec ligula posuere,
                                 </p>
-                                <button
-                                    type="button"
+                                <NavLink
+                                    href="/contacto"
                                     class="btn text-white btn-escobedo"
-                                    name="button"
                                 >
                                     Acerca del Club
                                     <svg
@@ -42,7 +41,7 @@
                                             d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
                                         ></path>
                                     </svg>
-                                </button>
+                                </NavLink>
                             </div>
                         </div>
 
@@ -205,6 +204,9 @@ import PartidosResultados from "@/Components/Home/PartidosResultados.vue";
 import NuestraHistoria from "@/Components/Home/NuestraHistoria.vue";
 import TablaPosiciones from "@/Components/Home/TablaPosiciones.vue";
 import PlantillaJugadores from "@/Components/Home/PlantillaJugadores.vue";
+
+import NavLink from "@/Components/NavLink.vue";
+
 </script>
 
 <style scoped>
@@ -243,8 +245,6 @@ import PlantillaJugadores from "@/Components/Home/PlantillaJugadores.vue";
 .container-home .container {
     max-width: 1250px;
 }
-
-
 
 .content {
     text-align: center;
@@ -374,8 +374,6 @@ p {
     top: 50%;
     transform: translateY(-50%);
 }
-
-
 
 /* SECCIÓN - FORMA PARTE DE UN GRAN EQUIPO */
 .join-us-div {
