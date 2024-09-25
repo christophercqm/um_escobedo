@@ -19,7 +19,17 @@
                     <h5 class="samll-sub mb-1 mt-0 title">Nuestra Historia</h5>
                     <h2 class="comon-heading m-0">Sobre el Club Escobedo</h2>
                     <p class="mt-3">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                        Lorem Ipsum is simply dummy text of the printing and
+                        typesetting industry. Lorem Ipsum has been the
+                        industry's standard dummy text ever since the 1500s,
+                        when an unknown printer took a galley of type and
+                        scrambled it to make a type specimen book. It has
+                        survived not only five centuries, but also the leap into
+                        electronic typesetting, remaining essentially unchanged.
+                        It was popularised in the 1960s with the release of
+                        Letraset sheets containing Lorem Ipsum passages, and
+                        more recently with desktop publishing software like
+                        Aldus PageMaker including versions of Lorem Ipsum.
                     </p>
                 </div>
             </div>
@@ -30,12 +40,17 @@
             <!-- JUNTA -->
             <Junta></Junta>
 
+            <!-- BARRA PATROCINIO -->
+            <BarraPatrocinio></BarraPatrocinio>
+
             <!-- ACTUALIDAD -->
             <Blog></Blog>
 
             <!-- PATROCINADORES -->
             <Patrocinadores></Patrocinadores>
 
+            <!-- NUESTRO CUERPO TÉCNICO -->
+            <CuerpoTecnico></CuerpoTecnico>
         </div>
     </GuestLayout>
 </template>
@@ -49,12 +64,11 @@ import MisionVision from "@/Components/Club/MisionVision.vue";
 import Junta from "@/Components/Club/Junta.vue";
 import Blog from "@/Components/Club/Blog.vue";
 import Patrocinadores from "@/Components/Home/Patrocinadores.vue";
-
-
+import BarraPatrocinio from "@/Components/BarraPatrocinio/Patrocinio.vue";
+import CuerpoTecnico from "@/Components/Club/CuerpoTecnico.vue";
 </script>
 
 <style scoped>
-
 .container.container-club {
 }
 
@@ -129,13 +143,12 @@ import Patrocinadores from "@/Components/Home/Patrocinadores.vue";
     padding-bottom: 120px;
 }
 
-.patrocinadores .col-patro{
+.patrocinadores .col-patro {
     padding: 50px 0;
-    margin-top: 0 !important;
-} 
-
-.patrocinadores .col-patro h2.patrocinadores-title{
     margin-top: 0 !important;
 }
 
+.patrocinadores .col-patro h2.patrocinadores-title {
+    margin-top: 0 !important;
+}
 </style>

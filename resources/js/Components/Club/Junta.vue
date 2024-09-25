@@ -9,7 +9,7 @@
                             <!-- Columna para cada tarjeta -->
                             <div class="card">
                                 <img
-                                    src="https://via.placeholder.com/250x100?text=Imagen+1"
+                                    :src=socio_1
                                     class="card-img-top"
                                     alt="Imagen 1"
                                 />
@@ -22,7 +22,7 @@
                         <div class="col-md-3 mb-4">
                             <div class="card">
                                 <img
-                                    src="https://via.placeholder.com/250x100?text=Imagen+2"
+                                    :src=socio_1
                                     class="card-img-top"
                                     alt="Imagen 2"
                                 />
@@ -35,7 +35,7 @@
                         <div class="col-md-3 mb-4">
                             <div class="card">
                                 <img
-                                    src="https://via.placeholder.com/250x100?text=Imagen+3"
+                                    :src="socio_1"
                                     class="card-img-top"
                                     alt="Imagen 3"
                                 />
@@ -48,7 +48,7 @@
                         <div class="col-md-3 mb-4">
                             <div class="card">
                                 <img
-                                    src="https://via.placeholder.com/250x100?text=Imagen+4"
+                                    :src="socio_1"
                                     class="card-img-top"
                                     alt="Imagen 4"
                                 />
@@ -65,7 +65,9 @@
     </div>
 </template>
 
-<script setup></script>
+<script setup>
+    import socio_1 from '@images/junta/socio1.jpg';
+</script>
 
 <style scoped>
 .contain-max {

@@ -136,6 +136,7 @@ import notice3 from "@images/noticias/notice3.jpg";
 /* Estilos personalizados para mejorar el diseño de la card */
 .contain-max .container {
     max-width: 1250px;
+    padding: 50px 0;
 }
 
 .card-img-top {
