@@ -3,7 +3,7 @@
         <div class="container container-club px-0">
             <!-- NUESTRA HISTORIA -->
             <div class="row row-info-bg full-width mx-auto">
-                <div class="col col-img">
+                <div class="col col-img h-100">
                     <figure class="big-img">
                         <img
                             :src="equipo"
@@ -19,18 +19,41 @@
                     <h5 class="samll-sub mb-1 mt-0 title">Nuestra Historia</h5>
                     <h2 class="comon-heading m-0">Sobre el Club Escobedo</h2>
                     <p class="mt-3">
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley of type and
-                        scrambled it to make a type specimen book. It has
-                        survived not only five centuries, but also the leap into
-                        electronic typesetting, remaining essentially unchanged.
-                        It was popularised in the 1960s with the release of
-                        Letraset sheets containing Lorem Ipsum passages, and
-                        more recently with desktop publishing software like
-                        Aldus PageMaker including versions of Lorem Ipsum.
+                        Nuestra historia se remonta a 1917, cuando se fundó
+                        nuestro club con el nombre de Arenas Sport, de la mano
+                        de Antonio Arce Puente. A partir de 1923, nos
+                        establecimos con el nombre actual de U.M. Escobedo, con
+                        el testigo de Benjamín Arce Calva, aunque
+                        momentáneamente fuimos Juventud Imperial en tiempos de
+                        Guerra Civil con Jose Portilla García, volviendo a
+                        nuestra denominación habitual con Francisco Alonso
+                        Entrecanales. Eusebio Arce, recordado por poner nombre a
+                        nuestro campo actual, dio el relevo a nuestro actual
+                        presidente Luis Merino Arce desde 1981.
                     </p>
+
+                    <!-- Párrafo oculto inicialmente -->
+                    <p v-if="isExpanded" class="hidden-content">
+                        Tras una década oscura en los años 50, en l que nos
+                        alejamos del panorama deportivo, regresamos gracias al
+                        apoyo de Nicanor Arce Noreña y resurgimos con más fuerza
+                        en 1964/65, en una nueva localidad. A partir de aquí,
+                        conseguimos numerosos éxitos: en 1966/67, ascender a
+                        tercera división con Lorenzo Ruiz Arce; en 1969/70,
+                        ganar la Copa Cantabria con Antonio Arce Vela; ser
+                        campeones de liga en cuatro ocasiones (1991/92,1992/93,
+                        2018/19, 2023/24); ser campeones de la copa Federación
+                        (2017/18); participar en veintidós fases de ascenso;
+                        participar en la Copa del Rey -consiguiendo vencer al
+                        Málaga y enfrentándonos al Sevilla F.C. y, finalmente,
+                        conseguir el ansiado ascenso a 2ª RFEF en la temporada
+                        pasada de 2023/24.
+                    </p>
+
+                    <!-- Botón Seguir Leyendo -->
+                    <span class="seguir-leyendo" @click="toggleContent">
+                        {{ isExpanded ? "Leer menos" : "Seguir leyendo" }}
+                    </span>
                 </div>
             </div>
 
@@ -66,6 +89,16 @@ import Blog from "@/Components/Club/Blog.vue";
 import Patrocinadores from "@/Components/Home/Patrocinadores.vue";
 import BarraPatrocinio from "@/Components/BarraPatrocinio/Patrocinio.vue";
 import CuerpoTecnico from "@/Components/Club/CuerpoTecnico.vue";
+
+import { ref } from "vue";
+
+// Estado para controlar si el contenido está expandido o no
+const isExpanded = ref(false);
+
+// Función para alternar la visibilidad del contenido
+const toggleContent = () => {
+    isExpanded.value = !isExpanded.value;
+};
 </script>
 
 <style scoped>
@@ -150,5 +183,48 @@ import CuerpoTecnico from "@/Components/Club/CuerpoTecnico.vue";
 
 .patrocinadores .col-patro h2.patrocinadores-title {
     margin-top: 0 !important;
+}
+
+.seguir-leyendo {
+    color: var(--red);
+}
+
+.col-history {
+    position: relative;
+}
+
+.hidden-content {
+    display: block;
+    transition: max-height 0.3s ease-out;
+}
+
+/* Cuando está expandido, mostrar contenido */
+.is-expanded .hidden-content {
+    display: block;
+    max-height: 1000px; /* Altura suficiente para mostrar todo */
+}
+
+.seguir-leyendo {
+    cursor: pointer;
+    color: var(--red);
+    text-decoration: underline;
+    margin-top: 10px;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+.seguir-leyendo:hover {
+    color: var(--red-hover);
+}
+
+@media (max-width: 768px) {
+    .container-club .row-info-bg {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .col-history {
+        padding-top: 100px;
+    }
 }
 </style>

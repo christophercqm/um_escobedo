@@ -1,6 +1,6 @@
 <template>
     <div class="contain-max contain-cuerpo-tecnico">
-        <div class="container">
+        <div class="container overflow-hidden">
             <div class="row">
                 <div class="col mb-4">
                     <h2>Nuestro cuerpo técnico</h2>

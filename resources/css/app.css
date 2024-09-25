@@ -3,6 +3,7 @@
 @tailwind utilities;
 :root {
     --red: #ee1d36;
+    --red-hover: #d9534f;
     --black: #000;
     --white: #fff;
     --gray-real: gray;
@@ -72,4 +73,17 @@ img {
 
 .btn-escobedo {
     background-color: var(--red) !important;
+}
+
+.contain-btn {
+    padding: 16px;
+}
+
+/* MEDIA QUERYS */
+@media (max-width: 768px) {
+    p {
+        font-size: 15px;
+    }
+
+    
 }

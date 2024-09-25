@@ -150,5 +150,19 @@ import logo8 from "@images/patrocinadores/logo-soka.webp";
     }
 }
 
+@media (max-width: 768px) {
+    .sponsor {
+        display: none;
+    }
+    .contain-patrocinadores .logo ul.sponsor li.logo {
+        width: 25%;
+    }
+    .contain-patrocinadores .logo ul.sponsor {
+        gap: 1rem 2.5rem;
+    }
+    
+
+}
+
 
 </style>

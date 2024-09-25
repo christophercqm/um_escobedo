@@ -6,9 +6,9 @@
                     <h2 class="text-left">Actualidad</h2>
                 </div>
             </div>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center contain-cards">
                 <!-- CARD 1 -->
-                <div class="col-md-4">
+                <div class="col-md-4 container-card">
                     <a href="www.google.com" class="card-link">
                         <div class="card shadow-sm">
                             <img
@@ -45,7 +45,7 @@
                 </div>
 
                 <!-- CARD 2 -->
-                <div class="col-md-4">
+                <div class="col-md-4 container-card">
                     <a href="www.google.com" class="card-link">
                         <div class="card shadow-sm">
                             <img
@@ -83,7 +83,7 @@
                 </div>
 
                 <!-- CARD 3 -->
-                <div class="col-md-4">
+                <div class="col-md-4 container-card">
                     <a href="www.google.com" class="card-link">
                         <div class="card shadow-sm">
                             <img
@@ -188,4 +188,20 @@ a {
 .card-meta span {
     color: #bababa !important;
 }
+
+@media (max-width: 600px) {
+    .container-club .card{
+        max-width: 100%;
+    }
+
+    .contain-cards .container-card{
+        margin-bottom: 2rem;
+    }
+
+    .contain-max .container {
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+}
+
 </style>

@@ -89,4 +89,13 @@ import NavLink from "@/Components/NavLink.vue";
     display: flex;
     align-items: center;
 }
+
+
+@media (max-width: 768px) {
+    .join-us-div .contain-info{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
 </style>

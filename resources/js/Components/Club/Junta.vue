@@ -5,7 +5,7 @@
                 <div class="col col-junta">
                     <h2>Junta</h2>
                     <div class="row">
-                        <div class="col-md-3" >
+                        <div class="col-md-3 mb-4" >
                             <!-- Columna para cada tarjeta -->
                             <div class="card">
                                 <img
@@ -108,4 +108,13 @@
 .col-junta {
     text-align: left;
 }
+
+@media (max-width: 768px) {
+    .col-junta .card{
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+    }
+}
+
 </style>

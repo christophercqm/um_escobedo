@@ -243,7 +243,7 @@ import equipo_3 from "@images/equipo/equipo_3.jpg";
     background-color: #f2f2f2;
 }
 
-.our-history-div{
+.our-history-div {
     max-width: 1250px;
     padding: 50px 0;
 }
@@ -333,9 +333,28 @@ import equipo_3 from "@images/equipo/equipo_3.jpg";
     color: var(--red);
 }
 
-.nuestros-valores .text-container p{
+.nuestros-valores .text-container p {
     font-size: 15px;
 }
 
+/* MEDIA QUERYS */
+@media (max-width: 768px) {
+    .comon-fild-ads1 figure {
+        width: 100%;
+    }
 
+    .left-history {
+        width: 100%;
+        padding-left: 0;
+    }
+
+    .value-items.nuestros-valores {
+        padding-left: 0;
+    }
+
+    .values-list.container {
+        padding: 0;
+        margin: 1rem 0;
+    }
+}
 </style>

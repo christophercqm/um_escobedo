@@ -172,6 +172,12 @@ footer .social-icon i.fa-instagram:hover {
 .footer-links {
     gap: 4.5rem;
 }
+
+@media (max-width: 768px) {
+    .comon-footer {
+        margin: 10px 0;
+    }
+}
 </style>
 
 <script setup>
