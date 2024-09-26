@@ -10,19 +10,13 @@
     --gray: #bdbcbc;
     --grayv2: #8d95a1;
     --text-color: #333333;
-
     /* PARA TEXTOS EN FONDO NEGRO */
     --black-opacity: rgba(13, 04, 03, 88%);
     --border: 5px;
-
     /* FUENTES */
     --barlow: "Barlow Condensed", sans-serif;
     --roboto: "Roboto", sans-serif;
 }
-
-
-
-
 
 
 /* resources/css/app.css */
@@ -50,3 +44,12 @@ img {
     max-width: 1250px !important;
 }
 
+.btn-admin {
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    padding: 10px 30px;
+    border-radius: var(--border);
+    font-size: 16px;
+    text-align: left;
+}

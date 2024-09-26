@@ -1,26 +1,13 @@
 <template>
-    <Head title="Prensa" />
-
     <AuthenticatedLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Prensa
-            </h2>
-        </template>
-
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                 <NavLink
-                    class="btn-escobedo"
+                    class="btn-escobedo btn-admin"
                     :href="route('admin.prensa.create')"
                 >
                     Añadir
                 </NavLink>
-
-                <!-- Mostrar mensaje de éxito -->
-                <div v-if="props.flash && props.flash.success" class="alert alert-success">
-                    {{ props.flash.success }}
-                </div>
 
                 <div style="overflow-x: auto">
                     <table
@@ -38,7 +25,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="articulo in props.prensa" :key="articulo.id">
+                            <tr v-for="articulo in articulos" :key="articulo.id">
                                 <td>{{ articulo.fecha_creacion }}</td>
                                 <td>{{ articulo.titulo }}</td>
                                 <td>{{ articulo.descripcion_breve }}</td>
@@ -51,12 +38,12 @@
                                     />
                                 </td>
                                 <td>
-                                    <Link
+                                    <NavLink
                                         class="text-blue-600 hover:text-blue-900"
                                         :href="route('admin.prensa.edit', articulo.id)"
                                     >
                                         Editar
-                                    </Link>
+                                    </NavLink>
                                     <button
                                         class="text-red-600 hover:text-red-900"
                                         @click="eliminarArticulo(articulo.id)"
@@ -74,20 +61,20 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeUnmount } from "vue";
-import Head from "@inertiajs/inertia-vue3"; // Asegúrate de que esta importación sea correcta
-
-import { Inertia } from "@inertiajs/inertia"; // Asegúrate de importar Inertia
+import { ref, onMounted, onBeforeUnmount } from "vue";
+import { Inertia } from "@inertiajs/inertia";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import NavLink from "@/Components/NavLink.vue";
-import Swal from 'sweetalert2';
+import NavLink from "@/Components/NavLink.vue"; // Asegúrate de que esta importación sea correcta
+import Swal from "sweetalert2";
 
 // Definir las props
 const props = defineProps({
-    prensa: Array, // Espera un arreglo de artículos de prensa
+    prensa: Array,
 });
 
-// Variable para almacenar la instancia de DataTable
+// Estado local para manejar la lista de artículos
+const articulos = ref([...props.prensa]);
+
 let dataTable;
 
 onMounted(() => {
@@ -105,23 +92,41 @@ onBeforeUnmount(() => {
 });
 
 // Función para eliminar un artículo
-const eliminarArticulo = async (id) => {
-    const { value: confirmDelete } = await Swal.fire({
-        title: '¿Estás seguro?',
-        text: 'No podrás revertir esto!',
-        icon: 'warning',
+const eliminarArticulo = (id) => {
+    Swal.fire({
+        title: "¿Estás seguro?",
+        text: "No podrás revertir esto!",
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sí, eliminar!'
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, eliminar!",
+    }).then(({ isConfirmed }) => {
+        if (isConfirmed) {
+            // Llamar al método destroy del controlador
+            Inertia.delete(route("admin.prensa.destroy", id), {
+                onSuccess: () => {
+                    // Actualizar la lista local de artículos
+                    articulos.value = articulos.value.filter(articulo => articulo.id !== id);
+                    Swal.fire({
+                        title: 'Eliminado!',
+                        text: 'El artículo ha sido eliminado.',
+                        icon: 'success',
+                        confirmButtonText: 'Aceptar',
+                    });
+                },
+                onError: () => {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Ocurrió un error al eliminar el artículo.',
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar',
+                    });
+                },
+            });
+        }
     });
-
-    if (confirmDelete) {
-        // Llamar al método destroy del controlador
-        Inertia.delete(route('admin.prensa.destroy', id));
-    }
 };
-
 </script>
 
 <style>

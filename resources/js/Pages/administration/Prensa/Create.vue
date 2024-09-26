@@ -3,6 +3,7 @@
         <div class="container mt-5 max-width">
             <h1>Añadir Nueva Prensa</h1>
             <form @submit.prevent="submit">
+                <!-- Campo Título -->
                 <div class="mb-3">
                     <InputLabel for="titulo" value="Título" />
                     <input
@@ -18,11 +19,9 @@
                     />
                 </div>
 
+                <!-- Campo Descripción Breve -->
                 <div class="mb-3">
-                    <InputLabel
-                        for="descripcion_breve"
-                        value="Descripción Breve"
-                    />
+                    <InputLabel for="descripcion_breve" value="Descripción Breve" />
                     <textarea
                         id="descripcion_breve"
                         v-model="form.descripcion_breve"
@@ -36,11 +35,9 @@
                     />
                 </div>
 
+                <!-- Campo Descripción Completa -->
                 <div class="mb-3">
-                    <InputLabel
-                        for="descripcion"
-                        value="Descripción Completa"
-                    />
+                    <InputLabel for="descripcion" value="Descripción Completa" />
                     <textarea
                         id="descripcion"
                         v-model="form.descripcion"
@@ -54,6 +51,7 @@
                     />
                 </div>
 
+                <!-- Campo Imagen -->
                 <div class="mb-3">
                     <InputLabel for="imagen" value="Seleccionar Imagen" />
                     <input
@@ -70,11 +68,9 @@
                     />
                 </div>
 
+                <!-- Vista Previa de la Imagen -->
                 <div class="mb-3" v-if="imagePreview">
-                    <InputLabel
-                        for="preview"
-                        value="Vista Previa de la Imagen"
-                    />
+                    <InputLabel for="preview" value="Vista Previa de la Imagen" />
                     <div class="img-prev">
                         <img
                             :src="imagePreview"
@@ -84,7 +80,8 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-success">
+                <!-- Botón de Envío -->
+                <button type="submit" class="btn-admin" :disabled="form.processing">
                     Crear Prensa
                 </button>
             </form>
@@ -93,8 +90,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { useForm } from "@inertiajs/inertia-vue3";
+import { ref } from "vue";
+import { useForm, usePage } from "@inertiajs/inertia-vue3";
 import Swal from 'sweetalert2';
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import InputLabel from "@/Components/InputLabel.vue";
@@ -105,7 +102,7 @@ const form = useForm({
     titulo: "",
     descripcion_breve: "",
     descripcion: "",
-    imagen: "",
+    imagen: null,
 });
 
 // Estado para la vista previa de la imagen
@@ -125,38 +122,31 @@ const handleImageUpload = (event) => {
 };
 
 // Función para enviar el formulario
-const submit = () => {
-    const formData = new FormData();
-    formData.append("titulo", form.titulo);
-    formData.append("descripcion_breve", form.descripcion_breve);
-    formData.append("descripcion", form.descripcion);
-    formData.append("imagen", form.imagen); // Agrega el archivo de imagen
+const submit = async () => {
+    try {
+        const response = await form.post(route("admin.prensa.store"));
 
-    form.post(route("admin.prensa.store"), {
-        data: formData,
-        onSuccess: (response) => {
-            console.log(response); // Verifica la respuesta aquí
-            Swal.fire({
-                title: 'Éxito!',
-                text: 'Prensa creada exitosamente.',
-                icon: 'success',
-                confirmButtonText: 'Aceptar',
-            });
-            form.reset(); // Resetea el formulario
-            imagePreview.value = null;
-        },
-        onError: (errors) => {
-            console.log(errors);
-            Swal.fire({ 
-                title: 'Error!',
-                text: 'Ocurrió un error al crear la prensa.',
-                icon: 'error',
-                confirmButtonText: 'Aceptar',
-            });
-        },
-    });
+        // Mostrar mensaje de éxito al crear
+        Swal.fire({
+            title: 'Éxito!',
+            text: 'Prensa creada exitosamente.',
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+        }).then(() => {
+            // Redirigir al índice después de aceptar el mensaje
+            window.location.href = route("admin.prensa"); // Cambia esto si tienes otra forma de redirigir
+        });
+
+    } catch (errors) {
+        // Mostrar mensaje de error
+        Swal.fire({
+            title: 'Error!',
+            text: 'Ocurrió un error al crear la prensa.',
+            icon: 'error',
+            confirmButtonText: 'Aceptar',
+        });
+    }
 };
-
 </script>
 
 <style scoped>

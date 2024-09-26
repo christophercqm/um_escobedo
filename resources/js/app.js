@@ -15,7 +15,11 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import $ from 'jquery';
 import 'datatables.net';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+
+
+
+const appName =
+    import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

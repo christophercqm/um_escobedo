@@ -26,7 +26,7 @@ class PrensaController extends Controller
      */
     public function create()
     {
-        return Inertia::render('administration/Prensa/Create'); // Muestra el formulario de creación
+        return Inertia::render('administration/Prensa/Create');
     }
 
     /**
@@ -34,40 +34,35 @@ class PrensaController extends Controller
      */
     public function store(Request $request)
     {
-        // Validación de los datos recibidos
+        // Validar los datos recibidos
         $request->validate([
             'titulo' => 'required|string|max:255',
             'descripcion_breve' => 'required|string',
             'descripcion' => 'required|string',
-            'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'imagen' => 'required|image|mimes:jpeg,png,jpg,webp,gif|max:2048',
         ]);
 
-        // Manejo de la carga de imagen
-        if ($request->hasFile('imagen')) {
-            // Obtener el archivo de la imagen
-            $file = $request->file('imagen');
-
-            // Almacenar la imagen usando el disco público
-            $imagePath = $file->store('prensa', 'public');
+        try {
+            // Manejo de la carga de imagen
+            $imagePath = $request->file('imagen')->store('prensa', 'public');
 
             // Crear un nuevo registro en la base de datos
-            $prensa = Prensa::create([
+            Prensa::create([
                 'titulo' => $request->titulo,
                 'descripcion_breve' => $request->descripcion_breve,
                 'descripcion' => $request->descripcion,
                 'imagen' => $imagePath, // Guardar la ruta en la base de datos
             ]);
 
-            // Comprobar si el registro se creó
-            if ($prensa) {
-                return redirect()->route('admin.prensa')->with('success', 'Artículo creado con éxito.');
-            } else {
-                return back()->withErrors(['error' => 'No se pudo crear el artículo.']);
-            }
-        } else {
-            return back()->withErrors(['error' => 'No se ha subido ninguna imagen.']);
+            // Redirigir con éxito
+            return redirect()->route('admin.prensa')->with('success', 'Artículo creado con éxito.');
+        } catch (\Exception $e) {
+            // En caso de que algo falle, redirigir con el error
+            return redirect()->back()->withErrors(['error' => 'Ocurrió un error al crear el artículo.']);
         }
     }
+
+
 
 
 
