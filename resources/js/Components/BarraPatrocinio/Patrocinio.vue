@@ -10,9 +10,9 @@
                 </h1>
                 <NavLink
                     href="/contacto"
-                    class="btn btn-socio"
+                    class="btn-patrocinio p-0 bg-white "
                 >
-                    <span>
+                    <span class="unete">
                         únete a nosotros
                     </span>
                     <svg
@@ -90,12 +90,26 @@ import NavLink from "@/Components/NavLink.vue";
     align-items: center;
 }
 
+.btn-patrocinio {
+    color: var(--red) !important;
+    text-transform: uppercase;
+    font-family: var(--roboto);
+    border-radius: var(--border);
+    padding: 0 !important;
+    padding: 10px 20px !important;
+}
 
+.unete {
+    padding-top: 2px;
+}
 @media (max-width: 768px) {
     .join-us-div .contain-info{
         display: flex;
         flex-direction: column;
         gap: 1rem;
+    }
+    .unete {
+        font-size: 1.5rem;
     }
 }
 </style>

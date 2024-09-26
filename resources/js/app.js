@@ -8,13 +8,14 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 
 // Importar estilos de Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 // Importar funcionalidad JavaScript de Bootstrap
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
+// Importar jQuery y DataTables
+import $ from 'jquery';
+import 'datatables.net';
 
-const appName =
-    import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -30,3 +31,6 @@ createInertiaApp({
         color: '#4B5563',
     },
 });
+
+// Hacer jQuery globalmente accesible
+window.$ = $; // Puedes acceder a jQuery en cualquier componente como $ o window.$

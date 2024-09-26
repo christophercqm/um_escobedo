@@ -20,34 +20,10 @@
     --roboto: "Roboto", sans-serif;
 }
 
-* {
-    transition: all 0.3s ease;
-}
 
-body {
-    font-family: var(--roboto) !important;
-    color: var(--gray);
-}
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: var(--barlow) !important;
-    margin: 0 !important;
-    margin: 10px 0 !important;
-}
 
-a {
-    text-decoration: none !important;
-    color: var(--white) !important;
-}
 
-p {
-    color: var(--text-color);
-}
 
 /* resources/css/app.css */
 
@@ -70,20 +46,7 @@ img {
     object-fit: cover;
 }
 
-
-.btn-escobedo {
-    background-color: var(--red) !important;
+.max-width {
+    max-width: 1250px !important;
 }
 
-.contain-btn {
-    padding: 16px;
-}
-
-/* MEDIA QUERYS */
-@media (max-width: 768px) {
-    p {
-        font-size: 15px;
-    }
-
-    
-}
