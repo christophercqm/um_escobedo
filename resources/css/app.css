@@ -53,3 +53,21 @@ img {
     font-size: 16px;
     text-align: left;
 }
+
+.btn-public {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: var(--red);
+    color: white;
+    text-decoration: none;
+    padding: 10px 30px;
+    border-radius: var(--border);
+    font-size: 16px;
+    text-align: left; 
+    transition: background-color 0.3s ease; 
+
+}
+
+.btn-public:hover {
+    background-color: #c11b30;
+}

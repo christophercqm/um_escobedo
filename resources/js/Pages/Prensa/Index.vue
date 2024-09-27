@@ -85,8 +85,8 @@
                                 </div>
                                 <div class="text-center contain-btn">
                                     <NavLink
-                                    :href="`/prensa/${item.id}`"
-                                    class="btn btn-escobedo w-100"
+                                        :href="`/prensa/${item.id}`"
+                                        class="btn btn-escobedo w-100"
                                         >Saber más</NavLink
                                     >
                                 </div>
@@ -99,135 +99,10 @@
                         </div>
                     </div>
 
-                    <!-- Menú Lateral -->
+                    <!-- SIDEBAR -->
                     <div class="col-3 col-sidebar p-0">
-                        <!-- Menú Lateral -->
-                        <div class="sidebar">
-                            <h5 class="sidebar-title">U.M. ESCOBEDO</h5>
-                            <hr class="separator" />
-                            <p class="sidebar-info-escobedo">
-                                Página oficial de la Unión Montañesa Escobedo,
-                                club fundado en 1917 y que actualmente milita en
-                                Segunda RFEF.
-                            </p>
-
-                            <br />
-                            <h5 class="sidebar-title">Enlaces de interés</h5>
-                            <hr class="separator" />
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <a href="#inicio" class="sidebar-link"
-                                        >Inicio</a
-                                    >
-                                </li>
-                                <li class="list-group-item">
-                                    <a href="#noticias" class="sidebar-link"
-                                        >Noticias</a
-                                    >
-                                </li>
-                                <li class="list-group-item">
-                                    <a href="#cronicas" class="sidebar-link"
-                                        >Crónicas</a
-                                    >
-                                </li>
-                                <li class="list-group-item">
-                                    <a href="#contacto" class="sidebar-link"
-                                        >Contacto</a
-                                    >
-                                </li>
-                            </ul>
-
-                            <br />
-                            <h5 class="sidebar-title">Últimas noticias</h5>
-                            <hr class="separator" />
-
-                            <div class="last-news">
-                                <div class="list-group">
-                                    <!-- Recorrer las tres últimas noticias -->
-                                    <NavLink
-                                        v-for="noticia in prensa.slice(0, 3)"
-                                        :key="noticia.id"
-                                        :href="`/prensa/${noticia.id}`"
-                                        class="list-group-item list-group-item-action"
-                                    >
-                                        <div class="d-flex">
-                                            <!-- Imagen de la noticia -->
-                                            <img
-                                                :src="`/storage/${noticia.imagen}`"
-                                                :alt="noticia.titulo"
-                                                class="me-3"
-                                                style="
-                                                    width: 50px;
-                                                    height: 50px;
-                                                    object-fit: cover;
-                                                    border-radius: 5px;
-                                                "
-                                            />
-                                            <div>
-                                                <!-- Título de la noticia -->
-                                                <h6 class="mb-1 title">
-                                                    {{ noticia.titulo }}
-                                                </h6>
-                                                <!-- Fecha de la noticia -->
-                                                <small style="color: gray; font-size: 12px;">
-                                                    <i
-                                                        class="fa fa-calendar me-1"
-                                                    ></i>
-                                                    {{
-                                                        new Date(
-                                                            noticia.created_at
-                                                        ).toLocaleDateString(
-                                                            "es-ES",
-                                                            {
-                                                                day: "2-digit",
-                                                                month: "long",
-                                                                year: "numeric",
-                                                            }
-                                                        )
-                                                    }}
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </NavLink>
-                                </div>
-                            </div>
-
-                            <br />
-                            <div
-                                class="sidebar-service card shadow-sm mb-4 position-relative"
-                            >
-                                <img
-                                    :src="sidebar_bg"
-                                    class="card-img-top"
-                                    alt="U.M. Escobedo"
-                                    style="
-                                        opacity: 0.5;
-                                        width: 100%;
-                                        height: 100%;
-                                        object-fit: cover;
-                                    "
-                                />
-                                <div class="overlay"></div>
-                                <!-- Dark overlay -->
-                                <div
-                                    class="card-body text-center position-relative"
-                                >
-                                    <h5 class="card-title text-left text-white">
-                                        U.M. Escobedo
-                                    </h5>
-                                    <p class="card-text text-left text-white">
-                                        Página oficial de la Unión Montañesa
-                                        Escobedo, club fundado en 1917 y que
-                                        actualmente milita en Segunda RFEF.
-                                    </p>
-                                    <NavLink
-                                        href="/contacto"
-                                        class="btn btn-escobedo"
-                                        >Contáctanos
-                                    </NavLink>
-                                </div>
-                            </div>
-                        </div>
+                        <Sidebar :prensa="latestPrensa" /> 
+                    
                     </div>
                 </div>
             </div>
@@ -238,8 +113,8 @@
 <script setup>
 import { ref, computed } from "vue";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
-import sidebar_bg from "@images/sidebar-bg.jpeg";
 import NavLink from "@/Components/NavLink.vue";
+import Sidebar from "@/Components/Sidebar/Sidebar.vue";
 
 // Estado reactivo para controlar la sección visible
 const currentSection = ref("todos"); // Inicialmente se muestran todas las noticias
@@ -273,6 +148,11 @@ const filteredPrensa = computed(() => {
         );
     }
 });
+
+const latestPrensa = computed(() => {
+    return props.prensa.slice(0, 3); 
+});
+
 </script>
 
 <style scoped>
@@ -319,47 +199,8 @@ const filteredPrensa = computed(() => {
     transform: scale(1.05);
 }
 
-/* Estilo del menú lateral */
-.sidebar {
-    background-color: #f8f9fa;
-    padding: 15px;
-    border-radius: 0.5rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar-title {
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-/* Estilo de los enlaces del menú */
-.sidebar-link {
-    text-decoration: none;
-    color: #333 !important;
-    display: block;
-    padding: 10px;
-    border-radius: var(--border);
-}
-
-/* Hover para enlaces del menú */
-.sidebar-link:hover {
-    color: var(--red) !important;
-}
-
 .separator {
     color: var(--red);
-}
-
-.sidebar .title {
-    color: var(--black);
-}
-
-.sidebar img {
-    width: 97px;
-    max-width: 97px;
-    height: 67px;
-    border: 8px;
-    object-fit: cover;
 }
 
 .last-news .list-group-item {
@@ -376,37 +217,6 @@ const filteredPrensa = computed(() => {
     border-radius: var(--border);
 }
 
-.sidebar-info-escobedo {
-    font-size: 14px;
-}
-
-.sidebar-service {
-    position: relative;
-    max-height: 400px;
-    height: 400px;
-    background-color: var(--black);
-}
-
-.sidebar-service .card-img-top {
-    max-width: unset;
-}
-
-.sidebar-service .card-body {
-    position: absolute !important;
-    z-index: 2;
-    bottom: 0;
-}
-
-.sidebar-service .card-body {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-}
-
-.sidebar-service .card-text {
-    font-size: 13px;
-}
-
 .card-meta .card-meta span {
     font-size: 14px;
 }
@@ -416,8 +226,7 @@ const filteredPrensa = computed(() => {
     max-height: 220px;
 }
 
-.contain-card-notice .card-text{
+.contain-card-notice .card-text {
     font-size: 15px;
 }
-
 </style>
