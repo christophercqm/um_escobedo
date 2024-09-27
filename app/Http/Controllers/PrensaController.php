@@ -23,6 +23,7 @@ class PrensaController extends Controller
         ]);
     }
 
+
     /**
      * Show the form for creating a new resource.
      */
@@ -44,7 +45,7 @@ class PrensaController extends Controller
             'descripcion_breve' => 'required|string',
             'descripcion' => 'required|string',
             'imagen' => 'required|image|mimes:jpeg,png,jpg,webp,gif|max:2048',
-            'estado' => 'required|integer', 
+            'estado' => 'required|integer',
             'categoria' => 'required|string',
         ]);
 
@@ -57,7 +58,7 @@ class PrensaController extends Controller
             'descripcion_breve' => $request->descripcion_breve,
             'descripcion' => $request->descripcion,
             'imagen' => $imagePath,
-            'estado' => $request->estado, 
+            'estado' => $request->estado,
             'categoria' => $request->categoria,
         ]);
 
@@ -71,8 +72,16 @@ class PrensaController extends Controller
      */
     public function show(string $id)
     {
-        $prensa = Prensa::findOrFail($id); // Busca la Prensa por ID
+        $prensas = Prensa::findOrFail($id); // Busca la Noticia por el ID
         return Inertia::render('administration/Prensa/Show', [
+            'prensa' => $prensas,
+        ]);
+    }
+
+    public function showPublic(string $id)
+    {
+        $prensa = Prensa::findOrFail($id); // Busca la Prensa por ID
+        return Inertia::render('Prensa/Show', [ // Asegúrate de que el path sea correcto
             'prensa' => $prensa,
         ]);
     }

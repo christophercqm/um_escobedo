@@ -31,8 +31,8 @@
                             <tr v-for="articulo in articulos" :key="articulo.id">
                                 <td>{{ articulo.fecha_creacion }}</td>
                                 <td>{{ articulo.titulo }}</td>
-                                <td>{{ articulo.descripcion_breve }}</td>
-                                <td>{{ articulo.descripcion }}</td>
+                                <td>{{ truncateText(articulo.descripcion_breve) }}</td>
+                                <td>{{ truncateText(articulo.descripcion) }}</td>
                                 <td>
                                     <img
                                         :src="`/storage/${articulo.imagen}`"
@@ -44,7 +44,7 @@
                                     <!-- Mostrar "Visible" o "Oculto" basado en el estado -->
                                     <span v-if="articulo.estado === 1">Visible</span>
                                     <span v-else>Oculto</span>
-                                </td>
+                                </td>   
                                 <td>
                                    <span> {{ formatCategoria(articulo.categoria) }}</span>
                                 </td>
@@ -115,6 +115,14 @@ onBeforeUnmount(() => {
 // Método para formatear la categoría
 const formatCategoria = (categoria) => {
     return categoria === 'cronicas' ? 'Crónicas' : categoria.charAt(0).toUpperCase() + categoria.slice(1);
+}
+
+// Método para truncar el texto
+const truncateText = (text, maxLength = 20) => {
+    if (text.length > maxLength) {
+        return text.substring(0, maxLength) + '...';
+    }
+    return text;
 }
 
 // Función para eliminar un artículo

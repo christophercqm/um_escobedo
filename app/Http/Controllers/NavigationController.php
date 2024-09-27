@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
+use App\Models\Prensa; 
+use Illuminate\Support\Facades\Storage; 
+
 
 class NavigationController extends Controller
 {
@@ -23,7 +26,10 @@ class NavigationController extends Controller
 
     public function prensa()
     {
-        return Inertia::render('Prensa');
+        $prensas = Prensa::all(); // Obtiene todos los registros de Prensa
+        return Inertia::render('Prensa/Index', [ // Renderiza la vista pública
+            'prensa' => $prensas, // Pasa los datos a la vista
+        ]);
     }
 
     public function contacto()

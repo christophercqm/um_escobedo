@@ -62,6 +62,7 @@ h6 {
     font-family: var(--barlow) !important;
     margin: 0 !important;
     margin: 10px 0 !important;
+    color: var(--black);
 }
 
 body {

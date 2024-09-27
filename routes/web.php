@@ -23,7 +23,10 @@ Route::get('/', function () {
 Route::get('/club', [NavigationController::class, 'club'])->name('club');
 Route::get('/primer-equipo', [NavigationController::class, 'primerEquipo'])->name('primer-equipo');
 Route::get('/escuela', [NavigationController::class, 'escuela'])->name('escuela');
+
 Route::get('/prensa', [NavigationController::class, 'prensa'])->name('prensa');
+Route::get('/prensa/{id}', [PrensaController::class, 'showPublic'])->name('prensa.show');
+
 Route::get('/contacto', [NavigationController::class, 'contacto'])->name('contacto');
 
 
