@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session; // Asegúrate de incluir esto
+use Illuminate\Support\Facades\Log;
+
 
 class PrensaController extends Controller
 {
@@ -34,12 +36,16 @@ class PrensaController extends Controller
      */
     public function store(Request $request)
     {
+
+
         // Validar los datos recibidos
         $request->validate([
             'titulo' => 'required|string|max:255',
             'descripcion_breve' => 'required|string',
             'descripcion' => 'required|string',
             'imagen' => 'required|image|mimes:jpeg,png,jpg,webp,gif|max:2048',
+            'estado' => 'required|integer', 
+            'categoria' => 'required|string',
         ]);
 
         // Manejo de la carga de imagen
@@ -50,18 +56,13 @@ class PrensaController extends Controller
             'titulo' => $request->titulo,
             'descripcion_breve' => $request->descripcion_breve,
             'descripcion' => $request->descripcion,
-            'imagen' => $imagePath, // Guardar la ruta en la base de datos
+            'imagen' => $imagePath,
+            'estado' => $request->estado, 
+            'categoria' => $request->categoria,
         ]);
 
         return redirect()->route('admin.prensa');
     }
-
-
-
-
-
-
-
 
 
 
@@ -94,13 +95,34 @@ class PrensaController extends Controller
     {
         $request->validate([
             'titulo' => 'required|string|max:255',
-            'contenido' => 'required|string',
+            'descripcion_breve' => 'required|string',
+            'descripcion' => 'required|string',
+            'estado' => 'required|boolean', // Validar el campo estado
+            // Si deseas permitir cambiar la imagen, agrega la validación aquí:
+            'imagen' => 'image|mimes:jpeg,png,jpg,webp,gif|max:2048',
         ]);
 
         $prensa = Prensa::findOrFail($id); // Busca la Prensa por ID
-        $prensa->update($request->all()); // Actualiza el registro
 
-        return redirect()->route('prensa.index')->with('success', 'Prensa actualizada exitosamente.');
+        // Manejo de la carga de imagen si se proporciona una nueva imagen
+        if ($request->hasFile('imagen')) {
+            // Elimina la imagen anterior si existe
+            if ($prensa->imagen) {
+                File::delete(public_path('storage/' . $prensa->imagen));
+            }
+            $imagePath = $request->file('imagen')->store('prensa', 'public');
+            $prensa->imagen = $imagePath; // Actualiza la ruta de la imagen
+        }
+
+        // Actualiza el registro con el resto de los campos
+        $prensa->update([
+            'titulo' => $request->titulo,
+            'descripcion_breve' => $request->descripcion_breve,
+            'descripcion' => $request->descripcion,
+            'estado' => $request->estado, // Actualiza el estado
+        ]);
+
+        return redirect()->route('admin.prensa')->with('success', 'Prensa actualizada exitosamente.');
     }
 
     /**
@@ -109,6 +131,10 @@ class PrensaController extends Controller
     public function destroy(string $id)
     {
         $prensa = Prensa::findOrFail($id); // Busca la Prensa por ID
+        // Elimina la imagen del almacenamiento si existe
+        if ($prensa->imagen) {
+            File::delete(public_path('storage/' . $prensa->imagen));
+        }
         $prensa->delete(); // Elimina el registro
 
         return redirect()->route('admin.prensa')

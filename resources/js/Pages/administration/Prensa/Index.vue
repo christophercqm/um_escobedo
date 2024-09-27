@@ -6,9 +6,8 @@
                     class="btn-escobedo btn-admin"
                     :href="route('admin.prensa.create')"
                 >
-                <i class="bi bi-pen pr-2"></i>
-
-                Crear artículo
+                    <i class="bi bi-pen pr-2"></i>
+                    Crear artículo
                 </NavLink>
 
                 <div style="overflow-x: auto">
@@ -23,6 +22,8 @@
                                 <th class="sortable" data-column="descripcion_breve">Descripción Breve</th>
                                 <th class="sortable" data-column="descripcion">Descripción Completa</th>
                                 <th class="sortable imagen-principal" data-column="imagen">Imagen</th>
+                                <th class="sortable" data-column="estado">Estado</th> 
+                                <th class="sortable" data-column="categoria">Categoría</th>
                                 <th class="sortable" data-column="acciones">Acciones</th>
                             </tr>
                         </thead>
@@ -39,20 +40,26 @@
                                         class="w-20 h-20 object-cover"
                                     />
                                 </td>
+                                <td>
+                                    <!-- Mostrar "Visible" o "Oculto" basado en el estado -->
+                                    <span v-if="articulo.estado === 1">Visible</span>
+                                    <span v-else>Oculto</span>
+                                </td>
+                                <td>
+                                   <span> {{ formatCategoria(articulo.categoria) }}</span>
+                                </td>
                                 <td class="contain-icons">
                                     <div class="icons">
-                                        
                                         <NavLink
                                             class="text-blue-600 hover:text-blue-900"
                                             :href="route('admin.prensa.edit', articulo.id)"
                                         >
-                                        <i class="bi bi-pencil-square text-success"></i>
+                                            <i class="bi bi-pencil-square text-success"></i>
                                         </NavLink>
 
                                         <NavLink
                                             class="text-blue-600 hover:text-blue-900"
                                             :href="route('admin.prensa.show', articulo.id)"
-
                                         >
                                             <i class="bi bi-eye text-success"></i>
                                         </NavLink>
@@ -60,9 +67,8 @@
                                         <button
                                             class="text-red-600 hover:text-red-900"
                                             @click="eliminarArticulo(articulo.id)"
-
                                         >
-                                        <i class="bi bi-trash3"></i>
+                                            <i class="bi bi-trash3"></i>
                                         </button>
                                     </div>
                                 </td>
@@ -79,7 +85,7 @@
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import NavLink from "@/Components/NavLink.vue"; // Asegúrate de que esta importación sea correcta
+import NavLink from "@/Components/NavLink.vue";
 import Swal from "sweetalert2";
 
 // Definir las props
@@ -105,6 +111,11 @@ onBeforeUnmount(() => {
         dataTable.destroy();
     }
 });
+
+// Método para formatear la categoría
+const formatCategoria = (categoria) => {
+    return categoria === 'cronicas' ? 'Crónicas' : categoria.charAt(0).toUpperCase() + categoria.slice(1);
+}
 
 // Función para eliminar un artículo
 const eliminarArticulo = (id) => {
@@ -145,7 +156,7 @@ const eliminarArticulo = (id) => {
 </script>
 
 <style>
-.contain-icons i{
+.contain-icons i {
     font-size: 20px;
 }
 
@@ -153,5 +164,4 @@ const eliminarArticulo = (id) => {
     display: flex;
     gap: .5rem;
 }
-
 </style>

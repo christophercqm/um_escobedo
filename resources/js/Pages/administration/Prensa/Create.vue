@@ -7,6 +7,7 @@
                 Crear Artículo
             </h2>
         </template>
+
         <div class="container mt-5 max-width">
             <form @submit.prevent="submit">
                 <!-- Campo Título -->
@@ -27,7 +28,10 @@
 
                 <!-- Campo Descripción Breve -->
                 <div class="mb-3">
-                    <InputLabel for="descripcion_breve" value="Descripción Breve" />
+                    <InputLabel
+                        for="descripcion_breve"
+                        value="Descripción Breve"
+                    />
                     <textarea
                         id="descripcion_breve"
                         v-model="form.descripcion_breve"
@@ -43,7 +47,10 @@
 
                 <!-- Campo Descripción Completa -->
                 <div class="mb-3">
-                    <InputLabel for="descripcion" value="Descripción Completa" />
+                    <InputLabel
+                        for="descripcion"
+                        value="Descripción Completa"
+                    />
                     <textarea
                         id="descripcion"
                         v-model="form.descripcion"
@@ -76,7 +83,10 @@
 
                 <!-- Vista Previa de la Imagen -->
                 <div class="mb-3" v-if="imagePreview">
-                    <InputLabel for="preview" value="Vista Previa de la Imagen" />
+                    <InputLabel
+                        for="preview"
+                        value="Vista Previa de la Imagen"
+                    />
                     <div class="img-prev">
                         <img
                             :src="imagePreview"
@@ -86,13 +96,49 @@
                     </div>
                 </div>
 
+                <!-- Campo Estado -->
+                <div class="mb-3">
+                    <InputLabel for="estado" value="Estado" />
+                    <select
+                        id="estado"
+                        v-model="form.estado"
+                        class="form-control"
+                        required
+                    >
+                        <option value="1">Publicar</option>
+                        <option value="0">Ocultar</option>
+                    </select>
+                    <InputError
+                        :message="form.errors.estado"
+                        class="text-danger"
+                    />
+                </div>
+
+                <!-- Campo Categoría -->
+                <div class="mb-3">
+                    <InputLabel for="categoria" value="categoria" />
+                    <select
+                        id="categoria"
+                        v-model="form.categoria"
+                        class="form-control"
+                        required
+                    >
+                        <option value="actualidad">Actualidad</option>
+                        <option value="cronicas">Crónicas</option>
+                    </select>
+                    <InputError
+                        :message="form.errors.categoria"
+                        class="text-danger"
+                    />
+                </div>
+
                 <!-- Botón de Envío -->
                 <button
                     type="submit"
                     class="btn-admin"
                     :disabled="form.processing"
                 >
-                    Crear Prensa
+                    Crear artículo
                 </button>
             </form>
         </div>
@@ -113,6 +159,8 @@ const form = useForm({
     descripcion_breve: "",
     descripcion: "",
     imagen: null,
+    estado: "1", // Valor por defecto para el estado (Publicado)
+    categoria: "Actualidad",
 });
 
 // Estado para la vista previa de la imagen
@@ -151,13 +199,12 @@ function submit() {
                         text: "Artículo creado con éxito.",
                         icon: "success",
                         confirmButtonText: "OK",
-                    }).then(() => {
-                        // Redireccionar manualmente si necesitas que vuelva a cargar la página o cambie a otra vista
-                        window.location.href = route("admin.prensa"); // Puedes cambiar a la ruta que desees
                     });
                 },
                 onError: () => {
-                    const errorMessages = Object.values(form.errors).flat().join(", ");
+                    const errorMessages = Object.values(form.errors)
+                        .flat()
+                        .join(", ");
                     Swal.fire({
                         title: "Error",
                         text: errorMessages || "Ocurrió un error inesperado.",

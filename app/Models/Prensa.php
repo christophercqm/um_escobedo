@@ -15,6 +15,9 @@ class Prensa extends Model
         'titulo',            // Título de la noticia
         'descripcion_breve', // Descripción breve
         'descripcion',       // Descripción completa
+        'estado',
+        'categoria',
+
     ];
 
 }
