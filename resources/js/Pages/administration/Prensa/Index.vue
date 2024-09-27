@@ -6,7 +6,9 @@
                     class="btn-escobedo btn-admin"
                     :href="route('admin.prensa.create')"
                 >
-                    Añadir
+                <i class="bi bi-pen pr-2"></i>
+
+                Crear artículo
                 </NavLink>
 
                 <div style="overflow-x: auto">
@@ -37,19 +39,32 @@
                                         class="w-20 h-20 object-cover"
                                     />
                                 </td>
-                                <td>
-                                    <NavLink
-                                        class="text-blue-600 hover:text-blue-900"
-                                        :href="route('admin.prensa.edit', articulo.id)"
-                                    >
-                                        Editar
-                                    </NavLink>
-                                    <button
-                                        class="text-red-600 hover:text-red-900"
-                                        @click="eliminarArticulo(articulo.id)"
-                                    >
-                                        Eliminar
-                                    </button>
+                                <td class="contain-icons">
+                                    <div class="icons">
+                                        
+                                        <NavLink
+                                            class="text-blue-600 hover:text-blue-900"
+                                            :href="route('admin.prensa.edit', articulo.id)"
+                                        >
+                                        <i class="bi bi-pencil-square text-success"></i>
+                                        </NavLink>
+
+                                        <NavLink
+                                            class="text-blue-600 hover:text-blue-900"
+                                            :href="route('admin.prensa.show', articulo.id)"
+
+                                        >
+                                            <i class="bi bi-eye text-success"></i>
+                                        </NavLink>
+
+                                        <button
+                                            class="text-red-600 hover:text-red-900"
+                                            @click="eliminarArticulo(articulo.id)"
+
+                                        >
+                                        <i class="bi bi-trash3"></i>
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -130,5 +145,13 @@ const eliminarArticulo = (id) => {
 </script>
 
 <style>
-/* Aquí puedes agregar estilos personalizados */
+.contain-icons i{
+    font-size: 20px;
+}
+
+.contain-icons .icons {
+    display: flex;
+    gap: .5rem;
+}
+
 </style>

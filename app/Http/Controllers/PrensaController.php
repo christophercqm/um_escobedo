@@ -42,25 +42,20 @@ class PrensaController extends Controller
             'imagen' => 'required|image|mimes:jpeg,png,jpg,webp,gif|max:2048',
         ]);
 
-        try {
-            // Manejo de la carga de imagen
-            $imagePath = $request->file('imagen')->store('prensa', 'public');
+        // Manejo de la carga de imagen
+        $imagePath = $request->file('imagen')->store('prensa', 'public');
 
-            // Crear un nuevo registro en la base de datos
-            Prensa::create([
-                'titulo' => $request->titulo,
-                'descripcion_breve' => $request->descripcion_breve,
-                'descripcion' => $request->descripcion,
-                'imagen' => $imagePath, // Guardar la ruta en la base de datos
-            ]);
+        // Crear un nuevo registro en la base de datos
+        Prensa::create([
+            'titulo' => $request->titulo,
+            'descripcion_breve' => $request->descripcion_breve,
+            'descripcion' => $request->descripcion,
+            'imagen' => $imagePath, // Guardar la ruta en la base de datos
+        ]);
 
-            // Redirigir con éxito
-            return redirect()->route('admin.prensa')->with('success', 'Artículo creado con éxito.');
-        } catch (\Exception $e) {
-            // En caso de que algo falle, redirigir con el error
-            return redirect()->back()->withErrors(['error' => 'Ocurrió un error al crear el artículo.']);
-        }
+        return redirect()->route('admin.prensa');
     }
+
 
 
 

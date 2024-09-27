@@ -1,7 +1,13 @@
 <template>
     <AuthenticatedLayout>
+        <Head title="Crear Artículo" />
+
+        <template #header>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                Crear Artículo
+            </h2>
+        </template>
         <div class="container mt-5 max-width">
-            <h1>Añadir Nueva Prensa</h1>
             <form @submit.prevent="submit">
                 <!-- Campo Título -->
                 <div class="mb-3">
@@ -81,7 +87,11 @@
                 </div>
 
                 <!-- Botón de Envío -->
-                <button type="submit" class="btn-admin" :disabled="form.processing">
+                <button
+                    type="submit"
+                    class="btn-admin"
+                    :disabled="form.processing"
+                >
                     Crear Prensa
                 </button>
             </form>
@@ -91,8 +101,8 @@
 
 <script setup>
 import { ref } from "vue";
-import { useForm, usePage } from "@inertiajs/inertia-vue3";
-import Swal from 'sweetalert2';
+import { Head, useForm } from "@inertiajs/inertia-vue3";
+import Swal from "sweetalert2";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import InputError from "@/Components/InputError.vue";
@@ -122,31 +132,43 @@ const handleImageUpload = (event) => {
 };
 
 // Función para enviar el formulario
-const submit = async () => {
-    try {
-        const response = await form.post(route("admin.prensa.store"));
-
-        // Mostrar mensaje de éxito al crear
-        Swal.fire({
-            title: 'Éxito!',
-            text: 'Prensa creada exitosamente.',
-            icon: 'success',
-            confirmButtonText: 'Aceptar',
-        }).then(() => {
-            // Redirigir al índice después de aceptar el mensaje
-            window.location.href = route("admin.prensa"); // Cambia esto si tienes otra forma de redirigir
-        });
-
-    } catch (errors) {
-        // Mostrar mensaje de error
-        Swal.fire({
-            title: 'Error!',
-            text: 'Ocurrió un error al crear la prensa.',
-            icon: 'error',
-            confirmButtonText: 'Aceptar',
-        });
-    }
-};
+function submit() {
+    // Confirma la acción de creación
+    Swal.fire({
+        title: "¿Estás seguro?",
+        text: "Estás a punto de crear un nuevo artículo.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, crear artículo!",
+    }).then(({ isConfirmed }) => {
+        if (isConfirmed) {
+            form.post(route("admin.prensa.store"), {
+                onSuccess: () => {
+                    Swal.fire({
+                        title: "¡Éxito!",
+                        text: "Artículo creado con éxito.",
+                        icon: "success",
+                        confirmButtonText: "OK",
+                    }).then(() => {
+                        // Redireccionar manualmente si necesitas que vuelva a cargar la página o cambie a otra vista
+                        window.location.href = route("admin.prensa"); // Puedes cambiar a la ruta que desees
+                    });
+                },
+                onError: () => {
+                    const errorMessages = Object.values(form.errors).flat().join(", ");
+                    Swal.fire({
+                        title: "Error",
+                        text: errorMessages || "Ocurrió un error inesperado.",
+                        icon: "error",
+                        confirmButtonText: "OK",
+                    });
+                },
+            });
+        }
+    });
+}
 </script>
 
 <style scoped>
