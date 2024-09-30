@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jugadores;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class JugadoresController extends Controller
 {
@@ -12,7 +13,11 @@ class JugadoresController extends Controller
      */
     public function index()
     {
-        //
+
+        $jugadores = Jugadores::all(); // Obtener todos los jugadores
+        return Inertia::render('administration/Jugadores/Index', [
+            'jugadores' => $jugadores, // Pasar los jugadores como prop
+        ]);
     }
 
     /**

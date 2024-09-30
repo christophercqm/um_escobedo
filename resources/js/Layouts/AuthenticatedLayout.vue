@@ -46,10 +46,10 @@ const showingNavigationDropdown = ref(false);
                                 </NavLink>
 
                                 <NavLink
-                                    :href="route('primerEquipo')"
-                                    :active="route().current('primerEquipo')"
+                                    :href="route('admin.jugadores')"
+                                    :active="route().current('admin.jugadores')"
                                 >
-                                    Primer Equipo
+                                    Jugadores
                                 </NavLink>
                             </div>
                         </div>

@@ -8,7 +8,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\PrensaController;
 use App\Http\Controllers\PrimerEquipoController;
-
+use App\Http\Controllers\JugadoresController;
+use App\Models\Jugadores;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -21,12 +22,10 @@ Route::get('/', function () {
 
 // Rutas públicas
 Route::get('/club', [NavigationController::class, 'club'])->name('club');
-Route::get('/primer-equipo', [NavigationController::class, 'primerEquipo'])->name('primer-equipo');
+Route::get('/primer-equipo', [NavigationController::class, 'primerEquipo'])->name('public.primerEquipo');
 Route::get('/escuela', [NavigationController::class, 'escuela'])->name('escuela');
-
 Route::get('/prensa', [NavigationController::class, 'prensa'])->name('prensa');
 Route::get('/prensa-public/{id}', [PrensaController::class, 'showPublic'])->name('prensa.public.show');
-
 Route::get('/contacto', [NavigationController::class, 'contacto'])->name('contacto');
 
 
@@ -42,6 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // RUTAS ESCOBEDO ADMIN
+
+    // Rutas de prensa
     Route::get('/prensa/admin', [PrensaController::class, 'index'])->name('admin.prensa');
     Route::get('/prensa/admin/create', [PrensaController::class, 'create'])->name('admin.prensa.create');
     Route::post('/prensa/admin', [PrensaController::class, 'store'])->name('admin.prensa.store');
@@ -50,7 +51,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/prensa/admin/{id}', [PrensaController::class, 'destroy'])->name('admin.prensa.destroy');
     Route::get('/prensa/admin/{id}', [PrensaController::class, 'show'])->name('admin.prensa.show');
 
-    Route::get('/primer-equipo', [PrimerEquipoController::class, 'index'])->name('primerEquipo');
+    Route::get('/primer-equipo/admin', [Jugadores::class, 'index'])->name('admin.primerEquipo');
+    
+    // JUGADORES
+    Route::get('/jugadores/admin', [JugadoresController::class, 'index'])->name('admin.jugadores');
+    Route::get('/jugadores/admin/create', [JugadoresController::class, 'create'])->name('admin.jugadores.create');
+    Route::post('/jugadores/admin', [JugadoresController::class, 'store'])->name('admin.jugadores.store');
+    Route::get('/jugadores/admin/{id}/edit', [JugadoresController::class, 'edit'])->name('admin.jugadores.edit');
+    Route::put('/jugadores/admin/{id}', [JugadoresController::class, 'update'])->name('admin.jugadores.update');
+    Route::delete('/jugadores/admin/{id}', [JugadoresController::class, 'destroy'])->name('admin.jugadores.destroy');
+    Route::get('/jugadores/admin/{id}', [JugadoresController::class, 'show'])->name('admin.jugadores.show');
+
 
 
 });
