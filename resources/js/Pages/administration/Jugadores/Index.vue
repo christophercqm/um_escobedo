@@ -21,7 +21,7 @@
                                 <th class="sortable" data-column="apellido">Apellido</th>
                                 <th class="sortable" data-column="posicion">Posición</th>
                                 <th class="sortable" data-column="numero_camiseta">Número de Camiseta</th>
-                                <th class="sortable" data-column="equipo">Equipo</th>
+                                <th class="sortable" data-column="equipo">Foto</th>
                                 <th class="sortable" data-column="estado">Estado</th> 
                                 <th class="sortable" data-column="acciones">Acciones</th>
                             </tr>
@@ -32,7 +32,13 @@
                                 <td>{{ jugador.apellido }}</td>
                                 <td>{{ jugador.posicion }}</td>
                                 <td>{{ jugador.numero_camiseta }}</td>
-                                <td>{{ jugador.equipo }}</td>
+                                <td>
+                                    <img
+                                        :src="`/storage/${jugador.foto_url}`"
+                                        alt="Imagen"
+                                        class="w-20 h-20 object-cover img-jugador"
+                                    />
+                                </td>
                                 <td>
                                     <span v-if="jugador.estado === 'Activo'">Activo</span>
                                     <span v-else>Inactivo</span>
@@ -117,7 +123,7 @@ const eliminarJugador = (id) => {
             Inertia.delete(route("admin.jugadores.destroy", id), {
                 onSuccess: () => {
                     // Actualizar la lista local de jugadores
-                    jugadores.value = jugadores.value.filter(jugador => jugador.id !== id);
+                    jugadores.value = jugadores.value.filter(j => j.id !== id);
                     Swal.fire({
                         title: 'Eliminado!',
                         text: 'El jugador ha sido eliminado.',
@@ -137,6 +143,8 @@ const eliminarJugador = (id) => {
         }
     });
 };
+
+
 </script>
 
 <style>
@@ -147,5 +155,9 @@ const eliminarJugador = (id) => {
 .contain-icons .icons {
     display: flex;
     gap: .5rem;
+}
+
+.img-jugador {
+    object-fit: contain;
 }
 </style>

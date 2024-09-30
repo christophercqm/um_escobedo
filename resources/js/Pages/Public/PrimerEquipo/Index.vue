@@ -12,11 +12,13 @@
                   class="jugador-card col-md-4 mb-4"
                 >
                   <div class="card text-center">
+                   <div class="img-player">
                     <img 
-                      :src="jugador.foto_url" 
+                      :src="`/storage/${jugador.foto_url}`" 
                       alt="Foto de {{ jugador.nombre }}" 
                       class="card-img-top card-img-jugador"
                     />
+                   </div>
                     <div class="card-body">
                       <h2 class="number text-white">{{ jugador.numero_camiseta }}</h2>
                       <h5 class="card-title">{{ jugador.nombre }} {{ jugador.apellido }}</h5>
