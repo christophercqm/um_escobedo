@@ -101,8 +101,7 @@
 
                     <!-- SIDEBAR -->
                     <div class="col-3 col-sidebar p-0">
-                        <Sidebar :prensa="latestPrensa" /> 
-                    
+                        <Sidebar :prensa="latestPrensa" />
                     </div>
                 </div>
             </div>
@@ -139,21 +138,23 @@ const truncateText = (number, text) => {
 
 // Función computada para filtrar las noticias según la sección seleccionada
 const filteredPrensa = computed(() => {
+    // Filtra todas las noticias activas (estado === 1) según la sección seleccionada
     if (currentSection.value === "todos") {
-        return props.prensa; // Muestra todas las noticias si la sección es "todos"
+        return props.prensa.filter(item => item.estado === 1);
     } else {
-        // Filtra las noticias por la categoría (actualidad o cronicas)
         return props.prensa.filter(
-            (item) => item.categoria === currentSection.value
+            (item) => item.categoria === currentSection.value && item.estado === 1
         );
     }
 });
 
+// Propiedad computada para obtener las últimas noticias activas para el sidebar
 const latestPrensa = computed(() => {
-    return props.prensa.slice(0, 3); 
+    return props.prensa.filter(item => item.estado === 1).slice(0, 3); 
 });
-
 </script>
+
+
 
 <style scoped>
 .container-prensa .container {

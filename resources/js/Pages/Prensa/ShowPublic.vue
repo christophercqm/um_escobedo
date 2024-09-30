@@ -9,7 +9,7 @@
                             <img
                                 :src="`/storage/${prensa.imagen}`"
                                 :alt="prensa.titulo"
-                                class="img-fluid"
+                                class="img-fluid img-articulo-public"
                             />
                             <p class="mt-3">
                                 <small class="text-muted">
@@ -22,19 +22,18 @@
                                 </small>
                             </p>
                             <div class="content">
-                                <p>{{ prensa.descripcion_breve }}</p>
-                                <div v-html="prensa.descripcion"></div>
-                                <!-- Suponiendo que tienes contenido HTML -->
+                                <!-- Mostrar la descripción con formato de párrafos -->
+                                <div v-html="formattedDescription"></div>
                             </div>
                             <NavLink href="/prensa" class="btn-public"
                                 >Volver a Noticias</NavLink
                             >
                         </div>
                     </div>
-                    
+
                     <!-- SIDEBAR-->
                     <div class="col-3">
-                        <Sidebar :prensa="allPrensa" /> 
+                        <Sidebar :prensa="allPrensa" />
                     </div>
                 </div>
             </div>
@@ -42,67 +41,28 @@
     </GuestLayout>
 </template>
 
-
 <script setup>
-import { defineProps } from "vue";
+import { defineProps, computed } from "vue";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import NavLink from "@/Components/NavLink.vue";
-
 import Sidebar from "@/Components/Sidebar/Sidebar.vue";
 
 const props = defineProps({
     prensa: Object,
     allPrensa: Array,
 });
+
+// Computed para formatear la descripción
+const formattedDescription = computed(() => {
+    // Divide la descripción en párrafos utilizando doble salto de línea como delimitador
+    const paragraphs = props.prensa.descripcion.split(/\n\s*\n/);
+    // Envolver cada párrafo en un <p> y unirlos
+    return paragraphs.map((paragraph) => `<p>${paragraph.trim()}</p>`).join("");
+});
 </script>
 
 <style scoped>
-    .sidebar-info-escobedo {
-        font-size: 14px;
-    }
-
-    .sidebar-service {
-        position: relative;
-        max-height: 400px;
-        height: 400px;
-        background-color: var(--black);
-    }
-
-    .sidebar-service .card-img-top {
-        max-width: unset;
-    }
-
-    .sidebar-service .card-body {
-        position: absolute !important;
-        z-index: 2;
-        bottom: 0;
-    }
-
-    .sidebar-service .card-body {
-        display: flex;
-        flex-direction: column;
-        align-items: start;
-    }
-
-    .sidebar-service .card-text {
-        font-size: 13px;
-    }
-
-    .card-meta .card-meta span {
-        font-size: 14px;
-    }
-
-    .contain-card-notice img {
-        min-height: 220px;
-        max-height: 220px;
-    }
-
-    .contain-card-notice .card-text {
-        font-size: 15px;
-    }
-
-    .prensa-show {
-        padding-top: 50px;
-        padding-bottom: 50px;
-    }
+.img-articulo-public {
+    height: 400px;
+}
 </style>
