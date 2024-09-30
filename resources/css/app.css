@@ -18,7 +18,6 @@
     --roboto: "Roboto", sans-serif;
 }
 
-
 /* resources/css/app.css */
 
 html,
@@ -63,11 +62,22 @@ img {
     padding: 10px 30px;
     border-radius: var(--border);
     font-size: 16px;
-    text-align: left; 
-    transition: background-color 0.3s ease; 
-
+    text-align: left;
+    transition: background-color 0.3s ease;
 }
 
 .btn-public:hover {
     background-color: #c11b30;
+}
+
+.padding-container {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+@media (max-width: 768px) {
+    .padding-container {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
 }

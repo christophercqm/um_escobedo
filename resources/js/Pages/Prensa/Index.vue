@@ -44,7 +44,7 @@
 
                 <!-- Tercera fila con las cards -->
                 <div class="row row-3">
-                    <div class="col-9">
+                    <div class="col-12 col-md-9">
                         <div
                             v-if="filteredPrensa.length > 0"
                             class="my-4 d-flex flex-wrap gap-4 contain-card-notice"
@@ -229,5 +229,19 @@ const latestPrensa = computed(() => {
 
 .contain-card-notice .card-text {
     font-size: 15px;
+}
+
+@media (max-width: 768px) {
+    .container-prensa {
+        padding: 0 12px;
+    }
+
+    .contain-card-notice {
+        justify-content: center;
+    }
+
+    .sidebar {
+        display: none;
+    }
 }
 </style>

@@ -1,26 +1,39 @@
 <template>
     <GuestLayout>
-        <div class="prensa-show">
-            <div class="container max-width">
-                <div class="row">
-                    <div class="col-9">
-                        <div class="container mt-4">
-                            <h1>{{ prensa.titulo }}</h1>
+        <div class="prensa-show padding-container">
+            <div class="container max-width p-0">
+                <div class="row row-detail-notice d-flex justify-content-md-between">
+                    <div class="col-12 col-md-8">
+                        <div class="container">
+                            <h1 class="mb-4 mt-0">{{ prensa.titulo }}</h1>
                             <img
                                 :src="`/storage/${prensa.imagen}`"
                                 :alt="prensa.titulo"
                                 class="img-fluid img-articulo-public"
                             />
-                            <p class="mt-3">
-                                <small class="text-muted">
-                                    <i class="fa fa-calendar me-1"></i>
-                                    {{
-                                        new Date(
-                                            prensa.created_at
-                                        ).toLocaleDateString("es-ES")
-                                    }}
-                                </small>
-                            </p>
+                            <div
+                                class="my-3 d-flex gap-3 container-notice-details"
+                            >
+                                <div
+                                    class="read d-flex align-items-center gap-2"
+                                >
+                                    <i class="bi bi-book"></i>
+                                    <span>{{
+                                        formatCategoria(prensa.categoria)
+                                    }}</span>
+                                </div>
+                                <div class="date">
+                                    <span>
+                                        <i class="bi bi-calendar me-1"></i>
+                                        {{
+                                            new Date(
+                                                prensa.created_at
+                                            ).toLocaleDateString("es-ES")
+                                        }}
+                                    </span>
+                                </div>
+                            </div>
+
                             <div class="content">
                                 <!-- Mostrar la descripción con formato de párrafos -->
                                 <div v-html="formattedDescription"></div>
@@ -59,10 +72,42 @@ const formattedDescription = computed(() => {
     // Envolver cada párrafo en un <p> y unirlos
     return paragraphs.map((paragraph) => `<p>${paragraph.trim()}</p>`).join("");
 });
+
+const formatCategoria = (categoria) => {
+    return categoria === "cronicas"
+        ? "Crónicas"
+        : categoria.charAt(0).toUpperCase() + categoria.slice(1);
+};
 </script>
 
 <style scoped>
+
 .img-articulo-public {
     height: 400px;
 }
+
+.container-notice-details span {
+    font-size: 14px;
+}
+
+.container-notice-details span,
+i {
+    color: var(--grayv2);
+}
+
+.container-notice-details i {
+    height: 20px;
+}
+
+@media (max-width: 768px) {
+
+    .sidebar {
+        display: none;
+    }
+}
+
+
+
+
+
 </style>
