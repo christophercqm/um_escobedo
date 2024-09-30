@@ -85,7 +85,7 @@
                                 </div>
                                 <div class="text-center contain-btn">
                                     <NavLink
-                                        :href="`/prensa/${item.id}`"
+                                        :href="`/prensa-public/${item.id}`"
                                         class="btn btn-escobedo w-100"
                                         >Saber más</NavLink
                                     >

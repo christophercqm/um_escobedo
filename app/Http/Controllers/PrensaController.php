@@ -82,7 +82,7 @@ class PrensaController extends Controller
     {
         $prensa = Prensa::findOrFail($id); // Busca la Prensa por ID
         $allPrensa = Prensa::all(); // Obtiene todos los registros de Prensa para el sidebar
-        return Inertia::render('Prensa/Show', [ // Asegúrate de que el path sea correcto
+        return Inertia::render('Prensa/ShowPublic', [ // Asegúrate de que el path sea correcto
             'prensa' => $prensa,
             'allPrensa' => $allPrensa, // Pasa todos los artículos a la vista
         ]);

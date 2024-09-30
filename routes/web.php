@@ -25,7 +25,7 @@ Route::get('/primer-equipo', [NavigationController::class, 'primerEquipo'])->nam
 Route::get('/escuela', [NavigationController::class, 'escuela'])->name('escuela');
 
 Route::get('/prensa', [NavigationController::class, 'prensa'])->name('prensa');
-Route::get('/prensa/{id}', [PrensaController::class, 'showPublic'])->name('prensa.show');
+Route::get('/prensa-public/{id}', [PrensaController::class, 'showPublic'])->name('prensa.public.show');
 
 Route::get('/contacto', [NavigationController::class, 'contacto'])->name('contacto');
 
