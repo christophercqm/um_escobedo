@@ -84,6 +84,7 @@ const formatCategoria = (categoria) => {
 
 .img-articulo-public {
     height: 400px;
+    border-radius: var(--border);
 }
 
 .container-notice-details span {

@@ -167,8 +167,11 @@ const showMore = () => {
     color: var(--white);
 }
 
-img.card-img-jugador {
-    max-height: 300px;
+div.img-player {
+  max-height: 220px;
+  height: 220px;
+}
+img.card-img-jugador { 
     object-fit: contain;
     margin: 0 auto;
 }
