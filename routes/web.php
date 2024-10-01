@@ -9,7 +9,13 @@ use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\PrensaController;
 use App\Http\Controllers\PrimerEquipoController;
 use App\Http\Controllers\JugadoresController;
+use App\Http\Controllers\CuerpoTecnicoController;
+
+
 use App\Models\Jugadores;
+
+
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -42,7 +48,7 @@ Route::middleware('auth')->group(function () {
 
     // RUTAS ESCOBEDO ADMIN
 
-    // Rutas de prensa
+    // PRENSA
     Route::get('/prensa/admin', [PrensaController::class, 'index'])->name('admin.prensa');
     Route::get('/prensa/admin/create', [PrensaController::class, 'create'])->name('admin.prensa.create');
     Route::post('/prensa/admin', [PrensaController::class, 'store'])->name('admin.prensa.store');
@@ -62,6 +68,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/jugadores/admin/{id}', [JugadoresController::class, 'destroy'])->name('admin.jugadores.destroy');
     Route::get('/jugadores/admin/{id}', [JugadoresController::class, 'show'])->name('admin.jugadores.show');
 
+    // CUERPO TÉCNICO
+    Route::get('/cuerpo-tecnico/admin', [CuerpoTecnicoController::class, 'index'])->name('cuerpo-tecnico.index');
+    Route::get('/cuerpo-tecnico/admin/create', [CuerpoTecnicoController::class, 'create'])->name('cuerpo-tecnico.create');
+    Route::post('/cuerpo-tecnico/admin', [CuerpoTecnicoController::class, 'store'])->name('cuerpo-tecnico.store');
+    Route::get('/cuerpo-tecnico/admin/{id}/edit', [CuerpoTecnicoController::class, 'edit'])->name('cuerpo-tecnico.edit');
+    Route::put('/cuerpo-tecnico/admin/{id}', [CuerpoTecnicoController::class, 'update'])->name('cuerpo-tecnico.update');
+    Route::delete('/cuerpo-tecnico/admin/{id}', [CuerpoTecnicoController::class, 'destroy'])->name('cuerpo-tecnico.destroy');
+    Route::get('/cuerpo-tecnico/admin/{id}', [CuerpoTecnicoController::class, 'show'])->name('cuerpo-tecnico.show');
 
 
 });

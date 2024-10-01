@@ -51,6 +51,12 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Jugadores
                                 </NavLink>
+                                <NavLink
+                                    :href="route('cuerpo-tecnico.index')"
+                                    :active="route().current('cuerpo-tecnico.index')"
+                                >
+                                    Cuerpo Técnico
+                                </NavLink>
                             </div>
                         </div>
 
