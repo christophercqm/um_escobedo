@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\CuerpoTecnico;
 
 class PrimerEquipoController extends Controller
 {
@@ -12,7 +13,8 @@ class PrimerEquipoController extends Controller
      */
     public function index()
     {
-        return Inertia::render('administration/PrimerEquipo/Index');
+        $cuerpoTecnico = CuerpoTecnico::all(); // Obtiene todos los miembros del cuerpo técnico
+        return view('primerEquipo.index', compact('jugadores', 'cuerpoTecnico'));
     }
 
     /**

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
-use Illuminate\Support\Facades\Storage; 
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\Prensa;
-use App\Models\Jugadores; 
+use App\Models\Jugadores;
+use App\Models\CuerpoTecnico;
 
 class NavigationController extends Controller
 {
@@ -18,9 +19,12 @@ class NavigationController extends Controller
     public function primerEquipo()
     {
         $jugadores = Jugadores::all();
+        $cuerpoTecnico = CuerpoTecnico::all();
         return Inertia::render('Public/PrimerEquipo/Index', [
-            'jugadores' => $jugadores, // Pasar los jugadores como prop
-        ]);    }
+            'jugadores' => $jugadores,
+            'cuerpoTecnico' => $cuerpoTecnico
+        ]);
+    }
 
     public function escuela()
     {

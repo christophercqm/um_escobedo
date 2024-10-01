@@ -74,6 +74,19 @@ img {
     padding-bottom: 50px;
 }
 
+.red {
+    color: var(--red);
+}
+
+.red:hover {
+    color: #c11b30;
+}
+
+.btn-ver-mas:hover {
+    color: #c11b30 !important;
+
+}
+
 @media (max-width: 768px) {
     .padding-container {
         padding-top: 30px;

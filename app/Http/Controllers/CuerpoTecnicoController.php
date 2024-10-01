@@ -71,7 +71,7 @@ class CuerpoTecnicoController extends Controller
         // Obtener el miembro del cuerpo técnico por su ID
         $cuerpoTecnico = CuerpoTecnico::findOrFail($id);
 
-        return inertia('CuerpoTecnico/Edit', [
+        return inertia('administration/CuerpoTecnico/Edit', [
             'cuerpoTecnico' => $cuerpoTecnico,
         ]);
     }
@@ -81,35 +81,45 @@ class CuerpoTecnicoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Validar los datos
-        $validated = $request->validate([
-            'nombre' => 'required|string|max:255',
-            'apellido' => 'required|string|max:255',
+        // Validar los campos requeridos
+        $request->validate([
+            'nombres' => 'required|string|max:255',
+            'apellidos' => 'required|string|max:255',
             'rol' => 'required|string|max:255',
             'estado' => 'required|string|in:Activo,Inactivo',
-            'foto_url' => 'nullable|image|max:2048',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:2048', // imagen opcional
         ]);
 
-        // Obtener el miembro del cuerpo técnico
+        // Buscar el miembro del cuerpo técnico a actualizar
         $cuerpoTecnico = CuerpoTecnico::findOrFail($id);
 
-        // Manejar el archivo de la foto si se sube una nueva
-        if ($request->hasFile('foto_url')) {
-            // Eliminar la foto anterior si existe
-            if ($cuerpoTecnico->foto_url) {
-                Storage::disk('public')->delete($cuerpoTecnico->foto_url);
+        // Manejo de la carga de imagen, solo si se proporciona
+        if ($request->hasFile('foto')) {
+            // Si hay una nueva imagen, eliminar la antigua (si existe)
+            if ($cuerpoTecnico->foto) {
+                // Verifica si el archivo existe antes de eliminarlo
+                if (Storage::disk('public')->exists($cuerpoTecnico->foto)) {
+                    Storage::disk('public')->delete($cuerpoTecnico->foto);
+                }
             }
-            // Guardar la nueva foto
-            $filePath = $request->file('foto_url')->store('cuerpo-tecnico', 'public');
-            $validated['foto_url'] = $filePath;
+            // Almacenar la nueva imagen
+            $imagePath = $request->file('foto')->store('cuerpo_tecnicos', 'public'); // Almacenar la imagen en 'storage/app/public/cuerpo_tecnicos'
+            $cuerpoTecnico->foto = $imagePath; // Actualiza la ruta de la imagen
         }
 
-        // Actualizar el miembro del cuerpo técnico
-        $cuerpoTecnico->update($validated);
+        // Actualizar los datos del miembro del cuerpo técnico
+        $cuerpoTecnico->update([
+            'nombres' => $request->nombres,
+            'apellidos' => $request->apellidos,
+            'rol' => $request->rol,
+            'estado' => $request->estado,
+            // La foto ya ha sido actualizada si se ha subido una nueva
+        ]);
 
-        // Redireccionar a la lista con un mensaje de éxito
-        return redirect()->route('cuerpo-tecnico.index')->with('success', 'Miembro del cuerpo técnico actualizado con éxito.');
+        // Redirigir al índice de cuerpo técnico con un mensaje de éxito
+        return redirect()->route('cuerpo-tecnico.index')->with('success', 'Cuerpo técnico actualizado exitosamente.');
     }
+
 
     /**
      * Elimina un miembro del cuerpo técnico de la base de datos.
@@ -140,7 +150,7 @@ class CuerpoTecnicoController extends Controller
         $cuerpoTecnico = CuerpoTecnico::findOrFail($id);
 
         // Retornar la vista con los detalles del miembro del cuerpo técnico
-        return inertia('CuerpoTecnico/Show', [
+        return inertia('administration/CuerpoTecnico/Show', [
             'cuerpoTecnico' => $cuerpoTecnico,
         ]);
     }
