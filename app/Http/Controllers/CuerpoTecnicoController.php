@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\CuerpoTecnico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+
 
 class CuerpoTecnicoController extends Controller
 {
@@ -71,6 +73,11 @@ class CuerpoTecnicoController extends Controller
         // Obtener el miembro del cuerpo técnico por su ID
         $cuerpoTecnico = CuerpoTecnico::findOrFail($id);
 
+        // Si la imagen existe, concatenamos el prefijo 'storage/'
+        if ($cuerpoTecnico->foto) {
+            $cuerpoTecnico->foto = asset('storage/' . $cuerpoTecnico->foto);
+        }
+
         return inertia('administration/CuerpoTecnico/Edit', [
             'cuerpoTecnico' => $cuerpoTecnico,
         ]);
@@ -79,46 +86,54 @@ class CuerpoTecnicoController extends Controller
     /**
      * Actualiza la información de un miembro del cuerpo técnico en la base de datos.
      */
+
+
     public function update(Request $request, $id)
     {
-        // Validar los campos requeridos
-        $request->validate([
-            'nombres' => 'required|string|max:255',
-            'apellidos' => 'required|string|max:255',
-            'rol' => 'required|string|max:255',
-            'estado' => 'required|string|in:Activo,Inactivo',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:2048', // imagen opcional
-        ]);
+        try {
+            // Buscar el Cuerpo Técnico
+            $cuerpoTecnico = CuerpoTecnico::findOrFail($id);
 
-        // Buscar el miembro del cuerpo técnico a actualizar
-        $cuerpoTecnico = CuerpoTecnico::findOrFail($id);
+            // Validar los datos solo para los campos que se van a actualizar
+            $validatedData = $request->validate([
+                'nombres' => 'nullable|string|max:255',
+                'apellidos' => 'nullable|string|max:255',
+                'rol' => 'nullable|string|max:255',
+                'estado' => 'nullable|string', // Permitir que estado sea opcional
+                'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
 
-        // Manejo de la carga de imagen, solo si se proporciona
-        if ($request->hasFile('foto')) {
-            // Si hay una nueva imagen, eliminar la antigua (si existe)
-            if ($cuerpoTecnico->foto) {
-                // Verifica si el archivo existe antes de eliminarlo
-                if (Storage::disk('public')->exists($cuerpoTecnico->foto)) {
+            // Actualizar solo los campos que están presentes en la solicitud
+            $cuerpoTecnico->fill(array_filter($validatedData));
+
+            // Manejar la carga de la foto si se ha proporcionado una nueva
+            if ($request->hasFile('foto')) {
+                // Eliminar la foto anterior si existe
+                if ($cuerpoTecnico->foto) {
                     Storage::disk('public')->delete($cuerpoTecnico->foto);
                 }
+                $path = $request->file('foto')->store('cuerpo_tecnicos', 'public');
+                $cuerpoTecnico->foto = $path; // Actualiza la ruta de la foto en el modelo
             }
-            // Almacenar la nueva imagen
-            $imagePath = $request->file('foto')->store('cuerpo_tecnicos', 'public'); // Almacenar la imagen en 'storage/app/public/cuerpo_tecnicos'
-            $cuerpoTecnico->foto = $imagePath; // Actualiza la ruta de la imagen
+
+            $cuerpoTecnico->save(); // Guarda los cambios
+
+            // Redirigir a la vista de edición con un mensaje de éxito
+            return redirect()->route('cuerpo-tecnico.index', $cuerpoTecnico->id)
+                ->with('success', 'Cuerpo técnico actualizado exitosamente.');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Registrar los errores de validación
+            Log::error('Error de validación al actualizar Cuerpo Técnico: ', $e->errors());
+            return redirect()->back()->withErrors($e->errors())->withInput(); // Devuelve a la vista anterior con errores
+        } catch (\Exception $e) {
+            // Registrar cualquier otro error
+            Log::error('Error al actualizar Cuerpo Técnico: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Ocurrió un error inesperado.'); // Redirigir con un mensaje de error
         }
-
-        // Actualizar los datos del miembro del cuerpo técnico
-        $cuerpoTecnico->update([
-            'nombres' => $request->nombres,
-            'apellidos' => $request->apellidos,
-            'rol' => $request->rol,
-            'estado' => $request->estado,
-            // La foto ya ha sido actualizada si se ha subido una nueva
-        ]);
-
-        // Redirigir al índice de cuerpo técnico con un mensaje de éxito
-        return redirect()->route('cuerpo-tecnico.index')->with('success', 'Cuerpo técnico actualizado exitosamente.');
     }
+
+
+
 
 
     /**

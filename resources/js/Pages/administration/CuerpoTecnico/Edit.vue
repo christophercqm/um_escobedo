@@ -82,7 +82,7 @@
 
                 <!-- Botón de Enviar -->
                 <div class="mt-6">
-                    <button type="submit" class="btn-escobedo btn-admin">
+                    <button type="submit" class="btn-admin">
                         Actualizar Cuerpo Técnico
                     </button>
                 </div>
@@ -95,6 +95,7 @@
 import { ref, onMounted } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import Swal from 'sweetalert2'; // Importar SweetAlert2
 
 const props = defineProps({
     cuerpoTecnico: {
@@ -121,14 +122,20 @@ onMounted(() => {
     form.value.apellidos = props.cuerpoTecnico.apellidos;
     form.value.rol = props.cuerpoTecnico.rol;
     form.value.estado = props.cuerpoTecnico.estado;
+
+    // Establecer la vista previa de la imagen si existe
+    if (form.value.fotoUrl) {
+        imagePreview.value = getFullPath(form.value.fotoUrl);
+    }
 });
 
 // Función para obtener la ruta completa de la imagen
 const getFullPath = (path) => {
-    if (path) {
-        return `${window.location.origin}/storage/${path}`;
+    // Verificar si el path comienza con 'http://' o 'https://'
+    if (path && !path.startsWith('http://') && !path.startsWith('https://')) {
+        return `/storage/${path}`; // Añadir '/storage/' a la ruta solo si no es una URL completa
     }
-    return null;
+    return path; // Si ya es una URL completa, devolver el path original
 };
 
 // Manejar la carga de archivos
@@ -144,41 +151,53 @@ const handleFileUpload = (event) => {
     }
 };
 
+// Función para enviar el formulario
 const submitForm = () => {
-    const formData = new FormData();
-    formData.append('nombres', form.value.nombres);
-    formData.append('apellidos', form.value.apellidos);
-    formData.append('rol', form.value.rol);
-    formData.append('estado', form.value.estado);
-    if (form.value.foto) {
-        formData.append('foto', form.value.foto);
-    }
+    // Confirmar la acción de actualización
+    Swal.fire({
+        title: "¿Estás seguro?",
+        text: "Estás a punto de actualizar el cuerpo técnico.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, actualizar!",
+    }).then(({ isConfirmed }) => {
+        if (isConfirmed) {
+            const formData = new FormData();
+            if (form.value.nombres) formData.append('nombres', form.value.nombres);
+            if (form.value.apellidos) formData.append('apellidos', form.value.apellidos);
+            if (form.value.rol) formData.append('rol', form.value.rol);
+            if (form.value.estado) formData.append('estado', form.value.estado);
+            if (form.value.foto) {
+                formData.append('foto', form.value.foto);
+            }
 
-    // Realizar la solicitud de actualización
-    Inertia.put(route('cuerpo-tecnico.update', props.cuerpoTecnico.id), formData, {
-        onError: (err) => {
-            errors.value = err;
-        },
-        onSuccess: () => {
-            // Reiniciar el formulario si es exitoso
-            form.value.nombres = '';
-            form.value.apellidos = '';
-            form.value.rol = '';
-            form.value.estado = '';
-            form.value.foto = null;
-            imagePreview.value = null; // Reiniciar vista previa
+
+            // Realizar la solicitud de actualización
+            Inertia.put(route('cuerpo-tecnico.update', props.cuerpoTecnico.id), formData, {
+                onError: (err) => {
+                    // Mostrar SweetAlert de error
+                    const errorMessages = Object.values(err).flat().join(", ");
+                    Swal.fire({
+                        title: "Error",
+                        text: errorMessages || "Ocurrió un error inesperado.",
+                        icon: "error",
+                        confirmButtonText: "OK",
+                    });
+                },
+                onSuccess: () => {
+                    // Mostrar SweetAlert de éxito
+                    Swal.fire({
+                        title: "¡Éxito!",
+                        text: "Cuerpo técnico actualizado exitosamente.",
+                        icon: "success",
+                        confirmButtonText: "OK",
+                    });
+                }
+            });
         }
     });
 };
+
 </script>
-
-<style>
-.img-fluid {
-    max-width: 100%;
-    height: auto;
-}
-
-.img-prev {
-    width: 200px;
-}
-</style>
