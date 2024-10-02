@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contacto;
+use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Http\Request;
 
 class ContactoController extends Controller
@@ -62,4 +63,5 @@ class ContactoController extends Controller
     {
         //
     }
+
 }

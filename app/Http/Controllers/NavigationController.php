@@ -41,7 +41,7 @@ class NavigationController extends Controller
 
     public function contacto()
     {
-        return Inertia::render('Contacto');
+        return Inertia::render('Public/Contacto/Index');
     }
 
     // Métodos futuros para secciones administrativas

@@ -41,6 +41,7 @@ img {
 
 .max-width {
     max-width: 1250px !important;
+    margin: 0 auto;
 }
 
 .btn-admin {
@@ -85,6 +86,12 @@ img {
 .btn-ver-mas:hover {
     color: #c11b30 !important;
 
+}
+
+.info  {
+    color: #666666;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 @media (max-width: 768px) {
