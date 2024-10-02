@@ -7,9 +7,10 @@ use Inertia\Inertia;
 
 use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\PrensaController;
-use App\Http\Controllers\PrimerEquipoController;
 use App\Http\Controllers\JugadoresController;
 use App\Http\Controllers\CuerpoTecnicoController;
+use App\Http\Controllers\FormularioContactoController;
+use App\Http\Controllers\ContactoController;
 
 
 use App\Models\Jugadores;
@@ -32,7 +33,10 @@ Route::get('/primer-equipo', [NavigationController::class, 'primerEquipo'])->nam
 Route::get('/escuela', [NavigationController::class, 'escuela'])->name('escuela');
 Route::get('/prensa', [NavigationController::class, 'prensa'])->name('prensa');
 Route::get('/prensa-public/{id}', [PrensaController::class, 'showPublic'])->name('prensa.public.show');
-Route::get('/contacto', [NavigationController::class, 'contacto'])->name('contacto');
+
+Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto');
+Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.enviar');
+
 
 
 Route::get('/dashboard', function () {

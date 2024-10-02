@@ -39,10 +39,7 @@ class NavigationController extends Controller
         ]);
     }
 
-    public function contacto()
-    {
-        return Inertia::render('Public/Contacto/Index');
-    }
+
 
     // Métodos futuros para secciones administrativas
     public function adminDashboard()
