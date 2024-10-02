@@ -11,8 +11,9 @@ class FormularioContactoMailable extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $message;
     public $data;
+    public $asunto;
+    
 
 
     /**
@@ -21,10 +22,10 @@ class FormularioContactoMailable extends Mailable
      * @param $usuario
      * @param $message
      */
-    public function __construct($data, $message)
+    public function __construct($data, $asunto)
     {
         $this->data = $data;
-        $this->message = $message;
+        $this->asunto  = $asunto;
     }
 
     /**
@@ -34,8 +35,9 @@ class FormularioContactoMailable extends Mailable
      */
     public function build()
     {
-
-        return $this->markdown('emails.contacto')
-            ->subject('Contacto'); // Using the app name in the subject
+        return $this->from(config('mail.from.address'), config('mail.from.name'))
+        ->markdown('emails.contacto')
+            ->subject($this->asunto)
+            ->with('data', $this->data);
     }
 }

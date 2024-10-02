@@ -6,7 +6,7 @@
     <title>Nuevo Mensaje de Contacto</title>
 </head>
 <body>
-    <h1>{{$message}}</h1>
+    <h1>Nuevo Mensaje de Contacto</h1>
     
     <p><strong>Nombre:</strong> {{ $data['nombre'] }}</p>
     <p><strong>Apellidos:</strong> {{ $data['apellidos'] }}</p>

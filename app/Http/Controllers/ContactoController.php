@@ -15,16 +15,7 @@ class ContactoController extends Controller
      */
     public function index()
     {
-
         return Inertia::render('Public/Contacto/Index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -32,64 +23,46 @@ class ContactoController extends Controller
      */
     public function store(Request $request)
     {
-        // Validación de los datos del formulario
+        // Validar el tipo de formulario
         $data = $request->validate([
+            'tipo' => 'required|in:contactar,acreditacion,patrocinadores',
             'nombre' => 'required|string|max:255',
             'apellidos' => 'nullable|string|max:255',
             'email' => 'required|email',
             'telefono' => 'nullable|string|max:15',
-            'mensaje' => 'required|string',
+            'mensaje' => 'nullable|string',
             'privacidad' => 'accepted', // Verificar que la casilla de privacidad fue marcada
         ]);
-        $email = $data['email'];
-        $message = 'Has recibido un nuevo mensaje de contacto';
-        // Procesar los datos, por ejemplo, enviar un correo o guardarlos en la base de datos
-        //$this->responseEmail($email, $message);
-        Mail::to($data['email'])->send(new FormularioContactoMailable($data, $message));
+
+        // Crear una nueva entrada en la base de datos
+        $contacto = new Contacto();
+        $contacto->tipo = $data['tipo'];
+        $contacto->nombre = $data['nombre'];
+        $contacto->apellidos = $data['apellidos'];
+        $contacto->email = $data['email'];
+        $contacto->telefono = $data['telefono'];
+        $contacto->mensaje = $data['mensaje'];
+        $contacto->privacidad_aceptada = $data['privacidad'] ? 1 : 0; // Convertir a 1 o 0
+        $contacto->save();
+
+        // Determinar el asunto según el tipo de formulario
+        $asunto = 'Correo General de Contacto';
+
+        // Enviar el correo
+        try {
+            Mail::to('recipient@example.com')
+                ->send(new FormularioContactoMailable($data, $asunto));
+        } catch (\Exception $e) {
+            error_log('Error al enviar el correo: ' . $e->getMessage());
+            return back()->withErrors(['error' => 'No se pudo enviar el mensaje, por favor intente más tarde.']);
+        }
+
         // Enviar respuesta de éxito al cliente (Vue.js)
         return back()->with('success', 'Mensaje enviado correctamente');
     }
 
-    private function responseEmail($email, $message)
-    {
-        try {
-            Mail::to($email)->send(new FormularioContactoMailable($email, $message));
-            return true;
-        } catch (\Exception $e) {
-            error_log('Error al enviar email de credenciales: ' . $e->getMessage());
-            return false;
-        }
-    }
 
     /**
-     * Display the specified resource.
+     * Obtiene las reglas de validación según el tipo de formulario.
      */
-    public function show(Contacto $contacto)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Contacto $contacto)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Contacto $contacto)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Contacto $contacto)
-    {
-        //
-    }
 }

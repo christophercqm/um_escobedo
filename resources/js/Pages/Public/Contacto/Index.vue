@@ -81,14 +81,14 @@
 
                         <!-- Formulario dinámico basado en el botón seleccionado -->
                         <div class="form-container">
-                            <!-- Formulario Contactar -->
                             <form v-if="selectedForm === 'contactar'" class="d-flex flex-column" @submit.prevent="submitContactar">
+                                <input type="hidden" name="tipo" value="contactar" />
                                 <div class="mb-3">
                                     <input type="text" class="form-control" v-model="contactarData.nombre" required placeholder="Nombre" name="nombre"/>
                                 </div>
 
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" v-model="contactarData.apellidos" required placeholder="Apellidos" name="apellidos"/>
+                                    <input type="text" class="form-control" v-model="contactarData.apellidos" placeholder="Apellidos" name="apellidos"/>
                                 </div>
 
                                 <div class="mb-3">
@@ -96,7 +96,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <input type="tel" class="form-control" v-model="contactarData.telefono" required placeholder="Teléfono" name="telefono"/>
+                                    <input type="tel" class="form-control" v-model="contactarData.telefono" placeholder="Teléfono" name="telefono"/>
                                 </div>
 
                                 <div class="mb-3">
@@ -113,14 +113,20 @@
                                 <button type="submit" class="btn-public" :disabled="!contactarData.privacidad">Enviar</button>
                             </form>
 
+
                             <!-- Formulario Acreditación -->
                             <form v-if="selectedForm === 'acreditacion'" @submit.prevent="submitAcreditacion">
+                                <!-- Campo oculto para el tipo de formulario (acreditacion) -->
+                                <input type="hidden" name="tipo" value="acreditacion" />
                                 <input type="text" placeholder="Campo Acreditación" v-model="acreditacionData.campo" required />
                                 <button type="submit">Enviar</button>
                             </form>
 
                             <!-- Formulario Patrocinadores -->
                             <form v-if="selectedForm === 'patrocinadores'" class="d-flex flex-column" @submit.prevent="submitPatrocinadores">
+                                <!-- Campo oculto para el tipo de formulario (patrocinadores) -->
+                                <input type="hidden" name="tipo" value="patrocinadores" />
+
                                 <div class="mb-3">
                                     <input type="text" class="form-control" v-model="patrocinadoresData.empresa" required placeholder="Empresa" />
                                 </div>
@@ -189,7 +195,10 @@ const patrocinadoresData = ref({
 
 // Funciones para enviar formularios
 const submitContactar = () => {
-    Inertia.post(route("contacto.enviar"), contactarData.value, {
+    // Agregar el tipo de formulario
+    const formData = { tipo: 'contactar', ...contactarData.value };
+
+    Inertia.post(route("contacto.enviar"), formData, {
         onSuccess: () => {
             console.log("Formulario Contactar enviado con éxito");
             resetContactarForm();
