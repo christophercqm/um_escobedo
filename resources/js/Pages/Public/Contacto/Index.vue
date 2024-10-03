@@ -100,7 +100,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <textarea class="form-control" v-model="contactarData.mensaje" required placeholder="Escribe tu mensaje" name="mensaje"></textarea>
+                                    <textarea class="form-control" v-model="contactarData.mensaje" required placeholder="Escribe tu mensaje" rows="3" name="mensaje"></textarea>
                                 </div>
 
                                 <div class="form-check mb-3 contain-privacidad">
@@ -144,7 +144,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <textarea class="form-control" v-model="patrocinadoresData.asunto" required placeholder="Asunto" rows="3"></textarea>
+                                    <textarea class="form-control" v-model="patrocinadoresData.asunto" required placeholder="Escribe tu mensaje" rows="3"></textarea>
                                 </div>
 
                                 <div class="form-check mb-3 contain-privacidad">
@@ -222,7 +222,10 @@ const submitAcreditacion = () => {
 };
 
 const submitPatrocinadores = () => {
-    Inertia.post(route("formulario.patrocinadores"), patrocinadoresData.value, {
+    // Agregar el tipo de formulario 'patrocinadores' en el objeto de datos
+    const formData = { tipo: 'patrocinadores', ...patrocinadoresData.value };
+
+    Inertia.post(route("contacto.enviar"), formData, {
         onSuccess: () => {
             console.log("Formulario Patrocinadores enviado con éxito");
             resetPatrocinadoresForm();
@@ -232,6 +235,8 @@ const submitPatrocinadores = () => {
         },
     });
 };
+
+
 
 // Funciones para resetear formularios
 const resetContactarForm = () => {

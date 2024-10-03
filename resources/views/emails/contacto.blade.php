@@ -7,11 +7,19 @@
 </head>
 <body>
     <h1>Nuevo Mensaje de Contacto</h1>
-    
-    <p><strong>Nombre:</strong> {{ $data['nombre'] }}</p>
-    <p><strong>Apellidos:</strong> {{ $data['apellidos'] }}</p>
-    <p><strong>Email:</strong> {{ $data['email'] }}</p>
-    <p><strong>Teléfono:</strong> {{ $data['telefono'] }}</p>
-    <p><strong>Mensaje:</strong> {{ $data['mensaje'] }}</p>
+
+    @if($data['tipo'] === 'patrocinadores')
+        <p><strong>Empresa:</strong> {{ $data['empresa'] }}</p>
+        <p><strong>Nombre del Representante:</strong> {{ $data['nombreRepresentante'] }}</p>
+        <p><strong>Email:</strong> {{ $data['email'] }}</p>
+        <p><strong>Teléfono:</strong> {{ $data['telefono'] }}</p>
+        <p><strong>Asunto:</strong> {{ $data['asunto'] }}</p>
+    @else
+        <p><strong>Nombre:</strong> {{ $data['nombre'] }}</p>
+        <p><strong>Apellidos:</strong> {{ $data['apellidos'] }}</p>
+        <p><strong>Email:</strong> {{ $data['email'] }}</p>
+        <p><strong>Teléfono:</strong> {{ $data['telefono'] }}</p>
+        <p><strong>Mensaje:</strong> {{ $data['mensaje'] }}</p>
+    @endif
 </body>
 </html>

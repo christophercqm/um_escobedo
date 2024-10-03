@@ -14,8 +14,6 @@ class FormularioContactoMailable extends Mailable
     public $data;
     public $asunto;
     
-
-
     /**
      * Create a new message instance.
      *
