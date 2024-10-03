@@ -61,7 +61,7 @@ class ContactoController extends Controller
 
         // Enviar el correo
         try {
-            \Log::info('Enviando correo con los datos: ', $data); // Agregar log para depurar
+            \Log::info('Enviando correo con los datos: ', $data); // Log para depurar
             Mail::to('recipient@example.com')
                 ->send(new FormularioContactoMailable($data, $asunto));
         } catch (\Exception $e) {

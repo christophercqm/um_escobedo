@@ -6,7 +6,6 @@
     <title>Nuevo Mensaje de Contacto</title>
 </head>
 <body>
-    <h1>Nuevo Mensaje de Contacto</h1>
 
     @if($data['tipo'] === 'patrocinadores')
         <p><strong>Empresa:</strong> {{ $data['empresa'] }}</p>

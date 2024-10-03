@@ -89,7 +89,7 @@ img {
 }
 
 .info  {
-    color: #666666;
+    color: #666666 !important;
     font-size: 14px;
     font-weight: 500;
 }

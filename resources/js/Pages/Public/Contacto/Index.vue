@@ -6,14 +6,13 @@
                     class="row row-detail-notice d-flex justify-content-md-between"
                 >
                     <div class="col-12 col-md-5">
-                        <div class="contain-info">
+                        <div class="contain-info mb-5 mb-md-0">
                             <h2 class="text-uppercase llamanos">Llámanos</h2>
                             <h2 class="title-contact">Datos de contacto</h2>
                             <p class="mt-3 mb-5 desc-contact">
-                                Si tienes alguna duda con alguno de nuestros
-                                servicios, alguna incidencia o simplemente estás
-                                valorando hacer alguna instalación de
-                                fontanería, estos son nuestras formas de
+                                Para información comercial, contacto con el
+                                equipo de prensa o colaboraciones, a
+                                continuación se muestran nuestros datos de
                                 contacto.
                             </p>
 
@@ -21,22 +20,49 @@
                                 <!-- EMAIL -->
                                 <div class="email d-flex gap-3">
                                     <span>
-                                        <i class="bi bi-envelope-at-fill icon"></i>
+                                        <i
+                                            class="bi bi-envelope-at-fill icon"
+                                        ></i>
                                     </span>
                                     <div class="email-info">
-                                        <h3 class="m-0 label-name">Correo electrónico</h3>
-                                        <span class="info">comunicacion@umescobedo.com</span>
+                                        <h3 class="m-0 label-name">
+                                            Correo electrónico
+                                        </h3>
+                                        <a
+                                            href="mailto:comunicacion@umescobedo.com"
+                                            class="info"
+                                        >
+                                            comunicacion@umescobedo.com
+                                        </a>
                                     </div>
                                 </div>
 
                                 <!-- TELEFONO -->
                                 <div class="tel d-flex gap-3">
                                     <span>
-                                        <i class="bi bi-telephone-fill icon"></i>
+                                        <i
+                                            class="bi bi-telephone-fill icon"
+                                        ></i>
                                     </span>
                                     <div class="tel-info">
-                                        <h3 class="m-0 label-name">Teléfonos</h3>
-                                        <span class="info">123456789</span>
+                                        <h3 class="m-0 label-name">
+                                            Teléfonos
+                                        </h3>
+                                        <span class="info">
+                                            <a
+                                                href="tel:+52645946150"
+                                                class="info"
+                                            >
+                                                645 946 150
+                                            </a>
+                                            -
+                                            <a
+                                                href="tel:+52664448096"
+                                                class="info"
+                                            >
+                                                664 448 096
+                                            </a>
+                                        </span>
                                     </div>
                                 </div>
 
@@ -46,8 +72,17 @@
                                         <i class="bi bi-geo-alt-fill icon"></i>
                                     </span>
                                     <div class="ubicacion-info">
-                                        <h3 class="m-0 label-name">Ubicación</h3>
-                                        <span class="info">Bº ARENAS S/N</span>
+                                        <h3 class="m-0 label-name">
+                                            Ubicación
+                                        </h3>
+                                        <a
+                                            href="https://maps.app.goo.gl/o1wGkmfNrhaYWMzM6"
+                                            target="_blank"
+                                            class="info"
+                                        >
+                                            Barranco arenas, s/n, 39609 Camargo
+                                            (Cantabria), España
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -58,21 +93,33 @@
                         <!-- Botones para seleccionar el formulario -->
                         <div class="button-group">
                             <button
-                                :class="['btn-contactar', { active: selectedForm === 'contactar' }]"
+                                :class="[
+                                    'btn-contactar',
+                                    { active: selectedForm === 'contactar' },
+                                ]"
                                 @click="selectedForm = 'contactar'"
                             >
                                 Contactar
                             </button>
 
                             <button
-                                :class="{ active: selectedForm === 'acreditacion' }"
+                                :class="[
+                                    'btn-contactar',
+                                    { active: selectedForm === 'acreditacion' },
+                                ]"
                                 @click="selectedForm = 'acreditacion'"
                             >
                                 Acreditación
                             </button>
 
                             <button
-                                :class="{ active: selectedForm === 'patrocinadores' }"
+                                :class="[
+                                    'btn-contactar',
+                                    {
+                                        active:
+                                            selectedForm === 'patrocinadores',
+                                    },
+                                ]"
                                 @click="selectedForm = 'patrocinadores'"
                             >
                                 Patrocinadores
@@ -81,80 +128,213 @@
 
                         <!-- Formulario dinámico basado en el botón seleccionado -->
                         <div class="form-container">
-                            <form v-if="selectedForm === 'contactar'" class="d-flex flex-column" @submit.prevent="submitContactar">
-                                <input type="hidden" name="tipo" value="contactar" />
+                            <form
+                                v-if="selectedForm === 'contactar'"
+                                class="d-flex flex-column"
+                                @submit.prevent="submitContactar"
+                            >
+                                <input
+                                    type="hidden"
+                                    name="tipo"
+                                    value="contactar"
+                                />
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" v-model="contactarData.nombre" required placeholder="Nombre" name="nombre"/>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        v-model="contactarData.nombre"
+                                        required
+                                        placeholder="Nombre"
+                                        name="nombre"
+                                    />
                                 </div>
 
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" v-model="contactarData.apellidos" placeholder="Apellidos" name="apellidos"/>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        v-model="contactarData.apellidos"
+                                        placeholder="Apellidos"
+                                        name="apellidos"
+                                    />
                                 </div>
 
                                 <div class="mb-3">
-                                    <input type="email" class="form-control" v-model="contactarData.email" required placeholder="Correo Electrónico" name="email"/>
+                                    <input
+                                        type="email"
+                                        class="form-control"
+                                        v-model="contactarData.email"
+                                        required
+                                        placeholder="Correo Electrónico"
+                                        name="email"
+                                    />
                                 </div>
 
                                 <div class="mb-3">
-                                    <input type="tel" class="form-control" v-model="contactarData.telefono" placeholder="Teléfono" name="telefono"/>
+                                    <input
+                                        type="tel"
+                                        class="form-control"
+                                        v-model="contactarData.telefono"
+                                        placeholder="Teléfono"
+                                        name="telefono"
+                                    />
                                 </div>
 
                                 <div class="mb-3">
-                                    <textarea class="form-control" v-model="contactarData.mensaje" required placeholder="Escribe tu mensaje" rows="3" name="mensaje"></textarea>
+                                    <textarea
+                                        class="form-control"
+                                        v-model="contactarData.mensaje"
+                                        required
+                                        placeholder="Escribe tu mensaje"
+                                        rows="3"
+                                        name="mensaje"
+                                    ></textarea>
                                 </div>
 
                                 <div class="form-check mb-3 contain-privacidad">
-                                    <input type="checkbox" class="form-check-input" id="privacidad" v-model="contactarData.privacidad" required name="privacidad"/>
-                                    <label class="form-check-label privacidad" for="privacidad">
-                                        He leído y acepto la <a href="#">Política de Privacidad</a> y del <a href="#">Tratamiento de Formularios</a>
+                                    <input
+                                        type="checkbox"
+                                        class="form-check-input"
+                                        id="privacidad"
+                                        v-model="contactarData.privacidad"
+                                        required
+                                        name="privacidad"
+                                    />
+                                    <label
+                                        class="form-check-label privacidad"
+                                        for="privacidad"
+                                    >
+                                        He leído y acepto la
+                                        <a href="#">Política de Privacidad</a> y
+                                        del
+                                        <a href="#"
+                                            >Tratamiento de Formularios</a
+                                        >
                                     </label>
                                 </div>
 
-                                <button type="submit" class="btn-public" :disabled="!contactarData.privacidad">Enviar</button>
+                                <button
+                                    type="submit"
+                                    class="btn-public"
+                                    :disabled="!contactarData.privacidad"
+                                >
+                                    Enviar
+                                </button>
                             </form>
 
-
                             <!-- Formulario Acreditación -->
-                            <form v-if="selectedForm === 'acreditacion'" @submit.prevent="submitAcreditacion">
+                            <form
+                                v-if="selectedForm === 'acreditacion'"
+                                @submit.prevent="submitAcreditacion"
+                            >
                                 <!-- Campo oculto para el tipo de formulario (acreditacion) -->
-                                <input type="hidden" name="tipo" value="acreditacion" />
-                                <input type="text" placeholder="Campo Acreditación" v-model="acreditacionData.campo" required />
+                                <input
+                                    type="hidden"
+                                    name="tipo"
+                                    value="acreditacion"
+                                />
+                                <input
+                                    type="text"
+                                    placeholder="Campo Acreditación"
+                                    v-model="acreditacionData.campo"
+                                    required
+                                />
                                 <button type="submit">Enviar</button>
                             </form>
 
                             <!-- Formulario Patrocinadores -->
-                            <form v-if="selectedForm === 'patrocinadores'" class="d-flex flex-column" @submit.prevent="submitPatrocinadores">
+                            <form
+                                v-if="selectedForm === 'patrocinadores'"
+                                class="d-flex flex-column"
+                                @submit.prevent="submitPatrocinadores"
+                            >
                                 <!-- Campo oculto para el tipo de formulario (patrocinadores) -->
-                                <input type="hidden" name="tipo" value="patrocinadores" />
+                                <input
+                                    type="hidden"
+                                    name="tipo"
+                                    value="patrocinadores"
+                                />
 
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" v-model="patrocinadoresData.empresa" required placeholder="Empresa" />
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        v-model="patrocinadoresData.empresa"
+                                        required
+                                        placeholder="Empresa"
+                                    />
                                 </div>
 
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" v-model="patrocinadoresData.nombreRepresentante" required placeholder="Nombre del Representante" />
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        v-model="
+                                            patrocinadoresData.nombreRepresentante
+                                        "
+                                        required
+                                        placeholder="Nombre del Representante"
+                                    />
                                 </div>
 
                                 <div class="mb-3">
-                                    <input type="email" class="form-control" v-model="patrocinadoresData.email" required placeholder="Correo Electrónico" />
+                                    <input
+                                        type="email"
+                                        class="form-control"
+                                        v-model="patrocinadoresData.email"
+                                        required
+                                        placeholder="Correo Electrónico"
+                                    />
                                 </div>
 
                                 <div class="mb-3">
-                                    <input type="tel" class="form-control" v-model="patrocinadoresData.telefono" required placeholder="Teléfono" />
+                                    <input
+                                        type="tel"
+                                        class="form-control"
+                                        v-model="patrocinadoresData.telefono"
+                                        required
+                                        placeholder="Teléfono"
+                                    />
                                 </div>
 
                                 <div class="mb-3">
-                                    <textarea class="form-control" v-model="patrocinadoresData.asunto" required placeholder="Escribe tu mensaje" rows="3"></textarea>
+                                    <textarea
+                                        class="form-control"
+                                        v-model="patrocinadoresData.asunto"
+                                        required
+                                        placeholder="Escribe tu mensaje"
+                                        rows="3"
+                                    ></textarea>
                                 </div>
 
                                 <div class="form-check mb-3 contain-privacidad">
-                                    <input type="checkbox" class="form-check-input" id="privacidadPatrocinadores" v-model="patrocinadoresData.privacidad" required />
-                                    <label class="form-check-label privacidad" for="privacidadPatrocinadores">
-                                        He leído y acepto la <a href="#">Política de Privacidad</a> y del <a href="#">Tratamiento de Formularios</a>
+                                    <input
+                                        type="checkbox"
+                                        class="form-check-input"
+                                        id="privacidadPatrocinadores"
+                                        v-model="patrocinadoresData.privacidad"
+                                        required
+                                    />
+                                    <label
+                                        class="form-check-label privacidad"
+                                        for="privacidadPatrocinadores"
+                                    >
+                                        He leído y acepto la
+                                        <a href="#">Política de Privacidad</a> y
+                                        del
+                                        <a href="#"
+                                            >Tratamiento de Formularios</a
+                                        >
                                     </label>
                                 </div>
 
-                                <button type="submit" class="btn-public" :disabled="!patrocinadoresData.privacidad">Enviar</button>
+                                <button
+                                    type="submit"
+                                    class="btn-public"
+                                    :disabled="!patrocinadoresData.privacidad"
+                                >
+                                    Enviar
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -196,7 +376,7 @@ const patrocinadoresData = ref({
 // Funciones para enviar formularios
 const submitContactar = () => {
     // Agregar el tipo de formulario
-    const formData = { tipo: 'contactar', ...contactarData.value };
+    const formData = { tipo: "contactar", ...contactarData.value };
 
     Inertia.post(route("contacto.enviar"), formData, {
         onSuccess: () => {
@@ -216,14 +396,17 @@ const submitAcreditacion = () => {
             resetAcreditacionForm();
         },
         onError: (errors) => {
-            console.error("Error al enviar el formulario Acreditación:", errors);
+            console.error(
+                "Error al enviar el formulario Acreditación:",
+                errors
+            );
         },
     });
 };
 
 const submitPatrocinadores = () => {
     // Agregar el tipo de formulario 'patrocinadores' en el objeto de datos
-    const formData = { tipo: 'patrocinadores', ...patrocinadoresData.value };
+    const formData = { tipo: "patrocinadores", ...patrocinadoresData.value };
 
     Inertia.post(route("contacto.enviar"), formData, {
         onSuccess: () => {
@@ -231,12 +414,13 @@ const submitPatrocinadores = () => {
             resetPatrocinadoresForm();
         },
         onError: (errors) => {
-            console.error("Error al enviar el formulario Patrocinadores:", errors);
+            console.error(
+                "Error al enviar el formulario Patrocinadores:",
+                errors
+            );
         },
     });
 };
-
-
 
 // Funciones para resetear formularios
 const resetContactarForm = () => {
@@ -265,7 +449,6 @@ const resetPatrocinadoresForm = () => {
     };
 };
 </script>
-
 
 <style scoped>
 .button-group button {
@@ -338,7 +521,10 @@ textarea::placeholder {
 
 .btn-contactar {
     margin-left: 0 !important;
+    border: 1px solid var(--red) !important;
+    color: var(--red);
 }
+
 .privacidad {
     color: var(--grayv2) !important;
     text-decoration: none !important;
