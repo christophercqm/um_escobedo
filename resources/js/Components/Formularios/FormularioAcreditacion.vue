@@ -1,22 +1,48 @@
 <template>
   <form @submit.prevent="submitAcreditacion">
     <div class="mb-3">
-      <label class="form-label">Seleccione el tipo de acreditación:</label>
-      <div class="form-check">
-        <input type="radio" class="form-check-input" id="arbitro" value="arbitro" v-model="acreditacionData.tipo" />
-        <label class="form-check-label" for="arbitro">Árbitro</label>
-      </div>
-      <div class="form-check">
-        <input type="radio" class="form-check-input" id="prensa" value="prensa" v-model="acreditacionData.tipo" />
-        <label class="form-check-label" for="prensa">Prensa</label>
-      </div>
-      <div class="form-check">
-        <input type="radio" class="form-check-input" id="cuerpo-tecnico" value="cuerpo_tecnico" v-model="acreditacionData.tipo" />
-        <label class="form-check-label" for="cuerpo-tecnico">Cuerpo Técnico</label>
-      </div>
-      <div class="form-check">
-        <input type="radio" class="form-check-input" id="cuerpo-directivo" value="cuerpo_directivo" v-model="acreditacionData.tipo" />
-        <label class="form-check-label" for="cuerpo-directivo">Cuerpo Directivo</label>
+      <label class="form-label label-acreditacion-title">Seleccione el tipo de acreditación:</label>
+      <div class="container-radio-buttons d-flex gap-3">
+        <div class="form-check">
+          <input
+            type="radio"
+            class="form-check-input p-0"
+            id="arbitro"
+            value="arbitro"
+            v-model="acreditacionData.tipo"
+          />
+          <label class="form-check-label name-label" for="arbitro">Árbitro</label>
+        </div>
+        <div class="form-check">
+          <input
+            type="radio"
+            class="form-check-input p-0"
+            id="prensa"
+            value="prensa"
+            v-model="acreditacionData.tipo"
+          />
+          <label class="form-check-label name-label" for="prensa">Prensa</label>
+        </div>
+        <div class="form-check">
+          <input
+            type="radio"
+            class="form-check-input p-0"
+            id="cuerpo-tecnico"
+            value="cuerpo_tecnico"
+            v-model="acreditacionData.tipo"
+          />
+          <label class="form-check-label name-label" for="cuerpo-tecnico">Cuerpo Técnico</label>
+        </div>
+        <div class="form-check">
+          <input
+            type="radio"
+            class="form-check-input p-0"
+            id="cuerpo-directivo"
+            value="cuerpo_directivo"
+            v-model="acreditacionData.tipo"
+          />
+          <label class="form-check-label name-label" for="cuerpo-directivo">Cuerpo Directivo</label>
+        </div>
       </div>
     </div>
 
@@ -44,9 +70,9 @@
 <script setup>
 import { ref } from 'vue';
 
-// Datos del formulario
+// Datos del formulario, inicializando el tipo en 'arbitro'
 const acreditacionData = ref({
-  tipo: '',
+  tipo: 'arbitro', // Este es el valor por defecto
   nombre: ''
 });
 
@@ -68,12 +94,20 @@ const submitAcreditacion = () => {
     line-height: 1;
 }
 
-
-
 .contain-privacidad {
     display: flex;
     align-items: start;
     gap: 1rem;
     font-size: 14px;
+}
+
+.label-acreditacion-title {
+  color: var(--black);
+  font-weight: 500;
+}
+
+.container-radio-buttons .name-label {
+  font-size: 14px;
+  color: var(--black);
 }
 </style>
