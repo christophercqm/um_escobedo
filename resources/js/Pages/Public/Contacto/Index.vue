@@ -6,8 +6,10 @@
                     <div class="col-12 col-md-5">
                         <div class="contain-info mb-5 mb-md-0">
                             <!-- Información de contacto -->
+                            <div class="contain-info mb-5 mb-md-0" :class="{ 'fade-in': true }"> 
+                            <!-- Información de contacto -->
                             <InfoContacto />
-                        </div>
+                        </div>                        </div>
                     </div>
 
                     <div class="col-md-5">
@@ -20,9 +22,16 @@
                       
 
                          <!-- Mostrar el formulario según la selección -->
-                        <FormularioContactar v-if="selectedForm === 'contactar'" @submit-form="handleSubmitForm" />
-                        <FormularioAcreditacion v-if="selectedForm === 'acreditacion'" @submit-form="handleSubmitForm" />
-                        <FormularioPatrocinadores v-if="selectedForm === 'patrocinadores'" @submit-form="handleSubmitForm" />
+                         <!-- Mostrar el formulario según la selección -->
+                         <div :class="{ 'fade-in': selectedForm === 'contactar' }" v-if="selectedForm === 'contactar'">
+                            <FormularioContactar @submit-form="handleSubmitForm" />
+                        </div>
+                        <div :class="{ 'fade-in': selectedForm === 'acreditacion' }" v-if="selectedForm === 'acreditacion'">
+                            <FormularioAcreditacion @submit-form="handleSubmitForm" />
+                        </div>
+                        <div :class="{ 'fade-in': selectedForm === 'patrocinadores' }" v-if="selectedForm === 'patrocinadores'">
+                            <FormularioPatrocinadores @submit-form="handleSubmitForm" />
+                        </div>
 
                     </div>
                 </div>

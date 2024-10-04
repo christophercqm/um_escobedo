@@ -39,7 +39,7 @@
           <div class="ubicacion-info">
             <h3 class="m-0 label-name">Ubicación</h3>
             <a href="https://maps.app.goo.gl/o1wGkmfNrhaYWMzM6" target="_blank" class="info">
-              Barranco arenas, s/n, 39609 Camargo (Cantabria), España
+              Bo. Arenas 37, s/n, 39609 Camargo (Cantabria), España
             </a>
           </div>
         </div>

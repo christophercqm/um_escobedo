@@ -100,3 +100,17 @@ img {
         padding-bottom: 30px;
     }
 }
+
+
+
+/* ANIMACIONES */
+.fade-in {
+    opacity: 0; /* Inicia completamente transparente */
+    animation: fadeIn 1s forwards; /* Aplica la animación */
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1; /* Termina completamente visible */
+    }
+}
