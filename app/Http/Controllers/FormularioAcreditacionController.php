@@ -12,10 +12,10 @@ use Illuminate\Support\Facades\Log;
 
 class FormularioAcreditacionController extends Controller
 {
-    public function storeAcreditacion(Request $request)
+public function storeAcreditacion(Request $request)
     {
         // Validar los datos
-        $request->validate([
+        $validatedData = $request->validate([
             'tipo_acreditacion' => 'required|string',
             'nombre' => 'required|string',
             'apellido' => 'required|string',
@@ -28,41 +28,32 @@ class FormularioAcreditacionController extends Controller
         ]);
 
         // Crear y guardar la instancia del modelo
-        $acreditacion = new Acreditacion();
-        $acreditacion->tipo_acreditacion = $request->tipo_acreditacion;
-        $acreditacion->nombre = $request->nombre;
-        $acreditacion->apellido = $request->apellido;
-        $acreditacion->dni = $request->dni;
-        $acreditacion->correo = $request->correo;
-        $acreditacion->telefono = $request->telefono;
-        $acreditacion->asunto = $request->asunto;
-        $acreditacion->equipo_pertenece = $request->equipo_pertenece;
+        $acreditacion = Acreditacion::create($validatedData);
 
         // Manejar el archivo si existe
         if ($request->hasFile('archivo')) {
             $filePath = $request->file('archivo')->store('acreditaciones', 'public');
             $acreditacion->archivo = $filePath;
+            $acreditacion->save(); // Guarda la ruta del archivo en la base de datos
 
             // Mapear tipo de acreditación a un formato más legible
             $tipoAcreditacionLegible = $this->mapTipoAcreditacion($request->tipo_acreditacion);
 
             // Crear un asunto personalizado
-            $asunto = "Solicitud de Acreditación de {$request->nombre} {$request->apellido} ({$tipoAcreditacionLegible})";
+            $asunto = "Solicitud de Acreditación de {$validatedData['nombre']} {$validatedData['apellido']} ({$tipoAcreditacionLegible})";
 
-            // Aquí puedes enviar el correo con el archivo adjunto
+            // Enviar el correo con el archivo adjunto
             try {
-                Log::info('Enviando correo con los datos: ', $request->all()); // Log para depurar
-                Mail::to($request->correo) // Cambia aquí para enviar al correo del usuario
-                    ->send(new FormularioAcreditacionMailable($request->all(), $asunto, storage_path("app/public/$filePath")));
+                Log::info('Enviando correo con los datos: ', $validatedData); // Log para depurar
+                Mail::to($validatedData['correo']) // Cambia aquí para enviar al correo del usuario
+                    ->send(new FormularioAcreditacionMailable($validatedData, $asunto, storage_path("app/public/$filePath")));
             } catch (\Exception $e) {
                 Log::error('Error al enviar el correo: ' . $e->getMessage()); // Log de error
-                return back()->withErrors(['error' => 'No se pudo enviar el mensaje, por favor intente más tarde.']);
+                return redirect()->back()->withErrors(['error' => 'No se pudo enviar el mensaje, por favor intente más tarde.']);
             }
         }
 
-        $acreditacion->save();
-
-        // Redirigir o devolver una respuesta
+        // Redirigir al usuario con un mensaje de éxito
         return redirect()->back()->with('success', 'Acreditación guardada correctamente.');
     }
 

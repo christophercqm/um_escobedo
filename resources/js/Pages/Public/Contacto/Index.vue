@@ -7,9 +7,9 @@
                         <div class="contain-info mb-5 mb-md-0">
                             <!-- Información de contacto -->
                             <div class="contain-info mb-5 mb-md-0" :class="{ 'fade-in': true }"> 
-                            <!-- Información de contacto -->
-                            <InfoContacto />
-                        </div>                        </div>
+                               <InfoContacto />
+                            </div>
+                        </div>  
                     </div>
 
                     <div class="col-md-5">
@@ -21,7 +21,6 @@
                         </div>
                       
 
-                         <!-- Mostrar el formulario según la selección -->
                          <!-- Mostrar el formulario según la selección -->
                          <div :class="{ 'fade-in': selectedForm === 'contactar' }" v-if="selectedForm === 'contactar'">
                             <FormularioContactar @submit-form="handleSubmitForm" />
@@ -62,7 +61,7 @@ const handleSubmitForm = (formData) => {
   if (formData.tipo === 'acreditacion') {
     Inertia.post(route('formulario.acreditacion'), formData.data);
   } else if (formData.tipo === 'contactar') {
-    Inertia.post(route('contacto.enviar'), formData.data);
+    Inertia.post(route('contacto.enviar'), formData);
   } else if (formData.tipo === 'patrocinadores') {
     Inertia.post(route('contacto.enviar'), formData.data);
   }
