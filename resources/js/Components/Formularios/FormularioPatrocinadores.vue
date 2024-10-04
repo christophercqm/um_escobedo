@@ -22,7 +22,7 @@
           He leído y acepto la <a href="#">Política de Privacidad</a> y del <a href="#">Tratamiento de Formularios</a>
         </label>
       </div>
-      <button type="submit" class="btn-public" :disabled="!formData.privacidad">Enviar</button>
+      <button type="submit" class="btn-public w-100" :disabled="!formData.privacidad">Enviar</button>
     </form>
   </template>
   

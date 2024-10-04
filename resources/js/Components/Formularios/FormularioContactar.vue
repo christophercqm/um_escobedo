@@ -65,7 +65,7 @@
         </div>
         <button
             type="submit"
-            class="btn-public"
+            class="btn-public w-100"
             :disabled="!formData.privacidad"
         >
             Enviar

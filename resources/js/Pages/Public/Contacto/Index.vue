@@ -48,21 +48,16 @@ import FormularioPatrocinadores from '@/Components/Formularios/FormularioPatroci
 // Estado del formulario seleccionado
 const selectedForm = ref('contactar');
 
-// Manejo del evento de envío de formulario
 const handleSubmitForm = (formData) => {
-  // Aquí puedes manejar el envío de los formularios según el tipo
-  if (formData.tipo === 'contactar') {
-    // Lógica para enviar formulario de contacto
-    Inertia.post(route('contacto.enviar'), formData);
-  } else if (formData.tipo === 'acreditacion') {
-    // Lógica para enviar formulario de acreditación
-    Inertia.post(route('formulario.acreditacion'), formData);
+  // Envío de datos utilizando Inertia
+  if (formData.tipo === 'acreditacion') {
+    Inertia.post(route('formulario.acreditacion'), formData.data);
+  } else if (formData.tipo === 'contactar') {
+    Inertia.post(route('contacto.enviar'), formData.data);
   } else if (formData.tipo === 'patrocinadores') {
-    // Lógica para enviar formulario de patrocinadores
-    Inertia.post(route('contacto.enviar'), formData);
+    Inertia.post(route('contacto.enviar'), formData.data);
   }
 };
-
 </script>
 
 <style scoped>

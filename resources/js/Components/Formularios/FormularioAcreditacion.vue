@@ -4,85 +4,98 @@
       <label class="form-label label-acreditacion-title">Seleccione el tipo de acreditación:</label>
       <div class="container-radio-buttons d-flex gap-3">
         <div class="form-check">
-          <input
-            type="radio"
-            class="form-check-input p-0"
-            id="arbitro"
-            value="arbitro"
-            v-model="acreditacionData.tipo"
-          />
+          <input type="radio" class="form-check-input p-0" id="arbitro" value="arbitro" v-model="acreditacionData.tipo_acreditacion" required />
           <label class="form-check-label name-label" for="arbitro">Árbitro</label>
         </div>
         <div class="form-check">
-          <input
-            type="radio"
-            class="form-check-input p-0"
-            id="prensa"
-            value="prensa"
-            v-model="acreditacionData.tipo"
-          />
+          <input type="radio" class="form-check-input p-0" id="prensa" value="prensa" v-model="acreditacionData.tipo_acreditacion" required />
           <label class="form-check-label name-label" for="prensa">Prensa</label>
         </div>
         <div class="form-check">
-          <input
-            type="radio"
-            class="form-check-input p-0"
-            id="cuerpo-tecnico"
-            value="cuerpo_tecnico"
-            v-model="acreditacionData.tipo"
-          />
+          <input type="radio" class="form-check-input p-0" id="cuerpo-tecnico" value="cuerpo_tecnico" v-model="acreditacionData.tipo_acreditacion" required />
           <label class="form-check-label name-label" for="cuerpo-tecnico">Cuerpo Técnico</label>
         </div>
         <div class="form-check">
-          <input
-            type="radio"
-            class="form-check-input p-0"
-            id="cuerpo-directivo"
-            value="cuerpo_directivo"
-            v-model="acreditacionData.tipo"
-          />
+          <input type="radio" class="form-check-input p-0" id="cuerpo-directivo" value="cuerpo_directivo" v-model="acreditacionData.tipo_acreditacion" required />
           <label class="form-check-label name-label" for="cuerpo-directivo">Cuerpo Directivo</label>
         </div>
       </div>
     </div>
 
-    <!-- Mostrar campos específicos según el tipo de acreditación -->
-    <div v-if="acreditacionData.tipo === 'arbitro'" class="mb-3">
-      <input type="text" class="form-control" placeholder="Nombre del Árbitro" v-model="acreditacionData.nombre" required />
+    <div v-if="isCuerpoTecnicoODirectivo">
+      <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Nombre" v-model="acreditacionData.nombre" required />
+      </div>
+      <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Apellido" v-model="acreditacionData.apellido" required />
+      </div>
+      <div class="mb-3">
+        <input type="text" class="form-control" placeholder="DNI" v-model="acreditacionData.dni" required />
+      </div>
+      <div class="mb-3">
+        <input type="email" class="form-control" placeholder="Correo Electrónico" v-model="acreditacionData.correo" required />
+      </div>
+      <div class="mb-3">
+        <input type="tel" class="form-control" placeholder="Teléfono" v-model="acreditacionData.telefono" required />
+      </div>
+      <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Equipo que pertenece" v-model="acreditacionData.equipo_pertenece" required />
+      </div>
+      <div class="mb-3">
+        <textarea class="form-control" placeholder="Asunto" v-model="acreditacionData.asunto" required></textarea>
+      </div>
     </div>
 
-    <div v-if="acreditacionData.tipo === 'prensa'" class="mb-3">
-      <input type="text" class="form-control" placeholder="Nombre del Periodista" v-model="acreditacionData.nombre" required />
+    <div class="mb-3">
+      <input type="file" class="form-control" @change="handleFileUpload" />
     </div>
 
-    <div v-if="acreditacionData.tipo === 'cuerpo_tecnico'" class="mb-3">
-      <input type="text" class="form-control" placeholder="Nombre del Miembro del Cuerpo Técnico" v-model="acreditacionData.nombre" required />
-    </div>
-
-    <div v-if="acreditacionData.tipo === 'cuerpo_directivo'" class="mb-3">
-      <input type="text" class="form-control" placeholder="Nombre del Miembro del Cuerpo Directivo" v-model="acreditacionData.nombre" required />
-    </div>
-
-    <button type="submit" class="btn-public">Enviar</button>
+    <button type="submit" class="btn-public w-100">Enviar</button>
   </form>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
-// Datos del formulario, inicializando el tipo en 'arbitro'
+// Datos del formulario
 const acreditacionData = ref({
-  tipo: 'arbitro', // Este es el valor por defecto
-  nombre: ''
+  tipo_acreditacion: '',
+  nombre: '',
+  apellido: '',
+  dni: '',
+  correo: '',
+  telefono: '',
+  asunto: '',
+  archivo: null,
+  equipo_pertenece: ''
 });
 
-// Definir la función emit para enviar eventos a componentes padres
-const emit = defineEmits(['submit-acreditacion']);
+// Computed property para verificar el tipo de acreditación
+const isCuerpoTecnicoODirectivo = computed(() => {
+  return acreditacionData.value.tipo_acreditacion === 'cuerpo_tecnico' || acreditacionData.value.tipo_acreditacion === 'cuerpo_directivo';
+});
+
+// Manejar la carga de archivos
+const handleFileUpload = (event) => {
+  acreditacionData.value.archivo = event.target.files[0];
+};
+
+// Emitir evento para enviar los datos al componente padre
+const emit = defineEmits(['submit-form']);
 
 const submitAcreditacion = () => {
-  emit('submit-acreditacion', acreditacionData.value);
+  console.log("Formulario enviado");
+  
+  const formData = new FormData();
+  for (const key in acreditacionData.value) {
+    formData.append(key, acreditacionData.value[key]);
+  }
+
+  // Emitir el evento con el tipo de formulario
+  emit('submit-form', { tipo: 'acreditacion', data: formData });
 };
 </script>
+
 
 <style setup>
 .privacidad {
@@ -102,12 +115,12 @@ const submitAcreditacion = () => {
 }
 
 .label-acreditacion-title {
-  color: var(--black);
-  font-weight: 500;
+    color: var(--black);
+    font-weight: 500;
 }
 
 .container-radio-buttons .name-label {
-  font-size: 14px;
-  color: var(--black);
+    font-size: 14px;
+    color: var(--black);
 }
 </style>
