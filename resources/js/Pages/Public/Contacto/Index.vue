@@ -1,342 +1,29 @@
 <template>
     <GuestLayout>
-        <div class="prensa-show padding-container">
+        <div class="contacto-index padding-container">
             <div class="container max-width">
-                <div
-                    class="row row-detail-notice d-flex justify-content-md-between"
-                >
+                <div class="row row-detail-notice d-flex justify-content-md-between">
                     <div class="col-12 col-md-5">
                         <div class="contain-info mb-5 mb-md-0">
-                            <h2 class="text-uppercase llamanos">Llámanos</h2>
-                            <h2 class="title-contact">Datos de contacto</h2>
-                            <p class="mt-3 mb-5 desc-contact">
-                                Para información comercial, contacto con el
-                                equipo de prensa o colaboraciones, a
-                                continuación se muestran nuestros datos de
-                                contacto.
-                            </p>
-
-                            <div class="data-contact">
-                                <!-- EMAIL -->
-                                <div class="email d-flex gap-3">
-                                    <span>
-                                        <i
-                                            class="bi bi-envelope-at-fill icon"
-                                        ></i>
-                                    </span>
-                                    <div class="email-info">
-                                        <h3 class="m-0 label-name">
-                                            Correo electrónico
-                                        </h3>
-                                        <a
-                                            href="mailto:comunicacion@umescobedo.com"
-                                            class="info"
-                                        >
-                                            comunicacion@umescobedo.com
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <!-- TELEFONO -->
-                                <div class="tel d-flex gap-3">
-                                    <span>
-                                        <i
-                                            class="bi bi-telephone-fill icon"
-                                        ></i>
-                                    </span>
-                                    <div class="tel-info">
-                                        <h3 class="m-0 label-name">
-                                            Teléfonos
-                                        </h3>
-                                        <span class="info">
-                                            <a
-                                                href="tel:+52645946150"
-                                                class="info"
-                                            >
-                                                645 946 150
-                                            </a>
-                                            -
-                                            <a
-                                                href="tel:+52664448096"
-                                                class="info"
-                                            >
-                                                664 448 096
-                                            </a>
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <!-- UBICACIÓN -->
-                                <div class="ubicacion d-flex gap-3">
-                                    <span>
-                                        <i class="bi bi-geo-alt-fill icon"></i>
-                                    </span>
-                                    <div class="ubicacion-info">
-                                        <h3 class="m-0 label-name">
-                                            Ubicación
-                                        </h3>
-                                        <a
-                                            href="https://maps.app.goo.gl/o1wGkmfNrhaYWMzM6"
-                                            target="_blank"
-                                            class="info"
-                                        >
-                                            Barranco arenas, s/n, 39609 Camargo
-                                            (Cantabria), España
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                            <!-- Información de contacto -->
+                            <InfoContacto />
                         </div>
                     </div>
 
                     <div class="col-md-5">
                         <!-- Botones para seleccionar el formulario -->
-                        <div class="button-group">
-                            <button
-                                :class="[
-                                    'btn-contactar',
-                                    { active: selectedForm === 'contactar' },
-                                ]"
-                                @click="selectedForm = 'contactar'"
-                            >
-                                Contactar
-                            </button>
-
-                            <button
-                                :class="[
-                                    'btn-contactar',
-                                    { active: selectedForm === 'acreditacion' },
-                                ]"
-                                @click="selectedForm = 'acreditacion'"
-                            >
-                                Acreditación
-                            </button>
-
-                            <button
-                                :class="[
-                                    'btn-contactar',
-                                    {
-                                        active:
-                                            selectedForm === 'patrocinadores',
-                                    },
-                                ]"
-                                @click="selectedForm = 'patrocinadores'"
-                            >
-                                Patrocinadores
-                            </button>
+                        <div class="button-group mb-3">
+                            <button :class="['btn-contactar', { active: selectedForm === 'contactar' }]" @click="selectedForm = 'contactar'">Contactar</button>
+                            <button :class="['btn-contactar', { active: selectedForm === 'acreditacion' }]" @click="selectedForm = 'acreditacion'">Acreditación</button>
+                            <button :class="['btn-contactar', { active: selectedForm === 'patrocinadores' }]" @click="selectedForm = 'patrocinadores'">Patrocinadores</button>
                         </div>
+                      
 
-                        <!-- Formulario dinámico basado en el botón seleccionado -->
-                        <div class="form-container">
-                            <form
-                                v-if="selectedForm === 'contactar'"
-                                class="d-flex flex-column"
-                                @submit.prevent="submitContactar"
-                            >
-                                <input
-                                    type="hidden"
-                                    name="tipo"
-                                    value="contactar"
-                                />
-                                <div class="mb-3">
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        v-model="contactarData.nombre"
-                                        required
-                                        placeholder="Nombre"
-                                        name="nombre"
-                                    />
-                                </div>
+                         <!-- Mostrar el formulario según la selección -->
+                        <FormularioContactar v-if="selectedForm === 'contactar'" @submit-form="handleSubmitForm" />
+                        <FormularioAcreditacion v-if="selectedForm === 'acreditacion'" @submit-form="handleSubmitForm" />
+                        <FormularioPatrocinadores v-if="selectedForm === 'patrocinadores'" @submit-form="handleSubmitForm" />
 
-                                <div class="mb-3">
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        v-model="contactarData.apellidos"
-                                        placeholder="Apellidos"
-                                        name="apellidos"
-                                    />
-                                </div>
-
-                                <div class="mb-3">
-                                    <input
-                                        type="email"
-                                        class="form-control"
-                                        v-model="contactarData.email"
-                                        required
-                                        placeholder="Correo Electrónico"
-                                        name="email"
-                                    />
-                                </div>
-
-                                <div class="mb-3">
-                                    <input
-                                        type="tel"
-                                        class="form-control"
-                                        v-model="contactarData.telefono"
-                                        placeholder="Teléfono"
-                                        name="telefono"
-                                    />
-                                </div>
-
-                                <div class="mb-3">
-                                    <textarea
-                                        class="form-control"
-                                        v-model="contactarData.mensaje"
-                                        required
-                                        placeholder="Escribe tu mensaje"
-                                        rows="3"
-                                        name="mensaje"
-                                    ></textarea>
-                                </div>
-
-                                <div class="form-check mb-3 contain-privacidad">
-                                    <input
-                                        type="checkbox"
-                                        class="form-check-input"
-                                        id="privacidad"
-                                        v-model="contactarData.privacidad"
-                                        required
-                                        name="privacidad"
-                                    />
-                                    <label
-                                        class="form-check-label privacidad"
-                                        for="privacidad"
-                                    >
-                                        He leído y acepto la
-                                        <a href="#">Política de Privacidad</a> y
-                                        del
-                                        <a href="#"
-                                            >Tratamiento de Formularios</a
-                                        >
-                                    </label>
-                                </div>
-
-                                <button
-                                    type="submit"
-                                    class="btn-public"
-                                    :disabled="!contactarData.privacidad"
-                                >
-                                    Enviar
-                                </button>
-                            </form>
-
-                            <!-- Formulario Acreditación -->
-                            <form
-                                v-if="selectedForm === 'acreditacion'"
-                                @submit.prevent="submitAcreditacion"
-                            >
-                                <!-- Campo oculto para el tipo de formulario (acreditacion) -->
-                                <input
-                                    type="hidden"
-                                    name="tipo"
-                                    value="acreditacion"
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="Campo Acreditación"
-                                    v-model="acreditacionData.campo"
-                                    required
-                                />
-                                <button type="submit">Enviar</button>
-                            </form>
-
-                            <!-- Formulario Patrocinadores -->
-                            <form
-                                v-if="selectedForm === 'patrocinadores'"
-                                class="d-flex flex-column"
-                                @submit.prevent="submitPatrocinadores"
-                            >
-                                <!-- Campo oculto para el tipo de formulario (patrocinadores) -->
-                                <input
-                                    type="hidden"
-                                    name="tipo"
-                                    value="patrocinadores"
-                                />
-
-                                <div class="mb-3">
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        v-model="patrocinadoresData.empresa"
-                                        required
-                                        placeholder="Empresa"
-                                    />
-                                </div>
-
-                                <div class="mb-3">
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        v-model="
-                                            patrocinadoresData.nombreRepresentante
-                                        "
-                                        required
-                                        placeholder="Nombre del Representante"
-                                    />
-                                </div>
-
-                                <div class="mb-3">
-                                    <input
-                                        type="email"
-                                        class="form-control"
-                                        v-model="patrocinadoresData.email"
-                                        required
-                                        placeholder="Correo Electrónico"
-                                    />
-                                </div>
-
-                                <div class="mb-3">
-                                    <input
-                                        type="tel"
-                                        class="form-control"
-                                        v-model="patrocinadoresData.telefono"
-                                        required
-                                        placeholder="Teléfono"
-                                    />
-                                </div>
-
-                                <div class="mb-3">
-                                    <textarea
-                                        class="form-control"
-                                        v-model="patrocinadoresData.asunto"
-                                        required
-                                        placeholder="Escribe tu mensaje"
-                                        rows="3"
-                                    ></textarea>
-                                </div>
-
-                                <div class="form-check mb-3 contain-privacidad">
-                                    <input
-                                        type="checkbox"
-                                        class="form-check-input"
-                                        id="privacidadPatrocinadores"
-                                        v-model="patrocinadoresData.privacidad"
-                                        required
-                                    />
-                                    <label
-                                        class="form-check-label privacidad"
-                                        for="privacidadPatrocinadores"
-                                    >
-                                        He leído y acepto la
-                                        <a href="#">Política de Privacidad</a> y
-                                        del
-                                        <a href="#"
-                                            >Tratamiento de Formularios</a
-                                        >
-                                    </label>
-                                </div>
-
-                                <button
-                                    type="submit"
-                                    class="btn-public"
-                                    :disabled="!patrocinadoresData.privacidad"
-                                >
-                                    Enviar
-                                </button>
-                            </form>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -344,110 +31,38 @@
     </GuestLayout>
 </template>
 
+
 <script setup>
-import { ref } from "vue";
-import { Inertia } from "@inertiajs/inertia";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
+import { ref } from 'vue';
+import { Inertia } from '@inertiajs/inertia';
+import GuestLayout from '@/Layouts/GuestLayout.vue';
+
+// Importar información de Contacto
+import InfoContacto from '@/Components/Contacto/InfoContacto.vue';
+
+// Importar los componentes del formulario
+import FormularioContactar from '@/Components/Formularios/FormularioContactar.vue';
+import FormularioAcreditacion from '@/Components/Formularios/FormularioAcreditacion.vue';
+import FormularioPatrocinadores from '@/Components/Formularios/FormularioPatrocinadores.vue';
 
 // Estado del formulario seleccionado
-const selectedForm = ref("contactar");
+const selectedForm = ref('contactar');
 
-// Datos de los formularios
-const contactarData = ref({
-    nombre: "",
-    apellidos: "",
-    email: "",
-    telefono: "",
-    mensaje: "",
-    privacidad: false,
-});
-
-const acreditacionData = ref({ campo: "" });
-
-const patrocinadoresData = ref({
-    empresa: "",
-    nombreRepresentante: "",
-    email: "",
-    telefono: "",
-    asunto: "",
-    privacidad: false,
-});
-
-// Funciones para enviar formularios
-const submitContactar = () => {
-    // Agregar el tipo de formulario
-    const formData = { tipo: "contactar", ...contactarData.value };
-
-    Inertia.post(route("contacto.enviar"), formData, {
-        onSuccess: () => {
-            console.log("Formulario Contactar enviado con éxito");
-            resetContactarForm();
-        },
-        onError: (errors) => {
-            console.error("Error al enviar el formulario Contactar:", errors);
-        },
-    });
+// Manejo del evento de envío de formulario
+const handleSubmitForm = (formData) => {
+  // Aquí puedes manejar el envío de los formularios según el tipo
+  if (formData.tipo === 'contactar') {
+    // Lógica para enviar formulario de contacto
+    Inertia.post(route('contacto.enviar'), formData);
+  } else if (formData.tipo === 'acreditacion') {
+    // Lógica para enviar formulario de acreditación
+    Inertia.post(route('formulario.acreditacion'), formData);
+  } else if (formData.tipo === 'patrocinadores') {
+    // Lógica para enviar formulario de patrocinadores
+    Inertia.post(route('contacto.enviar'), formData);
+  }
 };
 
-const submitAcreditacion = () => {
-    Inertia.post(route("formulario.acreditacion"), acreditacionData.value, {
-        onSuccess: () => {
-            console.log("Formulario Acreditación enviado con éxito");
-            resetAcreditacionForm();
-        },
-        onError: (errors) => {
-            console.error(
-                "Error al enviar el formulario Acreditación:",
-                errors
-            );
-        },
-    });
-};
-
-const submitPatrocinadores = () => {
-    // Agregar el tipo de formulario 'patrocinadores' en el objeto de datos
-    const formData = { tipo: "patrocinadores", ...patrocinadoresData.value };
-
-    Inertia.post(route("contacto.enviar"), formData, {
-        onSuccess: () => {
-            console.log("Formulario Patrocinadores enviado con éxito");
-            resetPatrocinadoresForm();
-        },
-        onError: (errors) => {
-            console.error(
-                "Error al enviar el formulario Patrocinadores:",
-                errors
-            );
-        },
-    });
-};
-
-// Funciones para resetear formularios
-const resetContactarForm = () => {
-    contactarData.value = {
-        nombre: "",
-        apellidos: "",
-        email: "",
-        telefono: "",
-        mensaje: "",
-        privacidad: false,
-    };
-};
-
-const resetAcreditacionForm = () => {
-    acreditacionData.value = { campo: "" };
-};
-
-const resetPatrocinadoresForm = () => {
-    patrocinadoresData.value = {
-        empresa: "",
-        nombreRepresentante: "",
-        email: "",
-        telefono: "",
-        asunto: "",
-        privacidad: false,
-    };
-};
 </script>
 
 <style scoped>
@@ -459,86 +74,11 @@ const resetPatrocinadoresForm = () => {
     border-radius: var(--border);
 }
 
-.button-group button.active {
-    background-color: var(--red);
-    color: white;
-}
-
-.form-container {
-    margin-top: 20px;
-}
-
-input {
-    display: block;
-    margin-bottom: 10px;
-    padding: 5px;
-}
-
-.icon {
-    color: var(--red);
-    font-size: 25px;
-    line-height: normal;
-}
-
-.label-name {
-    line-height: 1;
-}
-
-.data-contact {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.llamanos {
-    font-size: 1.5rem;
-    font-weight: 600;
-}
-
-.title-contact {
-    font-size: 2.5rem;
-    font-weight: 600;
-}
-
-.desc-contact {
-    font-size: 0.9rem;
-}
-
-form label {
-    color: var(--black);
-}
-
-form input:not([type="checkbox"]) {
-    padding: 14px;
-}
-
-input::placeholder,
-textarea::placeholder {
-    color: rgba(0, 0, 0, 0.5);
-    opacity: 1;
-    font-size: 15px;
-}
-
 .btn-contactar {
     margin-left: 0 !important;
     border: 1px solid var(--red) !important;
     color: var(--red);
 }
 
-.privacidad {
-    color: var(--grayv2) !important;
-    text-decoration: none !important;
-}
 
-.privacidad a {
-    color: #0d6efd !important;
-    text-decoration: none !important;
-}
-
-.contain-privacidad {
-    display: flex;
-    align-items: start;
-    gap: 1rem;
-    font-size: 14px;
-}
 </style>
