@@ -16,6 +16,8 @@ use App\Http\Controllers\FormularioContactarController;
 use App\Http\Controllers\FormularioPatrocinadorController;
 use App\Http\Controllers\FormularioAcreditacionController;
 
+// Partidos 
+use App\Http\Controllers\EquipoController;
 
 use App\Models\Jugadores;
 
@@ -91,6 +93,18 @@ Route::middleware('auth')->group(function () {
     Route::put('/cuerpo-tecnico/admin/{id}', [CuerpoTecnicoController::class, 'update'])->name('cuerpo-tecnico.update');
     Route::delete('/cuerpo-tecnico/admin/{id}', [CuerpoTecnicoController::class, 'destroy'])->name('cuerpo-tecnico.destroy');
     Route::get('/cuerpo-tecnico/admin/{id}', [CuerpoTecnicoController::class, 'show'])->name('cuerpo-tecnico.show');
+
+
+    // Rutas para gestionar equipos
+    Route::get('/equipos/admin', [EquipoController::class, 'index'])->name('equipos.index'); // Listar equipos
+    Route::get('/equipos/admin/create', [EquipoController::class, 'create'])->name('equipos.create'); // Mostrar formulario para crear un equipo
+    Route::post('/equipos/admin', [EquipoController::class, 'store'])->name('equipos.store'); // Guardar un nuevo equipo
+    Route::get('/equipos/admin/{id}/edit', [EquipoController::class, 'edit'])->name('equipos.edit'); // Mostrar formulario para editar un equipo
+    Route::post('/equipos/admin/{id}', [EquipoController::class, 'update'])->name('equipos.update'); // Actualizar un equipo
+    Route::delete('/equipos/admin/{id}', [EquipoController::class, 'destroy'])->name('equipos.destroy'); // Eliminar un equipo
+    Route::get('/equipos/admin/{id}', [EquipoController::class, 'show'])->name('equipos.show'); // Mostrar detalles de un equipo
+
+
 
 
 });

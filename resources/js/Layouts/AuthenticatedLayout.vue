@@ -57,6 +57,12 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Cuerpo Técnico
                                 </NavLink>
+                                <NavLink
+                                    :href="route('equipos.index')"
+                                    :active="route().current('equipos.index')"
+                                >
+                                    Equipos
+                                </NavLink>
                             </div>
                         </div>
 
