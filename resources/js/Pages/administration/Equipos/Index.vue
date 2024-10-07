@@ -144,7 +144,9 @@ const eliminarEquipo = (id) => {
 }
 
 .img-equipo {
-    object-fit: contain;
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
 }
 
 

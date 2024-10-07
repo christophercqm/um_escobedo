@@ -179,6 +179,6 @@ function submit() {
 }
 
 .img-prev {
-    width: 200px;
+    width: 50px;
 }
 </style>
