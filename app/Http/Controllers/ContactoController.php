@@ -23,95 +23,11 @@ class ContactoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) // Lógica para almacenar los datos del formulario de contacto y patrocinadores
-    {
-        // Validar el tipo de formulario
-        $data = $request->validate([
-            'tipo' => 'required|in:contactar,acreditacion,patrocinadores',
-            'nombre' => 'required_if:tipo,contactar|string|max:255',
-            'apellidos' => 'nullable|string|max:255',
-            'email' => 'required|email',
-            'telefono' => 'nullable|string|max:15',
-            'mensaje' => 'nullable|string',
-            'empresa' => 'required_if:tipo,patrocinadores|string|max:255',
-            'nombreRepresentante' => 'required_if:tipo,patrocinadores|string|max:255',
-            'asunto' => 'required_if:tipo,patrocinadores|string|max:255',
-            'privacidad' => 'accepted', // Verificar que la casilla de privacidad fue marcada
-        ]);
+    public function store(Request $request)
+    {}
 
-        // Crear una nueva entrada en la base de datos
-        $contacto = new Contacto();
-        $contacto->tipo = $data['tipo'];
-        // Usar el nombre del representante si el formulario es de patrocinadores
-        $contacto->nombre = $data['tipo'] === 'patrocinadores' ? $data['nombreRepresentante'] : $data['nombre'];
-        $contacto->apellidos = $data['apellidos'] ?? null;
-        $contacto->email = $data['email'];
-        $contacto->telefono = $data['telefono'] ?? null;
-        // Usar el mensaje para el formulario de patrocinadores
-        $contacto->mensaje = $data['tipo'] === 'patrocinadores' ? $data['asunto'] : $data['mensaje'];
-        $contacto->privacidad_aceptada = $data['privacidad'] ? 1 : 0;
-        $contacto->save();
 
-        // Determinar el asunto según el tipo de formulario
-        $asunto = match ($data['tipo']) {
-            'contactar' => "{$data['nombre']} {$data['apellidos']} - Correo General de Contacto",
-            'patrocinadores' => "{$data['empresa']} - Correo Patrocinadores",
-            'acreditacion' => "Correo Acreditación",
-            default => 'Correo General de Contacto'
-        };
 
-        // Enviar el correo
-        try {
-            Log::info('Enviando correo con los datos: ', $data); // Log para depurar
-            Mail::to('recipient@example.com')
-                ->send(new FormularioContactoMailable($data, $asunto));
-        } catch (\Exception $e) {
-            Log::error('Error al enviar el correo: ' . $e->getMessage()); // Log de error
-            return back()->withErrors(['error' => 'No se pudo enviar el mensaje, por favor intente más tarde.']);
-        }
-
-        // Enviar respuesta de éxito al cliente (Vue.js)
-        return back()->with('success', 'Mensaje enviado correctamente');
-    }
-
-    public function storeAcreditacion(Request $request)
-    {
-        // Validación de los datos del formulario de acreditación
-        $request->validate([
-            'nombre' => 'required|string|max:255',
-            'apellido' => 'required|string|max:255',
-            'dni' => 'required|string|max:20',
-            'correo' => 'nullable|string|email|max:255',
-            'telefono' => 'nullable|string|max:20',
-            'asunto' => 'required|string',
-            'equipo_pertenece' => 'required|string|max:255',
-            'tipo_acreditacion' => 'required|string|max:50',
-            'archivo' => 'nullable|file|mimes:pdf|max:2048', // Archivo PDF
-        ]);
-
-        // Lógica para almacenar los datos de acreditación
-        $acreditacion = new Acreditacion(); 
-        $acreditacion->nombre = $request->nombre;
-        $acreditacion->apellido = $request->apellido;
-        $acreditacion->dni = $request->dni;
-        $acreditacion->correo = $request->correo; // Este campo es opcional
-        $acreditacion->telefono = $request->telefono; // Este campo es opcional
-        $acreditacion->asunto = $request->asunto;
-        $acreditacion->equipo_pertenece = $request->equipo_pertenece;
-        $acreditacion->tipo_acreditacion = $request->tipo_acreditacion;
-
-        // Manejo del archivo
-        if ($request->hasFile('archivo')) {
-            $filePath = $request->file('archivo')->store('acreditaciones', 'public'); // Guardar el archivo en storage/app/public/acreditaciones
-            $acreditacion->archivo = $filePath; // Almacena la ruta en el modelo
-        }
-
-        // Guarda el modelo en la base de datos
-        $acreditacion->save();
-
-        // Redireccionar a la misma página con un mensaje de éxito
-        return redirect()->route('contacto')->with('success', 'Formulario de acreditación enviado exitosamente.');
-    }
 
 
 

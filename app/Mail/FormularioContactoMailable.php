@@ -13,17 +13,17 @@ class FormularioContactoMailable extends Mailable
 
     public $data;
     public $asunto;
-    
+
     /**
      * Create a new message instance.
      *
-     * @param $usuario
-     * @param $message
+     * @param array $data  Los datos del formulario
+     * @param string $asunto  El asunto del correo
      */
     public function __construct($data, $asunto)
     {
         $this->data = $data;
-        $this->asunto  = $asunto;
+        $this->asunto = $asunto;
     }
 
     /**
@@ -33,9 +33,8 @@ class FormularioContactoMailable extends Mailable
      */
     public function build()
     {
-        return $this->from(config('mail.from.address'), config('mail.from.name'))
-        ->markdown('emails.contacto')
-            ->subject($this->asunto)
+        return $this->subject($this->asunto)
+            ->markdown('emails.formularioContactar')
             ->with('data', $this->data);
     }
 }

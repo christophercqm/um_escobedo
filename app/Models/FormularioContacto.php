@@ -9,21 +9,16 @@ class FormularioContacto extends Model
 {
     use HasFactory;
 
-    // Campos que se pueden asignar masivamente
+    protected $table = 'formulario_contactar'; 
+
     protected $fillable = [
+        'tipo',
         'nombre',
         'apellidos',
         'email',
         'telefono',
         'mensaje',
         'privacidad_aceptada',
-        'tipo',
     ];
 
-    // Opcional: Definir los casts si es necesario
-    protected $casts = [
-        'privacidad_aceptada' => 'boolean',
-    ];
-
-    // Opcional: Métodos adicionales (ej. relaciones, scopes, etc.)
 }

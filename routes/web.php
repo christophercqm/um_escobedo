@@ -10,6 +10,9 @@ use App\Http\Controllers\PrensaController;
 use App\Http\Controllers\JugadoresController;
 use App\Http\Controllers\CuerpoTecnicoController;
 use App\Http\Controllers\ContactoController;
+
+//Formularios
+use App\Http\Controllers\FormularioContactarController;
 use App\Http\Controllers\FormularioAcreditacionController;
 
 
@@ -36,6 +39,9 @@ Route::get('/prensa-public/{id}', [PrensaController::class, 'showPublic'])->name
 
 Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto');
 Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.enviar');
+
+// Rutas para el formulario de contactar
+Route::post('/contactar', [FormularioContactarController::class, 'store'])->name('contactar.store');
 
 // Rutas para el formulario de acreditación
 Route::post('/acreditacion', [FormularioAcreditacionController::class, 'storeAcreditacion'])->name('formulario.acreditacion');
