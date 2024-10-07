@@ -10,6 +10,8 @@ use App\Http\Controllers\PrensaController;
 use App\Http\Controllers\JugadoresController;
 use App\Http\Controllers\CuerpoTecnicoController;
 use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\PartidoController;
+
 
 //Formularios
 use App\Http\Controllers\FormularioContactarController;
@@ -103,6 +105,17 @@ Route::middleware('auth')->group(function () {
     Route::post('/equipos/admin/{id}', [EquipoController::class, 'update'])->name('equipos.update'); // Actualizar un equipo
     Route::delete('/equipos/admin/{id}', [EquipoController::class, 'destroy'])->name('equipos.destroy'); // Eliminar un equipo
     Route::get('/equipos/admin/{id}', [EquipoController::class, 'show'])->name('equipos.show'); // Mostrar detalles de un equipo
+
+
+    // Rutas para gestionar partidos
+    Route::get('/partidos/admin', [PartidoController::class, 'index'])->name('partidos.index');
+    Route::get('/partidos/admin/create', [PartidoController::class, 'create'])->name('partidos.create');
+    Route::post('/partidos/admin', [PartidoController::class, 'store'])->name('partidos.store');
+    Route::get('/partidos/admin/{id}/edit', [PartidoController::class, 'edit'])->name('partidos.edit');
+    Route::put('/partidos/admin/{id}', [PartidoController::class, 'update'])->name('partidos.update');
+    Route::delete('/partidos/admin/{id}', [PartidoController::class, 'destroy'])->name('partidos.destroy');
+    Route::get('/partidos/admin/{id}', [PartidoController::class, 'show'])->name('partidos.show');
+
 
 
 

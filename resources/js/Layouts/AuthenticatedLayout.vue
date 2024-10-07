@@ -63,6 +63,12 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Equipos
                                 </NavLink>
+                                <NavLink
+                                    :href="route('partidos.index')"
+                                    :active="route().current('partidos.index')"
+                                >
+                                    Partidos
+                                </NavLink>
                             </div>
                         </div>
 
