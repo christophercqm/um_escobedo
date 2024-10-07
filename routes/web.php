@@ -13,6 +13,7 @@ use App\Http\Controllers\ContactoController;
 
 //Formularios
 use App\Http\Controllers\FormularioContactarController;
+use App\Http\Controllers\FormularioPatrocinadorController;
 use App\Http\Controllers\FormularioAcreditacionController;
 
 
@@ -40,11 +41,14 @@ Route::get('/prensa-public/{id}', [PrensaController::class, 'showPublic'])->name
 Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto');
 Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.enviar');
 
-// Rutas para el formulario de contactar
+// Formularios 
 Route::post('/contactar', [FormularioContactarController::class, 'store'])->name('contactar.store');
 
 // Rutas para el formulario de acreditación
 Route::post('/acreditacion', [FormularioAcreditacionController::class, 'storeAcreditacion'])->name('formulario.acreditacion');
+
+// Rutas para el formulario de patrocinadores
+Route::post('/patrocinadores', [FormularioPatrocinadorController::class, 'store'])->name('patrocinadores.store');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

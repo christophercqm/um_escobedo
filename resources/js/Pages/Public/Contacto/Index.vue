@@ -69,7 +69,7 @@ const handleSubmitForm = (formData) => {
     } else if (formData.tipo === 'acreditacion') {
         Inertia.post(route('formulario.acreditacion'), formData);
     } else if (formData.tipo === 'patrocinadores') {
-        Inertia.post(route('contacto.enviar'), formData); // O la ruta que corresponda para patrocinadores
+        Inertia.post(route('patrocinadores.store'), formData);
     }
 };
 </script>
