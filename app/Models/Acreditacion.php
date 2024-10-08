@@ -20,7 +20,13 @@ class Acreditacion extends Model
         'telefono',
         'asunto',
         'archivo',
-        'equipo_pertenece',
+        'proximo_encuentro',
         'tipo_acreditacion',
+        'partido_id' // Se relaciona con el id de la tabla del partido
     ];
+
+    public function partido()
+    {
+        return $this->belongsTo(Partido::class);
+    }
 }

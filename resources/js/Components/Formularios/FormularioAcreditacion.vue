@@ -42,41 +42,35 @@
       </div>
 
       <!-- Dropdown para elegir equipo -->
-<!-- Dropdown para elegir equipo -->
-    <div v-if="isCuerpoTecnicoODirectivo" class="mb-3">
-      <InputLabel for="equipo_pertenece" value="Seleccione un equipo *" />
-      <div class="dropdown">
-        <button
-          class="btn-public w-100 dropdown-toggle d-flex align-items-center"
-          type="button"
-          id="dropdownEquipo"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <img v-if="selectedEquipo.logo_local" :src="`/storage/${selectedEquipo.logo_local}`" alt="Logo Local" class="w-5 h-5 me-2" />
-          <span>{{ selectedEquipo.nombre ? selectedEquipo.nombre : 'Selecciona un equipo' }}</span>
-        </button>
-        <ul class="dropdown-menu w-100" aria-labelledby="dropdownEquipo" style="max-height: 300px; overflow-y: auto; border: 1px solid #ee1d36;">
-          <li v-for="partido in partidos" :key="partido.id">
-            <a
-              class="dropdown-item d-flex align-items-center justify-content-around"
-              href="#"
-              @click.prevent="selectEquipo(partido)"
-            >
-              <img :src="`/storage/${partido.equipo_local.logo}`" alt="Logo Local" class="w-5 h-5 me-2" />
-              {{ partido.equipo_local.nombre }} 
-              <span class="mx-3 partido-fecha">{{ formatFecha(partido.fecha_hora) }}</span>
-              {{ partido.equipo_visitante.nombre }}
-              <img :src="`/storage/${partido.equipo_visitante.logo}`" alt="Logo Visitante" class="w-5 h-5 ms-2" />
-            </a>
-          </li>
-        </ul>
+      <div v-if="isCuerpoTecnicoODirectivo" class="mb-3">
+        <div class="dropdown">
+          <button
+            class="btn-public w-100 dropdown-toggle d-flex align-items-center"
+            type="button"
+            id="dropdownEquipo"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img v-if="selectedEquipo.logo_local" :src="`/storage/${selectedEquipo.logo_local}`" alt="Logo Local" class="w-5 h-5 me-2" />
+            <span>{{ selectedEquipo.nombre ? selectedEquipo.nombre : 'Selecciona un equipo' }}</span>
+          </button>
+          <ul class="dropdown-menu w-100" aria-labelledby="dropdownEquipo" style="max-height: 300px; overflow-y: auto; border: 1px solid #ee1d36;">
+            <li v-for="partido in partidos" :key="partido.id">
+              <a
+                class="dropdown-item d-flex align-items-center justify-content-around"
+                href="#"
+                @click.prevent="selectEquipo(partido)"
+              >
+                <img :src="`/storage/${partido.equipo_local.logo}`" alt="Logo Local" class="w-5 h-5 me-2" />
+                {{ partido.equipo_local.nombre }} 
+                <span class="mx-3 partido-fecha">{{ formatFecha(partido.fecha_hora) }}</span>
+                {{ partido.equipo_visitante.nombre }}
+                <img :src="`/storage/${partido.equipo_visitante.logo}`" alt="Logo Visitante" class="w-5 h-5 ms-2" />
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-
-
-
-
 
       <div class="mb-3">
         <textarea class="form-control" placeholder="Asunto" v-model="acreditacionData.asunto" required rows="3"></textarea>
@@ -110,7 +104,8 @@ const acreditacionData = ref({
   telefono: '',
   asunto: '',
   archivo: null,
-  equipo_pertenece: '' // Nuevo campo para el equipo seleccionado
+  proximo_encuentro: '',
+  partido_id: ''
 });
 
 // Computed property para verificar el tipo de acreditación
@@ -128,14 +123,14 @@ const selectEquipo = (partido) => {
     logo_local: partido.equipo_local.logo,
     logo_visitante: partido.equipo_visitante.logo,
   };
-  acreditacionData.value.equipo_pertenece = selectedEquipo.value.nombre; // Guarda el nombre del equipo en el data
+  acreditacionData.value.proximo_encuentro = selectedEquipo.value.nombre; // Guarda el nombre del equipo en el data
+  acreditacionData.value.partido_id = partido.id; // Guarda el id del partido
 };
 
 // Manejar la carga de archivos
 const handleFileUpload = (event) => {
   acreditacionData.value.archivo = event.target.files[0];
 };
-
 
 // Emitir evento para enviar los datos al componente padre
 const emit = defineEmits(['submit-form']);
@@ -145,7 +140,6 @@ const formatFecha = (fechaHora) => {
   const options = { day: '2-digit', month: 'short' };
   return new Date(fechaHora).toLocaleDateString('es-ES', options).toUpperCase(); 
 };
-
 
 const submitAcreditacion = async () => {
   const swal = Swal.fire({
@@ -178,6 +172,7 @@ const submitAcreditacion = async () => {
   }
 };
 </script>
+
 
 <style setup>
 form input,
@@ -239,5 +234,15 @@ form input,
   color: var(--grayv2);
   font-weight: 500;
 }
+
+
+/* Efecto hover para las opciones del dropdown */
+.dropdown-item:hover {
+  background-color: rgba(0, 0, 0, .1); 
+  color: white; 
+}
+
+
+
 
 </style>

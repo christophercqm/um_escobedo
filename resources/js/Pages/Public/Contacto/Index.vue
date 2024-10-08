@@ -79,7 +79,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import InfoContacto from "@/Components/Contacto/InfoContacto.vue";
@@ -89,17 +89,14 @@ import FormularioPatrocinadores from "@/Components/Formularios/FormularioPatroci
 
 // Estado del formulario seleccionado
 const selectedForm = ref("contactar");
-const partidos = ref([]); // Declaración de la lista de partidos
 
 // Propiedades recibidas
 const props = defineProps({
     partidos: Array, 
 });
 
-// Inicializar la lista de partidos a partir de las props
-onMounted(() => {
-    partidos.value = props.partidos; // Asigna los partidos recibidos desde las props
-});
+// Inicializar la lista de partidos desde las props
+const partidos = ref(props.partidos);
 
 // Manejar el envío del formulario
 const handleSubmitForm = (formData) => {

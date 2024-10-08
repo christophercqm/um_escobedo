@@ -20,6 +20,8 @@ class FormularioAcreditacionMailable extends Mailable
      *
      * @param array $data
      * @param string $asunto
+     * @param string|null $archivoPath
+
      */
     public function __construct($data, $asunto, $archivoPath = null)
     {
