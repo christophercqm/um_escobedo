@@ -177,4 +177,8 @@ const eliminarPartido = (id) => {
     height: 30px; /* Ajusta el tamaño del logo según sea necesario */
     margin-right: 8px; /* Espacio entre el logo y el nombre */
 }
+
+tbody {
+    font-size: 15px;
+}
 </style>

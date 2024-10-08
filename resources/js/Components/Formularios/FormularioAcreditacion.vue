@@ -3,6 +3,7 @@
     <div class="mb-3">
       <label class="form-label label-acreditacion-title">Seleccione el tipo de acreditación:</label>
       <div class="container-radio-buttons d-flex gap-3">
+        <!-- Radios para el tipo de acreditación -->
         <div class="form-check">
           <input type="radio" class="form-check-input p-0" id="arbitro" value="arbitro" v-model="acreditacionData.tipo_acreditacion" required />
           <label class="form-check-label name-label" for="arbitro">Árbitro</label>
@@ -22,12 +23,13 @@
       </div>
     </div>
 
+    <!-- Resto del formulario -->
     <div v-if="isCuerpoTecnicoODirectivo">
       <div class="mb-3">
         <input type="text" class="form-control" placeholder="Nombre" v-model="acreditacionData.nombre" required />
       </div>
       <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Apellido" v-model="acreditacionData.apellido" required />
+        <input type="text" class="form-control" placeholder="Apellidos" v-model="acreditacionData.apellido" required />
       </div>
       <div class="mb-3">
         <input type="text" class="form-control" placeholder="DNI" v-model="acreditacionData.dni" required />
@@ -38,11 +40,46 @@
       <div class="mb-3">
         <input type="tel" class="form-control" placeholder="Teléfono" v-model="acreditacionData.telefono" required />
       </div>
-      <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Equipo que pertenece" v-model="acreditacionData.equipo_pertenece" required />
+
+      <!-- Dropdown para elegir equipo -->
+<!-- Dropdown para elegir equipo -->
+    <div v-if="isCuerpoTecnicoODirectivo" class="mb-3">
+      <InputLabel for="equipo_pertenece" value="Seleccione un equipo *" />
+      <div class="dropdown">
+        <button
+          class="btn-public w-100 dropdown-toggle d-flex align-items-center"
+          type="button"
+          id="dropdownEquipo"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img v-if="selectedEquipo.logo_local" :src="`/storage/${selectedEquipo.logo_local}`" alt="Logo Local" class="w-5 h-5 me-2" />
+          <span>{{ selectedEquipo.nombre ? selectedEquipo.nombre : 'Selecciona un equipo' }}</span>
+        </button>
+        <ul class="dropdown-menu w-100" aria-labelledby="dropdownEquipo" style="max-height: 300px; overflow-y: auto; border: 1px solid #ee1d36;">
+          <li v-for="partido in partidos" :key="partido.id">
+            <a
+              class="dropdown-item d-flex align-items-center justify-content-around"
+              href="#"
+              @click.prevent="selectEquipo(partido)"
+            >
+              <img :src="`/storage/${partido.equipo_local.logo}`" alt="Logo Local" class="w-5 h-5 me-2" />
+              {{ partido.equipo_local.nombre }} 
+              <span class="mx-3 partido-fecha">{{ formatFecha(partido.fecha_hora) }}</span>
+              {{ partido.equipo_visitante.nombre }}
+              <img :src="`/storage/${partido.equipo_visitante.logo}`" alt="Logo Visitante" class="w-5 h-5 ms-2" />
+            </a>
+          </li>
+        </ul>
       </div>
+    </div>
+
+
+
+
+
       <div class="mb-3">
-        <textarea class="form-control" placeholder="Asunto" v-model="acreditacionData.asunto" required></textarea>
+        <textarea class="form-control" placeholder="Asunto" v-model="acreditacionData.asunto" required rows="3"></textarea>
       </div>
     </div>
 
@@ -58,6 +95,11 @@
 import { ref, computed } from 'vue';
 import Swal from 'sweetalert2';
 
+// Recibir la prop de partidos del componente padre
+const props = defineProps({
+  partidos: Array,
+});
+
 // Datos del formulario
 const acreditacionData = ref({
   tipo_acreditacion: '',
@@ -68,7 +110,7 @@ const acreditacionData = ref({
   telefono: '',
   asunto: '',
   archivo: null,
-  equipo_pertenece: ''
+  equipo_pertenece: '' // Nuevo campo para el equipo seleccionado
 });
 
 // Computed property para verificar el tipo de acreditación
@@ -76,16 +118,36 @@ const isCuerpoTecnicoODirectivo = computed(() => {
   return acreditacionData.value.tipo_acreditacion === 'cuerpo_tecnico' || acreditacionData.value.tipo_acreditacion === 'cuerpo_directivo';
 });
 
+// Manejar la selección de equipo
+const selectedEquipo = ref({}); // Equipo seleccionado por defecto
+
+// Función para seleccionar un equipo
+const selectEquipo = (partido) => {
+  selectedEquipo.value = {
+    nombre: `${partido.equipo_local.nombre} vs ${partido.equipo_visitante.nombre}`,
+    logo_local: partido.equipo_local.logo,
+    logo_visitante: partido.equipo_visitante.logo,
+  };
+  acreditacionData.value.equipo_pertenece = selectedEquipo.value.nombre; // Guarda el nombre del equipo en el data
+};
+
 // Manejar la carga de archivos
 const handleFileUpload = (event) => {
   acreditacionData.value.archivo = event.target.files[0];
 };
 
+
 // Emitir evento para enviar los datos al componente padre
 const emit = defineEmits(['submit-form']);
 
+// Formatear la fecha para mostrarla adecuadamente
+const formatFecha = (fechaHora) => {
+  const options = { day: '2-digit', month: 'short' };
+  return new Date(fechaHora).toLocaleDateString('es-ES', options).toUpperCase(); 
+};
+
+
 const submitAcreditacion = async () => {
-  // Mostrar el modal de SweetAlert2 con un spinner
   const swal = Swal.fire({
     title: 'Enviando...',
     html: 'Por favor espera.',
@@ -101,23 +163,16 @@ const submitAcreditacion = async () => {
   }
 
   try {
-    // Simulación de una solicitud HTTP (puedes reemplazar esto con tu lógica real)
-    await new Promise((resolve, reject) => {
+    await new Promise((resolve) => {
       setTimeout(() => {
-        resolve(); // Simula una respuesta exitosa
+        resolve();
       }, 2000);
     });
 
-    // Cerrar el modal de SweetAlert2
     swal.close();
-
-    // Mostrar éxito
     Swal.fire('¡Listo!', 'Tu solicitud ha sido enviada.', 'success');
-
-    // Emitir el evento con el tipo de formulario
     emit('submit-form', { tipo: 'acreditacion', data: formData });
   } catch (error) {
-    // Manejar el error y mostrar un mensaje
     swal.close();
     Swal.fire('Error', 'Hubo un problema al enviar tu solicitud.', 'error');
   }
@@ -125,49 +180,64 @@ const submitAcreditacion = async () => {
 </script>
 
 <style setup>
-
 form input,
-.ipt-file
-  {
+.ipt-file {
   font-size: 15px;
 }
 
-/* Aquí van tus estilos previos y los nuevos para el spinner */
-.privacidad {
-    color: var(--grayv2) !important;
-    text-decoration: none !important;
-}
-
-.label-name {
-    line-height: 1;
-}
-
-.contain-privacidad {
-    display: flex;
-    align-items: start;
-    gap: 1rem;
-    font-size: 14px;
-}
-
 .label-acreditacion-title {
-    color: var(--black);
-    font-weight: 500;
+  color: var(--black);
+  font-weight: 500;
 }
 
 .container-radio-buttons .name-label {
-    font-size: 14px;
-    color: var(--black);
+  font-size: 14px;
+  color: var(--black);
 }
 
+/* Estilos para el dropdown */
+.dropdown-menu {
+  z-index: 1000; 
+}
 
+.dropdown-item {
+  cursor: pointer;
+  color: var(--grayv2) !important;
+}
 
+.w-5 {
+  width: 20px;
+  height: 20px; 
+  height: auto; 
+}
 
-/* ESTILOS SWEETALERT - SPINNER */
-.swal2-title,
-.swal2-content,
-.swal2-confirm,
-.swal2-cancel {
-    font-family: var(--roboto) !important;
+/* Estilo del dropdown */
+.dropdown-menu { 
+    overflow-y: auto; 
+}
+
+.dropdown-menu li{
+  font-size: 15px;
+}
+
+/* Estilo del scroll */
+.dropdown-menu::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb {
+    background-color: var(--red); 
+    border-radius: 10px; 
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb:hover {
+    background-color: var(--red);
+} 
+
+.partido-fecha {
+  font-size: 13px;
+  color: var(--grayv2);
+  font-weight: 500;
 }
 
 </style>

@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contacto;
+use App\Models\Partido; // Asegúrate de que el modelo Partido está importado
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\FormularioContactoMailable;
 use Inertia\Inertia;
-use App\Models\Acreditacion;
-use Illuminate\Support\Facades\Log;
 
 class ContactoController extends Controller
 {
@@ -17,23 +13,16 @@ class ContactoController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Public/Contacto/Index');
+        // Obtener todos los partidos de la base de datos
+        $partidos = Partido::with(['equipoLocal', 'equipoVisitante'])->get();
+
+        return inertia('Public/Contacto/Index', [
+            'partidos' => $partidos,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {}
-
-
-
-
-
-
-
-
-    /**
-     * Obtiene las reglas de validación según el tipo de formulario.
-     */
+    public function store(Request $request) {}
 }
