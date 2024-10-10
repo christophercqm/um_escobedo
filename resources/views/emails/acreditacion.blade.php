@@ -3,10 +3,10 @@
     <img src="https://pbs.twimg.com/profile_images/1611500112068345858/K2Dkrfy5_400x400.jpg" alt="U.M. Escobedo" style="width: 150px; border-radius: 50%;">
 </div>
 
-<h1 style="text-align: center; color: #333;">Correo Recibido de Prueba</h1>
+<h1 style="text-align: center; color: #333;">Nueva Solicitud de Acreditación</h1>
 
 <p style="text-align: center; font-size: 16px; color: #555;">
-    Este es un mensaje de prueba para confirmar la recepción del correo.
+    Ha recibido una nueva solicitud de acreditación. Haga clic en el botón a continuación para revisarla.
 </p>
 
 <table class="data-table" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
@@ -49,7 +49,6 @@
             <td style="border: 1px solid #ddd; padding: 10px;">Fecha y Hora del Partido</td>
             <td style="border: 1px solid #ddd; padding: 10px;">{{ $data['fecha_hora'] ?? 'N/A' }}</td>
         </tr>
-        
     </tbody>
 </table>
 
@@ -61,9 +60,12 @@
     </div>
 </div>
 
-@component('mail::button', ['url' => '#']) <!-- Cambia '#' por la URL correcta -->
-Ver solicitud completa
-@endcomponent
+<!-- Botón para revisar la solicitud -->
+<div style="text-align: center; margin: 20px 0;">
+    <a href="{{ route('acreditacion.revisar', $data['acreditacion_id']) }}" style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+        Revisar Solicitud
+    </a>
+</div>
 
 <div class="footer" style="margin-top: 20px; font-size: 14px; color: #888;">
     <small>*Este es un correo automático, por favor no responda directamente a este mensaje.*</small>

@@ -1,5 +1,6 @@
 <template>
   <form @submit.prevent="submitAcreditacion">
+    <!-- Selección del tipo de acreditación -->
     <div class="mb-3">
       <label class="form-label label-acreditacion-title">Seleccione el tipo de acreditación:</label>
       <div class="container-radio-buttons d-flex gap-3">
@@ -23,7 +24,7 @@
       </div>
     </div>
 
-    <!-- Resto del formulario -->
+    <!-- Campos adicionales si es Cuerpo Técnico o Directivo -->
     <div v-if="isCuerpoTecnicoODirectivo">
       <div class="mb-3">
         <input type="text" class="form-control" placeholder="Nombre" v-model="acreditacionData.nombre" required />
@@ -41,11 +42,11 @@
         <input type="tel" class="form-control" placeholder="Teléfono" v-model="acreditacionData.telefono" required />
       </div>
 
-      <!-- Dropdown para elegir equipo -->
-      <div v-if="isCuerpoTecnicoODirectivo" class="mb-3">
+      <!-- Dropdown para elegir equipo, agrupado por meses -->
+      <div class="mb-3">
         <div class="dropdown">
           <button
-            class="btn-public w-100 dropdown-toggle d-flex align-items-center"
+            class="btn-public w-100 dropdown-toggle d-flex align-items-center dropdown-partidos"
             type="button"
             id="dropdownEquipo"
             data-bs-toggle="dropdown"
@@ -54,33 +55,48 @@
             <img v-if="selectedEquipo.logo_local" :src="`/storage/${selectedEquipo.logo_local}`" alt="Logo Local" class="w-5 h-5 me-2" />
             <span>{{ selectedEquipo.nombre ? selectedEquipo.nombre : 'Selecciona un equipo' }}</span>
           </button>
+
           <ul class="dropdown-menu w-100" aria-labelledby="dropdownEquipo" style="max-height: 300px; overflow-y: auto; border: 1px solid #ee1d36;">
-            <li v-for="partido in partidos" :key="partido.id">
-              <a
-                class="dropdown-item d-flex align-items-center justify-content-around"
-                href="#"
-                @click.prevent="selectEquipo(partido)"
-              >
-                <img :src="`/storage/${partido.equipo_local.logo}`" alt="Logo Local" class="w-5 h-5 me-2" />
-                {{ partido.equipo_local.nombre }} 
-                <span class="mx-3 partido-fecha">{{ formatFecha(partido.fecha_hora) }}</span>
-                {{ partido.equipo_visitante.nombre }}
-                <img :src="`/storage/${partido.equipo_visitante.logo}`" alt="Logo Visitante" class="w-5 h-5 ms-2" />
-              </a>
+            <!-- Iterar por los meses -->
+            <li v-for="(partidosMes, mes) in partidosAgrupadosPorMes" :key="mes">
+              <!-- Encabezado del mes -->
+              <h6 class="dropdown-header">{{ capitalizeFirstLetter(mes) }} - {{ partidosMes.length }} partido(s)</h6>
+              <ul>
+                <!-- Iterar los partidos dentro de ese mes -->
+                <li v-for="partido in partidosMes" :key="partido.id">
+                  <a
+                    class="dropdown-item d-flex align-items-center justify-content-around"
+                    href="#"
+                    @click.prevent="selectEquipo(partido)"
+                  >
+                    <img :src="`/storage/${partido.equipo_local.logo}`" alt="Logo Local" class="w-5 h-5 me-2" />
+                    {{ partido.equipo_local.nombre }} 
+                    <div class="fecha-hora-partido d-flex flex-column">
+                      <span class="mx-3 partido-fecha">{{ formatFecha(partido.fecha_hora) }}</span>
+                      <span class="mx-3 partido-hora">{{ formatHora(partido.fecha_hora) }}</span>
+                    </div>
+                    {{ partido.equipo_visitante.nombre }}
+                    <img :src="`/storage/${partido.equipo_visitante.logo}`" alt="Logo Visitante" class="w-5 h-5 ms-2" />
+                  </a>
+                </li>
+              </ul>
             </li>
           </ul>
         </div>
       </div>
 
+      <!-- Campo para el asunto -->
       <div class="mb-3">
         <textarea class="form-control" placeholder="Asunto" v-model="acreditacionData.asunto" required rows="3"></textarea>
       </div>
     </div>
 
+    <!-- Campo para cargar un archivo -->
     <div class="mb-3">
       <input type="file" class="form-control ipt-file" @change="handleFileUpload" />
     </div>
 
+    <!-- Botón para enviar el formulario -->
     <button type="submit" class="btn-public w-100">Enviar</button>
   </form>
 </template>
@@ -113,8 +129,21 @@ const isCuerpoTecnicoODirectivo = computed(() => {
   return acreditacionData.value.tipo_acreditacion === 'cuerpo_tecnico' || acreditacionData.value.tipo_acreditacion === 'cuerpo_directivo';
 });
 
+// Agrupar partidos por mes
+const partidosAgrupadosPorMes = computed(() => {
+  const partidosPorMes = {};
+  props.partidos.forEach((partido) => {
+    const mes = new Date(partido.fecha_hora).toLocaleString('default', { month: 'long', year: 'numeric' });
+    if (!partidosPorMes[mes]) {
+      partidosPorMes[mes] = [];
+    }
+    partidosPorMes[mes].push(partido);
+  });
+  return partidosPorMes;
+});
+
 // Manejar la selección de equipo
-const selectedEquipo = ref({}); // Equipo seleccionado por defecto
+const selectedEquipo = ref({});
 
 // Función para seleccionar un equipo
 const selectEquipo = (partido) => {
@@ -123,9 +152,24 @@ const selectEquipo = (partido) => {
     logo_local: partido.equipo_local.logo,
     logo_visitante: partido.equipo_visitante.logo,
   };
-  acreditacionData.value.proximo_encuentro = selectedEquipo.value.nombre; // Guarda el nombre del equipo en el data
-  acreditacionData.value.partido_id = partido.id; // Guarda el id del partido
+  acreditacionData.value.proximo_encuentro = selectedEquipo.value.nombre;
+  acreditacionData.value.partido_id = partido.id;
 };
+
+// Formatear la fecha para mostrarla adecuadamente
+const formatFecha = (fechaHora) => {
+  const options = { day: '2-digit', month: 'short' };
+  return new Date(fechaHora).toLocaleDateString('es-ES', options).toUpperCase();
+};
+
+const formatHora = (fechaHora) => {
+  const options = { hour: '2-digit', minute: '2-digit', hour12: false };
+  return new Date(fechaHora).toLocaleTimeString('es-ES', options);
+};
+const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
 
 // Manejar la carga de archivos
 const handleFileUpload = (event) => {
@@ -134,12 +178,6 @@ const handleFileUpload = (event) => {
 
 // Emitir evento para enviar los datos al componente padre
 const emit = defineEmits(['submit-form']);
-
-// Formatear la fecha para mostrarla adecuadamente
-const formatFecha = (fechaHora) => {
-  const options = { day: '2-digit', month: 'short' };
-  return new Date(fechaHora).toLocaleDateString('es-ES', options).toUpperCase(); 
-};
 
 const submitAcreditacion = async () => {
   const swal = Swal.fire({
@@ -172,6 +210,7 @@ const submitAcreditacion = async () => {
   }
 };
 </script>
+
 
 
 <style setup>
@@ -239,10 +278,30 @@ form input,
 /* Efecto hover para las opciones del dropdown */
 .dropdown-item:hover {
   background-color: rgba(0, 0, 0, .1); 
-  color: white; 
+  color: var(--white);
 }
 
+.dropdown-header {
+  background-color: var(--gray);
+  color: var(--black);
+  font-size: 15px;
+}
 
+.dropdown-partidos {
+  background-color: var(--gray);
+}
 
+.partido-hora {
+  color: var(--red);
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;  
+}
+
+.fecha-hora-partido {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+} 
 
 </style>

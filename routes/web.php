@@ -51,6 +51,12 @@ Route::post('/contactar', [FormularioContactarController::class, 'store'])->name
 // Rutas para el formulario de acreditación
 Route::post('/acreditacion', [FormularioAcreditacionController::class, 'storeAcreditacion'])->name('formulario.acreditacion');
 
+
+// Ruta para revisar la acreditación
+Route::get('/revisar-acreditacion/{id}', [FormularioAcreditacionController::class, 'revisar'])->name('acreditacion.revisar');
+Route::post('/aprobar-acreditacion/{id}', [FormularioAcreditacionController::class, 'aprobar'])->name('acreditacion.aprobar');
+Route::post('/rechazar-acreditacion/{id}', [FormularioAcreditacionController::class, 'rechazar'])->name('acreditacion.rechazar');
+
 // Rutas para el formulario de patrocinadores
 Route::post('/patrocinadores', [FormularioPatrocinadorController::class, 'store'])->name('patrocinadores.store');
 

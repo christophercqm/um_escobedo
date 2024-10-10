@@ -169,6 +169,10 @@ form input:not([type="checkbox"]) {
     padding: 14px;
 }
 
+.privacidad {
+  font-size: 14px;
+}
+
 .privacidad a {
     color: #0d6efd !important;
     text-decoration: none !important;
