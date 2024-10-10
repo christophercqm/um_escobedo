@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Credencial U.M. Escobedo</title>
     <style>
-        body {
-            font-family: 'Roboto', sans-serif; /* Fuente principal para el body */
+
+       body, .credential {
+            font-family: 'Roboto', sans-serif !important;
         }
 
         .credential {
@@ -21,14 +22,15 @@
             flex-direction: column;
             justify-content: space-between;
             color: #C4D1EC;
+
             margin: 0 auto;
             position: relative;
-            padding: 20px; /* Agregado padding para un mejor espaciado */
         }
 
         .header {
             background-color: #ee1d36;
             color: white;
+            padding: 10px;
             border-radius: 5px;
             text-align: center;
             display: flex;
@@ -39,14 +41,17 @@
             gap: 10px;
         }
 
+        .title-header  {
+            font-family: 'Roboto', sans-serif !important;
+
+        }
+
         .header .title-header {
-            font-family: 'Roboto', sans-serif; /* Mantener Roboto para el título */
-            font-size: 24px; 
-            font-weight: bold; /* Cambiado a bold para mayor énfasis */
+            font-size: 24px;
+            font-weight: 500;
         }
 
         .role {
-            font-family: 'Roboto', sans-serif; /* Mantener Roboto para el título */
             font-size: 18px;
             text-align: center;
             margin: 10px 0;
@@ -63,18 +68,15 @@
 
         .partido-fecha p {
             margin: 0;
-            font-size: 16px; /* Puedes ajustar el tamaño aquí si lo deseas */
+            font-size: 16px;
         }
 
         .role .name {
-            font-family: 'Georgia', serif; /* Cambiar a Georgia para el nombre */
-            font-size: 30px; 
-            font-weight: bold; /* Negrita para el nombre */
+            font-size: 30px;
         }
 
         /* Instagram icono en la parte inferior */
         .instagram {
-            font-family: 'Arial', sans-serif; /* Cambiar a Arial para el texto de Instagram */
             font-size: 15px;
             color: #ee1d36;
             text-align: right;
@@ -87,16 +89,19 @@
             background-color: black;
             border-radius: 50%;
         }
+
+
     </style>
 </head>
 <body>
-    <div class="credential">
+    <div class="credential" style="display: flex; justify-content: space-between; flex-direction: column; font-family: 'Roboto', sans-serif;">
         <div class="header">
+
             <div class="container-img" style="margin: 0 auto; width: 100px; height: 100px; padding: 15px;">
                 <img 
                     src="{{ public_path().'/images/logo-escobedo.png' }}"
                     alt="U.M. Escobedo"
-                    style="width: 100%; height: 100%; object-fit: contain;"
+                    style="img-fluid width: 100%; height: 100%; object-fit: contain;"
                 />
             </div>
             <span class="title-header">U.M. Escobedo</span>
