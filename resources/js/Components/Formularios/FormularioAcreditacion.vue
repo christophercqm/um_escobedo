@@ -91,9 +91,35 @@
       </div>
     </div>
 
+    <!-- Campos adicionales si es "Prensa" -->
+    <div v-if="acreditacionData.tipo_acreditacion === 'arbitro'">
+      <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Nombre" v-model="acreditacionData.nombre" required />
+      </div>
+      <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Apellidos" v-model="acreditacionData.apellido" required />
+      </div>
+      <div class="mb-3">
+        <input type="text" class="form-control" placeholder="DNI" v-model="acreditacionData.dni" required />
+      </div>
+      <div class="mb-3">
+        <input type="tel" class="form-control" placeholder="Teléfono" v-model="acreditacionData.telefono" required />
+      </div>
+      <div class="mb-3">
+        <input type="email" class="form-control" placeholder="Correo Electrónico" v-model="acreditacionData.correo" required />
+      </div>
+      <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Medio" v-model="acreditacionData.medio" required />
+      </div>
+      <div class="mb-3">
+        <textarea class="form-control" placeholder="Asunto" v-model="acreditacionData.asunto" required rows="3"></textarea>
+      </div>
+    </div>
+
     <!-- Campo para cargar un archivo -->
     <div class="mb-3">
-      <input type="file" class="form-control ipt-file" @change="handleFileUpload" />
+      <input type="file" class="form-control ipt-file" @change="handleFileUpload" required />
+      <small class="form-text text-muted">Por favor, sube una imagen clara de tu carnet de federación.</small>
     </div>
 
     <!-- Botón para enviar el formulario -->
@@ -119,6 +145,7 @@ const acreditacionData = ref({
   correo: '',
   telefono: '',
   asunto: '',
+  medio: '', // Nuevo campo para Prensa
   archivo: null,
   proximo_encuentro: '',
   partido_id: ''
@@ -170,7 +197,6 @@ const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-
 // Manejar la carga de archivos
 const handleFileUpload = (event) => {
   acreditacionData.value.archivo = event.target.files[0];
@@ -211,8 +237,6 @@ const submitAcreditacion = async () => {
 };
 </script>
 
-
-
 <style setup>
 form input,
 .ipt-file {
@@ -250,7 +274,7 @@ form input,
     overflow-y: auto; 
 }
 
-.dropdown-menu li{
+.dropdown-menu li {
   font-size: 15px;
 }
 
@@ -273,7 +297,6 @@ form input,
   color: var(--grayv2);
   font-weight: 500;
 }
-
 
 /* Efecto hover para las opciones del dropdown */
 .dropdown-item:hover {
@@ -303,5 +326,4 @@ form input,
   justify-content: center;
   margin: 0 auto;
 } 
-
 </style>

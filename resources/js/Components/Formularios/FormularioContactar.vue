@@ -110,7 +110,7 @@
       text: "Mensaje enviado correctamente!",
       icon: "success",
       confirmButtonText: "Aceptar",
-      confirmButtonColor: "#ee1d36", 
+      confirmButtonColor: "#28a745", 
       customClass: {
         confirmButton: 'swal-button-ok' 
       }
