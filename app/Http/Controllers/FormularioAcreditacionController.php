@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Acreditacion;
 use App\Mail\FormularioAcreditacionMailable;
+use App\Mail\AcreditacionAprobada;
 use App\Mail\RechazoAcreditacionMailable;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
+
+
 
 class FormularioAcreditacionController extends Controller
 {
@@ -102,30 +106,62 @@ class FormularioAcreditacionController extends Controller
 
     public function aprobar($id)
     {
+        // Buscar la acreditación por ID
         $acreditacion = Acreditacion::findOrFail($id);
 
-        // Lógica para aprobar la acreditación
-        $acreditacion->estado = 1; // Establece el estado como 'aprobada'
+        // Actualizar el estado a 'aprobada'
+        $acreditacion->estado = true;
         $acreditacion->save();
 
         // Preparar los datos para el correo
         $data = [
             'nombre' => $acreditacion->nombre,
             'apellido' => $acreditacion->apellido,
-            'tipo_acreditacion' => $acreditacion->tipo_acreditacion,
+            'dni' => $acreditacion->dni,
+            'tipo_acreditacion' => $this->mapTipoAcreditacion($acreditacion->tipo_acreditacion),
+            'proximo_encuentro' => $acreditacion->proximo_encuentro,
+            'fecha_hora' => Carbon::parse($acreditacion->partido->fecha_hora)->format('d/m/Y H:i'),
         ];
+
+        // Crear el directorio si no existe
+        $pdfDir = storage_path("app/public/pdf");
+        if (!file_exists($pdfDir)) {
+            mkdir($pdfDir, 0755, true);
+            Log::info('Directorio creado: ' . $pdfDir);
+        }
+
+        // Generar el PDF
+        try {
+            Log::info('Generando PDF con los siguientes datos: ', $data);
+            $pdf = PDF::loadView('pdf.acreditacion', compact('data')); // Usa compact aquí
+            $pdfPath = $pdfDir . "/acreditacion_{$data['nombre']}_{$data['apellido']}.pdf";
+            $pdf->save($pdfPath);
+            Log::info('PDF generado y guardado en: ' . $pdfPath);
+        } catch (\Exception $e) {
+            Log::error('Error al generar el PDF: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Hubo un problema al generar el PDF.');
+        }
 
         // Enviar correo de notificación de aprobación
         try {
             Mail::to($acreditacion->correo)
-                ->send(new FormularioAcreditacionMailable($data, 'Su solicitud ha sido aprobada'));
+                ->send(new AcreditacionAprobada($data, null, $pdfPath));
 
-            return redirect()->back()->with('success', 'Acreditación aprobada correctamente.');
+            return redirect()->back()->with('success', 'Acreditación aprobada correctamente y correo enviado.');
         } catch (\Exception $e) {
             Log::error('Error al enviar el correo: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Hubo un problema al enviar el correo de aprobación.');
         }
     }
+
+
+
+
+
+
+
+
+
 
     public function rechazar($id)
     {

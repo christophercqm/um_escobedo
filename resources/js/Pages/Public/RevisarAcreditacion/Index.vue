@@ -127,16 +127,16 @@ import { Inertia } from "@inertiajs/inertia";
 
 export default {
     props: {
-        data: Object, // Recibe la información de la solicitud como prop
+        data: Object, // Información de la acreditación
         success: String, // Mensaje de éxito
         error: String, // Mensaje de error
     },
-    setup(props) {
+    setup({ data, success, error }) {
         const isLoading = ref(false); // Estado de carga
-        const successMessage = ref(props.success); // Mensaje de éxito
-        const errorMessage = ref(props.error); // Mensaje de error
+        const successMessage = ref(success); // Mensaje de éxito
+        const errorMessage = ref(error); // Mensaje de error
 
-        // Mapeo de tipos de acreditación
+        // Mapeo de tipos de acreditación a sus nombres legibles
         const tipoAcreditacionLegible = {
             cuerpo_tecnico: "Cuerpo Técnico",
             cuerpo_directivo: "Cuerpo Directivo",
@@ -144,43 +144,43 @@ export default {
             prensa: "Prensa",
         };
 
-        // Función para obtener la descripción legible del tipo de acreditación
-        const obtenerTipoAcreditacion = (tipo) => {
-            return tipoAcreditacionLegible[tipo] || tipo; // Devuelve el tipo legible o el mismo si no se encuentra
-        };
+        // Obtener la descripción legible del tipo de acreditación
+        const obtenerTipoAcreditacion = (tipo) =>
+            tipoAcreditacionLegible[tipo] || tipo;
 
+        // Aprobar la acreditación
         const aprobar = async () => {
-            isLoading.value = true; // Activar el estado de carga
-            successMessage.value = null; // Resetear el mensaje de éxito
-            errorMessage.value = null; // Resetear el mensaje de error
+            isLoading.value = true; // Mostrar spinner de carga
+            successMessage.value = null; // Reiniciar mensajes
+            errorMessage.value = null;
+
             try {
-                await Inertia.post(`/aprobar-acreditacion/${data.id}`); // Acceder a props directamente sin "this"
-                successMessage.value = "Acreditación aprobada correctamente."; // Mensaje de éxito
+                await Inertia.post(`/aprobar-acreditacion/${data.id}`);
+                successMessage.value = "Acreditación aprobada correctamente.";
             } catch (error) {
                 errorMessage.value =
-                    "Hubo un problema al aprobar la acreditación."; // Manejar error
-                console.error(error); // Opcional: ver el error en la consola
+                    "Hubo un problema al aprobar la acreditación.";
+                console.error(error);
             } finally {
-                isLoading.value = false; // Desactivar el estado de carga
+                isLoading.value = false; // Ocultar spinner de carga
             }
         };
 
+        // Rechazar la acreditación
         const rechazar = async () => {
-            isLoading.value = true; // Activar el estado de carga
-            successMessage.value = null; // Resetear el mensaje de éxito
-            errorMessage.value = null; // Resetear el mensaje de error
+            isLoading.value = true;
+            successMessage.value = null;
+            errorMessage.value = null;
+
             try {
-                // Enviando la solicitud para rechazar la acreditación
-                console.log("Enviando solicitud para rechazar la acreditación");
-                await Inertia.post(`/rechazar-acreditacion/${props.data.id}`);
-                // No necesitas manejar la respuesta aquí ya que Inertia se encargará de redirigir
+                await Inertia.post(`/rechazar-acreditacion/${data.id}`);
             } catch (error) {
-                console.error("Error al rechazar la acreditación:", error); // Manejar error
                 errorMessage.value =
                     error.response?.data?.error ||
                     "Hubo un problema al rechazar la acreditación.";
+                console.error(error);
             } finally {
-                isLoading.value = false; // Desactivar el estado de carga
+                isLoading.value = false;
             }
         };
 
