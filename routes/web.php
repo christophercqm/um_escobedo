@@ -57,6 +57,9 @@ Route::get('/revisar-acreditacion/{id}', [FormularioAcreditacionController::clas
 Route::post('/aprobar-acreditacion/{id}', [FormularioAcreditacionController::class, 'aprobar'])->name('acreditacion.aprobar');
 Route::post('/rechazar-acreditacion/{id}', [FormularioAcreditacionController::class, 'rechazar'])->name('acreditacion.rechazar');
 
+Route::post('/acreditacion/arbitro-prensa', [FormularioAcreditacionController::class, 'storeAcreditacionArbitroPrensa'])->name('acreditacion.store.arbitro.prensa');
+
+
 // Rutas para el formulario de patrocinadores
 Route::post('/patrocinadores', [FormularioPatrocinadorController::class, 'store'])->name('patrocinadores.store');
 

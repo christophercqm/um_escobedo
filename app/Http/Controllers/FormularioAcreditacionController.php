@@ -18,6 +18,8 @@ class FormularioAcreditacionController extends Controller
 {
     public function storeAcreditacion(Request $request)
     {
+        Log::info('storeAcreditacion method called');
+
         // Validar los datos
         $validatedData = $request->validate([
             'tipo_acreditacion' => 'required|string',
@@ -29,6 +31,7 @@ class FormularioAcreditacionController extends Controller
             'asunto' => 'required|string',
             'proximo_encuentro' => 'required|string',
             'partido_id' => 'required|exists:partidos,id',
+            'medio_al_que_pertenece' => 'nullable|string',
             'archivo' => 'nullable|file|mimes:jpg,jpeg,png,pdf',
         ]);
 
@@ -68,6 +71,7 @@ class FormularioAcreditacionController extends Controller
             'tipo_acreditacion' => $tipoAcreditacionLegible,
             'proximo_encuentro' => $validatedData['proximo_encuentro'],
             'fecha_hora' => $fechaHoraFormateada,
+            'medio_al_que_pertenece' => $validatedData['medio_al_que_pertenece'],
             'asunto' => $validatedData['asunto'],
             'acreditacion_id' => $acreditacion->id,
         ];
@@ -101,6 +105,82 @@ class FormularioAcreditacionController extends Controller
         // Redirigir al usuario con un mensaje de éxito
         return redirect()->back()->with('success', 'Acreditación guardada correctamente.');
     }
+
+
+    public function storeAcreditacionArbitroPrensa(Request $request)
+    {
+        Log::info('storeAcreditacionArbitroPrensa method called');
+        // Validar los datos
+        $validatedData = $request->validate([
+            'tipo_acreditacion' => 'required|string',
+            'nombre' => 'required|string',
+            'apellido' => 'required|string',
+            'dni' => 'required|string',
+            'correo' => 'required|email',
+            'telefono' => 'required|string',
+            'asunto' => 'required|string',
+            'proximo_encuentro' => 'required|string',
+            'partido_id' => 'required|exists:partidos,id',
+            'archivo' => 'nullable|file|mimes:jpg,jpeg,png,pdf',
+            'medio_al_que_pertenece' => 'nullable|string', // Campo opcional para prensa
+        ]);
+
+        // Log de los datos validados
+        Log::info('Datos validados recibidos del formulario: ', $validatedData);
+
+        // Crear y guardar la instancia del modelo
+        $acreditacion = Acreditacion::create($validatedData + ['estado' => false]); // Inicializa estado como false (rechazada)
+        Log::info('Acreditación creada con ID: ' . $acreditacion->id);
+
+        // Manejar el archivo si existe
+        if ($request->hasFile('archivo')) {
+            $filePath = $request->file('archivo')->store('acreditaciones', 'public');
+            $acreditacion->archivo = $filePath;
+            $acreditacion->save(); // Guarda la ruta del archivo en la base de datos
+            Log::info('Archivo subido y guardado en la base de datos: ' . $filePath);
+        } else {
+            Log::info('No se subió ningún archivo.');
+        }
+
+        // Cargar el partido relacionado
+        $partido = $acreditacion->partido;
+        Log::info('Partido relacionado cargado: ', $partido->toArray());
+
+        // Mapear tipo de acreditación a un formato más legible
+        $tipoAcreditacionLegible = $this->mapTipoAcreditacion($request->tipo_acreditacion);
+        Log::info('Tipo de acreditación mapeada a formato legible: ' . $tipoAcreditacionLegible);
+
+        // Formatear la fecha y hora del partido
+        $fechaHoraFormateada = Carbon::parse($partido->fecha_hora)->format('d/m/Y H:i');
+        Log::info('Fecha y hora del partido formateada: ' . $fechaHoraFormateada);
+
+        // Preparar los datos para la base de datos
+        $data = [
+            'nombre' => $validatedData['nombre'],
+            'apellido' => $validatedData['apellido'],
+            'dni' => $validatedData['dni'],
+            'correo' => $validatedData['correo'],
+            'telefono' => $validatedData['telefono'],
+            'tipo_acreditacion' => $tipoAcreditacionLegible,
+            'proximo_encuentro' => $validatedData['proximo_encuentro'],
+            'fecha_hora' => $fechaHoraFormateada,
+            'asunto' => $validatedData['asunto'],
+            'medio_al_que_pertenece' => $validatedData['medio_al_que_pertenece'], // Incluir este nuevo campo
+            'acreditacion_id' => $acreditacion->id,
+        ];
+
+        // Log de datos preparados
+        Log::info('Datos guardados en la base de datos: ', $data);
+
+        // Redirigir al usuario con un mensaje de éxito
+        return redirect()->back()->with('success', 'Acreditación guardada correctamente sin enviar correo.');
+    }
+
+
+
+
+
+
 
     public function revisar($id)
     {
