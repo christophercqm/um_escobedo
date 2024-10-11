@@ -43,47 +43,72 @@
       </div>
 
       <!-- Dropdown para elegir equipo, agrupado por meses -->
-      <div class="mb-3">
-        <div class="dropdown">
-          <button
-            class="btn-public w-100 dropdown-toggle d-flex align-items-center dropdown-partidos"
-            type="button"
-            id="dropdownEquipo"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <img v-if="selectedEquipo.logo_local" :src="`/storage/${selectedEquipo.logo_local}`" alt="Logo Local" class="w-5 h-5 me-2" />
-            <span>{{ selectedEquipo.nombre ? selectedEquipo.nombre : 'Selecciona un equipo' }}</span>
-          </button>
+      <!-- Dropdown para elegir partido, agrupado por meses -->
+<div class="mb-3">
+  <div class="dropdown">
+    <button
+      class="btn-public w-100 dropdown-toggle d-flex align-items-center dropdown-partidos"
+      type="button"
+      id="dropdownEquipoPrensa"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      <img
+        v-if="selectedEquipo.logo_local"
+        :src="`/storage/${selectedEquipo.logo_local}`"
+        alt="Logo Local"
+        class="w-5 h-5 me-2"
+      />
+      <span>{{ selectedEquipo.nombre_local ? selectedEquipo.nombre_local : 'Selecciona un partido' }}</span>
+      <span class="mx-2">vs</span>
+      <img
+        v-if="selectedEquipo.logo_visitante"
+        :src="`/storage/${selectedEquipo.logo_visitante}`"
+        alt="Logo Visitante"
+        class="w-5 h-5 me-2"
+      />
+      <span>{{ selectedEquipo.nombre_visitante }}</span>
+    </button>
 
-          <ul class="dropdown-menu w-100" aria-labelledby="dropdownEquipo" style="max-height: 300px; overflow-y: auto; border: 1px solid #ee1d36;">
-            <!-- Iterar por los meses -->
-            <li v-for="(partidosMes, mes) in partidosAgrupadosPorMes" :key="mes">
-              <!-- Encabezado del mes -->
-              <h6 class="dropdown-header">{{ capitalizeFirstLetter(mes) }} - {{ partidosMes.length }} partido(s)</h6>
-              <ul>
-                <!-- Iterar los partidos dentro de ese mes -->
-                <li v-for="partido in partidosMes" :key="partido.id">
-                  <a
-                    class="dropdown-item d-flex align-items-center justify-content-around"
-                    href="#"
-                    @click.prevent="selectEquipo(partido)"
-                  >
-                    <img :src="`/storage/${partido.equipo_local.logo}`" alt="Logo Local" class="w-5 h-5 me-2" />
-                    {{ partido.equipo_local.nombre }} 
-                    <div class="fecha-hora-partido d-flex flex-column">
-                      <span class="mx-3 partido-fecha">{{ formatFecha(partido.fecha_hora) }}</span>
-                      <span class="mx-3 partido-hora">{{ formatHora(partido.fecha_hora) }}</span>
-                    </div>
-                    {{ partido.equipo_visitante.nombre }}
-                    <img :src="`/storage/${partido.equipo_visitante.logo}`" alt="Logo Visitante" class="w-5 h-5 ms-2" />
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
+    <ul
+      class="dropdown-menu w-100"
+      aria-labelledby="dropdownEquipoPrensa"
+      style="max-height: 300px; overflow-y: auto; border: 1px solid #ee1d36;"
+    >
+      <!-- Iterar por los meses -->
+      <li v-for="(partidosMes, mes) in partidosAgrupadosPorMes" :key="mes">
+        <h6 class="dropdown-header">{{ capitalizeFirstLetter(mes) }} - {{ partidosMes.length }} partido(s)</h6>
+        <ul>
+          <li v-for="partido in partidosMes" :key="partido.id">
+            <a
+              class="dropdown-item d-flex align-items-center justify-content-around"
+              href="#"
+              @click.prevent="selectEquipo(partido)"
+            >
+              <img
+                :src="`/storage/${partido.equipo_local.logo}`"
+                alt="Logo Local"
+                class="w-5 h-5 me-2"
+              />
+              {{ partido.equipo_local.nombre }}
+              <div class="fecha-hora-partido d-flex flex-column">
+                <span class="mx-3 partido-fecha">{{ formatFecha(partido.fecha_hora) }}</span>
+                <span class="mx-3 partido-hora">{{ formatHora(partido.fecha_hora) }}</span>
+              </div>
+              {{ partido.equipo_visitante.nombre }}
+              <img
+                :src="`/storage/${partido.equipo_visitante.logo}`"
+                alt="Logo Visitante"
+                class="w-5 h-5 ms-2"
+              />
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
 
       <!-- Campo para el asunto -->
       <div class="mb-3">
@@ -108,18 +133,205 @@
       <div class="mb-3">
         <input type="email" class="form-control" placeholder="Correo Electrónico" v-model="acreditacionData.correo" required />
       </div>
+
+      <!-- Dropdown para elegir partido (equipo) en Árbitro -->
       <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Medio" v-model="acreditacionData.medio" required />
+        <div class="dropdown">
+          <button
+            class="btn-public w-100 dropdown-toggle d-flex align-items-center dropdown-partidos"
+            type="button"
+            id="dropdownEquipoArbitro"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              v-if="selectedEquipo.logo_local"
+              :src="`/storage/${selectedEquipo.logo_local}`"
+              alt="Logo Local"
+              class="w-5 h-5 me-2"
+            />
+            <span>{{ selectedEquipo.nombre ? selectedEquipo.nombre : 'Selecciona un partido' }}</span>
+          </button>
+
+          <ul
+            class="dropdown-menu w-100"
+            aria-labelledby="dropdownEquipoArbitro"
+            style="max-height: 300px; overflow-y: auto; border: 1px solid #ee1d36;"
+          >
+            <!-- Iterar por los meses -->
+            <li v-for="(partidosMes, mes) in partidosAgrupadosPorMes" :key="mes">
+              <!-- Encabezado del mes -->
+              <h6 class="dropdown-header">{{ capitalizeFirstLetter(mes) }} - {{ partidosMes.length }} partido(s)</h6>
+              <ul>
+                <!-- Iterar los partidos dentro de ese mes -->
+                <li v-for="partido in partidosMes" :key="partido.id">
+                  <a
+                    class="dropdown-item d-flex align-items-center justify-content-around"
+                    href="#"
+                    @click.prevent="selectEquipo(partido)"
+                  >
+                    <img
+                      :src="`/storage/${partido.equipo_local.logo}`"
+                      alt="Logo Local"
+                      class="w-5 h-5 me-2"
+                    />
+                    {{ partido.equipo_local.nombre }}
+                    <div class="fecha-hora-partido d-flex flex-column">
+                      <span class="mx-3 partido-fecha">{{ formatFecha(partido.fecha_hora) }}</span>
+                      <span class="mx-3 partido-hora">{{ formatHora(partido.fecha_hora) }}</span>
+                    </div>
+                    {{ partido.equipo_visitante.nombre }}
+                    <img
+                      :src="`/storage/${partido.equipo_visitante.logo}`"
+                      alt="Logo Visitante"
+                      class="w-5 h-5 ms-2"
+                    />
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </div>
       <div class="mb-3">
         <textarea class="form-control" placeholder="Asunto" v-model="acreditacionData.asunto" required rows="3"></textarea>
       </div>
     </div>
 
+
+    <!-- Campos adicionales para Prensa -->
+    <div v-if="acreditacionData.tipo_acreditacion === 'prensa'">
+      <div class="mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Nombre"
+          v-model="acreditacionData.nombre"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Apellidos"
+          v-model="acreditacionData.apellido"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="DNI"
+          v-model="acreditacionData.dni"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Correo Electrónico"
+          v-model="acreditacionData.correo"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <input
+          type="tel"
+          class="form-control"
+          placeholder="Teléfono"
+          v-model="acreditacionData.telefono"
+          required
+        />
+      </div>
+
+      <!-- Campo nuevo: Medio al que pertenece -->
+      <div class="mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Medio al que pertenece"
+          v-model="acreditacionData.medio"
+          required
+        />
+      </div>
+
+      <!-- Dropdown para elegir partido, agrupado por meses -->
+      <div class="mb-3">
+        <div class="dropdown">
+          <button
+            class="btn-public w-100 dropdown-toggle d-flex align-items-center dropdown-partidos"
+            type="button"
+            id="dropdownEquipoPrensa"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              v-if="selectedEquipo.logo_local"
+              :src="`/storage/${selectedEquipo.logo_local}`"
+              alt="Logo Local"
+              class="w-5 h-5 me-2"
+            />
+            <span>{{ selectedEquipo.nombre ? selectedEquipo.nombre : 'Selecciona un partido' }}</span>
+          </button>
+
+          <ul
+            class="dropdown-menu w-100"
+            aria-labelledby="dropdownEquipoPrensa"
+            style="max-height: 300px; overflow-y: auto; border: 1px solid #ee1d36;"
+          >
+            <!-- Iterar por los meses -->
+            <li v-for="(partidosMes, mes) in partidosAgrupadosPorMes" :key="mes">
+              <h6 class="dropdown-header">{{ capitalizeFirstLetter(mes) }} - {{ partidosMes.length }} partido(s)</h6>
+              <ul>
+                <li v-for="partido in partidosMes" :key="partido.id">
+                  <a
+                    class="dropdown-item d-flex align-items-center justify-content-around"
+                    href="#"
+                    @click.prevent="selectEquipo(partido)"
+                  >
+                    <img
+                      :src="`/storage/${partido.equipo_local.logo}`"
+                      alt="Logo Local"
+                      class="w-5 h-5 me-2"
+                    />
+                    {{ partido.equipo_local.nombre }}
+                    <div class="fecha-hora-partido d-flex flex-column">
+                      <span class="mx-3 partido-fecha">{{ formatFecha(partido.fecha_hora) }}</span>
+                      <span class="mx-3 partido-hora">{{ formatHora(partido.fecha_hora) }}</span>
+                    </div>
+                    {{ partido.equipo_visitante.nombre }}
+                    <img
+                      :src="`/storage/${partido.equipo_visitante.logo}`"
+                      alt="Logo Visitante"
+                      class="w-5 h-5 ms-2"
+                    />
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
     <!-- Campo para cargar un archivo -->
     <div class="mb-3">
       <input type="file" class="form-control ipt-file" @change="handleFileUpload" required />
-      <small class="form-text text-muted">Por favor, sube una imagen clara de tu carnet de federación.</small>
+      <!-- Mostrar texto dinámico basado en el tipo de acreditación -->
+      <small class="form-text text-muted">
+        <!-- Texto para árbitro -->
+        <template v-if="acreditacionData.tipo_acreditacion === 'arbitro'">
+          Por favor, sube una imagen clara de tu carnet de federación.
+        </template>
+        <!-- Texto para cualquier otro tipo de acreditación -->
+        <template v-else>
+          Por favor, sube una imagen clara de tu DNI.
+        </template>
+      </small>
     </div>
 
     <!-- Botón para enviar el formulario -->
@@ -175,13 +387,16 @@ const selectedEquipo = ref({});
 // Función para seleccionar un equipo
 const selectEquipo = (partido) => {
   selectedEquipo.value = {
-    nombre: `${partido.equipo_local.nombre} vs ${partido.equipo_visitante.nombre}`,
+    nombre_local: partido.equipo_local.nombre, // Guardar nombre del equipo local
+    nombre_visitante: partido.equipo_visitante.nombre, // Guardar nombre del equipo visitante
     logo_local: partido.equipo_local.logo,
     logo_visitante: partido.equipo_visitante.logo,
   };
-  acreditacionData.value.proximo_encuentro = selectedEquipo.value.nombre;
+  
+  acreditacionData.value.proximo_encuentro = `${selectedEquipo.value.nombre_local} vs ${selectedEquipo.value.nombre_visitante}`; // Actualizar proximo_encuentro
   acreditacionData.value.partido_id = partido.id;
 };
+
 
 // Formatear la fecha para mostrarla adecuadamente
 const formatFecha = (fechaHora) => {
@@ -311,7 +526,11 @@ form input,
 }
 
 .dropdown-partidos {
-  background-color: var(--gray);
+  background-color: var(--red);
+}
+
+.dropdown-partidos:hover {
+  background-color: #c11b30;
 }
 
 .partido-hora {
