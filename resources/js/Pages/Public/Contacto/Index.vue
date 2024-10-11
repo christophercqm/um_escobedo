@@ -71,9 +71,6 @@
                     </div>
                 </div>
             </div>
-            <div v-for="partido in partidos" :key="partido.id">
-                <pre>{{ partido }}</pre> 
-            </div>
         </div>
     </GuestLayout>
 </template>
