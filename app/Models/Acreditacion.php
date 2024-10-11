@@ -21,8 +21,9 @@ class Acreditacion extends Model
         'archivo',
         'proximo_encuentro',
         'medio_al_que_pertenece',
+        'club_pertenece',
         'tipo_acreditacion',
-        'partido_id' // Se relaciona con el id de la tabla del partido
+        'partido_id'
     ];
 
     public function partido()

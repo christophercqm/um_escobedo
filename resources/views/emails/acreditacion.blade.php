@@ -37,14 +37,10 @@
             <td style="border: 1px solid #ddd; padding: 10px;">Teléfono</td>
             <td style="border: 1px solid #ddd; padding: 10px;">{{ $data['telefono'] ?? 'N/A' }}</td>
         </tr>
+        @if(in_array($data['tipo_acreditacion'], ['Cuerpo Técnico', 'Cuerpo Directivo', 'Directivo']))
         <tr>
-            <td style="border: 1px solid #ddd; padding: 10px;">Tipo de Acreditación</td>
-            <td style="border: 1px solid #ddd; padding: 10px;">{{ $data['tipo_acreditacion'] ?? 'N/A' }}</td>
-        </tr>
-        @if(isset($data['medio_al_que_pertenece']) && strtolower($data['tipo_acreditacion']) === 'prensa')
-        <tr>
-            <td style="border: 1px solid #ddd; padding: 10px;">Medio</td>
-            <td style="border: 1px solid #ddd; padding: 10px;">{{ $data['medio_al_que_pertenece'] ?? 'N/A' }}</td>
+            <td style="border: 1px solid #ddd; padding: 10px;">Club al que Pertenece</td>
+            <td style="border: 1px solid #ddd; padding: 10px;">{{ $data['club_pertenece'] ?? 'N/A' }}</td>
         </tr>
         @endif
         <tr>
@@ -55,6 +51,16 @@
             <td style="border: 1px solid #ddd; padding: 10px;">Fecha y Hora del Partido</td>
             <td style="border: 1px solid #ddd; padding: 10px;">{{ $data['fecha_hora'] ?? 'N/A' }}</td>
         </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 10px;">Tipo de Acreditación</td>
+            <td style="border: 1px solid #ddd; padding: 10px;">{{ $data['tipo_acreditacion'] ?? 'N/A' }}</td>
+        </tr>
+        @if(isset($data['medio_al_que_pertenece']) && strtolower($data['tipo_acreditacion']) === 'prensa')
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 10px;">Medio</td>
+            <td style="border: 1px solid #ddd; padding: 10px;">{{ $data['medio_al_que_pertenece'] ?? 'N/A' }}</td>
+        </tr>
+        @endif
     </tbody>
 </table>
 

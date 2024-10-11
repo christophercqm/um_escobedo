@@ -46,30 +46,35 @@
       <div class="mb-3">
         <input type="tel" class="form-control" placeholder="Teléfono" v-model="acreditacionData.telefono" required />
       </div>
-      
-      <div class="mb-3">
-    <div class="dropdown">
-      <button class="btn-public w-100 dropdown-toggle d-flex align-items-center dropdown-partidos" type="button"
-        id="dropdownClub" data-bs-toggle="dropdown" aria-expanded="false">
-        <span>{{ selectedClub ? selectedClub.nombre : "Seleccione el club al que pertenece" }}</span>
-      </button>
 
-      <ul class="dropdown-menu w-100" aria-labelledby="dropdownClub" style="
-          max-height: 300px;
-          overflow-y: auto;
-          border: 1px solid #ee1d36;
-        ">
-        <li v-for="equipo in props.equipos" :key="equipo.id">
-          <a class="dropdown-item d-flex" href="#" @click.prevent="selectClub(equipo)">
-            <img v-if="equipo.logo" :src="`/storage/${equipo.logo}`" alt="Logo" class="w-5 h-5 me-2" />
-            <span class="name-club">
-              {{ equipo.nombre }}
-            </span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
+      <div class="mb-3">
+        <div class="dropdown">
+          <button class="btn-public w-100 dropdown-toggle d-flex align-items-center dropdown-partidos" type="button"
+            id="dropdownClub" data-bs-toggle="dropdown" aria-expanded="false">
+            <span>{{
+              selectedClub
+                ? selectedClub.nombre
+                : "Seleccione el club al que pertenece"
+            }}</span>
+          </button>
+
+          <ul class="dropdown-menu w-100" aria-labelledby="dropdownClub" style="
+                            max-height: 300px;
+                            overflow-y: auto;
+                            border: 1px solid #ee1d36;
+                        ">
+            <li v-for="equipo in props.equipos" :key="equipo.id">
+              <a class="dropdown-item d-flex" href="#" @click.prevent="selectClub(equipo)">
+                <img v-if="equipo.logo" :src="`/storage/${equipo.logo}`" alt="Logo" class="w-5 h-5 me-2" />
+                <span class="name-club">
+                  {{ equipo.nombre }}
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
 
       <!-- Dropdown para elegir equipo, agrupado por meses -->
       <div class="mb-3">
@@ -89,7 +94,7 @@
             <span>{{ selectedEquipo.nombre_visitante }}</span>
           </button>
 
-          <ul class="dropdown-menu w-100" aria-labelledby="dropdownEquipoPrensa" style="
+          <ul class="dropdown-menu w-100 p-0" aria-labelledby="dropdownEquipoPrensa" style="
                             max-height: 300px;
                             overflow-y: auto;
                             border: 1px solid #ee1d36;
@@ -322,13 +327,11 @@
 import { ref, computed } from "vue";
 import Swal from "sweetalert2";
 
-// Recibir la prop de partidos del componente padre
+// Props
 const props = defineProps({
   partidos: Array,
-  equipos: Array
+  equipos: Array,
 });
-
-console.log('Equipos recibidos:', props.equipos);
 
 // Datos del formulario
 const acreditacionData = ref({
@@ -336,6 +339,7 @@ const acreditacionData = ref({
   nombre: "",
   apellido: "",
   dni: "",
+  club_pertenece: "",
   correo: "",
   telefono: "",
   asunto: "",
@@ -345,14 +349,14 @@ const acreditacionData = ref({
   partido_id: "",
 });
 
-// Computed property para verificar el tipo de acreditación
-const isCuerpoTecnicoODirectivo = computed(() => {
-  return (
-    acreditacionData.value.tipo_acreditacion === "cuerpo_tecnico" ||
-    acreditacionData.value.tipo_acreditacion === "cuerpo_directivo"
-  );
-});
+// Variables reactivas
+const selectedEquipo = ref({});
+const selectedClub = ref(null);
 
+// Computed properties
+const isCuerpoTecnicoODirectivo = computed(() => {
+  return ["cuerpo_tecnico", "cuerpo_directivo"].includes(acreditacionData.value.tipo_acreditacion);
+});
 
 // Agrupar partidos por mes
 const partidosAgrupadosPorMes = computed(() => {
@@ -370,65 +374,39 @@ const partidosAgrupadosPorMes = computed(() => {
   return partidosPorMes;
 });
 
-// Manejar la selección de equipo
-const selectedEquipo = ref({});
-const selectedClub = ref(null); // Asegúrate de que esto esté definido
-
-
-// Función para seleccionar un equipo
+// Funciones de selección
 const selectEquipo = (partido) => {
   selectedEquipo.value = {
-    nombre_local: partido.equipo_local.nombre, // Guardar nombre del equipo local
-    nombre_visitante: partido.equipo_visitante.nombre, // Guardar nombre del equipo visitante
+    nombre_local: partido.equipo_local.nombre,
+    nombre_visitante: partido.equipo_visitante.nombre,
     logo_local: partido.equipo_local.logo,
     logo_visitante: partido.equipo_visitante.logo,
   };
-
-  acreditacionData.value.proximo_encuentro = `${selectedEquipo.value.nombre_local} vs ${selectedEquipo.value.nombre_visitante}`; // Actualizar proximo_encuentro
+  acreditacionData.value.proximo_encuentro = `${selectedEquipo.value.nombre_local} vs ${selectedEquipo.value.nombre_visitante}`;
   acreditacionData.value.partido_id = partido.id;
 };
 
-// Función para seleccionar un club
 const selectClub = (equipo) => {
-  selectedClub.value = equipo; // Guardar el club seleccionado
-  acreditacionData.value.medio_al_que_pertenece = equipo.nombre; // Actualizar el modelo de datos
+  selectedClub.value = equipo;
+  acreditacionData.value.medio_al_que_pertenece = equipo.nombre;
+  acreditacionData.value.club_pertenece = equipo.nombre;
 };
 
-// Formatear la fecha para mostrarla adecuadamente
-const formatFecha = (fechaHora) => {
-  const options = { day: "2-digit", month: "short" };
-  return new Date(fechaHora)
-    .toLocaleDateString("es-ES", options)
-    .toUpperCase();
-};
-
-const formatHora = (fechaHora) => {
-  const options = { hour: "2-digit", minute: "2-digit", hour12: false };
-  return new Date(fechaHora).toLocaleTimeString("es-ES", options);
-};
-
-const capitalizeFirstLetter = (string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-};
+// Formatear fecha y hora
+const formatFecha = (fechaHora) => new Date(fechaHora).toLocaleDateString("es-ES", { day: "2-digit", month: "short" }).toUpperCase();
+const formatHora = (fechaHora) => new Date(fechaHora).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit", hour12: false });
+const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
 // Validaciones simples de formulario
 const validarFormulario = () => {
   const requiredFields = [
-    "tipo_acreditacion",
-    "nombre",
-    "apellido",
-    "dni",
-    "correo",
-    "telefono",
-    "asunto",
-    "medio_al_que_pertenece",
-    "proximo_encuentro",
-    "partido_id",
+    "tipo_acreditacion", "nombre", "apellido", "dni", "correo",
+    "telefono", "asunto", "medio_al_que_pertenece", "proximo_encuentro", "partido_id"
   ];
 
   for (const field of requiredFields) {
     if (!acreditacionData.value[field]) {
-      Swal.fire("Error", `El campo ${field} es obligatorio.`, "error");
+      Swal.fire("Error", `El campo ${capitalizeFirstLetter(field.replace(/_/g, ' '))} es obligatorio.`, "error");
       return false;
     }
   }
@@ -437,7 +415,13 @@ const validarFormulario = () => {
 
 // Manejar la carga de archivos
 const handleFileUpload = (event) => {
-  acreditacionData.value.archivo = event.target.files[0];
+  const file = event.target.files[0];
+  // Validación de archivo
+  if (file && file.size > 2000000) { // 2 MB máximo
+    Swal.fire("Error", "El archivo debe ser menor a 2 MB.", "error");
+    return;
+  }
+  acreditacionData.value.archivo = file;
 };
 
 // Emitir evento para enviar los datos al componente padre
@@ -458,11 +442,9 @@ const submitAcreditacion = async () => {
   });
 
   const formData = new FormData();
-  for (const key in acreditacionData.value) {
-    formData.append(key, acreditacionData.value[key]);
-  }
-
-  console.log("FormData created:", Object.fromEntries(formData.entries())); // Mostrar FormData
+  Object.entries(acreditacionData.value).forEach(([key, value]) => {
+    formData.append(key, value);
+  });
 
   try {
     // Simulación de envío
@@ -481,6 +463,7 @@ const submitAcreditacion = async () => {
   }
 };
 </script>
+
 
 <style setup>
 form input,
