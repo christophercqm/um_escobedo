@@ -32,24 +32,31 @@ class FormularioAcreditacionController extends Controller
             'archivo' => 'nullable|file|mimes:jpg,jpeg,png,pdf',
         ]);
 
+        Log::info('Datos validados recibidos del formulario: ', $validatedData);
+
         // Crear y guardar la instancia del modelo
         $acreditacion = Acreditacion::create($validatedData + ['estado' => false]); // Inicializa estado como false (rechazada)
+        Log::info('Acreditación creada con ID: ' . $acreditacion->id);
 
         // Manejar el archivo si existe
         if ($request->hasFile('archivo')) {
             $filePath = $request->file('archivo')->store('acreditaciones', 'public');
             $acreditacion->archivo = $filePath;
             $acreditacion->save(); // Guarda la ruta del archivo en la base de datos
+            Log::info('Archivo subido y guardado en la base de datos: ' . $filePath);
         }
 
         // Cargar el partido relacionado
         $partido = $acreditacion->partido;
+        Log::info('Partido relacionado cargado: ', $partido->toArray());
 
         // Mapear tipo de acreditación a un formato más legible
         $tipoAcreditacionLegible = $this->mapTipoAcreditacion($request->tipo_acreditacion);
+        Log::info('Tipo de acreditación mapeada a formato legible: ' . $tipoAcreditacionLegible);
 
         // Formatear la fecha y hora del partido
         $fechaHoraFormateada = Carbon::parse($partido->fecha_hora)->format('d/m/Y H:i');
+        Log::info('Fecha y hora del partido formateada: ' . $fechaHoraFormateada);
 
         // Preparar los datos para el correo
         $data = [
@@ -61,19 +68,32 @@ class FormularioAcreditacionController extends Controller
             'tipo_acreditacion' => $tipoAcreditacionLegible,
             'proximo_encuentro' => $validatedData['proximo_encuentro'],
             'fecha_hora' => $fechaHoraFormateada,
+            'asunto' => $validatedData['asunto'],
             'acreditacion_id' => $acreditacion->id,
         ];
 
+        Log::info('Datos preparados para enviar el correo: ', $data);
+
         // Enviar el correo
         try {
-            Log::info('Enviando correo con los datos: ', $data);
-            $attachment = $acreditacion->archivo ? storage_path("app/public/{$acreditacion->archivo}") : null;
+            Log::info('Enviando correo con los siguientes datos: ', $data);
+            Log::info('Asunto del correo: ' . "Solicitud de Acreditación de {$validatedData['nombre']} {$validatedData['apellido']}");
 
+            // Verificar si hay un archivo adjunto
+            $attachment = $acreditacion->archivo ? storage_path("app/public/{$acreditacion->archivo}") : null;
+            if ($attachment) {
+                Log::info('Archivo adjunto encontrado: ' . $attachment);
+            } else {
+                Log::info('No se adjuntará ningún archivo.');
+            }
+
+            // Enviar el correo
             Mail::to($validatedData['correo'])
                 ->send(new FormularioAcreditacionMailable($data, "Solicitud de Acreditación de {$validatedData['nombre']} {$validatedData['apellido']}", $attachment));
 
             Log::info('Correo enviado correctamente a: ' . $validatedData['correo']);
         } catch (\Exception $e) {
+            // Log error si ocurre una excepción durante el envío del correo
             Log::error('Error al enviar el correo: ' . $e->getMessage());
             return redirect()->back()->withErrors(['error' => 'No se pudo enviar el mensaje, por favor intente más tarde.']);
         }

@@ -6,6 +6,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
+
 
 class FormularioAcreditacionMailable extends Mailable
 {
@@ -37,6 +39,10 @@ class FormularioAcreditacionMailable extends Mailable
      */
     public function build()
     {
+
+        Log::info('Construyendo el correo con el asunto: ' . $this->asunto);
+        Log::info('Datos del correo: ', $this->data);
+
         $email = $this->from(config('mail.from.address'), 'Escobedo')
                       ->markdown('emails.acreditacion')
                       ->subject($this->asunto)
