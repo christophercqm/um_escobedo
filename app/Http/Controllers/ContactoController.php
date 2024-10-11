@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Partido; // Asegúrate de que el modelo Partido está importado
+use App\Models\Partido;
+use App\Models\Equipo;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -15,9 +16,12 @@ class ContactoController extends Controller
     {
         // Obtener todos los partidos de la base de datos
         $partidos = Partido::with(['equipoLocal', 'equipoVisitante'])->get();
+        $equipos = Equipo::all(); 
+
 
         return inertia('Public/Contacto/Index', [
             'partidos' => $partidos,
+            'equipos' => $equipos,
         ]);
     }
 

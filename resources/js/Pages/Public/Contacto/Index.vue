@@ -57,6 +57,7 @@
                         >
                             <FormularioAcreditacion
                                 :partidos="partidos"
+                                :equipos="equipos"
                                 @submit-form="handleSubmitForm"
                             />
                         </div>
@@ -73,6 +74,8 @@
             </div>
         </div>
     </GuestLayout>
+
+
 </template>
 
 <script setup>
@@ -89,11 +92,14 @@ const selectedForm = ref("contactar");
 
 // Propiedades recibidas
 const props = defineProps({
-    partidos: Array, 
+    partidos: Array,
+    equipos: Array,
 });
 
 // Inicializar la lista de partidos desde las props
 const partidos = ref(props.partidos);
+const equipos = ref(props.equipos); 
+
 
 // Manejar el envío del formulario
 const handleSubmitForm = (formData) => {
