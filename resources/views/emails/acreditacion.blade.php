@@ -41,11 +41,10 @@
             <td style="border: 1px solid #ddd; padding: 10px;">Tipo de Acreditación</td>
             <td style="border: 1px solid #ddd; padding: 10px;">{{ $data['tipo_acreditacion'] ?? 'N/A' }}</td>
         </tr>
-        <!-- Condición para mostrar "Medio" solo si existe -->
-        @if(isset($data['medio_al_que_pertenece']) && $data['tipo_acreditacion'] === 'prensa')
+        @if(isset($data['medio_al_que_pertenece']) && strtolower($data['tipo_acreditacion']) === 'prensa')
         <tr>
-            <td>Medio</td>
-            <td>{{ $data['medio_al_que_pertenece'] }}</td>
+            <td style="border: 1px solid #ddd; padding: 10px;">Medio</td>
+            <td style="border: 1px solid #ddd; padding: 10px;">{{ $data['medio_al_que_pertenece'] ?? 'N/A' }}</td>
         </tr>
         @endif
         <tr>
@@ -62,11 +61,9 @@
 <div style="margin: 20px 0;">
    <strong style="font-size: 16px;">Asunto:</strong>
     <div style="border: 1px solid #ddd; padding: 10px; background-color: #f9f9f9; margin-top: 10px;">
-        <span>{{ ($data['asunto'] ?? 'N/A') }}</span>
+        <span>{{ $data['asunto'] ?? 'N/A' }}</span>
    </div>
 </div>
-
-
 
 <!-- Botón para revisar la solicitud -->
 <div style="text-align: center; margin: 20px 0;">

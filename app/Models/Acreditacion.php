@@ -9,8 +9,7 @@ class Acreditacion extends Model
 {
     use HasFactory;
 
-    protected $table = 'formulario_acreditacion'; // Reemplaza 'nombre_de_tu_tabla' con el nombre correcto
-
+    protected $table = 'formulario_acreditacion';
 
     protected $fillable = [
         'nombre',
