@@ -1,22 +1,14 @@
 <template>
-    <div
-        class="container container-revisar-acreditacion d-flex justify-center align-items-center"
-    >
+    <div class="container container-revisar-acreditacion d-flex justify-center align-items-center">
         <div class="row max-width mx-auto row-container">
             <div class="col-md-6">
                 <h2 class="mb-4 title">Revisar Solicitud de Acreditación</h2>
 
                 <!-- Mensajes de éxito o error -->
-                <div
-                    v-if="successMessage"
-                    class="alert alert-success text-center mt-3"
-                >
+                <div v-if="successMessage" class="alert alert-success text-center mt-3">
                     <p>{{ successMessage }}</p>
                 </div>
-                <div
-                    v-if="errorMessage"
-                    class="alert alert-danger text-center mt-3"
-                >
+                <div v-if="errorMessage" class="alert alert-danger text-center mt-3">
                     <p>{{ errorMessage }}</p>
                 </div>
 
@@ -75,18 +67,19 @@
                                 </td>
                                 <td>{{ data.fecha_hora_partido }}</td>
                             </tr>
+
+                              <!-- Mostrar el club si es Cuerpo Técnico o Cuerpo Directivo -->
+                              <tr v-if="data.tipo_acreditacion === 'cuerpo_tecnico' || data.tipo_acreditacion === 'cuerpo_directivo'">
+                                <td class="title-attribute">Club Perteneciente</td>
+                                <td>{{ data.club_pertenece }}</td>
+                            </tr>
                             <tr>
                                 <td class="title-attribute">Archivo</td>
                                 <td>
-                                    <a
-                                        :href="data.archivo"
-                                        download=""
+                                    <a :href="data.archivo" download=""
                                         class="btn btn-primary btn-sm d-flex align-items-center gap-2"
-                                        style="font-size: 15px;"
-                                        >
-                                        <i
-                                            class="bi bi-file-earmark-arrow-down"
-                                        ></i>
+                                        style="font-size: 15px">
+                                        <i class="bi bi-file-earmark-arrow-down"></i>
                                         <span>Descargar Archivo</span>
                                     </a>
                                 </td>
@@ -96,22 +89,13 @@
                 </div>
 
                 <div class="d-flex justify-content-between mt-4">
-                    <button
-                        @click="aprobar"
-                        :disabled="isLoading"
-                        class="btn btn-success d-flex align-items-center gap-2"
-                    >
-                        <i
-                            class="bi bi-check2-circle"
-                            style="font-size: 20px"
-                        ></i>
+                    <button @click="aprobar" :disabled="isLoading"
+                        class="btn btn-success d-flex align-items-center gap-2">
+                        <i class="bi bi-check2-circle" style="font-size: 20px"></i>
                         <span>Aprobar Acreditación</span>
                     </button>
-                    <button
-                        @click="rechazar"
-                        :disabled="isLoading"
-                        class="btn btn-danger d-flex align-items-center gap-2"
-                    >
+                    <button @click="rechazar" :disabled="isLoading"
+                        class="btn btn-danger d-flex align-items-center gap-2">
                         <i class="bi bi-x-circle" style="font-size: 20px"></i>
                         <span>Rechazar Acreditación</span>
                     </button>
@@ -128,13 +112,8 @@
             <div class="col-md-6">
                 <h2 class="mb-4 title">Vista Previa del Documento</h2>
                 <div class="border" style="height: 600px">
-                    <iframe
-                        v-if="data.archivo"
-                        :src="data.archivo"
-                        frameborder="0"
-                        class="w-100 h-100"
-                        style="height: 600px"
-                    ></iframe>
+                    <iframe v-if="data.archivo" :src="data.archivo" frameborder="0" class="w-100 h-100"
+                        style="height: 600px"></iframe>
                 </div>
             </div>
         </div>
@@ -171,9 +150,9 @@ export default {
 
         // Aprobar la acreditación
         const aprobar = async () => {
-            isLoading.value = true;
-            successMessage.value = null;
-            errorMessage.value = null;
+            isLoading.value = true; // Activar el estado de carga
+            successMessage.value = null; // Limpiar mensaje de éxito
+            errorMessage.value = null; // Limpiar mensaje de error
 
             // Mostrar un SweetAlert mientras se procesa la solicitud
             Swal.fire({
@@ -181,7 +160,7 @@ export default {
                 text: "Estamos aprobando la acreditación, por favor espera.",
                 allowOutsideClick: false,
                 didOpen: () => {
-                    Swal.showLoading();
+                    Swal.showLoading(); // Mostrar el loading de SweetAlert
                 },
             });
 
@@ -194,10 +173,10 @@ export default {
                     text: "La acreditación ha sido aprobada exitosamente y se ha enviado un correo al solicitante.",
                     icon: "success",
                     confirmButtonColor: "#28a745",
-                    timer: 3000,
+                    timer: 5000, // Mostrar por 3 segundos
                     confirmButtonText: "Aceptar",
                 });
-                successMessage.value = "Acreditación aprobada correctamente.";
+                successMessage.value = "Acreditación aprobada correctamente."; // Mensaje de éxito
             } catch (error) {
                 // Mostrar SweetAlert en caso de error
                 Swal.fire({
@@ -209,10 +188,10 @@ export default {
                     confirmButtonText: "Aceptar",
                 });
                 errorMessage.value =
-                    "Hubo un problema al aprobar la acreditación.";
-                console.error(error);
+                    "Hubo un problema al aprobar la acreditación."; // Mensaje de error
+                console.error(error); // Log para depuración
             } finally {
-                isLoading.value = false;
+                isLoading.value = false; // Desactivar el estado de carga
             }
         };
 

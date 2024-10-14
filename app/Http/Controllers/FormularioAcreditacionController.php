@@ -156,10 +156,6 @@ class FormularioAcreditacionController extends Controller
     }
 
 
-
-
-
-
     public function revisar($token)
     {
         // Buscar la acreditación por el token y cargar el partido relacionado
@@ -201,6 +197,13 @@ class FormularioAcreditacionController extends Controller
             'fecha_hora' => Carbon::parse($acreditacion->partido->fecha_hora)->format('d/m/Y H:i'),
         ];
 
+        // Incluir club_pertenece solo si es cuerpo_directivo o cuerpo_tecnico
+        if ($acreditacion->tipo_acreditacion === 'cuerpo_directivo' || $acreditacion->tipo_acreditacion === 'cuerpo_tecnico') {
+            $data['club_pertenece'] = $acreditacion->club_pertenece; // Asume que este campo está en la tabla de acreditación
+        } else {
+            $data['club_pertenece'] = 'No asignado'; // O cualquier valor por defecto
+        }
+
         // Crear el directorio si no existe
         $pdfDir = storage_path("app/public/pdf");
         if (!file_exists($pdfDir)) {
@@ -234,52 +237,36 @@ class FormularioAcreditacionController extends Controller
 
 
 
-
-
-
-
-
-
-
     public function rechazar($token)
     {
         try {
             // Buscar la acreditación por token
             $acreditacion = Acreditacion::where('token', $token)->firstOrFail();
-    
+
             // Lógica para rechazar la acreditación
             $acreditacion->estado = false;
             $acreditacion->save();
-    
+
             // Preparar los datos para el correo de rechazo
             $data = [
                 'nombre' => $acreditacion->nombre,
                 'apellido' => $acreditacion->apellido,
                 'correo' => $acreditacion->correo,
             ];
-    
+
             // Log para verificar la dirección de correo electrónico
             Log::info('Enviando correo de rechazo a: ' . $data['correo']);
-    
+
             // Enviar correo de notificación de rechazo al usuario
             Mail::to($data['correo'])->send(new RechazoAcreditacionMailable($data));
-    
+
             // Aquí no retornamos ninguna vista ni redirigimos
         } catch (\Exception $e) {
             Log::error('Error al rechazar la acreditación: ' . $e->getMessage());
-    
+
             // Si deseas manejar el error en la misma vista, puedes emitir un log o algún estado de error
         }
     }
-    
-    
-
-
-
-
-
-
-
 
 
 

@@ -4,12 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Credencial U.M. Escobedo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
-
-       body, .credential {
-            font-family: 'Roboto', sans-serif !important;
+        /* Aplicar la fuente globalmente a todo */
+        body, html, h1, h2, h3, h4, h5, h6, p, span, div, a {
+            font-family: 'Roboto', sans-serif !important; /* Define la fuente global */
         }
 
+        /* Ajustes para la tarjeta de la credencial */
         .credential {
             background-color: #191919;
             border: 1px solid #ccc;
@@ -17,108 +19,89 @@
             width: 100%;
             max-width: 450px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            height: 500px;
+            max-height: 500px;
             min-height: 500px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
             color: #C4D1EC;
-
-            margin: 0 auto;
-            position: relative;
         }
 
+        /* Encabezado */
         .header {
             background-color: #ee1d36;
             color: white;
             padding: 10px;
             border-radius: 5px;
             text-align: center;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            align-items: center;
-            margin: 0 auto;
-            gap: 10px;
         }
 
-        .title-header  {
-            font-family: 'Roboto', sans-serif !important;
-
-        }
-
-        .header .title-header {
-            font-size: 24px;
-            font-weight: 500;
-        }
-
+        /* Información personal */
         .role {
             font-size: 18px;
             text-align: center;
             margin: 10px 0;
         }
 
-        .role .info-personal {
-            gap: .5rem;
+        .info-personal {
             margin: 10px 0;
         }
 
-        .role .info-personal p {
+        .info-personal p {
             margin: 0;
         }
 
+        /* Nombre */
+        .name {
+            font-size: 30px;
+        }
+
+        /* Fecha y hora del encuentro */
         .partido-fecha p {
             margin: 0;
             font-size: 16px;
         }
 
-        .role .name {
-            font-size: 30px;
-        }
-
-        /* Instagram icono en la parte inferior */
+        /* Icono de Instagram en el pie */
         .instagram {
             font-size: 15px;
             color: #ee1d36;
-            text-align: right;
-            padding-right: 20px;
-            position: relative;
-            top: 60px;
         }
 
+        /* Contenedor de imagen */
         .container-img {
             background-color: black;
             border-radius: 50%;
         }
-
-
     </style>
 </head>
 <body>
-    <div class="credential" style="display: flex; justify-content: space-between; flex-direction: column; font-family: 'Roboto', sans-serif;">
+    <div class="credential" style="position: relative; margin-left: auto; margin-right: auto;">
         <div class="header">
-
-            <div class="container-img" style="margin: 0 auto; width: 100px; height: 100px; padding: 15px;">
+            <div class="container-img" style="width: 100px; height: 100px; padding: 15px; margin: 0 auto; display: flex; justify-content: center; align-items: center;">
                 <img 
-                    src="{{ public_path().'/images/logo-escobedo.png' }}"
-                    alt="U.M. Escobedo"
-                    style="img-fluid width: 100%; height: 100%; object-fit: contain;"
+                    src="{{ public_path().'/images/logo-escobedo.png' }}" 
+                    alt="U.M. Escobedo" 
+                    style="width: 75px; object-fit: contain;"
                 />
             </div>
-            <span class="title-header">U.M. Escobedo</span>
+            <p style="font-size: 24px; font-weight: 500; margin: 0;" class="roboto-text"><span>U.M. Escobedo</span></p>
         </div>
         <div class="role">
             <div class="info-personal">
                 <p class="name">{{ $data['nombre'] }} {{ $data['apellido'] }}</p>
-                <p class="dni">{{ $data['dni'] }}</p>
+                <p class="dni">DNI: {{ $data['dni'] }}</p>
             </div>
             <p>{{ $data['tipo_acreditacion'] }}</p>
+            <!-- Mostrar club_pertenece si es cuerpo técnico o directivo -->
+            @if (in_array($data['tipo_acreditacion'], ['Cuerpo Técnico', 'Cuerpo Directivo']))
+            <p>Club Perteneciente: {{ $data['club_pertenece'] }}</p>
+            @endif
             <div class="partido-fecha">
                 <p>{{ $data['proximo_encuentro'] }}</p>
-                <p>{{ $data['fecha_hora'] }}</p> 
+                <p>{{ $data['fecha_hora'] }}</p>
             </div>
         </div>
         <div class="footer">
-            <p class="instagram">@um_escobedooficial</p>
+            <p class="instagram" style="position: absolute; bottom: 0; right: 0; padding-right: 20px">@um_escobedooficial</p>
         </div>
     </div>
 </body>
