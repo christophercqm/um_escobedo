@@ -29,6 +29,17 @@
             <td style="border: 1px solid #ddd; padding: 10px;">DNI</td>
             <td style="border: 1px solid #ddd; padding: 10px;">{{ $data['dni'] ?? 'N/A' }}</td>
         </tr>
+        @if(strtolower($data['tipo_acreditacion']) !== 'arbitro')
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 10px;">Carnet de Federación</td>
+            <td style="border: 1px solid #ddd; padding: 10px;">{{ $data['carnet_federacion'] ?? 'N/A' }}</td>
+        </tr>
+        @else
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 10px;">Tipo de Acreditación</td>
+            <td style="border: 1px solid #ddd; padding: 10px;">Árbitro</td>
+        </tr>
+        @endif
         <tr>
             <td style="border: 1px solid #ddd; padding: 10px;">Correo</td>
             <td style="border: 1px solid #ddd; padding: 10px;">{{ $data['correo'] ?? 'N/A' }}</td>
@@ -65,18 +76,19 @@
 </table>
 
 <div style="margin: 20px 0;">
-   <strong style="font-size: 16px;">Asunto:</strong>
+    <strong style="font-size: 16px;">Asunto:</strong>
     <div style="border: 1px solid #ddd; padding: 10px; background-color: #f9f9f9; margin-top: 10px;">
         <span>{{ $data['asunto'] ?? 'N/A' }}</span>
-   </div>
+    </div>
 </div>
 
 <!-- Botón para revisar la solicitud -->
 <div style="text-align: center; margin: 20px 0;">
-    <a href="{{ route('acreditacion.revisar', $data['acreditacion_id']) }}" style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+    <a href="{{ route('acreditacion.revisar', ['token' => $data['token']]) }}" style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
         Revisar Solicitud
     </a>
 </div>
+
 
 <div class="footer" style="margin-top: 20px; font-size: 14px; color: #888;">
     <small>*Este es un correo automático, por favor no responda directamente a este mensaje.*</small>

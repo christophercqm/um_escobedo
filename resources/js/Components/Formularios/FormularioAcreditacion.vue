@@ -312,6 +312,15 @@
                 </div>
                 <div class="mb-3">
                     <input
+                        type="text"
+                        v-model="acreditacionData.carnet_federacion"
+                        class="form-control"
+                        id="carnet_federacion"
+                        placeholder="Introduce tu carnet de federación"
+                    />
+                </div>
+                <div class="mb-3">
+                    <input
                         type="tel"
                         class="form-control"
                         placeholder="Teléfono"
@@ -661,7 +670,6 @@
             </label>
         </div>
 
-
         <!-- Botón para enviar el formulario -->
         <button
             type="submit"
@@ -694,6 +702,7 @@ const acreditacionData = ref({
     telefono: "",
     asunto: "",
     medio_al_que_pertenece: "",
+    carnet_federacion: "",
     archivo: null,
     proximo_encuentro: "",
     partido_id: "",
@@ -770,8 +779,14 @@ const formatHora = (fechaHora) =>
 const capitalizeFirstLetter = (string) =>
     string.charAt(0).toUpperCase() + string.slice(1);
 
+const validarCorreo = (correo) => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(correo);
+};
+
 // Validaciones simples de formulario
 const validarFormulario = () => {
+    // Definir los campos obligatorios
     const requiredFields = [
         "tipo_acreditacion",
         "nombre",
@@ -780,11 +795,21 @@ const validarFormulario = () => {
         "correo",
         "telefono",
         "asunto",
-        "medio_al_que_pertenece",
         "proximo_encuentro",
         "partido_id",
     ];
 
+    // Agregar el campo 'medio_al_que_pertenece' si el tipo de acreditación es 'prensa'
+    if (acreditacionData.value.tipo_acreditacion === "prensa") {
+        requiredFields.push("medio_al_que_pertenece");
+    }
+
+    // Agregar el campo 'carnet_federacion' si el tipo de acreditación es 'arbitro'
+    if (acreditacionData.value.tipo_acreditacion === "arbitro") {
+        requiredFields.push("carnet_federacion");
+    }
+
+    // Validar que todos los campos obligatorios estén completos
     for (const field of requiredFields) {
         if (!acreditacionData.value[field]) {
             Swal.fire(
@@ -794,9 +819,17 @@ const validarFormulario = () => {
                 )} es obligatorio.`,
                 "error"
             );
-            return false;
+            return false; // Detener la validación si hay un campo vacío
         }
     }
+
+    // Validar el formato del correo electrónico
+    if (!validarCorreo(acreditacionData.value.correo)) {
+        Swal.fire("Error", "El correo electrónico no es válido.", "error");
+        return false; // Detener la validación si el correo es inválido
+    }
+
+    // Si todas las validaciones son exitosas
     return true;
 };
 

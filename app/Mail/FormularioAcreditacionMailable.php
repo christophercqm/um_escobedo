@@ -43,6 +43,7 @@ class FormularioAcreditacionMailable extends Mailable
         Log::info('Construyendo el correo con el asunto: ' . $this->asunto);
         Log::info('Datos del correo: ', $this->data);
 
+
         $email = $this->from(config('mail.from.address'), 'Escobedo')
                       ->markdown('emails.acreditacion')
                       ->subject($this->asunto)

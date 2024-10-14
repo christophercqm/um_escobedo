@@ -53,9 +53,9 @@ Route::post('/acreditacion', [FormularioAcreditacionController::class, 'storeAcr
 
 
 // Ruta para revisar la acreditación
-Route::get('/revisar-acreditacion/{id}', [FormularioAcreditacionController::class, 'revisar'])->name('acreditacion.revisar');
-Route::post('/aprobar-acreditacion/{id}', [FormularioAcreditacionController::class, 'aprobar'])->name('acreditacion.aprobar');
-Route::post('/rechazar-acreditacion/{id}', [FormularioAcreditacionController::class, 'rechazar'])->name('acreditacion.rechazar');
+Route::get('/acreditacion/revisar/{token}', [FormularioAcreditacionController::class, 'revisar'])->name('acreditacion.revisar');
+Route::post('/aprobar-acreditacion/{token}', [FormularioAcreditacionController::class, 'aprobar'])->name('acreditacion.aprobar');
+Route::post('/rechazar-acreditacion/{token}', [FormularioAcreditacionController::class, 'rechazar'])->name('acreditacion.rechazar');
 
 
 // Rutas para el formulario de patrocinadores

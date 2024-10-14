@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Illuminate\Support\Str;
+
 
 
 
@@ -32,11 +34,14 @@ class FormularioAcreditacionController extends Controller
             'proximo_encuentro' => 'required|string',
             'partido_id' => 'required|exists:partidos,id',
             'medio_al_que_pertenece' => 'nullable|string',
+            'carnet_federacion' => 'nullable|string',
             'archivo' => 'nullable|file|mimes:jpg,jpeg,png,pdf',
             'club_pertenece' => 'nullable|string',
         ]);
 
         Log::info('Datos validados recibidos del formulario: ', $validatedData);
+        Log::info('Tipo de acreditación recibido: ' . $validatedData['tipo_acreditacion']);
+
 
         // Inicializa un array con los datos comunes, incluyendo tipo_acreditacion
         $dataToStore = [
@@ -51,8 +56,16 @@ class FormularioAcreditacionController extends Controller
             'proximo_encuentro' => $validatedData['proximo_encuentro'],
             'partido_id' => $validatedData['partido_id'],
             'medio_al_que_pertenece' => $validatedData['medio_al_que_pertenece'],
-            'estado' => false // Inicializa estado como false (rechazada)
+            'estado' => false, // Inicializa estado como false (rechazada)
+            'token' => Str::uuid(), // Generar token único
+            'expires_at' => now()->addDays(7), // Establecer la fecha de expiración del token
+
         ];
+
+        // Solo agregar carnet_federacion si el tipo de acreditación no es árbitro
+        if (strtolower($validatedData['tipo_acreditacion']) !== 'arbitro') {
+            $dataToStore['carnet_federacion'] = $validatedData['carnet_federacion'];
+        }
 
         // Solo agregar club_pertenece si el tipo de acreditación es cuerpo directivo, directivo o cuerpo técnico
         if (in_array($validatedData['tipo_acreditacion'], ['cuerpo_directivo', 'directivo', 'cuerpo_tecnico'])) {
@@ -97,7 +110,13 @@ class FormularioAcreditacionController extends Controller
             'medio_al_que_pertenece' => $acreditacion->medio_al_que_pertenece,
             'asunto' => $validatedData['asunto'],
             'acreditacion_id' => $acreditacion->id,
+            'token' => $acreditacion->token, // Incluir el token en los datos del correo
         ];
+
+        // Solo agregar carnet_federacion a los datos si no es un árbitro
+        if (strtolower($validatedData['tipo_acreditacion']) == 'arbitro') {
+            $data['carnet_federacion'] = $validatedData['carnet_federacion'];
+        }
 
         // Solo agregar el medio si el tipo de acreditación es "prensa"
         if ($validatedData['tipo_acreditacion'] === 'prensa') {
@@ -141,10 +160,10 @@ class FormularioAcreditacionController extends Controller
 
 
 
-    public function revisar($id)
+    public function revisar($token)
     {
-        // Buscar la acreditación por ID y cargar el partido relacionado
-        $acreditacion = Acreditacion::with('partido')->findOrFail($id);
+        // Buscar la acreditación por el token y cargar el partido relacionado
+        $acreditacion = Acreditacion::with('partido')->where('token', $token)->firstOrFail();
 
         // Si el campo archivo tiene solo el nombre, añade la ruta base
         $acreditacion->archivo = asset('storage/' . $acreditacion->archivo);
@@ -163,10 +182,10 @@ class FormularioAcreditacionController extends Controller
 
 
 
-    public function aprobar($id)
+    public function aprobar($token)
     {
         // Buscar la acreditación por ID
-        $acreditacion = Acreditacion::findOrFail($id);
+        $acreditacion = Acreditacion::where('token', $token)->firstOrFail();
 
         // Actualizar el estado a 'aprobada'
         $acreditacion->estado = true;
@@ -222,39 +241,39 @@ class FormularioAcreditacionController extends Controller
 
 
 
-    public function rechazar($id)
+    public function rechazar($token)
     {
         try {
-            // Buscar la acreditación por ID
-            $acreditacion = Acreditacion::findOrFail($id);
-
+            // Buscar la acreditación por token
+            $acreditacion = Acreditacion::where('token', $token)->firstOrFail();
+    
             // Lógica para rechazar la acreditación
             $acreditacion->estado = false;
             $acreditacion->save();
-
+    
             // Preparar los datos para el correo de rechazo
             $data = [
                 'nombre' => $acreditacion->nombre,
                 'apellido' => $acreditacion->apellido,
                 'correo' => $acreditacion->correo,
             ];
-
+    
             // Log para verificar la dirección de correo electrónico
             Log::info('Enviando correo de rechazo a: ' . $data['correo']);
-
+    
             // Enviar correo de notificación de rechazo al usuario
             Mail::to($data['correo'])->send(new RechazoAcreditacionMailable($data));
-
-
-            // Retornar una respuesta Inertia con un mensaje de éxito
-            return redirect()->route('acreditacion.revisar', $id)
-                ->with('success', 'Acreditación rechazada correctamente.');
+    
+            // Aquí no retornamos ninguna vista ni redirigimos
         } catch (\Exception $e) {
             Log::error('Error al rechazar la acreditación: ' . $e->getMessage());
-            return redirect()->route('acreditacion.revisar', $id)
-                ->with('error', 'Hubo un problema al rechazar la acreditación.');
+    
+            // Si deseas manejar el error en la misma vista, puedes emitir un log o algún estado de error
         }
     }
+    
+    
+
 
 
 
