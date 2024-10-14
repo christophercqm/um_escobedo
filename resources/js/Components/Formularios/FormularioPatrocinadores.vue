@@ -113,6 +113,7 @@ const submitPatrocinadores = () => {
       icon: "success",
       confirmButtonText: "Aceptar",
       confirmButtonColor: "#28a745",
+      timer: 2000, // El modal se cierra automáticamente después de 2 segundos
       customClass: {
           confirmButton: 'swal-button-ok'
       }

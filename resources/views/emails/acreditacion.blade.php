@@ -39,7 +39,7 @@
         </tr>
         @if(in_array($data['tipo_acreditacion'], ['Cuerpo Técnico', 'Cuerpo Directivo', 'Directivo']))
         <tr>
-            <td style="border: 1px solid #ddd; padding: 10px;">Club al que Pertenece</td>
+            <td style="border: 1px solid #ddd; padding: 10px;">Club al que pertenece</td>
             <td style="border: 1px solid #ddd; padding: 10px;">{{ $data['club_pertenece'] ?? 'N/A' }}</td>
         </tr>
         @endif

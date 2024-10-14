@@ -85,10 +85,9 @@ img {
 
 .btn-ver-mas:hover {
     color: #c11b30 !important;
-
 }
 
-.info  {
+.info {
     color: #666666 !important;
     font-size: 14px;
     font-weight: 500;
@@ -101,16 +100,16 @@ img {
     }
 }
 
-
-
 /* ANIMACIONES */
 .fade-in {
-    opacity: 0; /* Inicia completamente transparente */
-    animation: fadeIn 1s forwards; /* Aplica la animación */
+    animation: fadeIn 1s ease-in-out;
 }
 
 @keyframes fadeIn {
-    to {
-        opacity: 1; /* Termina completamente visible */
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }
