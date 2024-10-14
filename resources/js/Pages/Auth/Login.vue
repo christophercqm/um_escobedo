@@ -3,11 +3,11 @@ import Checkbox from "@/Components/Checkbox.vue";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
-defineProps({
+// Definimos las propiedades que se recibirán en este componente
+const props = defineProps({
     canResetPassword: {
         type: Boolean,
     },
@@ -16,12 +16,14 @@ defineProps({
     },
 });
 
+// Inicializamos el formulario
 const form = useForm({
     email: "",
     password: "",
     remember: false,
 });
 
+// Método para enviar el formulario
 const submit = () => {
     form.post(route("login"), {
         onFinish: () => form.reset("password"),
@@ -34,8 +36,11 @@ const submit = () => {
         <div class="container-login max-width mx-auto padding-container">
             <Head title="Log in" />
 
-            <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-                {{ status }}
+            <div
+                v-if="props.status"
+                class="mb-4 font-medium text-sm text-green-600"
+            >
+                {{ props.status }}
             </div>
 
             <form @submit.prevent="submit">
@@ -77,30 +82,37 @@ const submit = () => {
                             v-model:checked="form.remember"
                         />
                         <span class="ms-2 text-sm text-gray-600"
-                            >Remember me</span
+                            >Recuérdame</span
                         >
                     </label>
                 </div>
 
                 <div class="flex items-center justify-end mt-4">
                     <Link
-                        v-if="canResetPassword"
+                        v-if="props.canResetPassword"
                         :href="route('password.request')"
                         class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                         Forgot your password?
                     </Link>
 
-                    <PrimaryButton
-                        class="ms-4"
+                    <button
+                        class="btn-public"
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing"
+                        type="submit"
                     >
-                        Log in
-                    </PrimaryButton>
+                        Iniciar sesión
+                    </button>
                 </div>
             </form>
         </div>
     </GuestLayout>
 </template>
 
+<style scoped>
+.container-login {
+    width: 500px;
+    max-width: 500px;
+}
+</style>

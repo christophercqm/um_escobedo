@@ -54,7 +54,7 @@ Route::post('/acreditacion', [FormularioAcreditacionController::class, 'storeAcr
 
 // Ruta para revisar la acreditación
 Route::get('/acreditacion/revisar/{token}', [FormularioAcreditacionController::class, 'revisar'])->name('acreditacion.revisar');
-Route::post('/aprobar-acreditacion/{token}', [FormularioAcreditacionController::class, 'aprobar'])->name('acreditacion.aprobar');
+Route::post('/aprobar-acreditacion/{id}', [FormularioAcreditacionController::class, 'aprobar'])->name('acreditacion.aprobar');
 Route::post('/rechazar-acreditacion/{token}', [FormularioAcreditacionController::class, 'rechazar'])->name('acreditacion.rechazar');
 
 
@@ -90,7 +90,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/jugadores/admin/create', [JugadoresController::class, 'create'])->name('admin.jugadores.create');
     Route::post('/jugadores/admin', [JugadoresController::class, 'store'])->name('admin.jugadores.store');
     Route::get('/jugadores/admin/{id}/edit', [JugadoresController::class, 'edit'])->name('admin.jugadores.edit');
-    Route::put('/jugadores/admin/{id}', [JugadoresController::class, 'update'])->name('admin.jugadores.update');
+    Route::post('/jugadores/admin/{id}', [JugadoresController::class, 'update'])->name('admin.jugadores.update');
     Route::delete('/jugadores/admin/{id}', [JugadoresController::class, 'destroy'])->name('admin.jugadores.destroy');
     Route::get('/jugadores/admin/{id}', [JugadoresController::class, 'show'])->name('admin.jugadores.show');
 

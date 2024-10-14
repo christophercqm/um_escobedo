@@ -2,19 +2,13 @@
     <AuthenticatedLayout>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <NavLink
-                    class="btn-escobedo btn-admin"
-                    :href="route('admin.jugadores.create')"
-                >
+                <NavLink class="btn-escobedo btn-admin" :href="route('admin.jugadores.create')">
                     <i class="bi bi-person-plus pr-2"></i>
                     Crear Jugador
                 </NavLink>
 
                 <div style="overflow-x: auto">
-                    <table
-                        id="jugadoresTable"
-                        class="table table-striped datatable my-4"
-                    >
+                    <table id="jugadoresTable" class="table table-striped datatable my-4">
                         <thead>
                             <tr>
                                 <th class="sortable" data-column="nombre">Nombre</th>
@@ -22,7 +16,7 @@
                                 <th class="sortable" data-column="posicion">Posición</th>
                                 <th class="sortable" data-column="numero_camiseta">Número de Camiseta</th>
                                 <th class="sortable" data-column="equipo">Foto</th>
-                                <th class="sortable" data-column="estado">Estado</th> 
+                                <th class="sortable" data-column="estado">Estado</th>
                                 <th class="sortable" data-column="acciones">Acciones</th>
                             </tr>
                         </thead>
@@ -33,36 +27,27 @@
                                 <td>{{ jugador.posicion }}</td>
                                 <td>{{ jugador.numero_camiseta }}</td>
                                 <td>
-                                    <img
-                                        :src="`/storage/${jugador.foto_url}`"
-                                        alt="Imagen"
-                                        class="w-20 h-20 object-cover img-jugador"
-                                    />
+                                    <img :src="`/storage/${jugador.foto_url}`" alt="Imagen"
+                                        class="w-20 h-20 object-cover img-jugador" />
                                 </td>
                                 <td>
                                     <span v-if="jugador.estado === 'Activo'">Activo</span>
                                     <span v-else>Inactivo</span>
-                                </td>   
+                                </td>
                                 <td class="contain-icons">
                                     <div class="icons">
-                                        <NavLink
-                                            class="text-blue-600 hover:text-blue-900"
-                                            :href="route('admin.jugadores.edit', jugador.id)"
-                                        >
+                                        <NavLink class="text-blue-600 hover:text-blue-900"
+                                            :href="route('admin.jugadores.edit', jugador.id)">
                                             <i class="bi bi-pencil-square text-success"></i>
                                         </NavLink>
 
-                                        <NavLink
-                                            class="text-blue-600 hover:text-blue-900"
-                                            :href="route('admin.jugadores.show', jugador.id)"
-                                        >
+                                        <NavLink class="text-blue-600 hover:text-blue-900"
+                                            :href="route('admin.jugadores.show', jugador.id)">
                                             <i class="bi bi-eye text-success"></i>
                                         </NavLink>
 
-                                        <button
-                                            class="text-red-600 hover:text-red-900"
-                                            @click="eliminarJugador(jugador.id)"
-                                        >
+                                        <button class="text-red-600 hover:text-red-900"
+                                            @click="eliminarJugador(jugador.id)">
                                             <i class="bi bi-trash3"></i>
                                         </button>
                                     </div>
