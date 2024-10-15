@@ -10,6 +10,7 @@ use App\Http\Controllers\PrensaController;
 use App\Http\Controllers\JugadoresController;
 use App\Http\Controllers\CuerpoTecnicoController;
 use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\JuntaController;
 use App\Http\Controllers\PartidoController;
 
 
@@ -36,7 +37,7 @@ Route::get('/', function () {
 });
 
 // Rutas públicas
-Route::get('/club', [NavigationController::class, 'club'])->name('club');
+Route::get('/club', [JuntaController::class, 'publicIndex'])->name('club.index'); 
 Route::get('/primer-equipo', [NavigationController::class, 'primerEquipo'])->name('public.primerEquipo');
 Route::get('/escuela', [NavigationController::class, 'escuela'])->name('escuela');
 Route::get('/prensa', [NavigationController::class, 'prensa'])->name('prensa');
@@ -102,6 +103,17 @@ Route::middleware('auth')->group(function () {
     Route::post('/cuerpo-tecnico/admin/{id}', [CuerpoTecnicoController::class, 'update'])->name('cuerpo-tecnico.update');
     Route::delete('/cuerpo-tecnico/admin/{id}', [CuerpoTecnicoController::class, 'destroy'])->name('cuerpo-tecnico.destroy');
     Route::get('/cuerpo-tecnico/admin/{id}', [CuerpoTecnicoController::class, 'show'])->name('cuerpo-tecnico.show');
+
+    // Rutas para gestionar la junta
+    Route::get('/junta/admin', [JuntaController::class, 'index'])->name('admin.junta.index'); // Listar miembros de la junta
+    Route::get('/junta/admin/create', [JuntaController::class, 'create'])->name('admin.junta.create'); // Mostrar formulario para crear un miembro de la junta
+    Route::post('/junta/admin', [JuntaController::class, 'store'])->name('admin.junta.store'); // Guardar un nuevo miembro de la junta
+    Route::get('/junta/admin/{id}/edit', [JuntaController::class, 'edit'])->name('admin.junta.edit'); // Mostrar formulario para editar un miembro de la junta
+    Route::post('/junta/admin/{id}', [JuntaController::class, 'update'])->name('admin.junta.update'); // Actualizar un miembro de la junta
+    Route::delete('/junta/admin/{id}', [JuntaController::class, 'destroy'])->name('admin.junta.destroy'); // Eliminar un miembro de la junta
+    Route::get('/junta/admin/{id}', [JuntaController::class, 'show'])->name('admin.junta.show'); // Mostrar detalles de un miembro de la junta
+
+
 
 
     // Rutas para gestionar equipos

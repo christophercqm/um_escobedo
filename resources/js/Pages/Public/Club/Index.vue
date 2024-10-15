@@ -5,11 +5,7 @@
             <div class="row row-info-bg full-width mx-auto">
                 <div class="col col-img h-100">
                     <figure class="big-img">
-                        <img
-                            :src="equipo"
-                            alt="Equipo Escobedo"
-                            class="img-fluid"
-                        />
+                        <img :src="equipo" alt="Equipo Escobedo" class="img-fluid" />
                     </figure>
                     <figure class="small-img">
                         <img :src="equipo_2" alt="pic2" />
@@ -61,7 +57,7 @@
             <MisionVision></MisionVision>
 
             <!-- JUNTA -->
-            <Junta></Junta>
+            <Junta :miembros="miembros"></Junta>
 
             <!-- BARRA PATROCINIO -->
             <BarraPatrocinio></BarraPatrocinio>
@@ -99,12 +95,16 @@ const isExpanded = ref(false);
 const toggleContent = () => {
     isExpanded.value = !isExpanded.value;
 };
+
+
+const props = defineProps({
+    miembros: Array,
+});
+
+
 </script>
 
 <style scoped>
-.container.container-club {
-}
-
 .big-img {
     position: relative;
     width: 100%;
@@ -130,14 +130,16 @@ const toggleContent = () => {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0); /* Transparente por defecto */
+    background-color: rgba(0, 0, 0, 0);
+    /* Transparente por defecto */
     transition: background-color 0.3s ease;
     z-index: 1;
 }
 
 /* Efecto hover para aplicar la capa negra */
 .big-img:hover::before {
-    background-color: rgba(0, 0, 0, 0.5); /* Opacidad negra */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Opacidad negra */
 }
 
 .big-img:hover img {
@@ -201,7 +203,8 @@ const toggleContent = () => {
 /* Cuando está expandido, mostrar contenido */
 .is-expanded .hidden-content {
     display: block;
-    max-height: 1000px; /* Altura suficiente para mostrar todo */
+    max-height: 1000px;
+    /* Altura suficiente para mostrar todo */
 }
 
 .seguir-leyendo {

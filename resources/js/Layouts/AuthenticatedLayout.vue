@@ -58,6 +58,12 @@ const showingNavigationDropdown = ref(false);
                                     Cuerpo Técnico
                                 </NavLink>
                                 <NavLink
+                                    :href="route('admin.junta.index')"
+                                    :active="route().current('admin.junta.index')"
+                                >
+                                    Junta
+                                </NavLink>
+                                <NavLink
                                     :href="route('equipos.index')"
                                     :active="route().current('equipos.index')"
                                 >

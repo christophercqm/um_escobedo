@@ -11,10 +11,6 @@ use App\Models\CuerpoTecnico;
 
 class NavigationController extends Controller
 {
-    public function club()
-    {
-        return Inertia::render('Club');
-    }
 
     public function primerEquipo()
     {
