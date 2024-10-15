@@ -2,7 +2,7 @@
     <GuestLayout>
         <div class="container container-club px-0">
             <!-- NUESTRA HISTORIA -->
-            <div class="row row-info-bg full-width mx-auto">
+            <div class="row row-info-bg full-width mx-auto bg-white">
                 <div class="col col-img h-100">
                     <figure class="big-img">
                         <img :src="equipo" alt="Equipo Escobedo" class="img-fluid" />

@@ -144,4 +144,9 @@ a {
         padding-left: 12px;
     }
 }
+
+.row-blog{
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
 </style>
