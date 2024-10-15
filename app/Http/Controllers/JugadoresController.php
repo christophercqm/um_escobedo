@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\File;
-use App\Models\Jugadores; 
+use App\Models\Jugadores;
 
 class JugadoresController extends Controller
 {
@@ -89,24 +89,27 @@ class JugadoresController extends Controller
     {
         // Busca el jugador por su ID
         $jugador = Jugadores::find($id);
-    
+
         // Verifica si el jugador existe
         if (!$jugador) {
             return redirect()->route('admin.jugadores')->with('error', 'Jugador no encontrado');
         }
-    
+
         // Retorna la vista con los datos del jugador
         return Inertia::render('administration/Jugadores/Edit', [
             'jugador' => $jugador, // Pasa el objeto jugador
         ]);
     }
-    
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Jugadores $jugadores)
+    public function update(Request $request, $id)
     {
+        // Buscar el jugador por ID
+        $jugador = Jugadores::findOrFail($id);
+
         // Validar los campos del formulario
         $request->validate([
             'nombre' => 'required|string|max:255',
@@ -125,17 +128,17 @@ class JugadoresController extends Controller
         // Si se proporciona una nueva imagen, manejar la carga de imagen
         if ($request->hasFile('foto_url')) {
             // Eliminar la imagen anterior si existe
-            if ($jugadores->foto_url) {
-                File::delete(public_path('storage/' . $jugadores->foto_url));
+            if ($jugador->foto_url) {
+                File::delete(public_path('storage/' . $jugador->foto_url));
             }
 
             // Almacenar la nueva imagen
             $imagePath = $request->file('foto_url')->store('jugadores', 'public');
-            $jugadores->foto_url = $imagePath; // Actualizar la ruta de la imagen
+            $jugador->foto_url = $imagePath; // Actualizar la ruta de la imagen
         }
 
         // Actualizar los datos del jugador
-        $jugadores->update([
+        $jugador->update([
             'nombre' => $request->nombre,
             'apellido' => $request->apellido,
             'posicion' => $request->posicion,
@@ -151,6 +154,7 @@ class JugadoresController extends Controller
         // Redirigir al índice de jugadores con un mensaje de éxito
         return redirect()->route('admin.jugadores')->with('success', 'Jugador actualizado exitosamente.');
     }
+
 
     /**
      * Remove the specified resource from storage.

@@ -6,7 +6,6 @@
                     <i class="bi bi-person-plus pr-2"></i>
                     Crear Jugador
                 </NavLink>
-
                 <div style="overflow-x: auto">
                     <table id="jugadoresTable" class="table table-striped datatable my-4">
                         <thead>

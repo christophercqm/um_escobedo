@@ -1,5 +1,6 @@
 <template>
     <AuthenticatedLayout>
+
         <Head title="Editar Jugador" />
 
         <template #header>
@@ -12,199 +13,92 @@
             <form @submit.prevent="submit">
                 <!-- Campo Nombre -->
                 <div class="mb-3">
-                    <input
-                        type="text"
-                        id="nombre"
-                        v-model="form.nombre"
-                        class="form-control"
-                        placeholder="Nombre *"
-                        required
-                    />
-                    <InputError
-                        :message="form.errors.nombre"
-                        class="text-danger"
-                    />
+                    <input type="text" id="nombre" v-model="form.nombre" class="form-control" placeholder="Nombre *"
+                        required />
+                    <InputError :message="form.errors.nombre" class="text-danger" />
                 </div>
 
                 <!-- Campo Apellido -->
                 <div class="mb-3">
-                    <input
-                        type="text"
-                        id="apellido"
-                        v-model="form.apellido"
-                        class="form-control"
-                        placeholder="Apellido *"
-                        required
-                    />
-                    <InputError
-                        :message="form.errors.apellido"
-                        class="text-danger"
-                    />
+                    <input type="text" id="apellido" v-model="form.apellido" class="form-control"
+                        placeholder="Apellido *" required />
+                    <InputError :message="form.errors.apellido" class="text-danger" />
                 </div>
 
                 <!-- Campo Fecha de Nacimiento -->
                 <div class="mb-3">
-                    <input
-                        type="date"
-                        id="fecha_nacimiento"
-                        v-model="form.fecha_nacimiento"
-                        class="form-control"
-                        placeholder="Fecha de Nacimiento"
-                    />
-                    <InputError
-                        :message="form.errors.fecha_nacimiento"
-                        class="text-danger"
-                    />
+                    <input type="date" id="fecha_nacimiento" v-model="form.fecha_nacimiento" class="form-control"
+                        placeholder="Fecha de Nacimiento" />
+                    <InputError :message="form.errors.fecha_nacimiento" class="text-danger" />
                 </div>
 
                 <!-- Campo Altura -->
                 <div class="mb-3">
-                    <input
-                        type="number"
-                        id="altura"
-                        v-model="form.altura"
-                        class="form-control"
-                        placeholder="Altura (cm)"
-                        min="0"
-                        step="0.01"
-                    />
-                    <InputError
-                        :message="form.errors.altura"
-                        class="text-danger"
-                    />
+                    <input type="number" id="altura" v-model="form.altura" class="form-control"
+                        placeholder="Altura (cm)" min="0" step="0.01" />
+                    <InputError :message="form.errors.altura" class="text-danger" />
                 </div>
 
                 <!-- Campo Posición -->
                 <div class="mb-3">
-                    <input
-                        type="text"
-                        id="posicion"
-                        v-model="form.posicion"
-                        class="form-control"
-                        placeholder="Posición *"
-                        required
-                    />
-                    <InputError
-                        :message="form.errors.posicion"
-                        class="text-danger"
-                    />
+                    <input type="text" id="posicion" v-model="form.posicion" class="form-control"
+                        placeholder="Posición *" required />
+                    <InputError :message="form.errors.posicion" class="text-danger" />
                 </div>
 
                 <!-- Campo Número de Camiseta -->
                 <div class="mb-3">
-                    <input
-                        type="number"
-                        id="numero_camiseta"
-                        v-model="form.numero_camiseta"
-                        class="form-control"
-                        placeholder="Número de Camiseta *"
-                        required
-                    />
-                    <InputError
-                        :message="form.errors.numero_camiseta"
-                        class="text-danger"
-                    />
+                    <input type="number" id="numero_camiseta" v-model="form.numero_camiseta" class="form-control"
+                        placeholder="Número de Camiseta *" required />
+                    <InputError :message="form.errors.numero_camiseta" class="text-danger" />
                 </div>
 
                 <!-- Campo Peso -->
                 <div class="mb-3">
-                    <input
-                        type="number"
-                        id="peso"
-                        v-model="form.peso"
-                        class="form-control"
-                        placeholder="Peso (kg)"
-                        min="0"
-                        step="0.01"
-                    />
-                    <InputError
-                        :message="form.errors.peso"
-                        class="text-danger"
-                    />
+                    <input type="number" id="peso" v-model="form.peso" class="form-control" placeholder="Peso (kg)"
+                        min="0" step="0.01" />
+                    <InputError :message="form.errors.peso" class="text-danger" />
                 </div>
 
                 <!-- Campo Equipo -->
                 <div class="mb-3">
-                    <input
-                        type="text"
-                        id="equipo"
-                        v-model="form.equipo"
-                        class="form-control"
-                        placeholder="Equipo"
-                    />
-                    <InputError
-                        :message="form.errors.equipo"
-                        class="text-danger"
-                    />
+                    <input type="text" id="equipo" v-model="form.equipo" class="form-control" placeholder="Equipo" />
+                    <InputError :message="form.errors.equipo" class="text-danger" />
                 </div>
 
                 <!-- Campo Nacionalidad -->
                 <div class="mb-3">
-                    <input
-                        type="text"
-                        id="nacionalidad"
-                        v-model="form.nacionalidad"
-                        class="form-control"
-                        placeholder="Nacionalidad"
-                    />
-                    <InputError
-                        :message="form.errors.nacionalidad"
-                        class="text-danger"
-                    />
+                    <input type="text" id="nacionalidad" v-model="form.nacionalidad" class="form-control"
+                        placeholder="Nacionalidad" />
+                    <InputError :message="form.errors.nacionalidad" class="text-danger" />
                 </div>
 
                 <!-- Campo Estado -->
                 <div class="mb-3">
-                    <select
-                        id="estado"
-                        v-model="form.estado"
-                        class="form-control"
-                        required
-                    >
+                    <select id="estado" v-model="form.estado" class="form-control" required>
                         <option value="" disabled selected>Estado *</option>
                         <option value="Activo">Activo</option>
                         <option value="Inactivo">Inactivo</option>
                     </select>
-                    <InputError
-                        :message="form.errors.estado"
-                        class="text-danger"
-                    />
+                    <InputError :message="form.errors.estado" class="text-danger" />
                 </div>
 
                 <!-- Campo Foto -->
                 <div class="mb-3">
-                    <input
-                        type="file"
-                        id="foto_url"
-                        @change="handleImageUpload"
-                        class="form-control"
-                        accept="image/*"
-                    />
-                    <InputError
-                        :message="form.errors.foto_url"
-                        class="text-danger"
-                    />
+                    <input type="file" id="foto_url" @change="handleImageUpload" class="form-control"
+                        accept="image/*" />
+                    <InputError :message="form.errors.foto_url" class="text-danger" />
                 </div>
 
                 <!-- Vista Previa de la Foto -->
                 <div class="mb-3" v-if="imagePreview">
                     <div class="img-prev">
-                        <img
-                            :src="imagePreview"
-                            alt="Vista Previa"
-                            class="img-fluid mt-2"
-                        />
+                        <img :src="imagePreview" alt="Vista Previa" class="img-fluid mt-2" />
                     </div>
                 </div>
 
-
-
                 <!-- Botón de Envío -->
-                <button
-                    type="submit"
-                    class="btn-admin"
-                    :disabled="form.processing"
-                >
+                <button type="submit" class="btn-admin" :disabled="form.processing">
                     Actualizar Jugador
                 </button>
             </form>
@@ -262,12 +156,12 @@ function submit() {
         text: "Estás a punto de actualizar el jugador.",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
+        confirmButtonColor: "#28a745",
         cancelButtonColor: "#d33",
         confirmButtonText: "Sí, actualizar jugador!",
     }).then(({ isConfirmed }) => {
         if (isConfirmed) {
-            form.put(route("admin.jugadores.update", props.jugador.id), {
+            form.post(route("admin.jugadores.update", props.jugador.id), {
                 onSuccess: () => {
                     Swal.fire({
                         title: "¡Éxito!",
@@ -304,6 +198,6 @@ function submit() {
 }
 
 .img-prev {
-    width: 200px;
+    width: 150px;
 }
 </style>
