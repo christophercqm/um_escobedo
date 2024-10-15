@@ -157,7 +157,7 @@ function submit() {
         text: "Estás a punto de crear un nuevo jugador.",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
+        confirmButtonColor: "#28a745",
         cancelButtonColor: "#d33",
         confirmButtonText: "Sí, crear jugador!",
     }).then(({ isConfirmed }) => {

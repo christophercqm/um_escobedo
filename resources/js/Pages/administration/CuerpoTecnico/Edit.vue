@@ -159,7 +159,7 @@ const submitForm = () => {
         text: "Estás a punto de actualizar el cuerpo técnico.",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
+        confirmButtonColor: "#28a745",
         cancelButtonColor: "#d33",
         confirmButtonText: "Sí, actualizar!",
     }).then(({ isConfirmed }) => {
@@ -175,7 +175,7 @@ const submitForm = () => {
 
 
             // Realizar la solicitud de actualización
-            Inertia.put(route('cuerpo-tecnico.update', props.cuerpoTecnico.id), formData, {
+            Inertia.post(route('cuerpo-tecnico.update', props.cuerpoTecnico.id), formData, {
                 onError: (err) => {
                     // Mostrar SweetAlert de error
                     const errorMessages = Object.values(err).flat().join(", ");

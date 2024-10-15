@@ -99,7 +99,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/cuerpo-tecnico/admin/create', [CuerpoTecnicoController::class, 'create'])->name('cuerpo-tecnico.create');
     Route::post('/cuerpo-tecnico/admin', [CuerpoTecnicoController::class, 'store'])->name('cuerpo-tecnico.store');
     Route::get('/cuerpo-tecnico/admin/{id}/edit', [CuerpoTecnicoController::class, 'edit'])->name('cuerpo-tecnico.edit');
-    Route::put('/cuerpo-tecnico/admin/{id}', [CuerpoTecnicoController::class, 'update'])->name('cuerpo-tecnico.update');
+    Route::post('/cuerpo-tecnico/admin/{id}', [CuerpoTecnicoController::class, 'update'])->name('cuerpo-tecnico.update');
     Route::delete('/cuerpo-tecnico/admin/{id}', [CuerpoTecnicoController::class, 'destroy'])->name('cuerpo-tecnico.destroy');
     Route::get('/cuerpo-tecnico/admin/{id}', [CuerpoTecnicoController::class, 'show'])->name('cuerpo-tecnico.show');
 
