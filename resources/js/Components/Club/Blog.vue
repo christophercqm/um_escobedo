@@ -7,117 +7,33 @@
                 </div>
             </div>
             <div class="row justify-content-center contain-cards">
-                <!-- CARD 1 -->
-                <div class="col-md-4 container-card">
-                    <a href="www.google.com" class="card-link">
-                        <div class="card shadow-sm">
-                            <img
-                                :src="notice1"
-                                alt="Noticia 1"
-                                class="card-img-top"
-                            />
-                            <div class="card-body">
-                                <h3 class="card-title">
-                                    Sem Porta Mollis Parturient
-                                </h3>
+                <div
+                    v-for="(noticia, index) in props.prensa"
+                    :key="index"
+                    class="col-md-4 container-card"
+                >
+                    <a :href="noticia.enlace" class="card-link">
+                        <div class="card shadow-sm d-flex flex-column">
+                            <img :src="`storage/${noticia.imagen}`" :alt="noticia.titulo" class="card-img-top" />
+                            <div class="card-body flex-grow-1">
+                                <h3 class="card-title">{{ noticia.titulo }}</h3>
                                 <div class="card-meta mb-2">
                                     <span class="text-muted me-3">
-                                        <i class="fa fa-calendar me-1"></i> 21
-                                        Octubre 2024
+                                        <i class="fa fa-calendar me-1"></i> {{ formatDate(noticia.fecha_creacion) }}
                                     </span>
                                 </div>
                                 <p class="card-text">
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipisici elit, sed eiusmod tempor incidunt
-                                    ut labore et dolore magna aliqua...
+                                    {{ truncateText(100, noticia.descripcion) }}
                                 </p>
                             </div>
-                            <!-- Botón separado fuera del enlace de la card -->
                             <div class="text-center contain-btn">
-                                <a
-                                    href="https://demo.goodlayers.com/realsoccer/demo2/2014/03/21/sem-porta-mollis-parturient/"
-                                    class="btn btn-escobedo w-100"
-                                    >Saber más</a
-                                >
+                                <a :href="`/prensa-public/${noticia.id}`" class="btn btn-escobedo w-100">Saber más</a>
                             </div>
                         </div>
                     </a>
                 </div>
-
-                <!-- CARD 2 -->
-                <div class="col-md-4 container-card">
-                    <a href="www.google.com" class="card-link">
-                        <div class="card shadow-sm">
-                            <img
-                                :src="notice2"
-                                alt="Noticia 1"
-                                class="card-img-top"
-                            />
-                            <div class="card-body">
-                                <h3 class="card-title">
-                                    Sem Porta Mollis Parturient
-                                </h3>
-                                <div class="card-meta mb-2">
-                                    <span class="text-muted me-3">
-                                        <i class="fa fa-calendar me-1"></i> 21
-                                        Noviembre 2024
-                                    </span>
-                                    
-                                </div>
-                                <p class="card-text">
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipisici elit, sed eiusmod tempor incidunt
-                                    ut labore et dolore magna aliqua...
-                                </p>
-                            </div>
-                            <!-- Botón separado fuera del enlace de la card -->
-                            <div class="text-center contain-btn">
-                                <a
-                                    href="https://demo.goodlayers.com/realsoccer/demo2/2014/03/21/sem-porta-mollis-parturient/"
-                                    class="btn btn-escobedo w-100"
-                                    >Saber más</a
-                                >
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- CARD 3 -->
-                <div class="col-md-4 container-card">
-                    <a href="www.google.com" class="card-link">
-                        <div class="card shadow-sm">
-                            <img
-                                :src="notice3"
-                                alt="Noticia 1"
-                                class="card-img-top"
-                            />
-                            <div class="card-body">
-                                <h3 class="card-title">
-                                    Sem Porta Mollis Parturient
-                                </h3>
-                                <div class="card-meta mb-2">
-                                    <span class="text-muted me-3">
-                                        <i class="fa fa-calendar me-1"></i> 21
-                                        Noviembre 2024
-                                    </span>
-                                    
-                                </div>
-                                <p class="card-text">
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipisici elit, sed eiusmod tempor incidunt
-                                    ut labore et dolore magna aliqua...
-                                </p>
-                            </div>
-                            <!-- Botón separado fuera del enlace de la card -->
-                            <div class="text-center contain-btn">
-                                <a
-                                    href="https://demo.goodlayers.com/realsoccer/demo2/2014/03/21/sem-porta-mollis-parturient/"
-                                    class="btn btn-escobedo w-100"
-                                    >Saber más</a
-                                >
-                            </div>
-                        </div>
-                    </a>
+                <div v-if="props.prensa.length === 0" class="col-12 text-center">
+                    <p>No hay noticias disponibles en esta categoría.</p>
                 </div>
             </div>
         </div>
@@ -125,27 +41,58 @@
 </template>
 
 <script setup>
-import notice1 from "@images/noticias/notice1.jpg";
-import notice2 from "@images/noticias/notice2.jpeg";
-import notice3 from "@images/noticias/notice3.jpg";
 
+// Recibiendo las props de prensa
+const props = defineProps({
+    prensa: {
+        type: Array,
+        default: () => []
+    }
+});
 
+// Función para truncar el texto
+const truncateText = (number, text) => {
+    if (text.length <= number) {
+        return text;
+    }
+    return text.slice(0, number) + "...";
+};
+
+// Función para formatear la fecha
+const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('es-ES', options); // Cambia 'es-ES' a tu idioma preferido
+};
 </script>
 
 <style scoped>
 /* Estilos personalizados para mejorar el diseño de la card */
 .contain-max .container {
     max-width: 1250px;
-    padding: 50px 0;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 .card-img-top {
     max-height: 200px;
+    object-fit: cover; /* Asegura que la imagen cubra el espacio de la tarjeta */
 }
 
 .card-link {
     text-decoration: none;
     color: inherit;
+}
+
+.card {
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    display: flex; /* Utiliza flexbox para las tarjetas */
+    flex-direction: column; /* Las tarjetas se alinean verticalmente */
+    height: 100%; /* Asegura que las tarjetas llenen el espacio */
+}
+
+.card-body {
+    flex-grow: 1; /* Permite que el cuerpo de la tarjeta crezca y ocupe espacio */
 }
 
 .card-title {
@@ -161,12 +108,6 @@ import notice3 from "@images/noticias/notice3.jpg";
 .card-text {
     font-size: 0.8rem;
     color: var(--gray-real);
-}
-
-.card {
-    cursor: pointer;
-    transition: box-shadow 0.3s ease;
-    max-width: 350px;
 }
 
 .card:hover {
@@ -190,11 +131,11 @@ a {
 }
 
 @media (max-width: 600px) {
-    .container-club .card{
+    .container-club .card {
         max-width: 100%;
     }
 
-    .contain-cards .container-card{
+    .contain-cards .container-card {
         margin-bottom: 2rem;
     }
 
@@ -203,5 +144,4 @@ a {
         padding-left: 12px;
     }
 }
-
 </style>

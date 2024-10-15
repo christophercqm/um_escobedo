@@ -63,13 +63,11 @@
             <BarraPatrocinio></BarraPatrocinio>
 
             <!-- ACTUALIDAD -->
-            <Blog></Blog>
+            <Blog :prensa="prensa"></Blog>
 
             <!-- PATROCINADORES -->
             <Patrocinadores></Patrocinadores>
 
-            <!-- NUESTRO CUERPO TÉCNICO -->
-            <CuerpoTecnico></CuerpoTecnico>
         </div>
     </GuestLayout>
 </template>
@@ -84,7 +82,6 @@ import Junta from "@/Components/Club/Junta.vue";
 import Blog from "@/Components/Club/Blog.vue";
 import Patrocinadores from "@/Components/Home/Patrocinadores.vue";
 import BarraPatrocinio from "@/Components/BarraPatrocinio/Patrocinio.vue";
-import CuerpoTecnico from "@/Components/Club/CuerpoTecnico.vue";
 
 import { ref } from "vue";
 
@@ -97,8 +94,11 @@ const toggleContent = () => {
 };
 
 
+
+
 const props = defineProps({
     miembros: Array,
+    prensa: Array,
 });
 
 

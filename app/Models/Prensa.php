@@ -9,6 +9,9 @@ class Prensa extends Model
 {
     use HasFactory;
 
+    protected $table = 'prensas'; 
+
+
     // Definir los campos que son asignables en masa
     protected $fillable = [
         'imagen',            // Ruta de la imagen

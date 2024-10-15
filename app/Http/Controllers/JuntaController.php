@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\File;
 use App\Models\Junta;
+use App\Models\Prensa;
 use Illuminate\Support\Facades\Log;
 
 
@@ -18,6 +19,7 @@ class JuntaController extends Controller
     {
         // Obtener todos los miembros de la tabla junta
         $miembros = Junta::all();
+
 
         return Inertia::render('administration/Junta/Index', [
             'miembros' => $miembros,
@@ -32,9 +34,15 @@ class JuntaController extends Controller
         // Obtener todos los miembros de la tabla junta
         $miembros = Junta::all();
 
+        // Obtener las últimas 3 noticias de prensa
+        $prensa = Prensa::where('estado', 1)->inRandomOrder()->take(3)->get()->toArray(); // 'estado' 1 significa activo
+
+
         // Renderiza la vista pública
         return Inertia::render('Public/Club/Index', [
             'miembros' => $miembros,
+            'prensa' => $prensa
+
         ]);
     }
 

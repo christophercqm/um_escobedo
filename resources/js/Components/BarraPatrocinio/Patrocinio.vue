@@ -10,7 +10,7 @@
                 </h1>
                 <NavLink
                     href="/contacto"
-                    class="btn-patrocinio p-0 bg-white "
+                    class="btn-patrocinio p-0 bg-white"
                 >
                     <span class="unete">
                         únete a nosotros
@@ -97,6 +97,7 @@ import NavLink from "@/Components/NavLink.vue";
     border-radius: var(--border);
     padding: 0 !important;
     padding: 10px 20px !important;
+    font-weight: 600;
 }
 
 .unete {
@@ -111,5 +112,11 @@ import NavLink from "@/Components/NavLink.vue";
     .unete {
         font-size: 1.5rem;
     }
+}
+
+@media (max-width: 768px) {
+    .unete {
+        font-size: 1rem;
+    }    
 }
 </style>

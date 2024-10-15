@@ -12,31 +12,19 @@
                 <!-- Segunda fila con botones -->
                 <div class="row row-2 my-4">
                     <div class="col d-flex justify-content-start gap-3">
-                        <button
-                            class="btn"
-                            :class="{
-                                'btn-active': currentSection === 'todos',
-                            }"
-                            @click="showSection('todos')"
-                        >
+                        <button class="btn" :class="{
+                            'btn-active': currentSection === 'todos',
+                        }" @click="showSection('todos')">
                             Todos
                         </button>
-                        <button
-                            class="btn"
-                            :class="{
-                                'btn-active': currentSection === 'actualidad',
-                            }"
-                            @click="showSection('actualidad')"
-                        >
+                        <button class="btn" :class="{
+                            'btn-active': currentSection === 'actualidad',
+                        }" @click="showSection('actualidad')">
                             Actualidad
                         </button>
-                        <button
-                            class="btn"
-                            :class="{
-                                'btn-active': currentSection === 'cronicas',
-                            }"
-                            @click="showSection('cronicas')"
-                        >
+                        <button class="btn" :class="{
+                            'btn-active': currentSection === 'cronicas',
+                        }" @click="showSection('cronicas')">
                             Crónicas
                         </button>
                     </div>
@@ -45,21 +33,10 @@
                 <!-- Tercera fila con las cards -->
                 <div class="row row-3">
                     <div class="col-12 col-md-9">
-                        <div
-                            v-if="filteredPrensa.length > 0"
-                            class="my-4 d-flex flex-wrap gap-4 contain-card-notice"
-                        >
-                            <div
-                                v-for="item in filteredPrensa"
-                                :key="item.id"
-                                class="card mb-4"
-                                :data-tipo="item.categoria"
-                            >
-                                <img
-                                    :src="`/storage/${item.imagen}`"
-                                    :alt="item.titulo"
-                                    class="card-img-top"
-                                />
+                        <div v-if="filteredPrensa.length > 0" class="my-4 d-flex flex-wrap gap-4 contain-card-notice">
+                            <div v-for="item in filteredPrensa" :key="item.id" class="card mb-4"
+                                :data-tipo="item.categoria">
+                                <img :src="`/storage/${item.imagen}`" :alt="item.titulo" class="card-img-top" />
                                 <div class="card-body">
                                     <h3 class="card-title">
                                         {{ item.titulo }}
@@ -84,11 +61,8 @@
                                     </p>
                                 </div>
                                 <div class="text-center contain-btn">
-                                    <NavLink
-                                        :href="`/prensa-public/${item.id}`"
-                                        class="btn-public w-100 m-0 d-block text-center"
-                                        >Saber más</NavLink
-                                    >
+                                    <NavLink :href="`/prensa-public/${item.id}`"
+                                        class="btn-public w-100 m-0 d-block text-center">Saber más</NavLink>
                                 </div>
                             </div>
                         </div>
@@ -150,7 +124,7 @@ const filteredPrensa = computed(() => {
 
 // Propiedad computada para obtener las últimas noticias activas para el sidebar
 const latestPrensa = computed(() => {
-    return props.prensa.filter(item => item.estado === 1).slice(0, 3); 
+    return props.prensa.filter(item => item.estado === 1).slice(0, 3);
 });
 </script>
 

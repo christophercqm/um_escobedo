@@ -13,6 +13,7 @@
                             role="tab"
                             aria-controls="home"
                             aria-selected="true"
+                            @click="setActiveTab('home')"
                         >
                             <i class="fas fa-calendar-alt"></i> Nuestra Misión
                         </button>
@@ -27,6 +28,7 @@
                             role="tab"
                             aria-controls="profile"
                             aria-selected="false"
+                            @click="setActiveTab('profile')"
                         >
                             <i class="fas fa-flag-checkered"></i> Nuestra Visión
                         </button>
@@ -41,6 +43,7 @@
                             role="tab"
                             aria-controls="contact"
                             aria-selected="false"
+                            @click="setActiveTab('contact')"
                         >
                             <i class="far fa-eye"></i> Nuestros Valores
                         </button>
@@ -56,16 +59,11 @@
                         id="home"
                         role="tabpanel"
                         aria-labelledby="home-tab"
+                        :class="{ 'fade-in': activeTab === 'home' }"
                     >
-                        <div
-                            class="comon-fild-ads1 d-lg-flex align-items-start"
-                        >
+                        <div class="comon-fild-ads1 d-lg-flex align-items-start">
                             <figure>
-                                <img
-                                    :src="equipo_3"
-                                    alt="Equipo"
-                                    class="Nuestra Historia - Equipo"
-                                />
+                                <img :src="equipo_3" alt="Equipo" class="Nuestra Historia - Equipo" />
                             </figure>
                             <div class="left-history">
                                 <h2>Misión</h2>
@@ -90,16 +88,11 @@
                         id="profile"
                         role="tabpanel"
                         aria-labelledby="profile-tab"
+                        :class="{ 'fade-in': activeTab === 'profile' }"
                     >
-                        <div
-                            class="comon-fild-ads1 d-lg-flex align-items-start"
-                        >
+                        <div class="comon-fild-ads1 d-lg-flex align-items-start">
                             <figure>
-                                <img
-                                    :src="equipo_3"
-                                    alt="Equipo"
-                                    class="Nuestra Historia - Equipo"
-                                />
+                                <img :src="equipo_3" alt="Equipo" class="Nuestra Historia - Equipo" />
                             </figure>
                             <div class="left-history">
                                 <h2>Visión</h2>
@@ -124,16 +117,11 @@
                         id="contact"
                         role="tabpanel"
                         aria-labelledby="contact-tab"
+                        :class="{ 'fade-in': activeTab === 'contact' }"
                     >
-                        <div
-                            class="comon-fild-ads1 d-lg-flex align-items-start"
-                        >
+                        <div class="comon-fild-ads1 d-lg-flex align-items-start">
                             <figure>
-                                <img
-                                    :src="equipo_3"
-                                    alt="Equipo"
-                                    class="Nuestra Historia - Equipo"
-                                />
+                                <img :src="equipo_3" alt="Equipo" class="Nuestra Historia - Equipo" />
                             </figure>
                             <div class="left-history">
                                 <div class="values-list container">
@@ -235,7 +223,18 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+
 import equipo_3 from "@images/equipo/equipo_3.jpg";
+
+// Estado para el tab activo
+const activeTab = ref('home');
+
+// Función para cambiar el tab activo
+const setActiveTab = (tab) => {
+    activeTab.value = tab;
+};
+
 </script>
 
 <style scoped>
@@ -249,7 +248,7 @@ import equipo_3 from "@images/equipo/equipo_3.jpg";
 }
 
 .nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
+.nav-pills .show>.nav-link {
     color: var(--white) !important;
     background-color: var(--red) !important;
 }
