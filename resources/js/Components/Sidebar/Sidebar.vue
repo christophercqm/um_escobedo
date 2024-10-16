@@ -92,7 +92,7 @@
                             class="btn-public text-center"
                             :href="route('proximos-partidos.index')" 
                         >
-                             Ver todos los partidos 
+                             Ver próximos partidos 
                             
                         </NavLink>
                     </div>
@@ -211,7 +211,7 @@ onUnmounted(() => {
     color: var(--blue);
     font-weight: 500;
     text-transform: uppercase;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 .vs {
