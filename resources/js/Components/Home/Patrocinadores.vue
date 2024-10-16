@@ -4,9 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="col col-patro mt-0">
-                    <h2
-                        class="patrocinadores patrocinadores-title m-0 text-center"
-                    >
+                    <h2 class="patrocinadores patrocinadores-title m-0 text-center">
                         Patrocinadores
                     </h2>
 
@@ -14,60 +12,28 @@
                         <div class="logo">
                             <ul class="sponsor p-0 d-flex">
                                 <li class="logo">
-                                    <img
-                                        :src="logo1"
-                                        alt="Logo Camargo"
-                                        class="img-logo"
-                                    />
+                                    <img :src="logo1" alt="Logo Camargo" class="img-logo" />
                                 </li>
                                 <li class="logo">
-                                    <img
-                                        :src="logo2"
-                                        alt="Logo Camargo"
-                                        class="img-logo"
-                                    />
+                                    <img :src="logo2" alt="Logo Camargo" class="img-logo" />
                                 </li>
                                 <li class="logo">
-                                    <img
-                                        :src="logo3"
-                                        alt="Logo Camargo"
-                                        class="img-logo"
-                                    />
+                                    <img :src="logo3" alt="Logo Camargo" class="img-logo" />
                                 </li>
                                 <li class="logo">
-                                    <img
-                                        :src="logo4"
-                                        alt="Logo Camargo"
-                                        class="img-logo"
-                                    />
+                                    <img :src="logo4" alt="Logo Camargo" class="img-logo" />
                                 </li>
                                 <li class="logo">
-                                    <img
-                                        :src="logo5"
-                                        alt="Logo Camargo"
-                                        class="img-logo"
-                                    />
+                                    <img :src="logo5" alt="Logo Camargo" class="img-logo" />
                                 </li>
                                 <li class="logo">
-                                    <img
-                                        :src="logo6"
-                                        alt="Logo Camargo"
-                                        class="img-logo"
-                                    />
+                                    <img :src="logo6" alt="Logo Camargo" class="img-logo" />
                                 </li>
                                 <li class="logo">
-                                    <img
-                                        :src="logo7"
-                                        alt="Logo Camargo"
-                                        class="img-logo"
-                                    />
+                                    <img :src="logo7" alt="Logo Camargo" class="img-logo" />
                                 </li>
                                 <li class="logo">
-                                    <img
-                                        :src="logo8"
-                                        alt="Logo Camargo"
-                                        class="img-logo"
-                                    />
+                                    <img :src="logo8" alt="Logo Camargo" class="img-logo" />
                                 </li>
                             </ul>
                         </div>
@@ -145,6 +111,7 @@ import logo8 from "@images/patrocinadores/logo-soka.webp";
     .contain-patrocinadores .logo {
         max-width: 100%;
     }
+
     .contain-patrocinadores .logo ul.sponsor li.logo {
         width: 30%;
     }
@@ -154,15 +121,15 @@ import logo8 from "@images/patrocinadores/logo-soka.webp";
     .sponsor {
         display: none;
     }
+
     .contain-patrocinadores .logo ul.sponsor li.logo {
         width: 25%;
     }
+
     .contain-patrocinadores .logo ul.sponsor {
         gap: 1rem 2.5rem;
     }
-    
+
 
 }
-
-
 </style>

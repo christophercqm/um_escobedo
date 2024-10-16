@@ -3,24 +3,17 @@
         <div class="prensa-show padding-container">
             <div class="container max-width p-0">
                 <div class="row row-detail-notice d-flex justify-content-md-between">
-                    <div class="col-12 col-md-8">
+                    <div class="col-12 col-md-8 fade-in">
                         <div class="container">
                             <h1 class="mb-4 mt-0">{{ prensa.titulo }}</h1>
-                            <img
-                                :src="`/storage/${prensa.imagen}`"
-                                :alt="prensa.titulo"
-                                class="img-fluid img-articulo-public"
-                            />
-                            <div
-                                class="my-3 d-flex gap-3 container-notice-details"
-                            >
-                                <div
-                                    class="read d-flex align-items-center gap-2"
-                                >
+                            <img :src="`/storage/${prensa.imagen}`" :alt="prensa.titulo"
+                                class="img-fluid img-articulo-public" />
+                            <div class="my-3 d-flex gap-3 container-notice-details">
+                                <div class="read d-flex align-items-center gap-2">
                                     <i class="bi bi-book"></i>
                                     <span>{{
                                         formatCategoria(prensa.categoria)
-                                    }}</span>
+                                        }}</span>
                                 </div>
                                 <div class="date">
                                     <span>
@@ -38,9 +31,7 @@
                                 <!-- Mostrar la descripción con formato de párrafos -->
                                 <div v-html="formattedDescription"></div>
                             </div>
-                            <NavLink href="/prensa" class="btn-public"
-                                >Volver a Noticias</NavLink
-                            >
+                            <NavLink href="/prensa" class="btn-public">Volver a Noticias</NavLink>
                         </div>
                     </div>
 
@@ -81,7 +72,6 @@ const formatCategoria = (categoria) => {
 </script>
 
 <style scoped>
-
 .img-articulo-public {
     height: 400px;
     border-radius: var(--border);
@@ -106,9 +96,4 @@ i {
         display: none;
     }
 }
-
-
-
-
-
 </style>

@@ -6,12 +6,12 @@
                     <h2>Junta</h2>
                     <!-- Contenedor para los miembros -->
                     <div class="logos">
-                        <div class="logos-slide" :style="{
+                        <div class="logos-slide bg-white" :style="{
                             animationPlayState: isHovered
                                 ? 'paused'
                                 : 'running',
                         }">
-                            <div v-for="miembro in props.miembros" :key="miembro.id" class="logo-item">
+                            <div v-for="miembro in props.miembros" :key="miembro.id" class="logo-item bg-white">
                                 <div class="card">
                                     <img :src="`/storage/${miembro.foto_url}`" class="card-img-top"
                                         :alt="`Imagen de ${miembro.nombre}`" />

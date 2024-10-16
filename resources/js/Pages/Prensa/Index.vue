@@ -1,17 +1,17 @@
 <template>
     <GuestLayout>
         <div class="content container-prensa w-100">
-            <div class="container px-0">
+            <div class="container px-0 bg-white">
                 <!-- Primera fila con título -->
                 <div class="row row-1">
-                    <div class="col col-bg-info">
+                    <div class="col col-bg-info bg-white">
                         <h1>Últimas noticias</h1>
                     </div>
                 </div>
 
                 <!-- Segunda fila con botones -->
                 <div class="row row-2 my-4">
-                    <div class="col d-flex justify-content-start gap-3">
+                    <div class="col d-flex justify-content-start gap-3 bg-white">
                         <button class="btn" :class="{
                             'btn-active': currentSection === 'todos',
                         }" @click="showSection('todos')">
@@ -31,11 +31,14 @@
                 </div>
 
                 <!-- Tercera fila con las cards -->
-                <div class="row row-3">
-                    <div class="col-12 col-md-9">
-                        <div v-if="filteredPrensa.length > 0" class="my-4 d-flex flex-wrap gap-4 contain-card-notice">
-                            <div v-for="item in filteredPrensa" :key="item.id" class="card mb-4"
-                                :data-tipo="item.categoria">
+                <div class="row row-3 bg-white">
+                    <div class="col-12 col-md-9 bg-white">
+                        <div v-if="filteredPrensa.length > 0" class="my-4 d-flex flex-wrap gap-4 contain-card-notice bg-white">
+                            <!-- Mostrar solo hasta la cantidad de noticias permitidas -->
+                            <div v-for="item in filteredPrensa.slice(
+                                0,
+                                visibleCards
+                            )" :key="item.id" class="card mb-4 fade-in" :data-tipo="item.categoria">
                                 <img :src="`/storage/${item.imagen}`" :alt="item.titulo" class="card-img-top" />
                                 <div class="card-body">
                                     <h3 class="card-title">
@@ -62,14 +65,18 @@
                                 </div>
                                 <div class="text-center contain-btn">
                                     <NavLink :href="`/prensa-public/${item.id}`"
-                                        class="btn-public w-100 m-0 d-block text-center">Saber más</NavLink>
+                                        class="btn-public w-100 m-0 d-block text-center">
+                                        Saber más
+                                    </NavLink>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Si no hay noticias en la categoría seleccionada -->
-                        <div v-else class="alert alert-info">
-                            No hay noticias disponibles en esta categoría.
+                        <!-- Botón Ver más -->
+                        <div v-if="filteredPrensa.length > visibleCards" class="text-center mt-4">
+                            <button @click="loadMore" class="btn-ver-mas">
+                                Ver más
+                            </button>
                         </div>
                     </div>
 
@@ -91,6 +98,7 @@ import Sidebar from "@/Components/Sidebar/Sidebar.vue";
 
 // Estado reactivo para controlar la sección visible
 const currentSection = ref("todos"); // Inicialmente se muestran todas las noticias
+const visibleCards = ref(4); // Mostrar solo 4 tarjetas inicialmente
 
 // Recibiendo las props de prensa
 const props = defineProps({
@@ -100,6 +108,12 @@ const props = defineProps({
 // Función para cambiar la sección activa
 const showSection = (section) => {
     currentSection.value = section;
+    visibleCards.value = 4; // Resetear a 4 tarjetas cuando se cambia de sección
+};
+
+// Función para cargar más tarjetas
+const loadMore = () => {
+    visibleCards.value += 4; // Mostrar 4 tarjetas más al hacer clic en "Ver más"
 };
 
 // Función para truncar el texto
@@ -114,21 +128,20 @@ const truncateText = (number, text) => {
 const filteredPrensa = computed(() => {
     // Filtra todas las noticias activas (estado === 1) según la sección seleccionada
     if (currentSection.value === "todos") {
-        return props.prensa.filter(item => item.estado === 1);
+        return props.prensa.filter((item) => item.estado === 1);
     } else {
         return props.prensa.filter(
-            (item) => item.categoria === currentSection.value && item.estado === 1
+            (item) =>
+                item.categoria === currentSection.value && item.estado === 1
         );
     }
 });
 
 // Propiedad computada para obtener las últimas noticias activas para el sidebar
 const latestPrensa = computed(() => {
-    return props.prensa.filter(item => item.estado === 1).slice(0, 3);
+    return props.prensa.filter((item) => item.estado === 1).slice(0, 3);
 });
 </script>
-
-
 
 <style scoped>
 .container-prensa .container {
@@ -203,6 +216,11 @@ const latestPrensa = computed(() => {
 
 .contain-card-notice .card-text {
     font-size: 15px;
+}
+
+.btn-ver-mas {
+    color: var(--red);
+    text-decoration: underline;
 }
 
 @media (max-width: 768px) {

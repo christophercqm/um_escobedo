@@ -4,47 +4,23 @@
             <div class="container">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link active"
-                            id="home-tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#home"
-                            type="button"
-                            role="tab"
-                            aria-controls="home"
-                            aria-selected="true"
-                            @click="setActiveTab('home')"
-                        >
+                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                            type="button" role="tab" aria-controls="home" aria-selected="true"
+                            @click="setActiveTab('home')">
                             <i class="fas fa-calendar-alt"></i> Nuestra Misión
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link"
-                            id="profile-tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#profile"
-                            type="button"
-                            role="tab"
-                            aria-controls="profile"
-                            aria-selected="false"
-                            @click="setActiveTab('profile')"
-                        >
+                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                            type="button" role="tab" aria-controls="profile" aria-selected="false"
+                            @click="setActiveTab('profile')">
                             <i class="fas fa-flag-checkered"></i> Nuestra Visión
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link"
-                            id="contact-tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#contact"
-                            type="button"
-                            role="tab"
-                            aria-controls="contact"
-                            aria-selected="false"
-                            @click="setActiveTab('contact')"
-                        >
+                        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
+                            type="button" role="tab" aria-controls="contact" aria-selected="false"
+                            @click="setActiveTab('contact')">
                             <i class="far fa-eye"></i> Nuestros Valores
                         </button>
                     </li>
@@ -54,20 +30,15 @@
             <div class="tab-content mna-bg" id="myTabContent">
                 <div class="container">
                     <!-- Misión -->
-                    <div
-                        class="tab-pane fade show active"
-                        id="home"
-                        role="tabpanel"
-                        aria-labelledby="home-tab"
-                        :class="{ 'fade-in': activeTab === 'home' }"
-                    >
-                        <div class="comon-fild-ads1 d-lg-flex align-items-start">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"
+                        :class="{ 'fade-in': activeTab === 'home' }">
+                        <div class="comon-fild-ads1 d-lg-flex align-items-start" style="background-color: #f2f2f2;">
                             <figure>
                                 <img :src="equipo_3" alt="Equipo" class="Nuestra Historia - Equipo" />
                             </figure>
                             <div class="left-history">
-                                <h2>Misión</h2>
-                                <p>
+                                <h2 style="background-color: #f2f2f2;">Misión</h2>
+                                <p style="background-color: #f2f2f2;">
                                     La Unión Montañesa Escobedo tiene como
                                     misión promover y desarrollar el fútbol en
                                     nuestra comunidad, fomentando el amor por
@@ -83,13 +54,8 @@
                     </div>
 
                     <!-- Visión -->
-                    <div
-                        class="tab-pane fade"
-                        id="profile"
-                        role="tabpanel"
-                        aria-labelledby="profile-tab"
-                        :class="{ 'fade-in': activeTab === 'profile' }"
-                    >
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"
+                        :class="{ 'fade-in': activeTab === 'profile' }">
                         <div class="comon-fild-ads1 d-lg-flex align-items-start">
                             <figure>
                                 <img :src="equipo_3" alt="Equipo" class="Nuestra Historia - Equipo" />
@@ -112,13 +78,8 @@
                     </div>
 
                     <!-- Valores -->
-                    <div
-                        class="tab-pane fade"
-                        id="contact"
-                        role="tabpanel"
-                        aria-labelledby="contact-tab"
-                        :class="{ 'fade-in': activeTab === 'contact' }"
-                    >
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"
+                        :class="{ 'fade-in': activeTab === 'contact' }">
                         <div class="comon-fild-ads1 d-lg-flex align-items-start">
                             <figure>
                                 <img :src="equipo_3" alt="Equipo" class="Nuestra Historia - Equipo" />
@@ -245,6 +206,7 @@ const setActiveTab = (tab) => {
 .our-history-div {
     max-width: 1250px;
     padding: 50px 0;
+    background-color: #f2f2f2;
 }
 
 .nav-pills .nav-link.active,

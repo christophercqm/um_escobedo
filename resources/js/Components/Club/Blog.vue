@@ -3,10 +3,10 @@
         <div class="container">
             <div class="row">
                 <div class="col text-center mb-4">
-                    <h2 class="text-left">Actualidad</h2>
+                    <h2 class="text-left bg-white">Actualidad</h2>
                 </div>
             </div>
-            <div class="row justify-content-center contain-cards">
+            <div class="row justify-content-center contain-cards bg-white">
                 <div
                     v-for="(noticia, index) in props.prensa"
                     :key="index"
