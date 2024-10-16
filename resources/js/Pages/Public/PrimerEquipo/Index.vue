@@ -59,6 +59,7 @@
                         </div>
                     </div>
 
+                    <Sidebar :proximoPartido="proximoPartido" />
                 </div>
 
                 <div class="row row-2 row-cuerpo-tecnico bg-white justify-content-md-between">
@@ -100,7 +101,9 @@ import Sidebar from "@/Components/Sidebar/Sidebar.vue";
 
 const props = defineProps({
     jugadores: Array,
-    cuerpoTecnico: Array // Recepción de datos del cuerpo técnico
+    cuerpoTecnico: Array,
+    proximoPartido: Object,
+
 });
 
 // Estado para manejar la sección actual

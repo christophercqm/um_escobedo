@@ -12,15 +12,6 @@ use App\Models\CuerpoTecnico;
 class NavigationController extends Controller
 {
 
-    public function primerEquipo()
-    {
-        $jugadores = Jugadores::all();
-        $cuerpoTecnico = CuerpoTecnico::all();
-        return Inertia::render('Public/PrimerEquipo/Index', [
-            'jugadores' => $jugadores,
-            'cuerpoTecnico' => $cuerpoTecnico
-        ]);
-    }
 
     public function escuela()
     {

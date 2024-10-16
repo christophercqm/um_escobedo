@@ -14,6 +14,8 @@ use App\Http\Controllers\JuntaController;
 use App\Http\Controllers\PartidoController;
 use App\Http\Controllers\ProximosPartidosController;
 use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\PrimerEquipoController;
+
 
 
 
@@ -24,9 +26,6 @@ use App\Http\Controllers\FormularioAcreditacionController;
 
 
 use App\Models\Jugadores;
-
-
-
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -39,7 +38,7 @@ Route::get('/', function () {
 
 // Rutas públicas
 Route::get('/club', [JuntaController::class, 'publicIndex'])->name('club.index'); 
-Route::get('/primer-equipo', [NavigationController::class, 'primerEquipo'])->name('public.primerEquipo');
+Route::get('/primer-equipo', [PrimerEquipoController::class, 'index'])->name('public.primerEquipo');
 Route::get('/escuela', [NavigationController::class, 'escuela'])->name('escuela');
 Route::get('/prensa', [PrensaController::class, 'publicIndex'])->name('prensa.index');
 Route::get('/prensa-public/{id}', [PrensaController::class, 'showPublic'])->name('prensa.showPublic');

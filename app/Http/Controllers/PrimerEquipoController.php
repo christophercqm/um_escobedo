@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\CuerpoTecnico;
+use App\Models\Partido;
+use App\Models\Jugadores;
+
 
 class PrimerEquipoController extends Controller
 {
@@ -13,9 +16,23 @@ class PrimerEquipoController extends Controller
      */
     public function index()
     {
-        $cuerpoTecnico = CuerpoTecnico::all(); // Obtiene todos los miembros del cuerpo técnico
-        return view('primerEquipo.index', compact('jugadores', 'cuerpoTecnico'));
+        $cuerpoTecnico = CuerpoTecnico::all();
+        $jugadores = Jugadores::all(); // Asegúrate de incluir la colección de jugadores
+        $proximoPartido = Partido::with(['equipoLocal', 'equipoVisitante'])
+            ->where('fecha_hora', '>', now()) // Fecha mayor a la actual
+            ->orderBy('fecha_hora', 'asc')    // Ordenar por fecha más cercana
+            ->first();
+
+        return Inertia::render('Public/PrimerEquipo/Index', [
+            'cuerpoTecnico' => $cuerpoTecnico,
+            'jugadores' => $jugadores, // Agrega esta línea
+            'proximoPartido' => $proximoPartido,
+        ]);
     }
+
+
+
+
 
     /**
      * Show the form for creating a new resource.
