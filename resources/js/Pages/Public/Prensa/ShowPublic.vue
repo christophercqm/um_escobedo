@@ -3,7 +3,7 @@
         <div class="prensa-show padding-container">
             <div class="container max-width p-0">
                 <div class="row row-detail-notice d-flex justify-content-md-between">
-                    <div class="col-12 col-md-8 fade-in">
+                    <div class="col-12 col-md-7 fade-in">
                         <div class="container">
                             <h1 class="mb-4 mt-0">{{ prensa.titulo }}</h1>
                             <img :src="`/storage/${prensa.imagen}`" :alt="prensa.titulo"
@@ -35,7 +35,7 @@
                         </div>
                     </div>
 
-                
+                    <Sidebar :proximoPartido="proximoPartido" />
                 </div>
             </div>
         </div>
@@ -51,6 +51,7 @@ import Sidebar from "@/Components/Sidebar/Sidebar.vue";
 const props = defineProps({
     prensa: Object,
     allPrensa: Array,
+    proximoPartido: Object,
 });
 
 // Computed para formatear la descripción

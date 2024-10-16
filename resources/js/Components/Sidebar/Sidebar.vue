@@ -1,5 +1,5 @@
 <template>
-    <div class="col-md-4">
+    <div class="col-md-4 fade-in">
         <div class="sidebar">
             <div class="container-proximo-partido box-shadow p-3 mb-4">
                 <h5
@@ -175,7 +175,6 @@ const padNumber = (num) => {
     return String(num).padStart(2, "0");
 };
 
-console.log("Props recibidas en Sidebar:", props); // Verificar que la prop llega correctamente
 
 // Contadores para los días, horas, minutos y segundos
 const days = ref(0);
