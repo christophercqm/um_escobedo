@@ -1,7 +1,7 @@
 <template>
     <div class="col-md-4">
-        <div class="sidebar box-shadow p-3">
-            <div class="container-proximo-partido">
+        <div class="sidebar">
+            <div class="container-proximo-partido box-shadow p-3 mb-4">
                 <h5
                     class="sidebar-title text-uppercase d-flex justify-between align-items-center mb-4"
                 >
@@ -19,7 +19,9 @@
                         }}</small>
                     </div>
                     <div class="match-info text-center">
-                        <div class="d-flex justify-between align-items-center container-partido-vs">
+                        <div
+                            class="d-flex justify-between align-items-center container-partido-vs"
+                        >
                             <div class="equipo-uno d-flex flex-column">
                                 <img
                                     :src="`/storage/${proximoPartido.equipo_local.logo}`"
@@ -85,15 +87,14 @@
                                 <small class="text-conteo">segundos</small>
                             </div>
                         </div>
-                        </div>
+                    </div>
 
-                    <div class="button-proximo-partido d-flex justify-center ">
-                        <NavLink 
+                    <div class="button-proximo-partido d-flex justify-center">
+                        <NavLink
                             class="btn-public text-center"
-                            :href="route('proximos-partidos.index')" 
+                            :href="route('proximos-partidos.index')"
                         >
-                             Ver próximos partidos 
-                            
+                            Ver próximos partidos
                         </NavLink>
                     </div>
                 </div>
@@ -102,12 +103,54 @@
                     <p>No hay próximos partidos.</p>
                 </div>
             </div>
+
+            <div class="container-siguenos box-shadow p-3">
+                <h5
+                    class="sidebar-title text-uppercase d-flex mb-4 align-items-center justify-between"
+                >
+                    <span class="title-proximo-partido">Síguenos</span>
+                    <div class="redes d-flex gap-3">
+                        <div class="social-icons">
+                            <a
+                                href="https://www.instagram.com/um_escobedooficial/"
+                                target="_blank"
+                            >
+                                <i class="fa-brands fa-instagram icon"></i>
+                            </a>
+                        </div>
+                        <div class="social-icons">
+                            <a
+                                href="https://x.com/UMEscobedo?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"
+                                target="_blank"
+                            >
+                                <i class="fa-brands fa-x-twitter icon"></i>
+                            </a>
+                        </div>
+                    </div>
+                </h5>
+                <hr class="separator" />
+
+                <div class="img-socio mt-4">
+                    <img :src="bg_sidebar" alt="Imagen Escobedo" />
+                    <div class="overlay"></div>
+                </div>
+
+                <div class="button-hazte-socio w-100 d-flex justify-center">
+                    <NavLink
+                        class="btn-public text-center"
+                        :href="route('contacto')"
+                    >
+                        hazte socio
+                    </NavLink>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
 import { defineProps, ref, onMounted, onUnmounted } from "vue";
+import bg_sidebar from "@images/bg-sidebar.jpeg";
 import NavLink from "../NavLink.vue";
 
 const props = defineProps({
@@ -228,7 +271,7 @@ onUnmounted(() => {
 }
 
 .vs .hora {
-    font-size: .8rem;
+    font-size: 0.8rem;
     color: var(--red);
     font-weight: 500;
 }
@@ -264,7 +307,7 @@ onUnmounted(() => {
 .fecha-partido {
     color: var(--red);
     font-weight: 500;
-    font-size: .8rem;
+    font-size: 0.8rem;
 }
 
 .container-segunda-ref {
@@ -281,5 +324,34 @@ onUnmounted(() => {
 
 .button-proximo-partido {
     margin-top: 2rem;
+}
+
+.img-socio {
+    position: relative;
+    width: 100%;
+    max-height: 220px;
+    height: 220px;
+    position: relative;
+    object-position: center;
+}
+
+.img-socio img {
+    width: 100%;
+    height: 100%;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.social-icons .icon {
+    font-size: 1.5rem;
+    color: var(--red);
 }
 </style>

@@ -7,9 +7,7 @@
                     <div class="col col-bg-info">
                         <!-- INFO DESC TOP -->
                         <div class="content-top">
-                            <div
-                                class="slider-content d-flex flex-column align-items-start"
-                            >
+                            <div class="slider-content d-flex flex-column align-items-start">
                                 <h3 class="text-white">
                                     Bienvenido al Club Escobedo
                                 </h3>
@@ -23,23 +21,13 @@
                                     dapibus condimentum. Nulla facilisi. Morbi
                                     auctor risus nec ligula posuere,
                                 </p>
-                                <NavLink
-                                    href="/contacto"
-                                    class="btn text-white btn-escobedo"
-                                >
+                                <NavLink href="/contacto" class="btn text-white btn-escobedo">
                                     Acerca del Club
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="16"
-                                        height="16"
-                                        fill="currentColor"
-                                        class="bi bi-arrow-right"
-                                        viewBox="0 0 16 16"
-                                    >
-                                        <path
-                                            fill-rule="evenodd"
-                                            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
-                                        ></path>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z">
+                                        </path>
                                     </svg>
                                 </NavLink>
                             </div>
@@ -53,15 +41,9 @@
                                 <h4 class="next-match">
                                     2023-2024 UEFA Champions League
                                 </h4>
-                                <div
-                                    class="d-flex align-items-center justify-content-center mt-2"
-                                >
+                                <div class="d-flex align-items-center justify-content-center mt-2">
                                     <figure>
-                                        <img
-                                            :src="escobedo_logo"
-                                            alt="Logo Image"
-                                            class="img-logo"
-                                        />
+                                        <img :src="escobedo_logo" alt="Logo Image" class="img-logo" />
                                     </figure>
                                     <div class="mc-details-top text-center">
                                         <p class="time">19:20pm</p>
@@ -72,11 +54,7 @@
                                     </div>
 
                                     <figure>
-                                        <img
-                                            :src="escobedo_logo"
-                                            alt="Logo Image"
-                                            class="img-logo"
-                                        />
+                                        <img :src="escobedo_logo" alt="Logo Image" class="img-logo" />
                                     </figure>
                                 </div>
                             </a>
@@ -87,23 +65,15 @@
                                 </h5>
                                 <hr />
 
-                                <ul
-                                    class="d-flex flex-column justify-content-center w-100 p-0 list-assis"
-                                >
-                                    <li
-                                        class="d-flex align-items-center justify-content-between w-100"
-                                    >
-                                        <span
-                                            class="ct-2 d-flex align-items-center"
-                                        >
+                                <ul class="d-flex flex-column justify-content-center w-100 p-0 list-assis">
+                                    <li class="d-flex align-items-center justify-content-between w-100">
+                                        <span class="ct-2 d-flex align-items-center">
                                             <i class="far fa-futbol"></i> Goles
                                         </span>
                                         <span>12 </span>
                                     </li>
 
-                                    <li
-                                        class="d-flex align-items-center justify-content-between"
-                                    >
+                                    <li class="d-flex align-items-center justify-content-between">
                                         <span class="ct-2">
                                             <i class="fas fa-mitten"></i>
                                             Asistencias
@@ -111,9 +81,7 @@
                                         <span>54 </span>
                                     </li>
 
-                                    <li
-                                        class="d-flex align-items-center justify-content-between"
-                                    >
+                                    <li class="d-flex align-items-center justify-content-between">
                                         <span class="ct-2">
                                             <i class="fas fa-running"></i>
                                             Apariciones
@@ -128,10 +96,7 @@
                         <div class="latest-news-div">
                             <div class="row row-one m-0">
                                 <div class="col-lg-5 container-black">
-                                    <h2
-                                        class="py-3"
-                                        style="z-index: 4; position: relative"
-                                    >
+                                    <h2 class="py-3" style="z-index: 4; position: relative">
                                         Últimas novedades
                                     </h2>
                                 </div>
@@ -164,18 +129,11 @@
                             </h1>
                             <a href="#" class="btn all-cm-btn mt-4 mt-lg-0">
                                 únete a nosotros
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
-                                    fill="currentColor"
-                                    class="bi bi-arrow-up-short"
-                                    viewBox="0 0 16 16"
-                                >
-                                    <path
-                                        fill-rule="evenodd"
-                                        d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"
-                                    ></path>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-up-short" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z">
+                                    </path>
                                 </svg>
                             </a>
                         </div>
@@ -282,6 +240,7 @@ p {
     background-color: var(--black);
     color: var(--white);
 }
+
 .contain-red {
     background-color: var(--red);
 }
@@ -326,6 +285,7 @@ p {
 .top-next-mc .location-mc {
     font-family: var(--roboto) !important;
 }
+
 .top-next-mc .date {
     font-weight: 700;
 }
@@ -387,6 +347,7 @@ p {
 .join-us-div .comon-heading {
     color: var(--white);
 }
+
 .comon-heading {
     font-weight: 600;
     color: #071f40;
