@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Prensa; // Asegúrate de incluir el modelo
+use App\Models\Partido;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\File;
@@ -20,6 +21,20 @@ class PrensaController extends Controller
         $prensas = Prensa::all(); // Obtiene todos los registros de Prensa
         return Inertia::render('administration/Prensa/Index', [
             'prensa' => $prensas,
+        ]);
+    }
+
+    public function publicIndex()
+    {
+        $prensas = Prensa::all(); // Obtiene todos los registros de Prensa
+        $proximoPartido = Partido::with(['equipoLocal', 'equipoVisitante']) // Asegúrate de incluir las relaciones
+            ->where('fecha_hora', '>', now()) // Fecha mayor a la actual
+            ->orderBy('fecha_hora', 'asc')    // Ordenar por fecha más cercana
+            ->first();                        // Obtener el primer resultado
+
+        return Inertia::render('Public/Prensa/Index', [
+            'prensa' => $prensas,
+            'proximoPartido' => $proximoPartido,
         ]);
     }
 
@@ -83,7 +98,7 @@ class PrensaController extends Controller
     {
         $prensa = Prensa::findOrFail($id); // Busca la Prensa por ID
         $allPrensa = Prensa::all(); // Obtiene todos los registros de Prensa para el sidebar
-        return Inertia::render('Prensa/ShowPublic', [ // Asegúrate de que el path sea correcto
+        return Inertia::render('Public/Prensa/ShowPublic', [ // Asegúrate de que el path sea correcto
             'prensa' => $prensa,
             'allPrensa' => $allPrensa, // Pasa todos los artículos a la vista
         ]);

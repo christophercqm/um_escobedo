@@ -12,6 +12,9 @@ use App\Http\Controllers\CuerpoTecnicoController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\JuntaController;
 use App\Http\Controllers\PartidoController;
+use App\Http\Controllers\ProximosPartidosController;
+use App\Http\Controllers\EquipoController;
+
 
 
 //Formularios
@@ -19,8 +22,6 @@ use App\Http\Controllers\FormularioContactarController;
 use App\Http\Controllers\FormularioPatrocinadorController;
 use App\Http\Controllers\FormularioAcreditacionController;
 
-// Partidos 
-use App\Http\Controllers\EquipoController;
 
 use App\Models\Jugadores;
 
@@ -40,11 +41,16 @@ Route::get('/', function () {
 Route::get('/club', [JuntaController::class, 'publicIndex'])->name('club.index'); 
 Route::get('/primer-equipo', [NavigationController::class, 'primerEquipo'])->name('public.primerEquipo');
 Route::get('/escuela', [NavigationController::class, 'escuela'])->name('escuela');
-Route::get('/prensa', [NavigationController::class, 'prensa'])->name('prensa');
-Route::get('/prensa-public/{id}', [PrensaController::class, 'showPublic'])->name('prensa.public.show');
+Route::get('/prensa', [PrensaController::class, 'publicIndex'])->name('prensa.index');
+Route::get('/prensa-public/{id}', [PrensaController::class, 'showPublic'])->name('prensa.showPublic');
+
 
 Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto');
 Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.enviar');
+
+
+Route::get('/proximos-partidos', [ProximosPartidosController::class, 'index'])->name('proximos-partidos.index');
+
 
 // Formularios 
 Route::post('/contactar', [FormularioContactarController::class, 'store'])->name('contactar.store');

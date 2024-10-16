@@ -1,17 +1,17 @@
 <template>
     <GuestLayout>
         <div class="content container-prensa w-100">
-            <div class="container px-0 bg-white">
+            <div class="container bg-white">
                 <!-- Primera fila con título -->
                 <div class="row row-1">
-                    <div class="col col-bg-info bg-white">
+                    <div class="col col-bg-info">
                         <h1>Últimas noticias</h1>
                     </div>
                 </div>
 
                 <!-- Segunda fila con botones -->
                 <div class="row row-2 my-4">
-                    <div class="col d-flex justify-content-start gap-3 bg-white">
+                    <div class="col d-flex justify-content-start gap-3">
                         <button class="btn" :class="{
                             'btn-active': currentSection === 'todos',
                         }" @click="showSection('todos')">
@@ -31,9 +31,9 @@
                 </div>
 
                 <!-- Tercera fila con las cards -->
-                <div class="row row-3 bg-white">
-                    <div class="col-12 col-md-9 bg-white">
-                        <div v-if="filteredPrensa.length > 0" class="my-4 d-flex flex-wrap gap-4 contain-card-notice bg-white">
+                <div class="row row-3 d-flex justify-between">
+                    <div class="col-12 col-md-7">
+                        <div v-if="filteredPrensa.length > 0" class="my-4 d-flex flex-wrap gap-4 contain-card-notice">
                             <!-- Mostrar solo hasta la cantidad de noticias permitidas -->
                             <div v-for="item in filteredPrensa.slice(
                                 0,
@@ -64,8 +64,8 @@
                                     </p>
                                 </div>
                                 <div class="text-center contain-btn">
-                                    <NavLink :href="`/prensa-public/${item.id}`"
-                                        class="btn-public w-100 m-0 d-block text-center">
+                                    <NavLink :href="route('prensa.showPublic', item.id)
+                                        " class="btn-public w-100 m-0 d-block text-center">
                                         Saber más
                                     </NavLink>
                                 </div>
@@ -81,9 +81,7 @@
                     </div>
 
                     <!-- SIDEBAR -->
-                    <div class="col-3 col-sidebar p-0">
-                        <Sidebar :prensa="latestPrensa" />
-                    </div>
+                    <Sidebar :proximoPartido="proximoPartido" />
                 </div>
             </div>
         </div>
@@ -103,6 +101,7 @@ const visibleCards = ref(4); // Mostrar solo 4 tarjetas inicialmente
 // Recibiendo las props de prensa
 const props = defineProps({
     prensa: Array,
+    proximoPartido: Object,
 });
 
 // Función para cambiar la sección activa
@@ -118,28 +117,17 @@ const loadMore = () => {
 
 // Función para truncar el texto
 const truncateText = (number, text) => {
-    if (text.length <= number) {
-        return text;
-    }
-    return text.slice(0, number) + "...";
+    return text.length <= number ? text : text.slice(0, number) + "...";
 };
 
 // Función computada para filtrar las noticias según la sección seleccionada
 const filteredPrensa = computed(() => {
-    // Filtra todas las noticias activas (estado === 1) según la sección seleccionada
-    if (currentSection.value === "todos") {
-        return props.prensa.filter((item) => item.estado === 1);
-    } else {
-        return props.prensa.filter(
-            (item) =>
-                item.categoria === currentSection.value && item.estado === 1
-        );
-    }
-});
-
-// Propiedad computada para obtener las últimas noticias activas para el sidebar
-const latestPrensa = computed(() => {
-    return props.prensa.filter((item) => item.estado === 1).slice(0, 3);
+    return props.prensa.filter(
+        (item) =>
+            item.estado === 1 &&
+            (currentSection.value === "todos" ||
+                item.categoria === currentSection.value)
+    );
 });
 </script>
 
@@ -221,6 +209,10 @@ const latestPrensa = computed(() => {
 .btn-ver-mas {
     color: var(--red);
     text-decoration: underline;
+}
+
+.sidebar {
+    max-width: 390px;
 }
 
 @media (max-width: 768px) {

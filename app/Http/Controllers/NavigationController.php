@@ -27,15 +27,6 @@ class NavigationController extends Controller
         return Inertia::render('Escuela');
     }
 
-    public function prensa()
-    {
-        $prensas = Prensa::all(); // Obtiene todos los registros de Prensa
-        return Inertia::render('Prensa/Index', [ // Renderiza la vista pública
-            'prensa' => $prensas, // Pasa los datos a la vista
-        ]);
-    }
-
-
 
     // Métodos futuros para secciones administrativas
     public function adminDashboard()

@@ -24,6 +24,20 @@ class PartidoController extends Controller
 
 
 
+    public function proximoPartido()
+    {
+        // Obtener el próximo partido que aún no ha ocurrido
+        $proximoPartido = Partido::with(['equipoLocal', 'equipoVisitante'])
+            ->where('fecha_hora', '>', now()) // Fecha mayor a la actual
+            ->orderBy('fecha_hora', 'asc')    // Ordenar por fecha más cercana
+            ->first();                        // Obtener el primer resultado
+
+        return inertia('Public/Prensa/Index', [
+            'proximoPartido' => $proximoPartido,
+        ]);
+    }
+
+
 
 
     // Mostrar el formulario para crear un nuevo partido

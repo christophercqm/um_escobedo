@@ -59,8 +59,6 @@
                         </div>
                     </div>
 
-                    <!-- SIDEBAR -->
-                    <Sidebar class="col-3"></Sidebar>
                 </div>
 
                 <div class="row row-2 row-cuerpo-tecnico bg-white justify-content-md-between">
@@ -164,9 +162,12 @@ div.img-player {
 }
 
 img.card-img-jugador {
-    object-fit: contain; /* Ajusta la imagen manteniendo su relación de aspecto */
-    height: 100%; /* Asegura que la imagen ocupe toda la altura del contenedor */
-    width: auto; /* Mantiene la relación de aspecto */
+    object-fit: contain;
+    /* Ajusta la imagen manteniendo su relación de aspecto */
+    height: 100%;
+    /* Asegura que la imagen ocupe toda la altura del contenedor */
+    width: auto;
+    /* Mantiene la relación de aspecto */
     margin: 0 auto;
 }
 
@@ -191,10 +192,13 @@ img.card-img-jugador {
 }
 
 .card-body-cuerpo-tecnico {
-    position: absolute; /* Mantiene el texto en la parte inferior */
-    bottom: 0; /* Coloca el texto en la parte inferior */
+    position: absolute;
+    /* Mantiene el texto en la parte inferior */
+    bottom: 0;
+    /* Coloca el texto en la parte inferior */
     background-color: var(--bg-black);
-    width: 100%; /* Asegura que el fondo del texto ocupe todo el ancho */
+    width: 100%;
+    /* Asegura que el fondo del texto ocupe todo el ancho */
 }
 
 /* Color del botón activo */
@@ -224,15 +228,21 @@ img.card-img-jugador {
 
 /* Nuevos estilos para el cuerpo técnico */
 .img-tecnico {
-    max-height: 420px; /* Asegura que todos los contenedores de imágenes tengan la misma altura */
-    height: 420px; /* Altura uniforme */
-    position: relative; /* Necesario para el posicionamiento absoluto del texto */
+    max-height: 420px;
+    /* Asegura que todos los contenedores de imágenes tengan la misma altura */
+    height: 420px;
+    /* Altura uniforme */
+    position: relative;
+    /* Necesario para el posicionamiento absoluto del texto */
 }
 
 
 img.card-img-tecnico {
-    object-fit: contain; /* Ajusta la imagen cubriendo todo el contenedor */
-    height: 100%; /* Asegura que la imagen ocupe toda la altura del contenedor */
-    width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
+    object-fit: contain;
+    /* Ajusta la imagen cubriendo todo el contenedor */
+    height: 100%;
+    /* Asegura que la imagen ocupe toda la altura del contenedor */
+    width: 100%;
+    /* Asegura que la imagen ocupe todo el ancho del contenedor */
 }
 </style>

@@ -35,10 +35,7 @@
                         </div>
                     </div>
 
-                    <!-- SIDEBAR-->
-                    <div class="col-3">
-                        <Sidebar :prensa="allPrensa" />
-                    </div>
+                
                 </div>
             </div>
         </div>

@@ -12,6 +12,7 @@
     --gray-real: gray;
     --gray: #bdbcbc;
     --grayv2: #8d95a1;
+    --blue: rgb(33,37,41);
     --text-color: #333333;
     /* PARA TEXTOS EN FONDO NEGRO */
     --black-opacity: rgba(13, 04, 03, 88%);
@@ -102,6 +103,11 @@ img {
         padding-bottom: 30px;
     }
 }
+
+.box-shadow {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ajusta los valores según sea necesario */
+}
+
 
 /* ANIMACIONES */
 .fade-in {
