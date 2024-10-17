@@ -59,7 +59,10 @@
                         </div>
                     </div>
 
-                    <Sidebar :proximoPartido="proximoPartido" />
+                    <Sidebar 
+                        :proximoPartido="proximoPartido"
+                        :ultimoPartido="ultimoPartido"
+                    />
                 </div>
 
                 <div class="row row-2 row-cuerpo-tecnico bg-white justify-content-md-between">
@@ -96,14 +99,19 @@
 
 <script setup>
 import GuestLayout from "@/Layouts/GuestLayout.vue";
-import { defineProps, computed, ref } from "vue";
+import { defineProps, computed, ref, onMounted } from "vue";
 import Sidebar from "@/Components/Sidebar/Sidebar.vue";
 
 const props = defineProps({
     jugadores: Array,
     cuerpoTecnico: Array,
     proximoPartido: Object,
+    ultimoPartido: Object
 
+});
+
+onMounted(() => {
+    console.log("Último partido:", props.ultimoPartido);
 });
 
 // Estado para manejar la sección actual

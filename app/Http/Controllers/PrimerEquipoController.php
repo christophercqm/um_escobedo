@@ -7,6 +7,8 @@ use Inertia\Inertia;
 use App\Models\CuerpoTecnico;
 use App\Models\Partido;
 use App\Models\Jugadores;
+use App\Models\UltimoPartido; // Agrega esta línea
+
 
 
 class PrimerEquipoController extends Controller
@@ -17,16 +19,30 @@ class PrimerEquipoController extends Controller
     public function index()
     {
         $cuerpoTecnico = CuerpoTecnico::all();
-        $jugadores = Jugadores::all(); // Asegúrate de incluir la colección de jugadores
+        $jugadores = Jugadores::all();
+        
+        // Obtiene el próximo partido
         $proximoPartido = Partido::with(['equipoLocal', 'equipoVisitante'])
-            ->where('fecha_hora', '>', now()) // Fecha mayor a la actual
-            ->orderBy('fecha_hora', 'asc')    // Ordenar por fecha más cercana
+            ->where('fecha_hora', '>', now())
+            ->orderBy('fecha_hora', 'asc')
             ->first();
+
+        // Obtiene los últimos partidos
+        $ultimosPartidos = UltimoPartido::with(['partido.equipoLocal', 'partido.equipoVisitante'])->get();
+
+        // Verifica si hay últimos partidos y selecciona el último
+        $ultimoPartido = $ultimosPartidos->last(); // O el método que prefieras para obtener el último
+        $fechaHoraUltimoPartido = $ultimoPartido ? $ultimoPartido->partido->fecha_hora : null;
+
 
         return Inertia::render('Public/PrimerEquipo/Index', [
             'cuerpoTecnico' => $cuerpoTecnico,
-            'jugadores' => $jugadores, // Agrega esta línea
+            'jugadores' => $jugadores,
             'proximoPartido' => $proximoPartido,
+            'ultimoPartido' => $ultimoPartido,
+            'fechaHoraUltimoPartido' => $fechaHoraUltimoPartido, // Pasa la fecha y hora
+
+ 
         ]);
     }
 
