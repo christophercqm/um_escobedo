@@ -20,5 +20,15 @@ class Equipo extends Model
         'logo',
     ];
 
-    // Aquí puedes agregar métodos adicionales relacionados con el modelo si es necesario
+    // Relación con los partidos donde el equipo fue local
+    public function partidosComoLocal()
+    {
+        return $this->hasMany(UltimoPartido::class, 'equipo_local_id');
+    }
+
+    // Relación con los partidos donde el equipo fue visitante
+    public function partidosComoVisitante()
+    {
+        return $this->hasMany(UltimoPartido::class, 'equipo_visitante_id');
+    }
 }

@@ -53,13 +53,17 @@ const showingNavigationDropdown = ref(false);
                                 </NavLink>
                                 <NavLink
                                     :href="route('cuerpo-tecnico.index')"
-                                    :active="route().current('cuerpo-tecnico.index')"
+                                    :active="
+                                        route().current('cuerpo-tecnico.index')
+                                    "
                                 >
                                     Cuerpo Técnico
                                 </NavLink>
                                 <NavLink
                                     :href="route('admin.junta.index')"
-                                    :active="route().current('admin.junta.index')"
+                                    :active="
+                                        route().current('admin.junta.index')
+                                    "
                                 >
                                     Junta
                                 </NavLink>
@@ -74,6 +78,16 @@ const showingNavigationDropdown = ref(false);
                                     :active="route().current('partidos.index')"
                                 >
                                     Partidos
+                                </NavLink>
+                                <NavLink
+                                    :href="route('admin.ultimos_partidos')"
+                                    :active="
+                                        route().current(
+                                            'admin.ultimos_partidos'
+                                        )
+                                    "
+                                >
+                                    Últimos partidos
                                 </NavLink>
                             </div>
                         </div>

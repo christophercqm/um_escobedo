@@ -1,6 +1,6 @@
 <template>
     <GuestLayout>
-        <div class="content container-primer-equipo w-100">
+        <div class="content container-primer-equipo bg-white w-100">
             <div class="container max-width padding-container">
                 <div class="row row-1 row-jugadores bg-white justify-content-md-between">
                     <!-- CONTENIDO JUGADORES -->
