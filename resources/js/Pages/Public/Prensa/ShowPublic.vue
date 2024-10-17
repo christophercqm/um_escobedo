@@ -11,18 +11,12 @@
                             <div class="my-3 d-flex gap-3 container-notice-details">
                                 <div class="read d-flex align-items-center gap-2">
                                     <i class="bi bi-book"></i>
-                                    <span>{{
-                                        formatCategoria(prensa.categoria)
-                                        }}</span>
+                                    <span>{{ formatCategoria(prensa.categoria) }}</span>
                                 </div>
                                 <div class="date">
                                     <span>
                                         <i class="bi bi-calendar me-1"></i>
-                                        {{
-                                            new Date(
-                                                prensa.created_at
-                                            ).toLocaleDateString("es-ES")
-                                        }}
+                                        {{ new Date(prensa.created_at).toLocaleDateString("es-ES") }}
                                     </span>
                                 </div>
                             </div>
@@ -35,7 +29,11 @@
                         </div>
                     </div>
 
-                    <Sidebar :proximoPartido="proximoPartido" />
+                    <Sidebar 
+                        :proximoPartido="proximoPartido"
+                        :ultimoPartido="ultimoPartido" 
+                        :allPrensa="allPrensa" 
+                    />
                 </div>
             </div>
         </div>
@@ -43,7 +41,7 @@
 </template>
 
 <script setup>
-import { defineProps, computed } from "vue";
+import { defineProps, computed, onMounted } from "vue";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import NavLink from "@/Components/NavLink.vue";
 import Sidebar from "@/Components/Sidebar/Sidebar.vue";
@@ -52,21 +50,22 @@ const props = defineProps({
     prensa: Object,
     allPrensa: Array,
     proximoPartido: Object,
+    ultimoPartido: Object
 });
 
 // Computed para formatear la descripción
 const formattedDescription = computed(() => {
-    // Divide la descripción en párrafos utilizando doble salto de línea como delimitador
     const paragraphs = props.prensa.descripcion.split(/\n\s*\n/);
-    // Envolver cada párrafo en un <p> y unirlos
     return paragraphs.map((paragraph) => `<p>${paragraph.trim()}</p>`).join("");
 });
 
+// Método para formatear la categoría
 const formatCategoria = (categoria) => {
     return categoria === "cronicas"
         ? "Crónicas"
         : categoria.charAt(0).toUpperCase() + categoria.slice(1);
 };
+
 </script>
 
 <style scoped>
@@ -89,7 +88,6 @@ i {
 }
 
 @media (max-width: 768px) {
-
     .sidebar {
         display: none;
     }

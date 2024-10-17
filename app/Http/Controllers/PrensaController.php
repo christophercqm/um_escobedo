@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Prensa; // Asegúrate de incluir el modelo
 use App\Models\Partido;
+use App\Models\UltimoPartido;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\File;
@@ -28,16 +29,22 @@ class PrensaController extends Controller
     public function publicIndex()
     {
         $prensas = Prensa::all(); // Obtiene todos los registros de Prensa
-        $proximoPartido = Partido::with(['equipoLocal', 'equipoVisitante']) // Asegúrate de incluir las relaciones
-            ->where('fecha_hora', '>', now()) // Fecha mayor a la actual
-            ->orderBy('fecha_hora', 'asc')    // Ordenar por fecha más cercana
-            ->first();                        // Obtener el primer resultado
+        $proximoPartido = Partido::with(['equipoLocal', 'equipoVisitante'])
+            ->where('fecha_hora', '>', now())
+            ->orderBy('fecha_hora', 'asc')
+            ->first(); // Obtener el próximo partido
+
+        // Obtiene los últimos partidos
+        $ultimosPartidos = UltimoPartido::with(['partido.equipoLocal', 'partido.equipoVisitante'])->get();
+        $ultimoPartido = $ultimosPartidos->last(); // Selecciona el último
 
         return Inertia::render('Public/Prensa/Index', [
             'prensa' => $prensas,
             'proximoPartido' => $proximoPartido,
+            'ultimoPartido' => $ultimoPartido, // Agrega esto para mantener consistencia
         ]);
     }
+
 
 
     /**
@@ -97,8 +104,11 @@ class PrensaController extends Controller
 
     public function showPublic(string $id)
     {
-        $prensa = Prensa::findOrFail($id); // Busca la Prensa por ID
-        $allPrensa = Prensa::all(); // Obtiene todos los registros de Prensa para el sidebar
+        // Busca la Prensa por ID
+        $prensa = Prensa::findOrFail($id);
+
+        // Obtiene todos los registros de Prensa para el sidebar
+        $allPrensa = Prensa::all();
 
         // Consulta para obtener el próximo partido
         $proximoPartido = Partido::with(['equipoLocal', 'equipoVisitante'])
@@ -106,12 +116,20 @@ class PrensaController extends Controller
             ->orderBy('fecha_hora', 'asc')    // Ordenar por fecha más cercana
             ->first(); // Obtiene el primer partido
 
+        // Asegúrate de tener `ultimoPartido` definido si es necesario
+        $ultimosPartidos = UltimoPartido::with(['partido.equipoLocal', 'partido.equipoVisitante'])->get();
+        $ultimoPartido = $ultimosPartidos->last(); // Selecciona el último
+
         return Inertia::render('Public/Prensa/ShowPublic', [
             'prensa' => $prensa,
-            'allPrensa' => $allPrensa, // Pasa todos los artículos a la vista
-            'proximoPartido' => $proximoPartido, // Pasa el próximo partido a la vista
+            'allPrensa' => $allPrensa,
+            'proximoPartido' => $proximoPartido,
+            'ultimoPartido' => $ultimoPartido, // Asegúrate de pasar también este prop
         ]);
     }
+
+
+
 
 
     /**

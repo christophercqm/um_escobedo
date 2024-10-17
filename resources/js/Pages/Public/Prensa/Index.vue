@@ -81,7 +81,10 @@
                     </div>
 
                     <!-- SIDEBAR -->
-                    <Sidebar :proximoPartido="proximoPartido" />
+                    <Sidebar 
+                        :proximoPartido="proximoPartido"
+                        :ultimoPartido="ultimoPartido"
+                    />
                 </div>
             </div>
         </div>
@@ -102,6 +105,7 @@ const visibleCards = ref(4); // Mostrar solo 4 tarjetas inicialmente
 const props = defineProps({
     prensa: Array,
     proximoPartido: Object,
+    ultimoPartido: Object
 });
 
 // Función para cambiar la sección activa

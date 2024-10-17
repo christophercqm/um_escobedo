@@ -3,9 +3,7 @@
         <div class="sidebar">
             <!-- PRÓXIMO PARTIDO-->
             <div class="container-proximo-partido box-shadow p-3 mb-4">
-                <h5
-                    class="sidebar-title text-uppercase d-flex justify-between align-items-center mb-4"
-                >
+                <h5 class="sidebar-title text-uppercase d-flex justify-between align-items-center mb-4">
                     <span class="title-proximo-partido">Próximo partido</span>
                 </h5>
                 <hr class="separator" />
@@ -20,15 +18,10 @@
                         }}</small>
                     </div>
                     <div class="match-info text-center">
-                        <div
-                            class="d-flex justify-between align-items-center container-partido-vs"
-                        >
+                        <div class="d-flex justify-between align-items-center container-partido-vs">
                             <div class="equipo-uno d-flex flex-column">
-                                <img
-                                    :src="`/storage/${proximoPartido.equipo_local.logo}`"
-                                    alt="Logo equipo local"
-                                    class="team-logo"
-                                />
+                                <img :src="`/storage/${proximoPartido.equipo_local.logo}`" alt="Logo equipo local"
+                                    class="team-logo" />
                                 <strong class="name-equipo">{{
                                     proximoPartido.equipo_local.nombre
                                 }}</strong>
@@ -42,11 +35,8 @@
                             </div>
 
                             <div class="equipo-dos d-flex flex-column">
-                                <img
-                                    :src="`/storage/${proximoPartido.equipo_visitante.logo}`"
-                                    alt="Logo equipo visitante"
-                                    class="team-logo"
-                                />
+                                <img :src="`/storage/${proximoPartido.equipo_visitante.logo}`"
+                                    alt="Logo equipo visitante" class="team-logo" />
                                 <strong class="name-equipo">{{
                                     proximoPartido.equipo_visitante.nombre
                                 }}</strong>
@@ -91,10 +81,7 @@
                     </div>
 
                     <div class="button-proximo-partido d-flex justify-center">
-                        <NavLink
-                            class="btn-public text-center"
-                            :href="route('proximos-partidos.index')"
-                        >
+                        <NavLink class="btn-public text-center" :href="route('proximos-partidos.index')">
                             Ver próximos partidos
                         </NavLink>
                     </div>
@@ -107,9 +94,7 @@
 
             <!-- ÚLTIMO PARTIDO -->
             <div class="container-siguenos box-shadow p-3">
-                <h5
-                    class="sidebar-title text-uppercase d-flex mb-4 align-items-center justify-between"
-                >
+                <h5 class="sidebar-title text-uppercase d-flex mb-4 align-items-center justify-between">
                     <span class="title-proximo-partido">Último partido</span>
                 </h5>
                 <hr class="separator" />
@@ -121,25 +106,18 @@
                         {{
                             ultimoPartido && ultimoPartido.partido
                                 ? formatFullDate(
-                                      ultimoPartido.partido.fecha_hora
-                                  )
+                                    ultimoPartido.partido.fecha_hora
+                                )
                                 : "No disponible"
                         }}
                     </p>
 
                     <!-- Información del último partido con los equipos -->
                     <div class="match-info text-center mt-3">
-                        <div
-                            class="d-flex justify-content-center align-items-center"
-                        >
-                            <div
-                                class="equipo-uno d-flex flex-column align-items-center"
-                            >
-                                <img
-                                    :src="`/storage/${ultimoPartido.partido.equipo_local.logo}`"
-                                    alt="Logo equipo local"
-                                    class="team-logo"
-                                />
+                        <div class="d-flex justify-content-center align-items-center">
+                            <div class="equipo-uno d-flex flex-column align-items-center">
+                                <img :src="`/storage/${ultimoPartido.partido.equipo_local.logo}`"
+                                    alt="Logo equipo local" class="team-logo" />
                                 <strong class="name-equipo">{{
                                     ultimoPartido.partido.equipo_local.nombre
                                 }}</strong>
@@ -168,14 +146,9 @@
                                     </small>
                                 </span>
                             </div>
-                            <div
-                                class="equipo-dos d-flex flex-column align-items-center"
-                            >
-                                <img
-                                    :src="`/storage/${ultimoPartido.partido.equipo_visitante.logo}`"
-                                    alt="Logo equipo visitante"
-                                    class="team-logo"
-                                />
+                            <div class="equipo-dos d-flex flex-column align-items-center">
+                                <img :src="`/storage/${ultimoPartido.partido.equipo_visitante.logo}`"
+                                    alt="Logo equipo visitante" class="team-logo" />
                                 <strong class="name-equipo">{{
                                     ultimoPartido.partido.equipo_visitante
                                         .nombre
@@ -188,24 +161,17 @@
 
             <!-- SÍGUENOS -->
             <div class="container-siguenos box-shadow p-3">
-                <h5
-                    class="sidebar-title text-uppercase d-flex mb-4 align-items-center justify-between"
-                >
+                <h5 class="sidebar-title text-uppercase d-flex mb-4 align-items-center justify-between">
                     <span class="title-proximo-partido">Síguenos</span>
                     <div class="redes d-flex gap-3">
                         <div class="social-icons">
-                            <a
-                                href="https://www.instagram.com/um_escobedooficial/"
-                                target="_blank"
-                            >
+                            <a href="https://www.instagram.com/um_escobedooficial/" target="_blank">
                                 <i class="fa-brands fa-instagram icon"></i>
                             </a>
                         </div>
                         <div class="social-icons">
-                            <a
-                                href="https://x.com/UMEscobedo?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"
-                                target="_blank"
-                            >
+                            <a href="https://x.com/UMEscobedo?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"
+                                target="_blank">
                                 <i class="fa-brands fa-x-twitter icon"></i>
                             </a>
                         </div>
@@ -219,10 +185,7 @@
                 </div>
 
                 <div class="button-hazte-socio w-100 d-flex justify-center">
-                    <NavLink
-                        class="btn-public text-center"
-                        :href="route('contacto')"
-                    >
+                    <NavLink class="btn-public text-center" :href="route('contacto')">
                         Hazte socio
                     </NavLink>
                 </div>
@@ -453,7 +416,7 @@ onUnmounted(() => {
     color: var(--red);
 }
 
-.estadio{
+.estadio {
     font-size: .7rem;
     padding: 0 1rem;
 }
