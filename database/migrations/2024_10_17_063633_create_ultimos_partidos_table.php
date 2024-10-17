@@ -16,18 +16,18 @@ return new class extends Migration
     {
         Schema::create('ultimos_partidos', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha');
-            $table->string('puntuacion_local')->nullable();
-            $table->string('puntuacion_visitante')->nullable();
-            $table->string('estadio')->nullable();
-            $table->string('estado_partido')->nullable();
-            $table->foreignId('equipo_local_id')->constrained('equipos')->onDelete('cascade');
-            $table->foreignId('equipo_visitante_id')->constrained('equipos')->onDelete('cascade');
-            $table->foreignId('partido_id')->constrained('partidos')->onDelete('cascade');
-            $table->timestamps();
+            $table->foreignId('partido_id')->constrained('partidos')->onDelete('cascade'); // Relacionar con la tabla partidos
+            $table->string('puntuacion_local')->nullable(); // Puntuación del equipo local
+            $table->string('puntuacion_visitante')->nullable(); // Puntuación del equipo visitante
+            $table->string('estadio')->nullable(); // Nombre del estadio
+            $table->string('estado_partido')->nullable(); // Estado del partido (ej: finalizado, en progreso)
+            $table->timestamps(); // Timestamps automáticos (created_at y updated_at)
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down()
     {
         Schema::dropIfExists('ultimos_partidos');

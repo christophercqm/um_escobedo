@@ -31,4 +31,9 @@ class Partido extends Model
     {
         return $this->belongsTo(Equipo::class, 'equipo_visitante_id');
     }
+
+    public function ultimosPartidos()
+    {
+        return $this->hasMany(UltimoPartido::class, 'partido_id');
+    }
 }

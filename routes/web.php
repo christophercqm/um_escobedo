@@ -148,7 +148,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/ultimos-partidos/admin/create', [UltimoPartidoController::class, 'create'])->name('admin.ultimos_partidos.create');
     Route::post('/ultimos-partidos/admin', [UltimoPartidoController::class, 'store'])->name('admin.ultimos_partidos.store');
     Route::get('/ultimos-partidos/admin/{id}/edit', [UltimoPartidoController::class, 'edit'])->name('admin.ultimos_partidos.edit');
-    Route::put('/ultimos-partidos/admin/{id}', [UltimoPartidoController::class, 'update'])->name('admin.ultimos_partidos.update');
+    Route::post('/ultimos-partidos/admin/{id}', [UltimoPartidoController::class, 'update'])->name('admin.ultimos_partidos.update');
     Route::delete('/ultimos-partidos/admin/{id}', [UltimoPartidoController::class, 'destroy'])->name('admin.ultimos_partidos.destroy');
     Route::get('/ultimos-partidos/admin/{id}', [UltimoPartidoController::class, 'show'])->name('admin.ultimos_partidos.show');
 
