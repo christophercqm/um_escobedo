@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-10-2024 a las 17:28:08
+-- Tiempo de generación: 18-10-2024 a las 16:30:54
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -383,7 +383,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (34, '2024_10_14_092037_add_carnet_federacion_to_formulario_acreditacion_table', 18),
 (35, '2024_10_14_115520_add_token_to_formulario_acreditacion_table', 19),
 (38, '2024_10_15_105005_create_junta_table', 20),
-(43, '2024_10_17_063633_create_ultimos_partidos_table', 21);
+(43, '2024_10_17_063633_create_ultimos_partidos_table', 21),
+(44, '2024_10_18_082137_add_estadio_to_partidos_table', 22);
 
 -- --------------------------------------------------------
 
@@ -423,6 +424,7 @@ CREATE TABLE `partidos` (
   `resultado_local` int(11) DEFAULT NULL,
   `resultado_visitante` int(11) DEFAULT NULL,
   `estado` varchar(255) NOT NULL DEFAULT 'programado',
+  `estadio` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -431,34 +433,35 @@ CREATE TABLE `partidos` (
 -- Volcado de datos para la tabla `partidos`
 --
 
-INSERT INTO `partidos` (`id`, `equipo_local_id`, `equipo_visitante_id`, `fecha_hora`, `resultado_local`, `resultado_visitante`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 3, 4, '2024-10-12 17:00:00', NULL, NULL, 'Pendiente', '2024-10-07 10:57:33', '2024-10-07 10:57:33'),
-(6, 21, 3, '2024-10-20 17:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:23:48', '2024-10-07 12:23:48'),
-(7, 3, 6, '2024-10-27 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:25:49', '2024-10-07 12:25:49'),
-(8, 22, 3, '2024-11-03 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:26:35', '2024-10-07 12:26:35'),
-(9, 8, 3, '2024-11-10 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:27:11', '2024-10-07 12:27:11'),
-(10, 3, 9, '2024-11-17 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:27:46', '2024-10-07 12:27:46'),
-(11, 10, 3, '2024-11-24 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:28:08', '2024-10-07 12:28:08'),
-(12, 3, 23, '2024-12-01 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:29:00', '2024-10-07 12:29:00'),
-(13, 12, 3, '2024-12-08 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:29:19', '2024-10-07 12:29:19'),
-(14, 3, 13, '2024-12-15 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:30:22', '2024-10-07 12:30:22'),
-(15, 14, 3, '2024-12-22 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:30:42', '2024-10-07 12:30:42'),
-(16, 15, 3, '2025-01-12 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:31:37', '2024-10-07 12:31:37'),
-(18, 17, 3, '2025-01-26 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:33:22', '2024-10-07 12:33:22'),
-(19, 3, 16, '2025-01-19 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:40:40', '2024-10-07 12:40:40'),
-(20, 3, 18, '2025-02-02 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:41:19', '2024-10-07 12:41:19'),
-(21, 19, 3, '2025-02-09 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:41:43', '2024-10-07 12:41:43'),
-(22, 3, 20, '2025-02-16 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:42:12', '2024-10-07 12:42:12'),
-(23, 4, 3, '2025-02-23 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:42:33', '2024-10-07 12:42:33'),
-(24, 3, 21, '2025-03-02 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:43:11', '2024-10-07 12:43:11'),
-(25, 6, 3, '2025-03-09 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:43:52', '2024-10-07 12:43:52'),
-(26, 3, 8, '2025-03-23 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:44:40', '2024-10-07 12:44:40'),
-(27, 9, 3, '2025-03-30 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:45:07', '2024-10-07 12:45:07'),
-(28, 3, 10, '2025-04-06 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:45:29', '2024-10-07 12:45:29'),
-(29, 23, 3, '2025-04-13 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:45:49', '2024-10-07 12:45:49'),
-(30, 3, 12, '2025-04-20 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:46:07', '2024-10-07 12:46:07'),
-(31, 13, 3, '2025-04-27 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:46:25', '2024-10-07 12:46:25'),
-(32, 3, 14, '2025-05-04 00:00:00', NULL, NULL, 'Pendiente', '2024-10-07 12:47:02', '2024-10-07 12:47:02');
+INSERT INTO `partidos` (`id`, `equipo_local_id`, `equipo_visitante_id`, `fecha_hora`, `resultado_local`, `resultado_visitante`, `estado`, `estadio`, `created_at`, `updated_at`) VALUES
+(1, 3, 4, '2024-10-12 17:00:00', 0, 2, 'Pendiente', 'Estadio Eusebio Arce (Camargo)', '2024-10-07 10:57:33', '2024-10-18 07:57:39'),
+(6, 21, 3, '2024-10-20 17:00:00', NULL, NULL, 'Pendiente', 'Ciudad Deportiva de Abegondo', '2024-10-07 12:23:48', '2024-10-18 07:33:21'),
+(7, 3, 6, '2024-10-26 00:00:00', NULL, NULL, 'Pendiente', 'Campo de Fútbol de Escobedo', '2024-10-07 12:25:49', '2024-10-18 07:34:52'),
+(8, 22, 3, '2024-11-03 00:00:00', NULL, NULL, 'Pendiente', 'Estadio Municipal de Miramar', '2024-10-07 12:26:35', '2024-10-18 07:35:54'),
+(9, 8, 3, '2024-11-10 00:00:00', NULL, NULL, 'Pendiente', 'Nuevo Los Pajaritos', '2024-10-07 12:27:11', '2024-10-18 07:36:42'),
+(10, 3, 9, '2024-11-17 00:00:00', NULL, NULL, 'Pendiente', 'Campo de Fútbol de Escobedo', '2024-10-07 12:27:46', '2024-10-18 07:37:17'),
+(11, 10, 3, '2024-11-24 00:00:00', NULL, NULL, 'Pendiente', 'Estadio Municipal Luis Ramos', '2024-10-07 12:28:08', '2024-10-18 07:37:59'),
+(12, 3, 23, '2024-12-01 00:00:00', NULL, NULL, 'Pendiente', 'Campo de Fútbol de Escobedo', '2024-10-07 12:29:00', '2024-10-18 07:38:53'),
+(13, 12, 3, '2024-12-08 00:00:00', NULL, NULL, 'Pendiente', 'Campo do Vao', '2024-10-07 12:29:19', '2024-10-18 07:39:25'),
+(14, 3, 13, '2024-12-15 00:00:00', NULL, NULL, 'Pendiente', 'Campo de Fútbol de Escobedo', '2024-10-07 12:30:22', '2024-10-18 07:39:49'),
+(15, 14, 3, '2024-12-22 00:00:00', NULL, NULL, 'Pendiente', 'Campo Pepe Quimarán', '2024-10-07 12:30:42', '2024-10-18 07:40:39'),
+(16, 15, 3, '2025-01-12 00:00:00', NULL, NULL, 'Pendiente', 'Estadio Helmántico', '2024-10-07 12:31:37', '2024-10-18 07:41:13'),
+(18, 17, 3, '2025-01-26 00:00:00', NULL, NULL, 'Pendiente', 'El Malecón', '2024-10-07 12:33:22', '2024-10-18 07:43:07'),
+(19, 3, 16, '2025-01-19 00:00:00', NULL, NULL, 'Pendiente', 'Campo de Fútbol de Escobedo', '2024-10-07 12:40:40', '2024-10-18 07:42:43'),
+(20, 3, 18, '2025-02-02 00:00:00', NULL, NULL, 'Pendiente', 'Campo de Fútbol de Escobedo', '2024-10-07 12:41:19', '2024-10-18 07:44:36'),
+(21, 19, 3, '2025-02-09 00:00:00', NULL, NULL, 'Pendiente', 'Anexos al Estadio José Zorrilla', '2024-10-07 12:41:43', '2024-10-18 07:45:11'),
+(22, 3, 20, '2025-02-16 00:00:00', NULL, NULL, 'Pendiente', 'Campo de Fútbol de Escobedo', '2024-10-07 12:42:12', '2024-10-18 07:45:35'),
+(23, 4, 3, '2025-02-23 00:00:00', NULL, NULL, 'Pendiente', 'Estadio Municipal de Pasarón', '2024-10-07 12:42:33', '2024-10-18 07:46:27'),
+(24, 3, 21, '2025-03-02 00:00:00', NULL, NULL, 'Pendiente', 'Campo de Fútbol de Escobedo', '2024-10-07 12:43:11', '2024-10-18 07:46:56'),
+(25, 6, 3, '2025-03-09 00:00:00', NULL, NULL, 'Pendiente', 'Nuevo Ganzábal', '2024-10-07 12:43:52', '2024-10-18 07:47:14'),
+(26, 3, 8, '2025-03-23 00:00:00', NULL, NULL, 'Pendiente', 'Campo de Fútbol de Escobedo', '2024-10-07 12:44:40', '2024-10-18 07:50:03'),
+(27, 9, 3, '2025-03-30 00:00:00', NULL, NULL, 'Pendiente', 'Instalaciones Nando Yosu', '2024-10-07 12:45:07', '2024-10-18 07:50:30'),
+(28, 3, 10, '2025-04-06 00:00:00', NULL, NULL, 'Pendiente', 'Campo de Fútbol de Escobedo', '2024-10-07 12:45:29', '2024-10-18 07:51:07'),
+(29, 23, 3, '2025-04-13 00:00:00', NULL, NULL, 'Pendiente', 'Román Suárez Puerta', '2024-10-07 12:45:49', '2024-10-18 07:51:36'),
+(30, 3, 12, '2025-04-20 00:00:00', NULL, NULL, 'Pendiente', 'Campo de Fútbol de Escobedo', '2024-10-07 12:46:07', '2024-10-18 07:52:24'),
+(31, 13, 3, '2025-04-27 00:00:00', NULL, NULL, 'Pendiente', 'Campo de As Eiroas', '2024-10-07 12:46:25', '2024-10-18 07:52:51'),
+(32, 3, 14, '2025-05-04 00:00:00', NULL, NULL, 'Pendiente', 'Campo de Fútbol de Escobedo', '2024-10-07 12:47:02', '2024-10-18 07:53:16'),
+(33, 3, 22, '2025-03-16 00:00:00', NULL, NULL, 'Pendiente', 'Campo de Fútbol de Escobedo', '2024-10-18 07:49:16', '2024-10-18 07:49:16');
 
 -- --------------------------------------------------------
 
@@ -523,7 +526,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('lWNtytEJKodMHLLEcL1ARG74oBzniq8kUcvOQ85s', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiYThZcnBZMFJ6d3hnWlBIdE01QVlLUEpGWVhEMHJGeVRNZmNFVEdBNyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jbHViIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1729178820);
+('RpCHLhl1zBwVePQcoY1TC9F83jtzpyMHIGFLlRtT', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiM21PdXhPVjk1Mmg2Sld6Q3JmWE4xMDZJSEdmb2V5TmQ5R2M4eWc1SiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wb2xpdGljYXMvcHJpdmFjaWRhZCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1729261753);
 
 -- --------------------------------------------------------
 
@@ -776,7 +779,7 @@ ALTER TABLE `junta`
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `navigations`
@@ -794,7 +797,7 @@ ALTER TABLE `noticias`
 -- AUTO_INCREMENT de la tabla `partidos`
 --
 ALTER TABLE `partidos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `prensas`
