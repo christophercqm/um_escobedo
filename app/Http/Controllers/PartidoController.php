@@ -59,6 +59,7 @@ class PartidoController extends Controller
             'resultado_local' => 'nullable|integer',
             'resultado_visitante' => 'nullable|integer',
             'estado' => 'required|string',
+            'estadio' => 'required|string|max:255',
         ]);
 
         // Crear el partido
@@ -88,6 +89,8 @@ class PartidoController extends Controller
             'resultado_local' => 'nullable|integer',
             'resultado_visitante' => 'nullable|integer',
             'estado' => 'required|string',
+            'estadio' => 'required|string|max:255',
+
         ]);
 
         $partido = Partido::findOrFail($id);

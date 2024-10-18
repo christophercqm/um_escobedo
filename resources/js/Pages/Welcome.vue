@@ -132,6 +132,7 @@
                 <PartidosResultados 
                     :proximoPartido="proximoPartido"
                     :ultimoPartido="ultimoPartido"
+                    :todosPartidos="todosPartidos"
                 />
 
                 <!-- NUESTRA HISTORIA  -->
@@ -190,12 +191,13 @@ import NavLink from "@/Components/NavLink.vue";
 const props = defineProps({
     proximoPartido: Object,
     ultimoPartido: Object,
+    todosPartidos: Array
 });
 
 onMounted(() => {
-    console.log("Props recibidas", props);
-    console.log("Próximo Partido:", props.proximoPartido);
-    console.log("Último Partido:", props.ultimoPartido);
+    //console.log("Props recibidas", props);
+    //console.log("Próximo Partido:", props.proximoPartido);
+    //console.log("Último Partido:", props.ultimoPartido);
 
 });
 

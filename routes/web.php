@@ -134,7 +134,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/partidos/admin/create', [PartidoController::class, 'create'])->name('partidos.create');
     Route::post('/partidos/admin', [PartidoController::class, 'store'])->name('partidos.store');
     Route::get('/partidos/admin/{id}/edit', [PartidoController::class, 'edit'])->name('partidos.edit');
-    Route::put('/partidos/admin/{id}', [PartidoController::class, 'update'])->name('partidos.update');
+    Route::post('/partidos/admin/{id}', [PartidoController::class, 'update'])->name('partidos.update');
     Route::delete('/partidos/admin/{id}', [PartidoController::class, 'destroy'])->name('partidos.destroy');
     Route::get('/partidos/admin/{id}', [PartidoController::class, 'show'])->name('partidos.show');
 

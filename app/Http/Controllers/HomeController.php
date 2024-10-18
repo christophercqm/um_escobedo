@@ -22,6 +22,13 @@ class HomeController extends Controller
         $ultimosPartidos = UltimoPartido::with(['partido.equipoLocal', 'partido.equipoVisitante'])->get();
         $ultimoPartido = $ultimosPartidos->isNotEmpty() ? $ultimosPartidos->last() : null;
 
+        // Obtener los 6 próximos partidos
+        $seisProximosPartidos = Partido::with(['equipoLocal', 'equipoVisitante'])
+            ->where('fecha_hora', '>', now())
+            ->orderBy('fecha_hora', 'asc')
+            ->take(6) // Limitar a 6 partidos
+            ->get();
+
         return Inertia::render('Welcome', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
@@ -29,6 +36,7 @@ class HomeController extends Controller
             'phpVersion' => PHP_VERSION,
             'proximoPartido' => $proximoPartido,
             'ultimoPartido' => $ultimoPartido,
+            'todosPartidos' => $seisProximosPartidos, // Cambiar aquí para enviar solo 6 partidos
         ]);
     }
 }

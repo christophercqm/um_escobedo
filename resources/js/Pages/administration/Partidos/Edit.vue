@@ -1,10 +1,10 @@
 <template>
     <AuthenticatedLayout>
-        <Head title="Crear Partido" />
+        <Head title="Editar Partido" />
 
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Crear Partido
+                Editar Partido
             </h2>
         </template>
 
@@ -21,10 +21,7 @@
                                     class="w-5 h-5 me-2" />
                                 {{ selectedLocal.nombre ? selectedLocal.nombre : 'Selecciona un equipo local' }}
                             </button>
-                            <ul class="dropdown-menu w-100" aria-labelledby="dropdownLocal" style="
-                                    max-height: 200px;
-                                    overflow-y: auto;
-                                    border: 1px solid #ee1d36;">
+                            <ul class="dropdown-menu w-100" aria-labelledby="dropdownLocal" style="max-height: 200px; overflow-y: auto; border: 1px solid #ee1d36;">
                                 <li v-for="equipo in sortedEquipos" :key="equipo.id">
                                     <a class="dropdown-item d-flex align-items-center" href="#"
                                         @click.prevent="selectLocal(equipo)">
@@ -47,10 +44,7 @@
                                     alt="Logo" class="w-5 h-5 me-2" />
                                 {{ selectedVisitante.nombre ? selectedVisitante.nombre : 'Selecciona un equipo visitante' }}
                             </button>
-                            <ul class="dropdown-menu w-100" aria-labelledby="dropdownVisitante" style="
-                                    max-height: 200px;
-                                    overflow-y: auto;
-                                    border: 1px solid #ee1d36;">
+                            <ul class="dropdown-menu w-100" aria-labelledby="dropdownVisitante" style="max-height: 200px; overflow-y: auto; border: 1px solid #ee1d36;">
                                 <li v-for="equipo in sortedEquipos" :key="equipo.id">
                                     <a class="dropdown-item d-flex align-items-center" href="#"
                                         @click.prevent="selectVisitante(equipo)">
@@ -105,7 +99,7 @@
 
                 <!-- Botón de Envío -->
                 <button type="submit" class="btn-admin" :disabled="form.processing">
-                    Crear Partido
+                    Editar Partido
                 </button>
             </form>
         </div>
@@ -113,27 +107,28 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { Head, useForm } from "@inertiajs/inertia-vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import InputError from "@/Components/InputError.vue";
 import Swal from "sweetalert2";
 
-// Obtener los equipos desde las props
+// Obtener los equipos y el partido desde las props
 const props = defineProps({
     equipos: Array,
+    partido: Object, // Objeto que representa el partido a editar
 });
 
-// Inicializar el formulario
+// Inicializar el formulario con los datos del partido
 const form = useForm({
-    equipo_local_id: "",
-    equipo_visitante_id: "",
-    fecha_hora: "",
-    resultado_local: null,
-    resultado_visitante: null,
-    estado: "",
-    estadio: "",
+    equipo_local_id: props.partido.equipo_local_id,
+    equipo_visitante_id: props.partido.equipo_visitante_id,
+    fecha_hora: props.partido.fecha_hora,
+    resultado_local: props.partido.resultado_local,
+    resultado_visitante: props.partido.resultado_visitante,
+    estado: props.partido.estado,
+    estadio: props.partido.estadio,
 });
 
 // Variables para almacenar los equipos seleccionados
@@ -172,11 +167,12 @@ function submit() {
         return; // No enviar el formulario
     }
 
-    form.post(route("partidos.store"), {
+    // Asegúrate de usar 'id' aquí
+    form.post(route("partidos.update", { id: props.partido.id }), {
         onSuccess: () => {
             Swal.fire({
                 title: "¡Éxito!",
-                text: "Partido creado con éxito.",
+                text: "Partido editado con éxito.",
                 icon: "success",
                 confirmButtonText: "OK",
             });
@@ -192,9 +188,13 @@ function submit() {
         },
     });
 }
+
+// Cargar el equipo local y visitante al cargar el componente
+onMounted(() => {
+    selectedLocal.value = props.equipos.find(equipo => equipo.id === form.equipo_local_id) || {};
+    selectedVisitante.value = props.equipos.find(equipo => equipo.id === form.equipo_visitante_id) || {};
+});
 </script>
-
-
 
 <style scoped>
 .container {

@@ -5,147 +5,44 @@
                 <div class="row gx-lg-5">
                     <div class="col-lg-7 col-xl-8">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h2 class="comon-heading m-0">
-                                Partidos y Resultados
-                            </h2>
+                            <h2 class="comon-heading m-0">Partidos y Resultados</h2>
                             <NavLink href="/proximos-partidos" class="btn-public m-0">
                                 <span>Todos los Partidos</span>
-
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                    class="bi bi-arrow-right-short" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                        d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
-                </svg>
-                            </Navlink>
+                                    class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
+                                </svg>
+                            </NavLink>
                         </div>
+
+                        <!-- Aquí se reemplaza el contenido estático por los datos dinámicos -->
                         <div class="row row-cols-1 row-cols-lg-2 gy-5 g-lg-4 mt-0 mt-lg-0">
-                            <div class="col">
+                            <div class="col" v-for="partido in todosPartidos" :key="partido.id">
                                 <a href="#" class="items-matchs">
-                                    <figure class="m-0 bg-mc-1">
-                                        <img :src="bg_1" alt="bg-ms" />
+                                    <figure class="m-0 bg-mc-1 mb-2">
+                                        <img :src="bg_1" alt="bg-ms"/>
                                         <div class="overlay"></div>
                                     </figure>
                                     <div class="matches-div-home">
                                         <h5>
-                                            Central Olympic Stadium
+                                            {{ partido.estadio || 'No disponible' }} <!-- Mostrar estadio o valor por defecto -->
                                             <span class="d-block">
-                                                April 02, 2019
+                                                {{ new Date(partido.fecha_hora).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }) }} <!-- Formato de fecha -->
                                             </span>
                                         </h5>
-                                        <div
-                                            class="d-flex align-items-center justify-content-between contain-logo-result">
+                                        <div class="d-flex align-items-center justify-content-between contain-logo-result">
                                             <figure>
-                                                <img :src="escobedo_logo" alt="cl2" />
-                                                <figcaption>
-                                                    Istanbul
+                                                <img :src="`storage/${partido.equipo_local.logo}`" class="mb-2" alt="cl2" />
+                                                <figcaption class="name-equipo">
+                                                    {{ partido.equipo_local.nombre }} <!-- Nombre del equipo local -->
                                                 </figcaption>
                                             </figure>
                                             <h4>VS</h4>
                                             <figure>
-                                                <img :src="escobedo_logo" alt="cl2" class="logo_results" />
-                                                <figcaption>
-                                                    Italy FC.
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="col">
-                                <a href="#" class="items-matchs">
-                                    <figure class="m-0 bg-mc-1">
-                                        <img :src="bg_2" alt="bg-ms" />
-                                        <div class="overlay"></div>
-                                    </figure>
-                                    <div class="matches-div-home">
-                                        <h5>
-                                            Central Olympic Stadium
-                                            <span class="d-block">
-                                                April 02, 2019
-                                            </span>
-                                        </h5>
-                                        <div
-                                            class="d-flex align-items-center justify-content-between contain-logo-result">
-                                            <figure>
-                                                <img :src="escobedo_logo" alt="cl2" />
-                                                <figcaption>
-                                                    Rayal FC
-                                                </figcaption>
-                                            </figure>
-                                            <h4>VS</h4>
-                                            <figure>
-                                                <img :src="escobedo_logo" alt="cl2" />
-                                                <figcaption>
-                                                    Italy FC.
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="col">
-                                <a href="#" class="items-matchs">
-                                    <figure class="m-0 bg-mc-1">
-                                        <img :src="bg_3" alt="bg-ms" />
-                                        <div class="overlay"></div>
-                                    </figure>
-                                    <div class="matches-div-home">
-                                        <h5>
-                                            Central Olympic Stadium
-                                            <span class="d-block">
-                                                April 02, 2019
-                                            </span>
-                                        </h5>
-                                        <div
-                                            class="d-flex align-items-center justify-content-between contain-logo-result">
-                                            <figure>
-                                                <img :src="escobedo_logo" alt="cl2" />
-                                                <figcaption>
-                                                    DC Unfo.
-                                                </figcaption>
-                                            </figure>
-                                            <h4>VS</h4>
-                                            <figure>
-                                                <img :src="escobedo_logo" alt="cl2" />
-                                                <figcaption>
-                                                    Italy FC.
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="col">
-                                <a href="#" class="items-matchs">
-                                    <figure class="m-0 bg-mc-1">
-                                        <img :src="bg_4" alt="bg-ms" />
-                                        <div class="overlay"></div>
-                                    </figure>
-                                    <div class="matches-div-home">
-                                        <h5>
-                                            Central Olympic Stadium
-                                            <span class="d-block">
-                                                April 02, 2019
-                                            </span>
-                                        </h5>
-                                        <div
-                                            class="d-flex align-items-center justify-content-between contain-logo-result">
-                                            <figure>
-                                                <img :src="escobedo_logo" alt="cl2" />
-
-                                                <figcaption>
-                                                    Istanbul
-                                                </figcaption>
-                                            </figure>
-                                            <h4>VS</h4>
-                                            <figure>
-                                                <img :src="escobedo_logo" alt="cl2" />
-
-                                                <figcaption>
-                                                    Italy FC.
+                                                <img :src="`storage/${partido.equipo_visitante.logo}`" alt="cl2" class="logo_results" />
+                                                <figcaption class="name-equipo">
+                                                    {{ partido.equipo_visitante.nombre }} <!-- Nombre del equipo visitante -->
                                                 </figcaption>
                                             </figure>
                                         </div>
@@ -155,9 +52,7 @@
                         </div>
                     </div>
 
-                    <Sidebar 
-                        :proximoPartido="proximoPartido"
-                        :ultimoPartido="ultimoPartido" />
+                    <Sidebar :proximoPartido="proximoPartido" :ultimoPartido="ultimoPartido" />
                 </div>
             </div>
         </div>
@@ -165,21 +60,23 @@
 </template>
 
 <script setup>
-import bg_1 from "@images/bg-1.jpg";
-import bg_2 from "@images/bg-2.jpeg";
-import bg_3 from "@images/bg-3.jpeg";
-import bg_4 from "@images/bg-4.jpg";
-import escobedo_logo from "@images/logo-escobedo.png";
-import NavLink from "../NavLink.vue";
-import Sidebar from "../Sidebar/Sidebar.vue";
+import bg_1 from "@images/bg-1.jpg"; // Imágenes de fondo
 
+import NavLink from "../NavLink.vue"; // Componente de navegación
+import Sidebar from "../Sidebar/Sidebar.vue"; // Componente de barra lateral
 
 const props = defineProps({
-        proximoPartido: Object,
-        ultimoPartido: Object,
+    proximoPartido: Object, // Prop para el próximo partido
+    ultimoPartido: Object, // Prop para el último partido
+    todosPartidos: Array, // Prop para todos los partidos
+});
 
-})
+// Debugging: imprime las props para ver si se pasan correctamente
+//console.log("Próximo Partido:", props.proximoPartido);
+//console.log("Último Partido:", props.ultimoPartido);
+//console.log("Todos los Partidos:", props.todosPartidos);
 </script>
+
 
 <style scoped>
 /* RESULTADOS  */
@@ -199,7 +96,7 @@ const props = defineProps({
 
 .overlay {
     position: absolute;
-    background-color: rgba(0, 31, 64, 0.5);
+    background-color: rgba(0, 31, 64, 0.8);
     width: 100%;
     height: 100%;
     z-index: 8;
@@ -240,15 +137,17 @@ const props = defineProps({
     display: inline-block;
 }
 
-.items-matchs figcaption {
+.name-equipo {
     color: #fff;
-    font-size: 19px;
+    font-size: 1rem;
+    line-height: 1;
+    padding-top: .7rem;
     text-shadow: #181818 1px 2px 4px;
     font-family: "Roboto", sans-serif;
 }
 
 .matches-div-home figure {
-    width: 24%;
+    width: 20%;
     margin: auto;
     display: inline-block;
 }

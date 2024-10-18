@@ -19,6 +19,8 @@ class Partido extends Model
         'resultado_local',
         'resultado_visitante',
         'estado',
+        'estadio',
+
     ];
 
     // Definición de las relaciones
