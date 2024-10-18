@@ -110,9 +110,10 @@ const props = defineProps({
 
 });
 
+/*
 onMounted(() => {
     console.log("Último partido:", props.ultimoPartido);
-});
+});*/
 
 // Estado para manejar la sección actual
 const currentSection = ref("todos");

@@ -21,13 +21,14 @@
                                     dapibus condimentum. Nulla facilisi. Morbi
                                     auctor risus nec ligula posuere,
                                 </p>
-                                <NavLink href="/contacto" class="btn text-white btn-escobedo">
-                                    Acerca del Club
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                <NavLink href="/club" class="btn-public btn-acerca-club text-white d-flex gap-3">
+                                    <span class="text-acerca-club">
+                                        Acerca del club
+                                    </span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                                        class="bi bi-arrow-right-short" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd"
-                                            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z">
-                                        </path>
+                                            d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
                                     </svg>
                                 </NavLink>
                             </div>
@@ -35,32 +36,65 @@
 
                         <!-- SIGUIENTES PARTIDOS  -->
                         <div class="next-match-banner">
-                            <a class="top-next-mc text-center">
-                                <h5 class="mn-mc-titel">Próximo Partido</h5>
-                                <hr />
-                                <h4 class="next-match">
-                                    2023-2024 UEFA Champions League
+                            <div class="next-match-widget text-center semi-black">
+                                <h2 class="text-white m-0 title-next-match">Próximo partido</h2>
+                                <hr class="separator">
+
+                                <!-- Nombre de la competición o liga -->
+                                <h4 class="next-match mb-0 text-uppercase text-white">
+                                    segunda ref
                                 </h4>
-                                <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <figure>
-                                        <img :src="escobedo_logo" alt="Logo Image" class="img-logo" />
-                                    </figure>
-                                    <div class="mc-details-top text-center">
-                                        <p class="time">19:20pm</p>
-                                        <h5 class="date">24/ 11/ 2024</h5>
-                                        <p class="location-mc">
-                                            Estadio El Malecón, Cantabria
+                                <!-- Fecha del partido -->
+                                <h5 class="date mt-1">
+                                    {{ formatDate(proximoPartido.fecha_hora) }}
+                                </h5>
+
+                                <div class="match-info d-flex align-items-center justify-content-center mt-2">
+                                    <!-- Logo equipo local -->
+                                    <div
+                                        class="team-info text-center d-flex flex-column justify-center align-items-center">
+                                        <figure class="container-image">
+                                            <img :src="`/storage/${proximoPartido.equipo_local.logo}`" alt="Logo Local"
+                                                class="team-logo" />
+                                        </figure>
+                                        <h6 class="team-name text-white">
+                                            {{
+                                                proximoPartido.equipo_local
+                                                    .nombre
+                                            }}
+                                        </h6>
+                                    </div>
+
+                                    <div class="vs-section mx-3">
+                                        <h3 class="vs-text text-white mb-0">VS</h3>
+                                        <p class="match-time">
+                                            {{
+                                                formatTime(
+                                                    proximoPartido.fecha_hora
+                                                )
+                                            }}
                                         </p>
                                     </div>
 
-                                    <figure>
-                                        <img :src="escobedo_logo" alt="Logo Image" class="img-logo" />
-                                    </figure>
+                                    <!-- Logo equipo visitante -->
+                                    <div
+                                        class="team-info text-center d-flex flex-column justify-center align-items-center">
+                                        <figure class="container-image">
+                                            <img :src="`/storage/${proximoPartido.equipo_visitante.logo}`"
+                                                alt="Logo Visitante" class="team-logo" />
+                                        </figure>
+                                        <h6 class="team-name text-white">
+                                            {{
+                                                proximoPartido.equipo_visitante
+                                                    .nombre
+                                            }}
+                                        </h6>
+                                    </div>
                                 </div>
-                            </a>
+                            </div>
 
                             <a class="top-mc-starts mt-4">
-                                <h5 class="mn-mc-titel text-center">
+                                <h5 class="mn-mc-titel text-center text-white">
                                     Inicio de LaLiga 2024
                                 </h5>
                                 <hr />
@@ -91,25 +125,14 @@
                                 </ul>
                             </a>
                         </div>
-
-                        <!-- BANNER PRINCIPAL (ÚLTIMAS NOVEDADES)-->
-                        <div class="latest-news-div">
-                            <div class="row row-one m-0">
-                                <div class="col-lg-5 container-black">
-                                    <h2 class="py-3" style="z-index: 4; position: relative">
-                                        Últimas novedades
-                                    </h2>
-                                </div>
-                                <div class="col-lg-7 contain-red">
-                                    <div class="latest-news"></div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
                 <!-- CALENDARIO Y RESULTADOS -->
-                <PartidosResultados></PartidosResultados>
+                <PartidosResultados 
+                    :proximoPartido="proximoPartido"
+                    :ultimoPartido="ultimoPartido"
+                />
 
                 <!-- NUESTRA HISTORIA  -->
                 <NuestraHistoria></NuestraHistoria>
@@ -127,15 +150,15 @@
                             <h1 class="comon-heading m-0">
                                 Forma parte de un gran equipo
                             </h1>
-                            <a href="#" class="btn all-cm-btn mt-4 mt-lg-0">
-                                únete a nosotros
+                            <NavLink href="/contacto" class="btn all-cm-btn mt-4 mt-lg-0">
+                                <span>únete a nosotros</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-arrow-up-short" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd"
                                         d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z">
                                     </path>
                                 </svg>
-                            </a>
+                            </NavLink>
                         </div>
                     </div>
                 </div>
@@ -154,7 +177,6 @@
 import { onMounted, ref } from "vue";
 
 import GuestLayout from "@/Layouts/GuestLayout.vue";
-import escobedo_logo from "@images/logo-escobedo.png";
 
 import Patrocinadores from "@/Components/Home/Patrocinadores.vue";
 import Tienda from "@/Components/Home/Tienda.vue";
@@ -165,6 +187,33 @@ import PlantillaJugadores from "@/Components/Home/PlantillaJugadores.vue";
 
 import NavLink from "@/Components/NavLink.vue";
 
+const props = defineProps({
+    proximoPartido: Object,
+    ultimoPartido: Object,
+});
+
+onMounted(() => {
+    console.log("Props recibidas", props);
+    console.log("Próximo Partido:", props.proximoPartido);
+    console.log("Último Partido:", props.ultimoPartido);
+
+});
+
+// Función para formatear la fecha
+function formatDate(fechaHora) {
+    const date = new Date(fechaHora);
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'short' }).toUpperCase(); // Mes abreviado en MAYÚSCULAS
+    const year = date.getFullYear();
+    return `${day} ${month} ${year}`;
+}
+
+// Función para formatear la hora
+const formatTime = (fechaHora) => {
+    const options = { hour: "2-digit", minute: "2-digit" };
+    const hora = new Date(fechaHora);
+    return hora.toLocaleTimeString("es-ES", options);
+};
 </script>
 
 <style scoped>
@@ -215,25 +264,6 @@ p {
 .owl-stage-outer,
 .owl-stage {
     width: 100% !important;
-}
-
-.latest-news-div {
-    width: 100%;
-    background: gray;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-}
-
-.latest-news-div .container {
-    max-width: unset;
-    padding: 0;
-}
-
-.latest-news-div .container .row-one {
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
 }
 
 .container-black {
@@ -369,6 +399,50 @@ p {
     width: 30px;
     height: 30px;
 }
+
+.btn-acerca-club {
+    font-size: 1.2rem;
+}
+
+.btn-acerca-club i {
+    font-size: 1.2rem;
+}
+
+.match-time {
+    color: var(--red);
+    font-size: .9rem;
+}
+
+.container-image {
+    width: 60px;
+    height: 60px;
+    margin-bottom: .5rem !important;
+}
+
+.next-match-widget {
+    padding: 19px 10px;
+    border-radius: 8px;
+}
+
+.date,
+.match-time {
+    color: var(--red);
+    font-weight: 500;
+    font-size: 0.8rem;
+    font-family: var(--roboto) !important;
+}
+
+.team-name {
+    font-family: var(--roboto) !important;
+    font-size: .9rem;
+}
+
+.title-next-match {
+    font-size: 1.5rem;
+    font-family: var(--roboto) !important;
+
+}
+
 
 @media (max-width: 992px) {
     .row.row-calendairo-resultados {

@@ -1,7 +1,7 @@
 <template>
     <div class="home-about-part">
         <div class="container">
-            <h5>Nuestra Historia</h5>
+            <h5 class="nuestra-historia">Nuestra Historia</h5>
             <h2 class="comon-heading m-0">Sobre el Club Escobedo</h2>
 
             <p class="col-lg-7 my-4 text-left text-about">
@@ -14,33 +14,27 @@
                 segunda RFEF este año 2024. Estamos listos para luchar mucho
                 más, ¿quieres formar parte de nuestra historia?
             </p>
-            <a href="#" class="btn all-cm-btn">
-                Más Información
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-arrow-right"
-                    viewBox="0 0 16 16"
-                >
-                    <path
-                        fill-rule="evenodd"
-                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
-                    ></path>
+            <NavLink href="/club" class="btn all-cm-btn d-flex">
+                <span class="mas-informacion">Más Información</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                    class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
                 </svg>
-            </a>
+            </NavLink>
         </div>
     </div>
 </template>
 
 <script setup>
+import NavLink from '../NavLink.vue';
 </script>
 
 <style scoped>
 .container-home .container {
     max-width: 1250px;
 }
+
 .home-about-part {
     display: grid;
     align-content: center;
@@ -86,18 +80,13 @@
     align-items: start;
 }
 
-.text-about {
-    font-size: 17px;
-}
 
 
 @media (max-width: 992px) {
-    .btn.all-cm-btn{
+    .btn.all-cm-btn {
         display: flex;
         align-items: center;
         gap: 1rem;
     }
 }
-
-
 </style>

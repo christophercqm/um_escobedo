@@ -4,33 +4,22 @@
             <div class="container">
                 <div class="row gx-lg-5">
                     <div class="col-lg-7 col-xl-8">
-                        <div
-                            class="d-flex justify-content-between align-items-center"
-                        >
+                        <div class="d-flex justify-content-between align-items-center">
                             <h2 class="comon-heading m-0">
                                 Partidos y Resultados
                             </h2>
-                            <a href="#" class="btn all-cm-btn">
+                            <NavLink href="/proximos-partidos" class="btn all-cm-btn">
                                 Todos los Partidos
 
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
-                                    fill="currentColor"
-                                    class="bi bi-arrow-right"
-                                    viewBox="0 0 16 16"
-                                >
-                                    <path
-                                        fill-rule="evenodd"
-                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
-                                    ></path>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z">
+                                    </path>
                                 </svg>
-                            </a>
+                            </Navlink>
                         </div>
-                        <div
-                            class="row row-cols-1 row-cols-lg-2 gy-5 g-lg-4 mt-0 mt-lg-0"
-                        >
+                        <div class="row row-cols-1 row-cols-lg-2 gy-5 g-lg-4 mt-0 mt-lg-0">
                             <div class="col">
                                 <a href="#" class="items-matchs">
                                     <figure class="m-0 bg-mc-1">
@@ -45,24 +34,16 @@
                                             </span>
                                         </h5>
                                         <div
-                                            class="d-flex align-items-center justify-content-between contain-logo-result"
-                                        >
+                                            class="d-flex align-items-center justify-content-between contain-logo-result">
                                             <figure>
-                                                <img
-                                                    :src="escobedo_logo"
-                                                    alt="cl2"
-                                                />
+                                                <img :src="escobedo_logo" alt="cl2" />
                                                 <figcaption>
                                                     Istanbul
                                                 </figcaption>
                                             </figure>
                                             <h4>VS</h4>
                                             <figure>
-                                                <img
-                                                    :src="escobedo_logo"
-                                                    alt="cl2"
-                                                    class="logo_results"
-                                                />
+                                                <img :src="escobedo_logo" alt="cl2" class="logo_results" />
                                                 <figcaption>
                                                     Italy FC.
                                                 </figcaption>
@@ -86,23 +67,16 @@
                                             </span>
                                         </h5>
                                         <div
-                                            class="d-flex align-items-center justify-content-between contain-logo-result"
-                                        >
+                                            class="d-flex align-items-center justify-content-between contain-logo-result">
                                             <figure>
-                                                <img
-                                                    :src="escobedo_logo"
-                                                    alt="cl2"
-                                                />
+                                                <img :src="escobedo_logo" alt="cl2" />
                                                 <figcaption>
                                                     Rayal FC
                                                 </figcaption>
                                             </figure>
                                             <h4>VS</h4>
                                             <figure>
-                                                <img
-                                                    :src="escobedo_logo"
-                                                    alt="cl2"
-                                                />
+                                                <img :src="escobedo_logo" alt="cl2" />
                                                 <figcaption>
                                                     Italy FC.
                                                 </figcaption>
@@ -126,23 +100,16 @@
                                             </span>
                                         </h5>
                                         <div
-                                            class="d-flex align-items-center justify-content-between contain-logo-result"
-                                        >
+                                            class="d-flex align-items-center justify-content-between contain-logo-result">
                                             <figure>
-                                                <img
-                                                    :src="escobedo_logo"
-                                                    alt="cl2"
-                                                />
+                                                <img :src="escobedo_logo" alt="cl2" />
                                                 <figcaption>
                                                     DC Unfo.
                                                 </figcaption>
                                             </figure>
                                             <h4>VS</h4>
                                             <figure>
-                                                <img
-                                                    :src="escobedo_logo"
-                                                    alt="cl2"
-                                                />
+                                                <img :src="escobedo_logo" alt="cl2" />
                                                 <figcaption>
                                                     Italy FC.
                                                 </figcaption>
@@ -166,13 +133,9 @@
                                             </span>
                                         </h5>
                                         <div
-                                            class="d-flex align-items-center justify-content-between contain-logo-result"
-                                        >
+                                            class="d-flex align-items-center justify-content-between contain-logo-result">
                                             <figure>
-                                                <img
-                                                    :src="escobedo_logo"
-                                                    alt="cl2"
-                                                />
+                                                <img :src="escobedo_logo" alt="cl2" />
 
                                                 <figcaption>
                                                     Istanbul
@@ -180,10 +143,7 @@
                                             </figure>
                                             <h4>VS</h4>
                                             <figure>
-                                                <img
-                                                    :src="escobedo_logo"
-                                                    alt="cl2"
-                                                />
+                                                <img :src="escobedo_logo" alt="cl2" />
 
                                                 <figcaption>
                                                     Italy FC.
@@ -195,233 +155,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-5 col-xl-4">
-                        <div class="latest-result-div mt-5 mt-lg-0">
-                            <div
-                                class="d-flex align-items-center justify-content-between"
-                            >
-                                <h2 class="comon-heading mt-0">
-                                    Últimos Resultados
-                                </h2>
-                                <a href="#" class="btn viw-btn">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="16"
-                                        height="16"
-                                        fill="currentColor"
-                                        class="bi bi-arrow-up-right-square-fill"
-                                        viewBox="0 0 16 16"
-                                    >
-                                        <path
-                                            d="M14 0a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12zM5.904 10.803 10 6.707v2.768a.5.5 0 0 0 1 0V5.5a.5.5 0 0 0-.5-.5H6.525a.5.5 0 1 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 .707.707z"
-                                        ></path>
-                                    </svg>
-                                </a>
-                            </div>
 
-                            <div class="ltest-divbm mt-4">
-                                <a href="#" class="comon-items-div">
-                                    <div
-                                        class="d-flex justify-content-between align-items-center"
-                                    >
-                                        <div class="cm-culb">
-                                            <figure
-                                                class="d-flex align-items-center"
-                                            >
-                                                <figcaption class="me-2">
-                                                    Escobedo
-                                                </figcaption>
-                                                <img
-                                                    :src="escobedo_logo"
-                                                    alt="cl2"
-                                                    class="logo-latest-results"
-                                                />
-                                            </figure>
-                                        </div>
-                                        <h5 class="m-0">1 - 2</h5>
-                                        <div class="cm-culb">
-                                            <figure
-                                                class="d-flex align-items-center"
-                                            >
-                                                <figcaption class="me-2">
-                                                    Leioa
-                                                </figcaption>
-                                                <img
-                                                    :src="escobedo_logo"
-                                                    alt="cl2"
-                                                    class="logo-latest-results"
-                                                />
-                                            </figure>
-                                        </div>
-                                    </div>
-                                    <p class="text-center">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        Nov 1, 2024/Santander, Catanbria
-                                    </p>
-                                </a>
-
-                                <a href="#" class="comon-items-div">
-                                    <div
-                                        class="d-flex justify-content-between align-items-center"
-                                    >
-                                        <div class="cm-culb">
-                                            <figure
-                                                class="d-flex align-items-center"
-                                            >
-                                                <figcaption class="me-2">
-                                                    Escobedo.
-                                                </figcaption>
-                                                <img
-                                                    :src="escobedo_logo"
-                                                    alt="cl2"
-                                                    class="logo-latest-results"
-                                                />
-                                            </figure>
-                                        </div>
-                                        <h5 class="m-0">2 - 0</h5>
-                                        <div class="cm-culb">
-                                            <figure
-                                                class="d-flex align-items-center"
-                                            >
-                                                <figcaption class="me-2">
-                                                    Leioa
-                                                </figcaption>
-                                                <img
-                                                    :src="escobedo_logo"
-                                                    alt="cl2"
-                                                    class="logo-latest-results"
-                                                />
-                                            </figure>
-                                        </div>
-                                    </div>
-                                    <p class="text-center">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        Nov 2, 2024/Santander, Catanbria
-                                    </p>
-                                </a>
-
-                                <a href="#" class="comon-items-div">
-                                    <div
-                                        class="d-flex justify-content-between align-items-center"
-                                    >
-                                        <div class="cm-culb">
-                                            <figure
-                                                class="d-flex align-items-center"
-                                            >
-                                                <figcaption class="me-2">
-                                                    Escobedo
-                                                </figcaption>
-                                                <img
-                                                    :src="escobedo_logo"
-                                                    alt="cl2"
-                                                    class="logo-latest-results"
-                                                />
-                                            </figure>
-                                        </div>
-                                        <h5 class="m-0">1 - 0</h5>
-                                        <div class="cm-culb">
-                                            <figure
-                                                class="d-flex align-items-center"
-                                            >
-                                                <figcaption class="me-2">
-                                                    Leioa
-                                                </figcaption>
-                                                <img
-                                                    :src="escobedo_logo"
-                                                    alt="cl2"
-                                                    class="logo-latest-results"
-                                                />
-                                            </figure>
-                                        </div>
-                                    </div>
-                                    <p class="text-center">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        Nov 2, 2024/Santander, Catanbria
-                                    </p>
-                                </a>
-
-                                <a href="#" class="comon-items-div">
-                                    <div
-                                        class="d-flex justify-content-between align-items-center"
-                                    >
-                                        <div class="cm-culb">
-                                            <figure
-                                                class="d-flex align-items-center"
-                                            >
-                                                <figcaption class="me-2">
-                                                    Escobedo
-                                                </figcaption>
-                                                <img
-                                                    :src="escobedo_logo"
-                                                    alt="cl2"
-                                                    class="logo-latest-results"
-                                                />
-                                            </figure>
-                                        </div>
-                                        <h5 class="m-0">1 - 0</h5>
-                                        <div class="cm-culb">
-                                            <figure
-                                                class="d-flex align-items-center"
-                                            >
-                                                <figcaption class="me-2">
-                                                    Leioa
-                                                </figcaption>
-                                                <img
-                                                    :src="escobedo_logo"
-                                                    alt="cl2"
-                                                    class="logo-latest-results"
-                                                />
-                                            </figure>
-                                        </div>
-                                    </div>
-                                    <p class="text-center">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        Nov 2, 2024/Santander, Catanbria
-                                    </p>
-                                </a>
-
-                                <a href="#" class="comon-items-div">
-                                    <div
-                                        class="d-flex justify-content-between align-items-center"
-                                    >
-                                        <div class="cm-culb">
-                                            <figure
-                                                class="d-flex align-items-center"
-                                            >
-                                                <figcaption class="me-2">
-                                                    Escobedo
-                                                </figcaption>
-                                                <img
-                                                    :src="escobedo_logo"
-                                                    alt="cl2"
-                                                    class="logo-latest-results"
-                                                />
-                                            </figure>
-                                        </div>
-                                        <h5 class="m-0">1 - 0</h5>
-                                        <div class="cm-culb">
-                                            <figure
-                                                class="d-flex align-items-center"
-                                            >
-                                                <figcaption class="me-2">
-                                                    Leioa
-                                                </figcaption>
-                                                <img
-                                                    :src="escobedo_logo"
-                                                    alt="cl2"
-                                                    class="logo-latest-results"
-                                                />
-                                            </figure>
-                                        </div>
-                                    </div>
-                                    <p class="text-center">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        Nov 2, 2024/Santander, Catanbria
-                                    </p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <Sidebar 
+                        :proximoPartido="proximoPartido"
+                        :ultimoPartido="ultimoPartido" />
                 </div>
             </div>
         </div>
@@ -434,6 +171,15 @@ import bg_2 from "@images/bg-2.jpeg";
 import bg_3 from "@images/bg-3.jpeg";
 import bg_4 from "@images/bg-4.jpg";
 import escobedo_logo from "@images/logo-escobedo.png";
+import NavLink from "../NavLink.vue";
+import Sidebar from "../Sidebar/Sidebar.vue";
+
+
+const props = defineProps({
+        proximoPartido: Object,
+        ultimoPartido: Object,
+
+})
 </script>
 
 <style scoped>

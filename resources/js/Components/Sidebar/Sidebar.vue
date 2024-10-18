@@ -20,10 +20,10 @@
                     <div class="match-info text-center">
                         <div class="d-flex justify-between align-items-center container-partido-vs">
                             <div class="equipo-uno d-flex flex-column">
-                                <img :src="`/storage/${proximoPartido.equipo_local.logo}`" alt="Logo equipo local"
+                                <img :src="`/storage/${proximoPartido.equipo_local?.logo}`" alt="Logo equipo local"
                                     class="team-logo" />
                                 <strong class="name-equipo">{{
-                                    proximoPartido.equipo_local.nombre
+                                    proximoPartido.equipo_local?.nombre
                                 }}</strong>
                             </div>
 
@@ -35,10 +35,10 @@
                             </div>
 
                             <div class="equipo-dos d-flex flex-column">
-                                <img :src="`/storage/${proximoPartido.equipo_visitante.logo}`"
+                                <img :src="`/storage/${proximoPartido.equipo_visitante?.logo}`"
                                     alt="Logo equipo visitante" class="team-logo" />
                                 <strong class="name-equipo">{{
-                                    proximoPartido.equipo_visitante.nombre
+                                    proximoPartido.equipo_visitante?.nombre
                                 }}</strong>
                             </div>
                         </div>
@@ -116,10 +116,10 @@
                     <div class="match-info text-center mt-3">
                         <div class="d-flex justify-content-center align-items-center">
                             <div class="equipo-uno d-flex flex-column align-items-center">
-                                <img :src="`/storage/${ultimoPartido.partido.equipo_local.logo}`"
+                                <img :src="`/storage/${ultimoPartido.partido?.equipo_local?.logo}`"
                                     alt="Logo equipo local" class="team-logo" />
                                 <strong class="name-equipo">{{
-                                    ultimoPartido.partido.equipo_local.nombre
+                                    ultimoPartido.partido?.equipo_local?.nombre
                                 }}</strong>
                             </div>
                             <div class="vs mx-2">
@@ -147,11 +147,10 @@
                                 </span>
                             </div>
                             <div class="equipo-dos d-flex flex-column align-items-center">
-                                <img :src="`/storage/${ultimoPartido.partido.equipo_visitante.logo}`"
+                                <img :src="`/storage/${ultimoPartido.partido?.equipo_visitante?.logo}`"
                                     alt="Logo equipo visitante" class="team-logo" />
                                 <strong class="name-equipo">{{
-                                    ultimoPartido.partido.equipo_visitante
-                                        .nombre
+                                    ultimoPartido.partido?.equipo_visitante?.nombre
                                 }}</strong>
                             </div>
                         </div>
@@ -276,7 +275,7 @@ const calculateTimeRemaining = () => {
 // Inicializar el contador y actualizar cada segundo
 let intervalId;
 onMounted(() => {
-    console.log("Ultimo Partido:", props.ultimoPartido);
+    //console.log("Ultimo Partido:", props.ultimoPartido);
     calculateTimeRemaining();
     intervalId = setInterval(calculateTimeRemaining, 1000);
 });
@@ -286,6 +285,7 @@ onUnmounted(() => {
     clearInterval(intervalId);
 });
 </script>
+
 
 <style scoped>
 .team-logo {

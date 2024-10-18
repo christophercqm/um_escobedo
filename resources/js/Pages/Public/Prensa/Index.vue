@@ -85,6 +85,7 @@
                         :proximoPartido="proximoPartido"
                         :ultimoPartido="ultimoPartido"
                     />
+                    
                 </div>
             </div>
         </div>

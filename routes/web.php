@@ -16,6 +16,8 @@ use App\Http\Controllers\ProximosPartidosController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\PrimerEquipoController;
 use App\Http\Controllers\UltimoPartidoController;
+use App\Http\Controllers\HomeController;
+
 
 
 
@@ -29,14 +31,8 @@ use App\Http\Controllers\FormularioAcreditacionController;
 
 use App\Models\Jugadores;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 
 // Rutas públicas
 Route::get('/club', [JuntaController::class, 'publicIndex'])->name('club.index'); 
