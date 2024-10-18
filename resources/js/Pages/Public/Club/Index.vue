@@ -1,6 +1,6 @@
 <template>
     <GuestLayout>
-        <div class="container container-club px-0">
+        <div class="container container-club px-0 fade-in">
             <!-- NUESTRA HISTORIA -->
             <div class="row row-info-bg full-width mx-auto bg-white">
                 <div class="col col-img h-100">

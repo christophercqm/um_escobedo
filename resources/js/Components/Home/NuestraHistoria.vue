@@ -14,12 +14,20 @@
                 segunda RFEF este año 2024. Estamos listos para luchar mucho
                 más, ¿quieres formar parte de nuestra historia?
             </p>
-            <NavLink href="/club" class="btn all-cm-btn d-flex">
+            <NavLink href="/club" class="btn-public d-flex">
                 <span class="mas-informacion">Más Información</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                    class="bi bi-arrow-right-short" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                        d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    fill="currentColor"
+                    class="bi bi-arrow-right-short"
+                    viewBox="0 0 16 16"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"
+                    />
                 </svg>
             </NavLink>
         </div>
@@ -27,7 +35,7 @@
 </template>
 
 <script setup>
-import NavLink from '../NavLink.vue';
+import NavLink from "../NavLink.vue";
 </script>
 
 <style scoped>
@@ -79,8 +87,6 @@ import NavLink from '../NavLink.vue';
     justify-content: start;
     align-items: start;
 }
-
-
 
 @media (max-width: 992px) {
     .btn.all-cm-btn {

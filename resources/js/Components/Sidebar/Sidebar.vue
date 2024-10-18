@@ -93,7 +93,7 @@
             </div>
 
             <!-- ÚLTIMO PARTIDO -->
-            <div class="container-siguenos box-shadow p-3">
+            <div class="container-siguenos box-shadow p-3 mb-4">
                 <h5 class="sidebar-title text-uppercase d-flex mb-4 align-items-center justify-between">
                     <span class="title-proximo-partido">Último partido</span>
                 </h5>

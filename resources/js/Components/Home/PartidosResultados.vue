@@ -5,9 +5,9 @@
                 <div class="row gx-lg-5">
                     <div class="col-lg-7 col-xl-8">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h2 class="comon-heading m-0">Partidos y Resultados</h2>
+                            <h2 class="comon-heading m-0">Próximos partidos</h2>
                             <NavLink href="/proximos-partidos" class="btn-public m-0">
-                                <span>Todos los Partidos</span>
+                                <span>Todos los partidos</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
                                     class="bi bi-arrow-right-short" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd"
