@@ -17,6 +17,7 @@ use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\PrimerEquipoController;
 use App\Http\Controllers\UltimoPartidoController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PoliticasController;
 
 
 
@@ -52,6 +53,7 @@ Route::get('/proximos-partidos', [ProximosPartidosController::class, 'index'])->
 // Formularios 
 Route::post('/contactar', [FormularioContactarController::class, 'store'])->name('contactar.store');
 
+
 // Rutas para el formulario de acreditación
 Route::post('/acreditacion', [FormularioAcreditacionController::class, 'storeAcreditacion'])->name('formulario.acreditacion');
 
@@ -62,6 +64,7 @@ Route::post('/aprobar-acreditacion/{id}', [FormularioAcreditacionController::cla
 Route::post('/rechazar-acreditacion/{token}', [FormularioAcreditacionController::class, 'rechazar'])->name('acreditacion.rechazar');
 
 
+
 // Rutas para el formulario de patrocinadores
 Route::post('/patrocinadores', [FormularioPatrocinadorController::class, 'store'])->name('patrocinadores.store');
 
@@ -69,6 +72,10 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+
+Route::get('/politicas/privacidad', [PoliticasController::class, 'privacidad'])->name('politicas.privacidad');
+Route::get('/politicas/cookies', [PoliticasController::class, 'cookies'])->name('politicas.cookies');
 
 Route::middleware('auth')->group(function () {
 
