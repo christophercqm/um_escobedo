@@ -2,12 +2,14 @@
     <GuestLayout>
         <div class="content container-home w-100">
             <div class="container container-bg px-0">
-                <div class="row row-info-bg">
+                <div class="row row-info-bg position-relative">
                     <div class="bg-home"></div>
                     <div class="col col-bg-info">
                         <!-- INFO DESC TOP -->
-                        <div class="content-top">
-                            <div class="slider-content d-flex flex-column align-items-start">
+                        <div class="content-top fade-in">
+                            <div
+                                class="slider-content d-flex flex-column align-items-start"
+                            >
                                 <h3 class="text-white">
                                     Bienvenido al Club Escobedo
                                 </h3>
@@ -16,32 +18,47 @@
                                     <span class="d-block">Club de Fútbol</span>
                                 </h2>
                                 <p class="text-white text-left">
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit. Quisque non velit sed urna
-                                    dapibus condimentum. Nulla facilisi. Morbi
-                                    auctor risus nec ligula posuere,
+                                    Bienvenidos a U.M. Escobedo. Desde 1923, cuando adoptamos nuestro nombre actual, hemos crecido como un pilar del fútbol en nuestra comunidad. Con un fuerte compromiso hacia el deporte, continuamos nuestra labor bajo la presidencia de Luis Merino Arce desde 1981. ¡Únete a nuestra historia!
+
                                 </p>
-                                <NavLink href="/club" class="btn-public btn-acerca-club text-white d-flex gap-3">
+                                <NavLink
+                                    href="/club"
+                                    class="btn-public btn-acerca-club text-white d-flex gap-3"
+                                >
                                     <span class="text-acerca-club">
                                         Acerca del club
                                     </span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                                        class="bi bi-arrow-right-short" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd"
-                                            d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="32"
+                                        height="32"
+                                        fill="currentColor"
+                                        class="bi bi-arrow-right-short"
+                                        viewBox="0 0 16 16"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"
+                                        />
                                     </svg>
                                 </NavLink>
                             </div>
                         </div>
 
                         <!-- SIGUIENTES PARTIDOS  -->
-                        <div class="next-match-banner">
-                            <div class="next-match-widget text-center semi-black">
-                                <h2 class="text-white m-0 title-next-match">Próximo partido</h2>
-                                <hr class="separator">
+                        <div class="next-match-banner fade-in">
+                            <div
+                                class="next-match-widget text-center semi-black"
+                            >
+                                <h2 class="text-white m-0 title-next-match">
+                                    Próximo partido
+                                </h2>
+                                <hr class="separator" />
 
                                 <!-- Nombre de la competición o liga -->
-                                <h4 class="next-match mb-0 text-uppercase text-white">
+                                <h4
+                                    class="next-match mb-0 text-uppercase text-white"
+                                >
                                     segunda ref
                                 </h4>
                                 <!-- Fecha del partido -->
@@ -49,13 +66,19 @@
                                     {{ formatDate(proximoPartido.fecha_hora) }}
                                 </h5>
 
-                                <div class="match-info d-flex align-items-center justify-content-center mt-2">
+                                <div
+                                    class="match-info d-flex align-items-center justify-content-center mt-2"
+                                >
                                     <!-- Logo equipo local -->
                                     <div
-                                        class="team-info text-center d-flex flex-column justify-center align-items-center">
+                                        class="team-info text-center d-flex flex-column justify-center align-items-center"
+                                    >
                                         <figure class="container-image">
-                                            <img :src="`/storage/${proximoPartido.equipo_local.logo}`" alt="Logo Local"
-                                                class="team-logo" />
+                                            <img
+                                                :src="`/storage/${proximoPartido.equipo_local.logo}`"
+                                                alt="Logo Local"
+                                                class="team-logo"
+                                            />
                                         </figure>
                                         <h6 class="team-name text-white">
                                             {{
@@ -66,7 +89,9 @@
                                     </div>
 
                                     <div class="vs-section mx-3">
-                                        <h3 class="vs-text text-white mb-0">VS</h3>
+                                        <h3 class="vs-text text-white mb-0">
+                                            VS
+                                        </h3>
                                         <p class="match-time">
                                             {{
                                                 formatTime(
@@ -78,10 +103,14 @@
 
                                     <!-- Logo equipo visitante -->
                                     <div
-                                        class="team-info text-center d-flex flex-column justify-center align-items-center">
+                                        class="team-info text-center d-flex flex-column justify-center align-items-center"
+                                    >
                                         <figure class="container-image">
-                                            <img :src="`/storage/${proximoPartido.equipo_visitante.logo}`"
-                                                alt="Logo Visitante" class="team-logo" />
+                                            <img
+                                                :src="`/storage/${proximoPartido.equipo_visitante.logo}`"
+                                                alt="Logo Visitante"
+                                                class="team-logo"
+                                            />
                                         </figure>
                                         <h6 class="team-name text-white">
                                             {{
@@ -99,15 +128,23 @@
                                 </h5>
                                 <hr />
 
-                                <ul class="d-flex flex-column justify-content-center w-100 p-0 list-assis">
-                                    <li class="d-flex align-items-center justify-content-between w-100">
-                                        <span class="ct-2 d-flex align-items-center">
+                                <ul
+                                    class="d-flex flex-column justify-content-center w-100 p-0 list-assis"
+                                >
+                                    <li
+                                        class="d-flex align-items-center justify-content-between w-100"
+                                    >
+                                        <span
+                                            class="ct-2 d-flex align-items-center"
+                                        >
                                             <i class="far fa-futbol"></i> Goles
                                         </span>
                                         <span>12 </span>
                                     </li>
 
-                                    <li class="d-flex align-items-center justify-content-between">
+                                    <li
+                                        class="d-flex align-items-center justify-content-between"
+                                    >
                                         <span class="ct-2">
                                             <i class="fas fa-mitten"></i>
                                             Asistencias
@@ -115,7 +152,9 @@
                                         <span>54 </span>
                                     </li>
 
-                                    <li class="d-flex align-items-center justify-content-between">
+                                    <li
+                                        class="d-flex align-items-center justify-content-between"
+                                    >
                                         <span class="ct-2">
                                             <i class="fas fa-running"></i>
                                             Apariciones
@@ -129,35 +168,42 @@
                 </div>
 
                 <!-- CALENDARIO Y RESULTADOS -->
-                <PartidosResultados 
+                <PartidosResultados
                     :proximoPartido="proximoPartido"
                     :ultimoPartido="ultimoPartido"
                     :todosPartidos="todosPartidos"
                 />
 
                 <!-- NUESTRA HISTORIA  -->
-                <NuestraHistoria></NuestraHistoria>
+                <NuestraHistoria data-aos="fade"></NuestraHistoria>
 
                 <!-- TABLE DE POSICIONES-->
-                <TablaPosiciones></TablaPosiciones>
-
-                <!-- Plantilla de Jugadores -->
-                <PlantillaJugadores></PlantillaJugadores>
+                <!--<TablaPosiciones data-aos="fade"></TablaPosiciones>-->
 
                 <!-- Forma parte de un gran equipo -->
-                <div class="join-us-div">
+                <div class="join-us-div" data-aos="fade">
                     <div class="container">
                         <div class="d-lg-flex justify-content-between">
                             <h1 class="comon-heading m-0">
                                 Forma parte de un gran equipo
                             </h1>
-                            <NavLink href="/contacto" class="btn all-cm-btn mt-4 mt-lg-0">
+                            <NavLink
+                                href="/contacto"
+                                class="btn all-cm-btn mt-4 mt-lg-0"
+                            >
                                 <span>únete a nosotros</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-arrow-up-short" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z">
-                                    </path>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    class="bi bi-arrow-up-short"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"
+                                    ></path>
                                 </svg>
                             </NavLink>
                         </div>
@@ -165,10 +211,11 @@
                 </div>
 
                 <!-- SECTION TIENDA -->
-                <Tienda></Tienda>
+
+                <!--<Tienda data-aos="fade"></Tienda>-->
 
                 <!-- PATROCINADORES-->
-                <Patrocinadores></Patrocinadores>
+                <Patrocinadores data-aos="fade"></Patrocinadores>
             </div>
         </div>
     </GuestLayout>
@@ -184,28 +231,28 @@ import Tienda from "@/Components/Home/Tienda.vue";
 import PartidosResultados from "@/Components/Home/PartidosResultados.vue";
 import NuestraHistoria from "@/Components/Home/NuestraHistoria.vue";
 import TablaPosiciones from "@/Components/Home/TablaPosiciones.vue";
-import PlantillaJugadores from "@/Components/Home/PlantillaJugadores.vue";
 
 import NavLink from "@/Components/NavLink.vue";
 
 const props = defineProps({
     proximoPartido: Object,
     ultimoPartido: Object,
-    todosPartidos: Array
+    todosPartidos: Array,
 });
 
 onMounted(() => {
     //console.log("Props recibidas", props);
     //console.log("Próximo Partido:", props.proximoPartido);
     //console.log("Último Partido:", props.ultimoPartido);
-
 });
 
 // Función para formatear la fecha
 function formatDate(fechaHora) {
     const date = new Date(fechaHora);
     const day = date.getDate();
-    const month = date.toLocaleString('default', { month: 'short' }).toUpperCase(); // Mes abreviado en MAYÚSCULAS
+    const month = date
+        .toLocaleString("default", { month: "short" })
+        .toUpperCase(); // Mes abreviado en MAYÚSCULAS
     const year = date.getFullYear();
     return `${day} ${month} ${year}`;
 }
@@ -412,13 +459,13 @@ p {
 
 .match-time {
     color: var(--red);
-    font-size: .9rem;
+    font-size: 0.9rem;
 }
 
 .container-image {
     width: 60px;
     height: 60px;
-    margin-bottom: .5rem !important;
+    margin-bottom: 0.5rem !important;
 }
 
 .next-match-widget {
@@ -436,15 +483,13 @@ p {
 
 .team-name {
     font-family: var(--roboto) !important;
-    font-size: .9rem;
+    font-size: 0.9rem;
 }
 
 .title-next-match {
     font-size: 1.5rem;
     font-family: var(--roboto) !important;
-
 }
-
 
 @media (max-width: 992px) {
     .row.row-calendairo-resultados {
@@ -454,6 +499,59 @@ p {
 
     .next-match-banner {
         display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .content-top .slider-content {
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        top: 0;
+        transform: translateY(0%);
+    }
+
+    .row-info-bg{
+        margin: 0 !important;
+    }
+
+    .next-match-banner {
+        display: block;
+        width: 100%;
+        max-width: 320px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        
+
+        top: 75% !important;
+        transform: translateY(-75%);
+    }
+
+    .next-match-banner .top-mc-starts{
+        display: none;
+    }
+
+    .row-info-bg .col-bg-info{
+        /*height: 80vh;*/
+    }
+
+    .slider-content {
+        align-items: center !important;
+        padding-top: 2rem;
+    }
+
+    .slider-content h3 {
+        text-align: center;
+    }
+
+    .slider-content .title {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+
+    .slider-content p{
+        text-align: center;
     }
 }
 </style>

@@ -1,5 +1,6 @@
+<!-- PARTIDOS RESULTADOS -->
 <template>
-    <div class="row row-calendairo-resultados">
+    <div class="row row-calendairo-resultados " data-aos="fade">
         <div class="col">
             <div class="container">
                 <div class="row gx-lg-5">

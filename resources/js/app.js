@@ -17,21 +17,30 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import $ from 'jquery';
 import 'datatables.net';
 
+// Importar AOS
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Importar los estilos de AOS
 
-
-
-const appName =
-    import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`,
         import.meta.glob('./Pages/**/*.vue')),
     setup({ el, App, props, plugin }) {
-        return createApp({ render: () => h(App, props) })
+        const inertiaApp = createApp({ render: () => h(App, props) });
+
+        inertiaApp
             .use(plugin)
             .use(ZiggyVue)
             .mount(el);
+
+        // Inicializar AOS cuando la app esté completamente montada
+        AOS.init({
+            duration: 1000, // Duración de la animación
+            once: true,     // Si quieres que la animación solo ocurra una vez
+            offset: 100,    // Desplazamiento antes de que comience la animación
+        });
     },
     progress: {
         color: '#4B5563',

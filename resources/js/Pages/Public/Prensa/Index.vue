@@ -11,7 +11,7 @@
 
                 <!-- Segunda fila con botones -->
                 <div class="row row-2 my-4">
-                    <div class="col d-flex justify-content-start gap-3">
+                    <div class="col d-flex justify-content-start gap-3 flex-wrap">
                         <button class="btn" :class="{
                             'btn-active': currentSection === 'todos',
                         }" @click="showSection('todos')">

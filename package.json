@@ -20,6 +20,7 @@
     "dependencies": {
         "@inertiajs/inertia-vue3": "^0.6.0",
         "@popperjs/core": "^2.11.8",
+        "aos": "^2.3.4",
         "bootstrap": "^5.3.3",
         "bootstrap-icons": "^1.11.3",
         "datatables.net": "^2.1.7",

@@ -33,7 +33,7 @@
                         </div>
 
                         <!-- Lista de jugadores filtrados con transición -->
-                        <transition name="fade" mode="out-in">
+                        <transition name="fade" mode="out-in" data-aos="fade" >
                             <div class="container-jugadores row" key="jugadores-list">
                                 <div v-for="jugador in displayedJugadores" :key="jugador.id"
                                     class="jugador-card col-md-6 mb-4 fade-in">
@@ -72,7 +72,7 @@
                         <div class="row">
                             <div v-for="miembro in displayedCuerpoTecnico" :key="miembro.id"
                                 class="cuerpo-tecnico-card col-md-6 mb-4">
-                                <div class="card text-center">
+                                <div class="card text-center" data-aos="fade" >
                                     <div class="img-tecnico">
                                         <img :src="`/storage/${miembro.foto}`"
                                             alt="Foto de {{ miembro.nombres }} {{ miembro.apellidos }}"

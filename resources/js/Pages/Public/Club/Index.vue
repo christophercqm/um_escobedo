@@ -54,19 +54,19 @@
             </div>
 
             <!-- MISIÓN, VISIÓN - VALORES  -->
-            <MisionVision></MisionVision>
+            <MisionVision data-aos="fade"></MisionVision>
 
             <!-- JUNTA -->
-            <Junta :miembros="miembros"></Junta>
+            <Junta :miembros="miembros" data-aos="fade" ></Junta>
 
             <!-- BARRA PATROCINIO -->
-            <BarraPatrocinio></BarraPatrocinio>
+            <BarraPatrocinio data-aos="fade" ></BarraPatrocinio>
 
             <!-- ACTUALIDAD -->
-            <Blog :prensa="prensa"></Blog>
+            <Blog :prensa="prensa" data-aos="fade" ></Blog>
 
             <!-- PATROCINADORES -->
-            <Patrocinadores></Patrocinadores>
+            <Patrocinadores data-aos="fade" ></Patrocinadores>
 
         </div>
     </GuestLayout>

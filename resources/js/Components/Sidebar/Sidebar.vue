@@ -1,6 +1,6 @@
 <template>
-    <div class="col-md-4 fade-in">
-        <div class="sidebar">
+    <div class="col-md-4 fade-in sidebar-contain">
+        <div class="sidebar mb-4">
             <!-- PRÓXIMO PARTIDO-->
             <div class="container-proximo-partido box-shadow p-3 mb-4">
                 <h5 class="sidebar-title text-uppercase d-flex justify-between align-items-center mb-4">
@@ -419,5 +419,10 @@ onUnmounted(() => {
 .estadio {
     font-size: .7rem;
     padding: 0 1rem;
+}
+
+.sidebar-contain{
+    padding-left: 20px;
+    padding-right: 20px;
 }
 </style>

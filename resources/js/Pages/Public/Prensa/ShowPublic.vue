@@ -87,6 +87,10 @@ i {
     height: 20px;
 }
 
+.content {
+    text-align: justify;
+}
+
 @media (max-width: 768px) {
     .sidebar {
         display: none;
